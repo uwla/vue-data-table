@@ -1,0 +1,83 @@
+.data-table-wrapper {
+    overflow: auto;
+
+    table {
+        th {
+            //display: inline-flex;
+            background-color: white;
+            position: sticky;
+            border: none !important;
+            box-shadow: 1px 1px #ccc;
+            line-height: 1;
+            top: 0;
+            user-select: none;
+
+            div {
+                display: flex;
+                align-items: baseline;
+            }
+
+
+            &.sortable {
+                cursor: pointer;
+
+                &:hover {
+                    color: #3490DC;
+                }
+            }
+
+            div {
+                display: flex;
+                align-items: center;
+            }
+
+            .data-table-sorting-index {
+                margin: 0 0 0 5px;
+                font-size: 80%;
+                border: 1px solid #ccc;
+                border-radius: 50%;
+                height: 1.5em;
+                width: 1.5em;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .data-table-sorting-icon {
+                &::after {
+                    right: 0.5em;
+                    content: "\2193";
+                }
+
+                &::before {
+                    right: 1em;
+                    content: "\2191";
+                }
+
+                &::after,
+                &::before {
+                    font-size: 140%;
+                    line-height: 1;
+                    color: black;
+                    position: absolute;
+                    bottom: 0.55em;
+                    display: block;
+                    opacity: 0.5;
+                }
+            }
+
+            &[data-sorting="asc"] .data-table-sorting-icon::before {
+                opacity: 1;
+            }
+
+            &[data-sorting="desc"] .data-table-sorting-icon::after {
+                opacity: 1;
+            }
+        }
+
+        th,
+        td {
+            white-space: nowrap;
+        }
+    }
+}

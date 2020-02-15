@@ -1,32 +1,43 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="app">
+        <h1>App</h1>
+        <data-table :parameters="params" />
     </div>
-    <router-view/>
-  </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+export default {
+    name: "App",
+    computed: {
+        users() {
+            return this.$store.state.users;
+        },
 
-#nav {
-  padding: 30px;
+        params() {
+            return {
+                data: this.users,
+                columns: this.columns
+            };
+        }
+    },
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+    data() {
+        return {
+            columns: [
+                { data: "name", title: "Name" },
+                { data: "email", title: "Email Address"},
+                { data: "role", title: "Job", searchable: false },
+                { data: "created_at", title: "Registered at" }
+            ]
+        };
     }
-  }
-}
+};
+</script>
+
+<style lang="css">
+    #app {
+        padding: 32px;
+        min-height: 100vh;
+        /* background: #f4f6f9; */
+    }
 </style>
