@@ -1,5 +1,5 @@
 // import DataTableEntriesInfo from './EntriesInfo/DataTableEntriesInfo.vue';
-// import DataTableEntriesLength from './EntriesLength/DataTableEntriesLength.vue';
+import DataTableEntriesLength from './EntriesLength/DataTableEntriesLength.vue';
 // import DataTablePagination from './Pagination/DataTablePagination.vue';
 // import DataTableSearchFilter from './SearchFilter/DataTableSearchFilter.vue';
 import DataTableWrapper from './Wrapper/DataTableWrapper.vue';
@@ -9,16 +9,12 @@ export default {
 	name: "DataTable",
 
 	components: {
-		//DataTableEntriesInfo, DataTableEntriesLength, DataTablePagination, DataTableSearchFilter,
+        //DataTableEntriesInfo, DataTablePagination, DataTableSearchFilter,
+        DataTableEntriesLength,
 		DataTableWrapper
 	 },
 
 	computed: {
-		attributes() {
-			let {tableAttributes, tableWrapperAttributes} = this;
-			return {tableAttributes, tableWrapperAttributes};
-		},
-
 		/**
 		 * Merge the parameters passed as props with the default parameters
 		 * @return Object
@@ -47,26 +43,28 @@ export default {
 		 * @return Array
 		 */
 		data() {
-			return this.dataSorted
-		},
+            let data = this.params.data;
+            data = this.filterData(data);
+            data = this.sortData(data);
 
-		/**
-		 * Sort the data
-		 * @return Array
-		 */
-		dataSorted() {
-			let {data} = this.parameters;
+            return data;
+        },
 
-			if (this.sortingColumns.length == 0) {
-				return data;
-			}
+        /**
+         * Get the options for the length of the entries
+         * @return Array
+         */
+        entriesLength() {
+            return this.params.entriesLength
+        },
 
-			let keys = this.sortingColumns.map(col => col.data);
-			let direction = this.sortingColumns.map(col => col.attributes["data-sorting"]);
-
-			return _.orderBy(data, keys, direction);
-		},
-
+        /**
+         * Get the text to display in the entries length section
+         * @return String
+         */
+        entriesLengthText() {
+            return this.params.entriesLengthText
+        },
 
 		/**
 		 * Get the HTML attributes of the table
@@ -92,14 +90,11 @@ export default {
 
 	data() {
 		return {
-			sortingColumns: [],
-			sortedData: []
+            sortingColumns: [],
+            entryLength: this.parameters.defaultEntryLength || defaultParameters.defaultEntryLength,
+
 		}
 	},
-
-	// data() {
-	//     return this.params;
-	// },
 
 	methods: {
 		toggleSorting(column) {
@@ -132,7 +127,37 @@ export default {
                         col.sortIndex = i;
                         return col;
                     });
-		},
+        },
+
+        toggleEntryLength() {
+            this.entryLength = Number(window.event.target.value)
+        },
+
+        filterData(data) {
+            data = this.filterDataBySearch(data);
+            data = this.filterDataByEntryLength(data);
+            return data;
+        },
+
+        filterDataBySearch(data) {
+            // for while, a provisory solution
+            return data;
+        },
+
+        filterDataByEntryLength(data) {
+            return data.slice(0, this.entryLength);
+        },
+
+        sortData(data) {
+            if (this.sortingColumns.length == 0) {
+				return data;
+			}
+
+			let keys = this.sortingColumns.map(col => col.data);
+			let direction = this.sortingColumns.map(col => col.attributes["data-sorting"]);
+
+			return _.orderBy(data, keys, direction);
+        },
 	},
 
 	props: {

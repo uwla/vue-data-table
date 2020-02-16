@@ -26,7 +26,7 @@ export default {
     fixedHeader: true,
 
     // default text
-    entriesLengthText: "Show entries:",
+    entriesLengthText: "Show :entries entries",
     entriesInfoText: "Showing :first to :last of :total entries",
     entriesInfoTextFiltered: "Showing :first to :last of :totalFiltered (filtered from :total entries)",
     paginationNextButtonText: "Next",

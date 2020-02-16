@@ -1,16 +1,6 @@
 export default {
     name: "DataTableWrapper",
 
-    computed: {
-        tableAttributes() {
-            return this.attributes.tableAttributes;
-        },
-
-        tableWrapperAttributes() {
-            return this.attributes.tableWrapperAttributes;
-        },
-    },
-
     props: {
         data: {
             type: Array,
@@ -20,10 +10,14 @@ export default {
             type: Array,
             required: true,
         },
-        attributes: {
+        tableAttributes: {
             type: Object,
             required: true,
-        }
+        },
+        tableWrapperAttributes: {
+            type: Object,
+            required: true,
+        },
     },
 
     methods: {
