@@ -1,6 +1,6 @@
 // import DataTableEntriesInfo from './EntriesInfo/DataTableEntriesInfo.vue';
 import DataTableEntriesLength from './EntriesLength/DataTableEntriesLength.vue';
-// import DataTablePagination from './Pagination/DataTablePagination.vue';
+import DataTablePagination from './Pagination/DataTablePagination.vue';
 // import DataTableSearchFilter from './SearchFilter/DataTableSearchFilter.vue';
 import DataTableWrapper from './Wrapper/DataTableWrapper.vue';
 import defaultParameters from './defaults.js';
@@ -9,7 +9,8 @@ export default {
 	name: "DataTable",
 
 	components: {
-        //DataTableEntriesInfo, DataTablePagination, DataTableSearchFilter,
+        //DataTableEntriesInfo, DataTableSearchFilter,
+        DataTablePagination,
         DataTableEntriesLength,
 		DataTableWrapper
 	 },
@@ -38,14 +39,19 @@ export default {
 			})
 		},
 
+		numberOfPages() {
+			return Math.ceil(this.params.data.length / this.entryLength)
+		},
+
 		/**
 		 * get the data
 		 * @return Array
 		 */
 		data() {
             let data = this.params.data;
-            data = this.filterData(data);
+            data = this.filterDataBySearch(data);
             data = this.sortData(data);
+            data = this.filterDataByEntryLength(data);
 
             return data;
         },
@@ -85,12 +91,15 @@ export default {
 			return {
 				...this.params.tableWrapperAttributes, style: {maxHeight, maxWidth}
 			}
-		},
+        },
+
+
 	},
 
 	data() {
 		return {
             sortingColumns: [],
+            currentPage: 1,
             entryLength: this.parameters.defaultEntryLength || defaultParameters.defaultEntryLength,
 
 		}
@@ -102,16 +111,18 @@ export default {
 				return;
 			}
 
+            // set the sorting direction
 			if (column.attributes["data-sorting"] == null) {
-				// so, we add it to our array
                 column.attributes["data-sorting"] = "desc";
+
+                // add it to our array
                 column.sortIndex = this.sortingColumns.length;
 				this.sortingColumns.push(column);
 				return;
 			}
 
+            // toggle the sorting direction
 			if (column.attributes["data-sorting"] == "desc") {
-				// toggle the sorting direction
 				column.attributes["data-sorting"] = "asc";
 				return;
 			}
@@ -120,23 +131,17 @@ export default {
             column.attributes["data-sorting"] = null;
             column.sortIndex = null;
 
+            // reset the index
             this.sortingColumns =
-                this.sortingColumns
-                    .filter(col => col.index != column.index)
-                    .map((col, i) => {
-                        col.sortIndex = i;
-                        return col;
-                    });
+                this.sortingColumns.filter(col => col.index != column.index).map((col, i) => {
+                    col.sortIndex = i;
+                    return col;
+                });
         },
 
         toggleEntryLength() {
             this.entryLength = Number(window.event.target.value)
-        },
-
-        filterData(data) {
-            data = this.filterDataBySearch(data);
-            data = this.filterDataByEntryLength(data);
-            return data;
+            this.currentPage = 1
         },
 
         filterDataBySearch(data) {
@@ -145,7 +150,9 @@ export default {
         },
 
         filterDataByEntryLength(data) {
-            return data.slice(0, this.entryLength);
+            let start = this.entryLength * (this.currentPage - 1);
+            let end = start + this.entryLength;
+            return data.slice(start, end);
         },
 
         sortData(data) {
@@ -157,6 +164,10 @@ export default {
 			let direction = this.sortingColumns.map(col => col.attributes["data-sorting"]);
 
 			return _.orderBy(data, keys, direction);
+        },
+
+        setCurrentPage(page) {
+            this.currentPage = page
         },
 	},
 

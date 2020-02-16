@@ -17,6 +17,7 @@ export default {
     // entry length
     defaultEntryLength: 10,
     entriesLength: [10, 25, 50, 100],
+    entriesLengthText: "Show :entries entries",
 
     // scroll options
     scrollX: true,
@@ -26,11 +27,13 @@ export default {
     fixedHeader: true,
 
     // default text
-    entriesLengthText: "Show :entries entries",
     entriesInfoText: "Showing :first to :last of :total entries",
     entriesInfoTextFiltered: "Showing :first to :last of :totalFiltered (filtered from :total entries)",
-    paginationNextButtonText: "Next",
-    paginationPreviousButtonText: "Previous",
+
+    pagination: {
+        nextButtonText: "Next",
+        previousButtonText: "Previous",
+    },
     searchFilterText: "search:",
 
     // size parameters
