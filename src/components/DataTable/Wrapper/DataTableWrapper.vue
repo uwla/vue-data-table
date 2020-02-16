@@ -4,11 +4,10 @@
             <thead>
                 <tr>
                     <th v-for="(column, i) in columns" :key="i"
-                        @click="$emit('toggleSorting', column)" v-bind="column.attributes">
+                        @click="$emit('sort', column)" v-bind="column.attributes">
 
                         <div>
                             {{ column.title }}
-
                             <span class="data-table-sorting-index" v-if="column.sortIndex != null">
                                 {{ column.sortIndex + 1}}
                             </span>
