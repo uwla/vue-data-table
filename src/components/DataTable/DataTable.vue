@@ -6,7 +6,7 @@
             <!-- <data-table-search-filter v-if="params.showSearchFilter" :params="params"/> -->
         </div>
 
-        <div class="data-table-container my-4">
+        <div class="data-table-container">
             <data-table-wrapper v-bind="{data, columns, tableAttributes, tableWrapperAttributes}"
                  @sort="toggleSorting"/>
         </div>
@@ -21,3 +21,4 @@
 </template>
 
 <script src="./DataTable.js"></script>
+<style src="./DataTable.scss" lang="scss"></style>
