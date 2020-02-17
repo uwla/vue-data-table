@@ -8,16 +8,13 @@
                     {{ previousButtonText }}
                 </span>
             </li>
-            <!--
-                // 7 -> display all : 1 2 3 4 5 6 7
-                // 8 -> 1 2 3 4 5 ... 8
-                // 9 -> 1 ... 4 5 6 ... 9
-             -->
-            <li v-for="i in numberOfPages" :key="i" @click="setCurrentPage(i)"
-                class="page-item" :class="{disabled: currentPage == i}">
+            <!-- LAYOUT 1 -->
+
+            <li v-for="(page, i) in pages" :key="i" @click="setCurrentPage(page)"
+                class="page-item" :class="{disabled: page == '...', active: currentPage == page }">
 
                 <span class="page-link" >
-                    {{ i }}
+                    {{ page }}
                 </span>
             </li>
 
