@@ -6,75 +6,81 @@ import DataTableWrapper from './Wrapper/DataTableWrapper.vue';
 import defaultParameters from './defaults.js';
 
 export default {
-	name: "DataTable",
+    name: "DataTable",
 
-	components: {
+    components: {
         //DataTableEntriesInfo,
         DataTableSearchFilter,
         DataTablePagination,
         DataTableEntriesLength,
-		DataTableWrapper
-	 },
+        DataTableWrapper
+     },
 
-	computed: {
-		/**
-		 * Merge the parameters passed as props with the default parameters
-		 * @return Object
-		 */
-		params() {
-			return {...defaultParameters, ...this.parameters};
-		},
+    computed: {
+        /**
+         * Merge the parameters passed as props with the default parameters
+         * @return Object
+         */
+        params() {
+            return {...defaultParameters, ...this.parameters};
+        },
 
-		/**
-		 * Merge the columns passed as props with the default options
-		 * @return Array
-		 */
-		columns() {
-			return this.parameters.columns.map((col, index) => {
+        /**
+         * Merge the columns passed as props with the default options
+         * @return Array
+         */
+        columns() {
+            return this.parameters.columns.map((col, index) => {
                 let attributes = {};
 
                 if (col.orderable == null || col.orderable)
                     attributes.class = "sortable"
 
-				return {...defaultParameters.column, ...col, index, attributes};
-			})
-		},
+                return {...defaultParameters.column, ...col, index, attributes};
+            })
+        },
 
-		numberOfPages() {
-			return Math.ceil(this.params.data.length / this.entryLength)
-		},
+        searchableColumns() {
+            return this.columns.filter(col => col.searchable)
+        },
 
-		/**
-		 * get the data
-		 * @return Array
-		 */
-		data() {
-            let data = this.params.data;
-            data = this.filterDataBySearch(data);
-            data = this.sortData(data);
+        numberOfPages() {
+            return Math.ceil(this.filteredData.length / this.entryLength)
+        },
+
+        /**
+         * get the data
+         * @return Array
+         */
+        data() {
+            let data = this.sortData(this.filteredData);
             data = this.filterDataByEntryLength(data);
 
             return data;
         },
 
-		/**
-		 * Get the HTML attributes of the table
-		 * @return Object
-		 */
-		tableAttributes() {
-			//let params = this.params;
-			return {...this.params.tableAttributes, class: this.params.tableClass}
-		},
+        filteredData() {
+            return this.filterDataBySearch(this.params.data);
+        },
 
-		/**
-		 * Get the HTML attributes of the table's wrapper
-		 * @return Object
-		 */
-		tableWrapperAttributes() {
-			let {tableMaxHeight: maxHeight, tableMaxWidth: maxWidth} = this.params;
+        /**
+         * Get the HTML attributes of the table
+         * @return Object
+         */
+        tableAttributes() {
+            //let params = this.params;
+            return {...this.params.tableAttributes, class: this.params.tableClass}
+        },
 
-			return {
-				...this.params.tableWrapperAttributes, style: {maxHeight, maxWidth}
+        /**
+         * Get the HTML attributes of the table's wrapper
+         * @return Object
+         */
+        tableWrapperAttributes() {
+            let {tableMaxHeight: maxHeight, tableMaxWidth: maxWidth} = this.params;
+
+            return {
+                ...this.params.tableWrapperAttributes, style: {maxHeight, maxWidth}
             }
         },
 
@@ -96,44 +102,45 @@ export default {
 
             return defaultLength
         }
-	},
+    },
 
-	data() {
-		return {
+    data() {
+        return {
             sortingColumns: [],
+            searchText: "",
             currentPage: 1,
             currentEntryLength: null,
-		}
-	},
+        }
+    },
 
-	methods: {
+    methods: {
         toggleFiltering() {
             let {value} = window.event.target;
-            console.log(value)
+            this.searchText = value.trim();
         },
 
-		toggleSorting(column) {
-			if (!column.orderable) {
-				return;
-			}
+        toggleSorting(column) {
+            if (!column.orderable) {
+                return;
+            }
 
             // set the sorting direction
-			if (column.attributes["data-sorting"] == null) {
+            if (column.attributes["data-sorting"] == null) {
                 column.attributes["data-sorting"] = "desc";
 
                 // add it to our array
                 column.sortIndex = this.sortingColumns.length;
-				this.sortingColumns.push(column);
-				return;
-			}
+                this.sortingColumns.push(column);
+                return;
+            }
 
             // toggle the sorting direction
-			if (column.attributes["data-sorting"] == "desc") {
-				column.attributes["data-sorting"] = "asc";
-				return;
-			}
+            if (column.attributes["data-sorting"] == "desc") {
+                column.attributes["data-sorting"] = "asc";
+                return;
+            }
 
-			// remove it from sorting
+            // remove it from sorting
             column.attributes["data-sorting"] = null;
             column.sortIndex = null;
 
@@ -151,8 +158,24 @@ export default {
         },
 
         filterDataBySearch(data) {
-            // for while, a provisory solution
-            return data;
+            let {searchText} = this;
+
+            return data.filter(object => {
+                return this.searchableColumns.some(col => {
+                    
+                    let value = object[col.data];
+
+                    if (typeof value == "string") {
+                        return value.toLowerCase().includes(searchText.toLowerCase())
+                    }
+
+                    if (typeof value == "number") {
+                        return value.toString().includes(searchText)
+                    }
+
+                    return false
+                });
+            });
         },
 
         filterDataByEntryLength(data) {
@@ -163,24 +186,24 @@ export default {
 
         sortData(data) {
             if (this.sortingColumns.length == 0) {
-				return data;
-			}
+                return data;
+            }
 
-			let keys = this.sortingColumns.map(col => col.data);
-			let direction = this.sortingColumns.map(col => col.attributes["data-sorting"]);
+            let keys = this.sortingColumns.map(col => col.data);
+            let direction = this.sortingColumns.map(col => col.attributes["data-sorting"]);
 
-			return _.orderBy(data, keys, direction);
+            return _.orderBy(data, keys, direction);
         },
 
         setCurrentPage(page) {
             this.currentPage = page
         },
-	},
+    },
 
-	props: {
-		parameters: {
-			type: Object,
-			required: true
-		}
-	}
+    props: {
+        parameters: {
+            type: Object,
+            required: true
+        }
+    }
 };
