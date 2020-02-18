@@ -1,3 +1,8 @@
-.data-table-container {
-    margin: .7rem 0;
+.data-table-body {
+    margin: 0.75rem 0;
+}
+
+.data-table-head, .data-table-footer {
+    display: flex;
+    justify-content: space-between;
 }

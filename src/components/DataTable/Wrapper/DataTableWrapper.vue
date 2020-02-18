@@ -1,16 +1,20 @@
 <template>
-    <div class="data-table-wrapper" v-bind="tableWrapperAttributes">
-        <table v-bind="tableAttributes">
+    <div class="data-table-wrapper" v-bind="tableWrapper">
+        <table v-bind="table">
             <thead>
                 <tr>
                     <th v-for="(column, i) in columns" :key="i"
                         @click="$emit('sort', column)" v-bind="column.attributes">
 
-                        <div>
-                            {{ column.title }}
+                        <div class="data-table-thead-content">
+                            <span class="data-table-column-title">
+                                {{ column.title }}
+                            </span>
+
                             <span class="data-table-sorting-index" v-if="column.sortIndex != null">
                                 {{ column.sortIndex + 1}}
                             </span>
+
                             <span class="data-table-sorting-icon" v-if="column.orderable">
                                 &nbsp;
                             </span>
@@ -18,6 +22,7 @@
                     </th>
                 </tr>
             </thead>
+            
             <tbody>
                 <tr v-for="(row, i) in data" :key="i">
                     <td v-for="(prop, j) in columns" :key="j">

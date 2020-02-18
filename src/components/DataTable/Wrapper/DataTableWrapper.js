@@ -10,19 +10,19 @@ export default {
             type: Array,
             required: true,
         },
-        tableAttributes: {
+        table: {
             type: Object,
             required: true,
         },
-        tableWrapperAttributes: {
+        tableWrapper: {
             type: Object,
             required: true,
         },
     },
 
     methods: {
-        toggleSorting(col) {
+        // toggleSorting(col) {
 
-        },
+        // },
     }
 };

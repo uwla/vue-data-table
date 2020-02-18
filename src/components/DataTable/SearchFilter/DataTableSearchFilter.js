@@ -2,8 +2,8 @@ export default {
     name: "DataTableSearchFilter",
 
     props: {
-        params: {
-            type: Object,
+        text: {
+            type: String,
             required: true,
         }
     },

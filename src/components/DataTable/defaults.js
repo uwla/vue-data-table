@@ -14,36 +14,39 @@ export default {
         searchable: true,
     },
 
-    // entry length
-    defaultEntryLength: 10,
-    entriesLength: [10, 25, 50, 100],
-    entriesLengthText: "Show :entries entries",
-
     // scroll options
-    scrollX: true,
-    scrollY: true,
-
-    //
     fixedHeader: true,
 
-    // default text
-    entriesInfoText: "Showing :first to :last of :total entries",
-    entriesInfoTextFiltered: "Showing :first to :last of :totalFiltered (filtered from :total entries)",
+    // entry
+    entries: {
+        defaultLength: 10,
+        lengths: [10, 25, 50, 100],
+        text: "Show :entries entries",
+    },
+
+    info: {
+        text: "Showing :first to :last of :total entries",
+        textFiltered: "Showing :first to :last of :filtered (filtered from :total entries)",
+    },
 
     pagination: {
         nextButtonText: "Next",
         previousButtonText: "Previous",
     },
-    searchFilterText: "search:",
 
-    // size parameters
-    tableMaxHeight: "80vh",
-    tableMaxWidth: "100%",
+    filter: {
+        text: "search:"
+    },
 
-    //
-    tableClass: "table table-striped table-hover",
+    table: {
+        class: "table table-striped table-hover",
+    },
 
-    // attributes
-    tableAttributes: {},
-    tableWrapperAttributes: {}
+    tableWrapper: {
+        style: {
+            overflow: "auto",
+            height: "80vh",
+            width: "100%",
+        },
+    }
 };

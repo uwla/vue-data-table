@@ -8,7 +8,6 @@
                     {{ previousButtonText }}
                 </span>
             </li>
-            <!-- LAYOUT 1 -->
 
             <li v-for="(page, i) in pages" :key="i" @click="setCurrentPage(page)"
                 class="page-item" :class="{disabled: page == '...', active: currentPage == page }">
