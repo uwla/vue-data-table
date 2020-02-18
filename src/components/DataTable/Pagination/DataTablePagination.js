@@ -21,6 +21,10 @@ export default {
         pages() {
             let {numberOfPages: lastPage, currentPage, previousPage, nextPage} = this;
 
+            if (lastPage == 1) {
+                return [1]
+            }
+            
             // ex1: 1 2 3 4 5 6 7
             // ex2: 1 2 3 4
             if (lastPage <= 7) {
@@ -38,7 +42,7 @@ export default {
             if (lastPage > 8 && (lastPage > currentPage + 3) && lastPage > 4) {
                 return [1, '...', previousPage, currentPage, nextPage, '...', lastPage];
             }
-            
+
             // ex1: 1 ... 5 6 7 8
             // ex2: 1 ... 32 33 34 35
             if (lastPage > 7 && lastPage <= currentPage + 3) {

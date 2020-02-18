@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="data-table-pagination">
         <ul class="pagination">
             <li @click="setCurrentPage(previousPage)"
                 class="page-item" :class="{disabled: isFirstPage}">
