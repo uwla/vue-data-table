@@ -1,20 +1,23 @@
 <template>
     <div class="data-table">
-        <div>
+        <div class="data-table-head">
             <data-table-entries-length v-if="params.showEntriesLength"
-                v-bind="{entryLength, entriesLength, entriesLengthText}" @select="toggleEntryLength"/>
-            <!-- <data-table-search-filter v-if="params.showSearchFilter" :params="params"/> -->
+                v-bind="{...params.entries, entryLength}" @select="toggleEntryLength"/>
+
+            <data-table-search-filter v-if="params.showSearchFilter"
+                v-bind="{...params.filter}" @input="toggleFiltering"/>
         </div>
 
-        <div class="data-table-container">
-            <data-table-wrapper v-bind="{data, columns, tableAttributes, tableWrapperAttributes}"
-                 @sort="toggleSorting"/>
+        <div class="data-table-body">
+            <data-table-wrapper v-bind="{data, columns, table: params.table, tableWrapper: params.tableWrapper}"
+                @sort="toggleSorting"/>
         </div>
 
-        <div>
+        <div class="data-table-footer">
+            <span>text</span>
             <!-- <data-table-entries-info v-if="params.showEntriesInfo" :params="params"/> -->
-            <data-table-pagination v-if="params.showPagination" @pageClicked="setCurrentPage"
-                v-bind="{numberOfPages, currentPage, ...params.pagination}"/>
+            <data-table-pagination v-if="params.showPagination"
+                v-bind="{numberOfPages, currentPage, ...params.pagination}" @pageClicked="setCurrentPage"/>
         </div>
 
     </div>

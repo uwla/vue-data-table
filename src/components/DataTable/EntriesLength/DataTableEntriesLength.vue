@@ -1,16 +1,16 @@
 <template>
     <div class="data-table-entries-length">
-        {{ textBeforeEntries }}
+        <span>{{ textBeforeEntries }}</span>
 
         <select :value="entryLength" @input="$emit('select')">
 
-            <option v-for="(length, i) in entriesLength" :key="i" :value="length">
+            <option v-for="(length, i) in lengths" :key="i" :value="length">
                 {{ length }}
             </option>
 
         </select>
 
-        {{ textAfterEntries }}
+        <span>{{ textAfterEntries }}</span>
     </div>
 </template>
 

@@ -3,11 +3,11 @@ export default {
 
     computed: {
         textPieces() {
-            return this.entriesLengthText.split(":entries");
+            return this.text.split(":entries");
         },
 
         textBeforeEntries() {
-            return this.textPieces[0] || "";
+            return this.textPieces[0];
         },
 
         textAfterEntries() {
@@ -20,11 +20,11 @@ export default {
             type: Number,
             required: true,
         },
-        entriesLength: {
+        lengths: {
             type: Array,
             required: true,
         },
-        entriesLengthText: {
+        text: {
             type: String,
             required: true
         }

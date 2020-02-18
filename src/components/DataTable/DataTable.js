@@ -1,7 +1,7 @@
 // import DataTableEntriesInfo from './EntriesInfo/DataTableEntriesInfo.vue';
 import DataTableEntriesLength from './EntriesLength/DataTableEntriesLength.vue';
 import DataTablePagination from './Pagination/DataTablePagination.vue';
-// import DataTableSearchFilter from './SearchFilter/DataTableSearchFilter.vue';
+import DataTableSearchFilter from './SearchFilter/DataTableSearchFilter.vue';
 import DataTableWrapper from './Wrapper/DataTableWrapper.vue';
 import defaultParameters from './defaults.js';
 
@@ -9,7 +9,8 @@ export default {
 	name: "DataTable",
 
 	components: {
-        //DataTableEntriesInfo, DataTableSearchFilter,
+        //DataTableEntriesInfo,
+        DataTableSearchFilter,
         DataTablePagination,
         DataTableEntriesLength,
 		DataTableWrapper
@@ -56,22 +57,6 @@ export default {
             return data;
         },
 
-        /**
-         * Get the options for the length of the entries
-         * @return Array
-         */
-        entriesLength() {
-            return this.params.entriesLength
-        },
-
-        /**
-         * Get the text to display in the entries length section
-         * @return String
-         */
-        entriesLengthText() {
-            return this.params.entriesLengthText
-        },
-
 		/**
 		 * Get the HTML attributes of the table
 		 * @return Object
@@ -90,22 +75,43 @@ export default {
 
 			return {
 				...this.params.tableWrapperAttributes, style: {maxHeight, maxWidth}
-			}
+            }
         },
 
+        entryLength() {
+            if (this.currentEntryLength != null) {
+                return this.currentEntryLength
+            }
 
+            let {defaultLength} = defaultParameters.entries;
+            let {entries} = this.parameters
+
+            if (entries) {
+                if (entries.defaultLength) {
+                    defaultLength = entries.defaultLength;
+                } else if (entries.lengths) {
+                    defaultLength = entries.lengths[0]
+                }
+            }
+
+            return defaultLength
+        }
 	},
 
 	data() {
 		return {
             sortingColumns: [],
             currentPage: 1,
-            entryLength: this.parameters.defaultEntryLength || defaultParameters.defaultEntryLength,
-
+            currentEntryLength: null,
 		}
 	},
 
 	methods: {
+        toggleFiltering() {
+            let {value} = window.event.target;
+            console.log(value)
+        },
+
 		toggleSorting(column) {
 			if (!column.orderable) {
 				return;
@@ -140,7 +146,7 @@ export default {
         },
 
         toggleEntryLength() {
-            this.entryLength = Number(window.event.target.value)
+            this.currentEntryLength = Number(window.event.target.value)
             this.currentPage = 1
         },
 

@@ -1,7 +1,12 @@
 .data-table-wrapper {
-    overflow: auto;
-
     table {
+        border-bottom: 1px solid #ccc;
+
+        th,
+        td {
+            white-space: nowrap;
+        }
+
         th {
             //display: inline-flex;
             background-color: white;
@@ -12,11 +17,10 @@
             top: 0;
             user-select: none;
 
-            div {
+            .data-table-thead-content {
                 display: flex;
-                align-items: baseline;
+                align-items: center;
             }
-
 
             &.sortable {
                 cursor: pointer;
@@ -26,10 +30,6 @@
                 }
             }
 
-            div {
-                display: flex;
-                align-items: center;
-            }
 
             .data-table-sorting-index {
                 margin: 0 0 0 5px;
@@ -75,9 +75,5 @@
             }
         }
 
-        th,
-        td {
-            white-space: nowrap;
-        }
     }
 }
