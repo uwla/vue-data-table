@@ -1,4 +1,4 @@
-// import DataTableEntriesInfo from './EntriesInfo/DataTableEntriesInfo.vue';
+import DataTableEntriesInfo from './EntriesInfo/DataTableEntriesInfo.vue';
 import DataTableEntriesLength from './EntriesLength/DataTableEntriesLength.vue';
 import DataTablePagination from './Pagination/DataTablePagination.vue';
 import DataTableSearchFilter from './SearchFilter/DataTableSearchFilter.vue';
@@ -9,11 +9,7 @@ export default {
     name: "DataTable",
 
     components: {
-        //DataTableEntriesInfo,
-        DataTableSearchFilter,
-        DataTablePagination,
-        DataTableEntriesLength,
-        DataTableWrapper
+        DataTableEntriesInfo, DataTableSearchFilter, DataTablePagination, DataTableEntriesLength, DataTableWrapper
      },
 
     computed: {
@@ -46,6 +42,21 @@ export default {
 
         numberOfPages() {
             return Math.ceil(this.filteredData.length / this.entryLength)
+        },
+
+        infoParams() {
+            let totalEntries = this.params.data.length;
+            let firstEntry = this.entryLength * (this.currentPage - 1) + 1;
+            let lastEntry = firstEntry + this.entryLength - 1;
+            let filteredEntries = this.filteredData.length;
+
+            if (lastEntry > filteredEntries) {
+                lastEntry = filteredEntries
+            }
+
+            let {text, textFiltered} = this.params.info;
+
+            return {firstEntry, lastEntry, totalEntries, filteredEntries, text, textFiltered}
         },
 
         /**
@@ -117,6 +128,7 @@ export default {
         toggleFiltering() {
             let {value} = window.event.target;
             this.searchText = value.trim();
+            this.currentPage = 1;
         },
 
         toggleSorting(column) {
@@ -153,8 +165,16 @@ export default {
         },
 
         toggleEntryLength() {
-            this.currentEntryLength = Number(window.event.target.value)
-            this.currentPage = 1
+            let newEntryLength = Number(window.event.target.value);
+
+            let firstDataIndex = this.currentPage * this.entryLength;
+            if (newEntryLength < this.entryLength) {
+                firstDataIndex -= (this.entryLength - newEntryLength);
+            }
+
+            this.currentPage = Math.ceil(firstDataIndex / newEntryLength);
+
+            this.currentEntryLength = newEntryLength;
         },
 
         filterDataBySearch(data) {
@@ -162,7 +182,7 @@ export default {
 
             return data.filter(object => {
                 return this.searchableColumns.some(col => {
-                    
+
                     let value = object[col.data];
 
                     if (typeof value == "string") {

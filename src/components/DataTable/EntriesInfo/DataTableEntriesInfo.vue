@@ -1,6 +1,6 @@
 <template>
-    <div>
-        {{ text }}
+    <div class="data-table-info">
+        {{ infoText }}
     </div>
 </template>
 
