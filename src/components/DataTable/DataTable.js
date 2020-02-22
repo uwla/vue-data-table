@@ -166,15 +166,10 @@ export default {
 
         toggleEntryLength() {
             let newEntryLength = Number(window.event.target.value);
-
-            let firstDataIndex = this.currentPage * this.entryLength;
-            if (newEntryLength < this.entryLength) {
-                firstDataIndex -= (this.entryLength - newEntryLength);
-            }
-
-            this.currentPage = Math.ceil(firstDataIndex / newEntryLength);
+            let firstDataIndex = 1 + this.entryLength * (this.currentPage - 1);
 
             this.currentEntryLength = newEntryLength;
+            this.currentPage = Math.ceil(firstDataIndex / newEntryLength);
         },
 
         filterDataBySearch(data) {
