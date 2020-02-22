@@ -22,11 +22,18 @@
                     </th>
                 </tr>
             </thead>
-            
+
             <tbody>
+
                 <tr v-for="(row, i) in data" :key="i">
                     <td v-for="(prop, j) in columns" :key="j">
                         {{ row[prop.data] }}
+                    </td>
+                </tr>
+
+                <tr v-if="empty">
+                    <td :colspan="columns.length" style="text-align: center"    >
+                        {{ emptyTableText }}
                     </td>
                 </tr>
             </tbody>

@@ -9,8 +9,7 @@
         </div>
 
         <div class="data-table-body">
-            <data-table-wrapper v-bind="{data, columns, table: params.table, tableWrapper: params.tableWrapper}"
-                @sort="toggleSorting"/>
+            <data-table-wrapper v-bind="{...tableWrapperParams}" @sort="toggleSorting"/>
         </div>
 
         <div class="data-table-footer">

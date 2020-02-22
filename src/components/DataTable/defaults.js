@@ -38,6 +38,8 @@ export default {
         text: "search:"
     },
 
+    emptyTableText: "No matching records found",
+
     table: {
         class: "table table-striped table-hover",
     },
@@ -45,7 +47,7 @@ export default {
     tableWrapper: {
         style: {
             overflow: "auto",
-            height: "80vh",
+            height: "75vh",
             width: "100%",
         },
     }
