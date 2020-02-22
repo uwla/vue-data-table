@@ -235,6 +235,9 @@ export const DataTable = {
                 return data;
             }
 
+            // create a copy of the data
+            data = [...data]
+
             // get the columns to sort
             let columns = this.sortingColumns.map(col => {
                 return {key: col.data, direction: col.attributes["data-sorting"]};
