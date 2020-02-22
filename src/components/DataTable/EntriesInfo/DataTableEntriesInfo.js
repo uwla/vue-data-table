@@ -6,61 +6,50 @@ export default {
          * The text to display in the left-bottom of the table
          * @return string
         */
-        text() {
-
-            if (this.totalEntries == this.totalFilteredEntries) {
-                // ex: "Showing 51 to 100 of 256 entries"
-                return this.entriesInfoText
-                .replace(":first", this.firstEntry)
-                .replace(":last", this.lastEntry)
-                .replace(":total", this.totalFilteredEntries);
+        infoText() {
+            // case 1, no filter
+            // ex: "Showing 51 to 100 of 256 entries"
+            if (this.totalEntries == this.filteredEntries) {
+                return this.text
+                            .replace(":first", this.firstEntry)
+                            .replace(":last", this.lastEntry)
+                            .replace(":total", this.filteredEntries);
             }
 
+            // case 2, filt
             // ex: "Showing 26 to 50 of 176 entries (filtered from 439 entries)"
-            return this.entriesInfoTextFiltered
+            return this.textFiltered
                         .replace(":first", this.firstEntry)
                         .replace(":last", this.lastEntry)
-                        .replace(":totalFiltered", this.totalFilteredEntries)
+                        .replace(":filtered", this.filteredEntries)
                         .replace(":total", this.totalEntries);
-        },
-
-        /**
-         * The index of the first entry being displayed
-         * @return integer
-         */
-        firstEntry() {
-            return 1;
-        },
-
-        /**
-         * The index of the last entry being displayed
-         * @return integer
-         */
-        lastEntry() {
-            return 10;
-        },
-
-        /**
-         * The total number of entries being displayed
-         * @return integer
-         */
-        totalFilteredEntries() {
-            return this.dataFiltered.length;
-        },
-
-        /**
-         * The total number of entries, regardless of then being displayed or not
-         * @return integer
-         */
-        totalEntries() {
-            return this.data.length;
         },
     },
 
     props: {
-        params: {
-            type: Object,
+        firstEntry: {
+            type: Number,
+            required: true
+        },
+        lastEntry: {
+            type: Number,
+            required: true
+        },
+        filteredEntries: {
+            type: Number,
+            required: true
+        },
+        totalEntries: {
+            type: Number,
+            required: true
+        },
+        text: {
+            type: String,
             required: true,
-        }
+        },
+        textFiltered: {
+            type: String,
+            required: true,
+        },
     },
 };

@@ -14,8 +14,8 @@
         </div>
 
         <div class="data-table-footer">
-            <span>text</span>
-            <!-- <data-table-entries-info v-if="params.showEntriesInfo" :params="params"/> -->
+            <data-table-entries-info v-if="params.showEntriesInfo" v-bind="{...infoParams}"/>
+
             <data-table-pagination v-if="params.showPagination"
                 v-bind="{numberOfPages, currentPage, ...params.pagination}" @pageClicked="setCurrentPage"/>
         </div>

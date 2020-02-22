@@ -24,11 +24,11 @@ export default {
             if (lastPage == 1) {
                 return [1]
             }
-            
+
             // ex1: 1 2 3 4 5 6 7
             // ex2: 1 2 3 4
             if (lastPage <= 7) {
-                return _.range(1, lastPage)
+                return _.range(1, lastPage + 1)
             }
 
             // ex1: 1 2 3 4 5 ... 8
