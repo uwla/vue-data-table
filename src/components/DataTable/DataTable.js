@@ -5,7 +5,7 @@ import DataTableSearchFilter from './SearchFilter/DataTableSearchFilter.vue';
 import DataTableWrapper from './Wrapper/DataTableWrapper.vue';
 import defaultParameters from './defaults.js';
 
-export default {
+export const DataTable = {
     name: "DataTable",
 
     components: {
@@ -62,6 +62,11 @@ export default {
         tableWrapperParams() {
             let {data, columns} = this, {table, tableWrapper, emptyTableText} = this.params;
             return {data, columns, table, tableWrapper, emptyTableText}
+        },
+
+        paginationParams() {
+            let {numberOfPages, currentPage, params} = this;
+            return {numberOfPages, currentPage, ...params.pagination}
         },
 
         /**
@@ -126,6 +131,14 @@ export default {
             searchText: "",
             currentPage: 1,
             currentEntryLength: null,
+
+            ...defaultParameters.components.reduce((obj, componentName) => {
+                let key = "show" + componentName;
+                let components = this.parameters.components || defaultParameters.components;
+                obj[key] = components.includes(componentName);
+
+                return obj
+            }, {})
         }
     },
 
@@ -143,7 +156,7 @@ export default {
 
             // set the sorting direction
             if (column.attributes["data-sorting"] == null) {
-                column.attributes["data-sorting"] = "desc";
+                column.attributes["data-sorting"] = "asc";
 
                 // add it to our array
                 column.sortIndex = this.sortingColumns.length;
@@ -152,8 +165,8 @@ export default {
             }
 
             // toggle the sorting direction
-            if (column.attributes["data-sorting"] == "desc") {
-                column.attributes["data-sorting"] = "asc";
+            if (column.attributes["data-sorting"] == "asc") {
+                column.attributes["data-sorting"] = "desc";
                 return;
             }
 
@@ -169,6 +182,11 @@ export default {
                 });
         },
 
+
+        /**
+         * Toggle entry length, but still shows the records from the last entry length
+         * @return void
+         */
         toggleEntryLength() {
             let newEntryLength = Number(window.event.target.value);
             let firstDataIndex = 1 + this.entryLength * (this.currentPage - 1);
@@ -177,6 +195,10 @@ export default {
             this.currentPage = Math.ceil(firstDataIndex / newEntryLength);
         },
 
+        /**
+         * Filter data by search text
+         * @return void
+         */
         filterDataBySearch(data) {
             let {searchText} = this;
 
@@ -204,15 +226,43 @@ export default {
             return data.slice(start, end);
         },
 
+        /**
+         * Perform a case-insensitive sorting.
+         * @return void
+         */
         sortData(data) {
             if (this.sortingColumns.length == 0) {
                 return data;
             }
 
-            let keys = this.sortingColumns.map(col => col.data);
-            let direction = this.sortingColumns.map(col => col.attributes["data-sorting"]);
+            // get the columns to sort
+            let columns = this.sortingColumns.map(col => {
+                return {key: col.data, direction: col.attributes["data-sorting"]};
+            });
 
-            return _.orderBy(data, keys, direction);
+            // reverse the columns, so that the first columns
+            // will be the last to be sorted. This way, the first
+            // columns will have more effect on the final order
+            columns.reverse();
+
+            columns.forEach(col => {
+                let {key, direction} = col;
+
+                // sort numbers
+                if (typeof data[0][key] == "number") {
+                    data.sort((a, b) => a[key] - b[key])
+
+                // sort strings
+                } else {
+                    data.sort((a, b) => a[key].toLowerCase().localeCompare(b[key].toLowerCase()));
+                }
+
+                if (direction == "desc") {
+                    data.reverse()
+                }
+            });
+
+            return data;
         },
 
         setCurrentPage(page) {
@@ -227,3 +277,5 @@ export default {
         }
     }
 };
+
+export default DataTable;

@@ -3,10 +3,7 @@
 export default {
 
     // visible components
-    showEntriesLength: true,
-    showEntriesInfo: true,
-    showSearchFilter: true,
-    showPagination: true,
+    components: ['EntriesLength', 'EntriesInfo', 'SearchFilter', 'Pagination'],
 
     // column options
     column: {

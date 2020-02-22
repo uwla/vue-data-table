@@ -1,11 +1,11 @@
 <template>
     <div class="data-table">
         <div class="data-table-head">
-            <data-table-entries-length v-if="params.showEntriesLength"
-                v-bind="{...params.entries, entryLength}" @select="toggleEntryLength"/>
+            <data-table-entries-length v-if="showEntriesLength" v-bind="{...params.entries, entryLength}"
+                @select="toggleEntryLength"/>
 
-            <data-table-search-filter v-if="params.showSearchFilter"
-                v-bind="{...params.filter}" @input="toggleFiltering"/>
+            <data-table-search-filter v-if="showSearchFilter" v-bind="{...params.filter}"
+                @input="toggleFiltering"/>
         </div>
 
         <div class="data-table-body">
@@ -13,10 +13,10 @@
         </div>
 
         <div class="data-table-footer">
-            <data-table-entries-info v-if="params.showEntriesInfo" v-bind="{...infoParams}"/>
+            <data-table-entries-info v-if="showEntriesInfo" v-bind="{...infoParams}"/>
 
-            <data-table-pagination v-if="params.showPagination"
-                v-bind="{numberOfPages, currentPage, ...params.pagination}" @pageClicked="setCurrentPage"/>
+            <data-table-pagination v-if="showPagination" v-bind="{... paginationParams}"
+                @pageClicked="setCurrentPage"/>
         </div>
 
     </div>

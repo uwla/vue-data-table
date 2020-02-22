@@ -1,7 +1,6 @@
 <template>
     <div id="app">
-        <h1>App</h1>
-        <data-table :parameters="params" />
+        <data-table :parameters="params"/>
     </div>
 </template>
 
