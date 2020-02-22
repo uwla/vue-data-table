@@ -41,7 +41,7 @@ export default {
         },
 
         numberOfPages() {
-            return Math.ceil(this.filteredData.length / this.entryLength)
+            return Math.ceil(this.filteredData.length / this.entryLength) || 1
         },
 
         infoParams() {
@@ -57,6 +57,11 @@ export default {
             let {text, textFiltered} = this.params.info;
 
             return {firstEntry, lastEntry, totalEntries, filteredEntries, text, textFiltered}
+        },
+
+        tableWrapperParams() {
+            let {data, columns} = this, {table, tableWrapper, emptyTableText} = this.params;
+            return {data, columns, table, tableWrapper, emptyTableText}
         },
 
         /**

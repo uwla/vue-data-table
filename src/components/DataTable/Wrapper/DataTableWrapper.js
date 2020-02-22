@@ -1,6 +1,12 @@
 export default {
     name: "DataTableWrapper",
 
+    computed: {
+        empty() {
+            return this.data.length == 0
+        }
+    },
+
     props: {
         data: {
             type: Array,
@@ -18,6 +24,10 @@ export default {
             type: Object,
             required: true,
         },
+        emptyTableText: {
+            type: String,
+            required: true
+        }
     },
 
     methods: {
