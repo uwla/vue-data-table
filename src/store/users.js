@@ -1,6 +1,6 @@
 export default [{
         "id": 630,
-        "name": "ANdre Souza",
+        "name": "andre Souza",
         "email": "andreasa@gmail.com",
         "email_verified_at": null,
         "created_at": "2020-02-06 21:15:43",

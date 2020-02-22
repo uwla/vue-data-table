@@ -28,7 +28,13 @@ export default {
             // ex1: 1 2 3 4 5 6 7
             // ex2: 1 2 3 4
             if (lastPage <= 7) {
-                return _.range(1, lastPage + 1)
+                let pages = [];
+
+                for (let i = 1; i <= lastPage; i++) {
+                    pages.push(i)
+                }
+
+                return pages;
             }
 
             // ex1: 1 2 3 4 5 ... 8

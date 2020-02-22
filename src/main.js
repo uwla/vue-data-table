@@ -11,8 +11,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 Vue.config.productionTip = false
 Vue.component('data-table', DataTable);
 
-window._ = require('lodash');
-
 new Vue({
   router,
   store,

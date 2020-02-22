@@ -1,18 +1,19 @@
 .data-table-wrapper {
     table {
-        border-bottom: 1px solid #ccc;
-
+        margin: 0;
+        
         th,
         td {
             white-space: nowrap;
         }
 
         th {
-            //display: inline-flex;
             background-color: white;
             position: sticky;
+            padding: 1rem 0.75rem;
             border: none !important;
-            box-shadow: 1px 1px #ccc;
+            box-shadow: inset 0px 11px .75px -10px #ddd,
+                        inset 0px -11px .75px -10px #ddd;
             line-height: 1;
             top: 0;
             user-select: none;
@@ -60,7 +61,7 @@
                     line-height: 1;
                     color: black;
                     position: absolute;
-                    bottom: 0.55em;
+                    bottom: 0.92rem;
                     display: block;
                     opacity: 0.5;
                 }
