@@ -25,7 +25,12 @@ export default {
             columns: [
                 { data: "name", title: "Name" },
                 { data: "email", title: "Email Address"},
-                { data: "role", title: "Job", searchable: false },
+                { data: "gender", title: "Gender"},
+                { data: "city", title: "City"},
+                { data: "country", title: "Country"},
+                { data: "state", title: "State"},
+                { data: "job", title: "Job"},
+                { data: "company", title: "Company"},
                 { data: "created_at", title: "Registered at" }
             ]
         };

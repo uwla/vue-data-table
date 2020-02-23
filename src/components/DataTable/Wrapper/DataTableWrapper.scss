@@ -1,13 +1,9 @@
 .data-table-wrapper {
     table {
         margin: 0;
-        
-        th,
-        td {
-            white-space: nowrap;
-        }
 
         th {
+            white-space: nowrap;
             background-color: white;
             position: sticky;
             padding: 1rem 0.75rem;
@@ -45,6 +41,8 @@
             }
 
             .data-table-sorting-icon {
+                width: 23px;
+
                 &::after {
                     right: 0.5em;
                     content: "\2193";
