@@ -1,10 +1,7 @@
+import { mapState } from 'vuex'
+
 export default {
     name: "DataTableSearchFilter",
 
-    props: {
-        text: {
-            type: String,
-            required: true,
-        }
-    },
+    computed: mapState('dataTable', ['searchText']),
 };

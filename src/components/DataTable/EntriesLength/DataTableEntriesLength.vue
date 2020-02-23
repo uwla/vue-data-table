@@ -2,12 +2,10 @@
     <div class="data-table-entries-length">
         <span>{{ textBeforeEntries }}</span>
 
-        <select :value="entryLength" @input="$emit('select')">
-
-            <option v-for="(length, i) in lengths" :key="i" :value="length">
+        <select :value="currentEntryLength" @input="$store.commit('dataTable/toggleEntryLength')">
+            <option v-for="(length, i) in entriesLengths" :key="i" :value="length">
                 {{ length }}
             </option>
-
         </select>
 
         <span>{{ textAfterEntries }}</span>

@@ -1,38 +1,20 @@
+import {mapGetters, mapState} from 'vuex'
+
 export default {
     name: "DataTableWrapper",
 
     computed: {
-        empty() {
-            return this.data.length == 0
-        }
-    },
+        ...mapGetters('dataTable', ['data']),
+        ...mapState('dataTable', ['table', 'tableWrapper', 'emptyTableText', 'columns']),
 
-    props: {
-        data: {
-            type: Array,
-            required: true
+        isEmpty() {
+            return this.data.length == 0
         },
-        columns: {
-            type: Array,
-            required: true,
-        },
-        table: {
-            type: Object,
-            required: true,
-        },
-        tableWrapper: {
-            type: Object,
-            required: true,
-        },
-        emptyTableText: {
-            type: String,
-            required: true
-        }
     },
 
     methods: {
-        // toggleSorting(col) {
-
-        // },
+        sortColumn(column) {
+            this.$store.commit('dataTable/toggleSorting', column)
+        },
     }
 };
