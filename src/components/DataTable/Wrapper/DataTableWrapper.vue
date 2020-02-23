@@ -4,7 +4,7 @@
             <thead>
                 <tr>
                     <th v-for="(column, i) in columns" :key="i"
-                        @click="$emit('sort', column)" v-bind="column.attributes">
+                        @click="sortColumn(column)" v-bind="column.attributes">
 
                         <div class="data-table-thead-content">
                             <span class="data-table-column-title">
@@ -31,7 +31,7 @@
                     </td>
                 </tr>
 
-                <tr v-if="empty">
+                <tr v-if="isEmpty">
                     <td :colspan="columns.length" style="text-align: center"    >
                         {{ emptyTableText }}
                     </td>

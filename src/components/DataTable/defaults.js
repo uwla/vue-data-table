@@ -1,12 +1,18 @@
 //import DataTableActionColumn from './ActionColumn/DataTableActionColumn.vue';
 
 export default {
+    sortingColumns: [],
+    search: "",
+    currentPage: 1,
+    currentEntryLength: 0,
 
     // visible components
     components: ['EntriesLength', 'EntriesInfo', 'SearchFilter', 'Pagination'],
 
     // column options
-    column: {
+    data: [],
+    columns: [],
+    columnOptions: {
         orderable: true,
         searchable: true,
     },
@@ -15,28 +21,23 @@ export default {
     fixedHeader: true,
 
     // entry
-    entries: {
-        defaultLength: 10,
-        lengths: [10, 25, 50, 100],
-        text: "Show :entries entries",
-    },
+    defaultEntryLength: 10,
+    entriesLengths: [10, 25, 50, 100],
+    entriesLengthText: "Show :entries entries",
 
-    info: {
-        text: "Showing :first to :last of :total entries",
-        textFiltered: "Showing :first to :last of :filtered (filtered from :total entries)",
-    },
+    // Entries Info
+    infoText: "Showing :first to :last of :total entries",
+    infoTextFiltered: "Showing :first to :last of :filtered (filtered from :total entries)",
 
-    pagination: {
-        nextButtonText: "Next",
-        previousButtonText: "Previous",
-    },
+    // Pagination
+    nextButtonText: "Next",
+    previousButtonText: "Previous",
 
-    filter: {
-        text: "search:"
-    },
-
+    // Search Filter
+    searchText: "search:",
     emptyTableText: "No matching records found",
 
+    // Table
     table: {
         class: "table table-striped table-hover",
     },
