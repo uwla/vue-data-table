@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <data-table :parameters="params"/>
+        <data-table :parameters="{data: users, columns}"/>
     </div>
 </template>
 
@@ -11,26 +11,19 @@ export default {
         users() {
             return this.$store.state.users;
         },
-
-        params() {
-            return {
-                data: this.users,
-                columns: this.columns
-            };
-        }
     },
 
     data() {
         return {
             columns: [
-                { data: "name", title: "Name" },
+                { data: "name"},
                 { data: "email", title: "Email Address"},
-                { data: "gender", title: "Gender"},
-                { data: "city", title: "City"},
-                { data: "country", title: "Country"},
-                { data: "state", title: "State"},
-                { data: "job", title: "Job"},
-                { data: "company", title: "Company"},
+                { data: "gender"},
+                { data: "city"},
+                { data: "country"},
+                { data: "state"},
+                { data: "job"},
+                { data: "company"},
                 { data: "created_at", title: "Registered at" }
             ]
         };

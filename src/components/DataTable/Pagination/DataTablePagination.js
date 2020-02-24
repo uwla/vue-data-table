@@ -1,10 +1,16 @@
 import {mapGetters, mapState} from 'vuex'
+import store from '../store/index'
+
 export default {
     name: "DataTablePagination",
 
+    beforeCreate() {
+        this.$store = store
+    },
+
     computed: {
-        ...mapGetters('dataTable', ['numberOfPages', 'currentPage']),
-        ...mapState('dataTable', ['previousButtonText', 'nextButtonText']),
+        ...mapGetters(['numberOfPages', 'currentPage']),
+        ...mapState(['previousButtonText', 'nextButtonText']),
 
         isLastPage() {
             return this.currentPage == this.numberOfPages;
@@ -46,7 +52,7 @@ export default {
         setCurrentPage(pageNumber) {
             if ((pageNumber != "...") && (pageNumber != this.currentPage) &&
                 (pageNumber > 0) && (pageNumber <= this.numberOfPages))
-                this.$store.commit('dataTable/setCurrentPage', pageNumber)
+                this.$store.commit('setCurrentPage', pageNumber)
         }
     }
 };

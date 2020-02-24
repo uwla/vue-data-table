@@ -1,11 +1,16 @@
 import {mapGetters, mapState} from 'vuex'
+import store from '../store/index'
 
 export default {
     name: "DataTableWrapper",
 
+    beforeCreate() {
+        this.$store = store
+    },
+
     computed: {
-        ...mapGetters('dataTable', ['data']),
-        ...mapState('dataTable', ['table', 'tableWrapper', 'emptyTableText', 'columns']),
+        ...mapGetters(['data']),
+        ...mapState(['table', 'tableWrapper', 'emptyTableText', 'columns']),
 
         isEmpty() {
             return this.data.length == 0
@@ -14,7 +19,7 @@ export default {
 
     methods: {
         sortColumn(column) {
-            this.$store.commit('dataTable/toggleSorting', column)
+            this.$store.commit('toggleSorting', column)
         },
     }
 };
