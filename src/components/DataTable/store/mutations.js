@@ -1,5 +1,3 @@
-
-
 export default {
     /**
      * Set the current page of the pagination
@@ -16,12 +14,15 @@ export default {
     setOptions(state, options) {
         // map the columns
         let columns = options.columns.map((col, index) => {
-            let attributes = {}
+            let attributes = {}, {title} = col
 
             if (col.orderable == null || col.orderable)
                 attributes.class = "sortable"
 
-            return {...state.columnOptions, ...col, index, attributes}
+            if (!title)
+                title = col.data.charAt(0).toUpperCase() + col.data.slice(1)
+
+            return {...state.columnOptions, ...col, title, index, attributes}
         })
 
         Object.assign(state, options)

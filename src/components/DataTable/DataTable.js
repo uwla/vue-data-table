@@ -3,6 +3,7 @@ import DataTableEntriesLength from './EntriesLength/DataTableEntriesLength.vue';
 import DataTablePagination from './Pagination/DataTablePagination.vue';
 import DataTableSearchFilter from './SearchFilter/DataTableSearchFilter.vue';
 import DataTableWrapper from './Wrapper/DataTableWrapper.vue';
+import store from './store/index'
 
 export const DataTable = {
     name: "DataTable",
@@ -18,11 +19,15 @@ export const DataTable = {
         }
     },
 
-    created() {
-        this.$store.commit('dataTable/setOptions', this.parameters)
+    beforeCreate() {
+        this.$store = store;
+    },
 
-        let length = this.$store.getters["dataTable/defaultEntryLength"]
-        this.$store.commit('dataTable/setCurrentEntryLength', length)
+    created() {
+        this.$store.commit('setOptions', this.parameters)
+
+        let length = this.$store.getters.defaultEntryLength
+        this.$store.commit('setCurrentEntryLength', length)
     },
 };
 

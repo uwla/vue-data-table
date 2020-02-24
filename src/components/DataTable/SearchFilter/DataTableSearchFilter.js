@@ -1,7 +1,12 @@
 import { mapState } from 'vuex'
+import store from '../store/index'
 
 export default {
     name: "DataTableSearchFilter",
 
-    computed: mapState('dataTable', ['searchText']),
+    beforeCreate() {
+        this.$store = store
+    },
+
+    computed: mapState(['searchText']),
 };

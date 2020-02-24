@@ -1,11 +1,16 @@
 import {mapGetters, mapState} from 'vuex'
+import store from '../store/index'
 
 export default {
     name: "DataTableEntriesInfo",
 
+    beforeCreate() {
+        this.$store = store
+    },
+
     computed: {
-        ...mapGetters('dataTable', ['totalEntries', 'filteredEntries', 'firstEntry', 'lastEntry']),
-        ...mapState('dataTable', ['infoText', 'infoTextFiltered']),
+        ...mapGetters(['totalEntries', 'filteredEntries', 'firstEntry', 'lastEntry']),
+        ...mapState(['infoText', 'infoTextFiltered']),
 
         /**
          * The text to display in the left-bottom of the table
