@@ -1,26 +1,21 @@
 import {mapState} from 'vuex'
-import store from '../store/index'
 
 export default {
     name: "DataTableEntriesLength",
 
-    beforeCreate() {
-        this.$store = store
-    },
-
     computed: {
-        ...mapState(['currentEntryLength', 'entriesLengths', 'entriesLengthText']),
+        ...mapState('dataTable', ['currentEntryLength', 'entriesLengths', 'entriesLengthText']),
 
         textPieces() {
             return this.entriesLengthText.split(":entries")
         },
 
         textBeforeEntries() {
-            return this.textPieces[0]
+            return this.textPieces[0].trim() || ""
         },
 
         textAfterEntries() {
-            return this.textPieces[1] || ""
+            return this.textPieces[1].trim() || ""
         },
     },
 };

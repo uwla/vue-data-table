@@ -1,25 +1,15 @@
-import {mapGetters, mapState} from 'vuex'
-import store from '../store/index'
+import {mapState} from 'vuex'
+import DataTableTbody from './Tbody/DataTableTbody.vue'
+import DataTableThead from './Thead/DataTableThead.vue'
 
 export default {
     name: "DataTableWrapper",
 
-    beforeCreate() {
-        this.$store = store
+    components: {
+        DataTableTbody, DataTableThead
     },
 
     computed: {
-        ...mapGetters(['data']),
-        ...mapState(['table', 'tableWrapper', 'emptyTableText', 'columns']),
-
-        isEmpty() {
-            return this.data.length == 0
-        },
+        ...mapState('dataTable', ['table', 'tableWrapper']),
     },
-
-    methods: {
-        sortColumn(column) {
-            this.$store.commit('toggleSorting', column)
-        },
-    }
 };

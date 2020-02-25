@@ -1,6 +1,8 @@
 <template>
+
     <div id="app">
-        <data-table :parameters="{data: users, columns}"/>
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <data-table :parameters="params"/>
     </div>
 </template>
 
@@ -11,23 +13,33 @@ export default {
         users() {
             return this.$store.state.users;
         },
-    },
 
-    data() {
-        return {
-            columns: [
-                { data: "name"},
-                { data: "email", title: "Email Address"},
-                { data: "gender"},
-                { data: "city"},
-                { data: "country"},
-                { data: "state"},
-                { data: "job"},
-                { data: "company"},
-                { data: "created_at", title: "Registered at" }
-            ]
-        };
-    }
+        params() {
+            return {
+                data: this.users,
+                actionColumnText: "Ações",
+                actionColumn: 'multiple',
+                actionColumnsText: {view: "Ver", edit: "Editar", delete: "Deletar"},
+                entriesLengthText: "Exibindo :entries dados por página",
+                infoText: "Mostrando :first à :last de :total dados",
+                infoTextFiltered: "Mostrando :first à :last de :filtered (filtrado de :total dados)",
+                nextButtonText: "Próximo",
+                previousButtonText: "Anterior",
+                searchText: "Pesquisar:",
+                columns: [
+                    { key: "name", title: "Nome"},
+                    //{ key: "email", title: "Email"},
+                    //{ key: "gender", title: "Sexo"},
+                    //{ key: "city", title: "Cidade"},
+                    { key: "country", title: "País"},
+                    //{ key: "state"},
+                    { key: "job", title: "Emprego"},
+                    //{ key: "company", title: "Empresa"},
+                    //{ key: "created_at", title: "Registered at" }
+                ]
+            }
+        }
+    },
 };
 </script>
 
