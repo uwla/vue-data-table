@@ -73,5 +73,20 @@
                 opacity: 1;
             }
         }
+
+        .data-table-action-th {
+            text-align: center;
+            width: 1px;
+        }
+
+        .data-table-action-td {
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+
+            button:not(:last-child) {
+                margin-right: .75em
+            }
+        }
     }
 }

@@ -1,9 +1,8 @@
-import DataTableEntriesInfo from './EntriesInfo/DataTableEntriesInfo.vue';
-import DataTableEntriesLength from './EntriesLength/DataTableEntriesLength.vue';
-import DataTablePagination from './Pagination/DataTablePagination.vue';
-import DataTableSearchFilter from './SearchFilter/DataTableSearchFilter.vue';
-import DataTableWrapper from './Wrapper/DataTableWrapper.vue';
-import store from './store/index'
+import DataTableEntriesInfo from "./EntriesInfo/DataTableEntriesInfo.vue";
+import DataTableEntriesLength from "./EntriesLength/DataTableEntriesLength.vue";
+import DataTablePagination from "./Pagination/DataTablePagination.vue";
+import DataTableSearchFilter from "./SearchFilter/DataTableSearchFilter.vue";
+import DataTableWrapper from "./Wrapper/DataTableWrapper.vue";
 
 export const DataTable = {
     name: "DataTable",
@@ -19,15 +18,11 @@ export const DataTable = {
         }
     },
 
-    beforeCreate() {
-        this.$store = store;
-    },
-
     created() {
-        this.$store.commit('setOptions', this.parameters)
+        this.$store.commit("dataTable/mergeParameters", this.parameters)
 
-        let length = this.$store.getters.defaultEntryLength
-        this.$store.commit('setCurrentEntryLength', length)
+        let length = this.$store.getters["dataTable/defaultEntryLength"]
+        this.$store.commit("dataTable/setCurrentEntryLength", length)
     },
 };
 

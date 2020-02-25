@@ -7,22 +7,20 @@ export default {
     setCurrentPage: (state, page) => state.currentPage = page,
 
     /**
-     * Set the state's options
+     * Merge the options with the defaults
      * @param Object state
      * @param Object options
      */
-    setOptions(state, options) {
+    mergeParameters(state, options) {
         // map the columns
         let columns = options.columns.map((col, index) => {
-            let attributes = {}, {title} = col
+            if (!col.title)
+                col.title = col.key.charAt(0).toUpperCase() + col.key.slice(1)
+            if (col.orderable !== false)
+                col.sortIndex = -1
+                col.sortingDirection = ""
 
-            if (col.orderable == null || col.orderable)
-                attributes.class = "sortable"
-
-            if (!title)
-                title = col.data.charAt(0).toUpperCase() + col.data.slice(1)
-
-            return {...state.columnOptions, ...col, title, index, attributes}
+            return {...state.columnOptions, ...col, index}
         })
 
         Object.assign(state, options)
@@ -73,8 +71,8 @@ export default {
             return
 
         // set the sorting direction if none is set
-        if (column.attributes["data-sorting"] == null) {
-            column.attributes["data-sorting"] = "asc"
+        if (column.sortingDirection == "") {
+            column.sortingDirection = "asc"
 
             // add it to our array of columns being sorted
             column.sortIndex = state.sortingColumns.length
@@ -82,15 +80,15 @@ export default {
             return
         }
 
-        if (column.attributes["data-sorting"] == "asc") {
-            column.attributes["data-sorting"] = "desc"
+        if (column.sortingDirection == "asc") {
+            column.sortingDirection = "desc"
             state.sortingColumns.splice(column.sortIndex, 1, column)
             return
         }
 
         // remove it from sorting
-        column.attributes["data-sorting"] = null
-        column.sortIndex = null
+        column.sortingDirection = ""
+        column.sortIndex = -1
 
         // reset the sortIndex of all columns, which indicate the
         // priority of each column in the sorting. This number

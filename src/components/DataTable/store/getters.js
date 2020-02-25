@@ -41,7 +41,7 @@ export default {
         return data.filter(object => {
             // for each searchable key in the object
             return getters.searchableColumns.some(column => {
-                let key = column.data, value = object[key]
+                let {key} = column, value = object[key]
 
                 if (typeof value == "string")
                     return value.toLowerCase().includes(search.toLowerCase())
@@ -69,7 +69,7 @@ export default {
 
         // get the columns to perform a multiple sort
         let columns = state.sortingColumns.map(col => {
-            return {key: col.data, direction: col.attributes["data-sorting"]}
+            return {key: col.key, direction: col.sortingDirection}
         })
 
         // reverse the columns, so that the first columns

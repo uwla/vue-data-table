@@ -1,5 +1,3 @@
-//import DataTableActionColumn from './ActionColumn/DataTableActionColumn.vue';
-
 export default {
     sortingColumns: [],
     search: "",
@@ -17,13 +15,19 @@ export default {
         searchable: true,
     },
 
+    actions: ['view', 'edit', 'delete'],
+    actionColumn: false, //false, true, 'multiple' //
+    actionColumnText: 'Actions',
+    actionColumnsText: {view: "View", edit: "Edit", delete: "Delete"},
+    actionButtons: {view:  'DataTableViewButton', edit: 'DataTableEditButton', delete: 'DataTableDeleteButton'},
+
     // scroll options
     fixedHeader: true,
 
     // entry
     defaultEntryLength: 10,
     entriesLengths: [10, 25, 50, 100],
-    entriesLengthText: "Show :entries entries",
+    text: "Show :entries entries",
 
     // Entries Info
     infoText: "Showing :first to :last of :total entries",
