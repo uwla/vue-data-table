@@ -5,7 +5,7 @@ export default {
     currentEntryLength: 0,
 
     // visible components
-    components: ['EntriesLength', 'EntriesInfo', 'SearchFilter', 'Pagination'],
+    components: ["EntriesLength", "EntriesInfo", "SearchFilter", "Pagination"],
 
     // column options
     data: [],
@@ -15,11 +15,11 @@ export default {
         searchable: true,
     },
 
-    actions: ['view', 'edit', 'delete'],
-    actionColumn: false, //false, true, 'multiple' //
-    actionColumnText: 'Actions',
+    actions: ["view", "edit", "delete"],
+    actionColumn: false, //false, true, "multiple" //
+    actionColumnText: "Actions",
     actionColumnsText: {view: "View", edit: "Edit", delete: "Delete"},
-    actionButtons: {view:  'DataTableViewButton', edit: 'DataTableEditButton', delete: 'DataTableDeleteButton'},
+    actionButtons: {view:  "DataTableViewButton", edit: "DataTableEditButton", delete: "DataTableDeleteButton"},
 
     // scroll options
     fixedHeader: true,

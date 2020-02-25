@@ -8,5 +8,5 @@
 </template>
 
 
-<script src="./DataTableWrapper.js"></script>
-<style src="./DataTableWrapper.scss" lang="scss"></style>
+<script src="./TableWrapper.js"></script>
+<style src="./TableWrapper.scss" lang="scss"></style>

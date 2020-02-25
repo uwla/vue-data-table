@@ -4,4 +4,4 @@
     </div>
 </template>
 
-<script src="./DataTableEntriesInfo.js"></script>
+<script src="./EntriesInfo.js"></script>

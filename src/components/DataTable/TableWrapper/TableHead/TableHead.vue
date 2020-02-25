@@ -11,4 +11,4 @@
 </template>
 
 
-<script src="./DataTableThead.js"></script>
+<script src="./TableHead.js"></script>

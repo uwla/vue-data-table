@@ -1,8 +1,8 @@
 import {mapGetters, mapState} from 'vuex'
-import DataTableTr from './Tr/DataTableTr.vue'
+import DataTableTr from './TableRow/TableRow.vue'
 
 export default {
-    name: "DataTableBody",
+    name: "DataTableTableBody",
 
     components: {
         DataTableTr

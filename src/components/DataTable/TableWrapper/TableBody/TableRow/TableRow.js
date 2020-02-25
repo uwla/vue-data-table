@@ -1,11 +1,11 @@
 import {mapState} from 'vuex'
-import DataTableViewButton from '../../../Actions/Buttons/DataTableActionBtnView.vue'
-import DataTableEditButton from '../../../Actions/Buttons/DataTableActionBtnEdit.vue'
-import DataTableDeleteButton from '../../../Actions/Buttons/DataTableActionBtnDelete.vue'
+import DataTableViewButton from '../../../Actions/ActionButtonView.vue'
+import DataTableEditButton from '../../../Actions/ActionButtonEdit.vue'
+import DataTableDeleteButton from '../../../Actions/ActionButtonDelete.vue'
 
 
 export default {
-    name: "DataTableBody",
+    name: "DataTableTr",
 
     components: {
         DataTableEditButton, DataTableViewButton, DataTableDeleteButton
@@ -23,7 +23,6 @@ export default {
         actionComponents() {
             return this.actions.map(action => this.actionButtons[action])
         }
-
     },
 
     props: {

@@ -1,8 +1,8 @@
 import {mapState} from 'vuex'
-import DataTableTh from './Th/DataTableTh.vue'
+import DataTableTh from './TableHeader/TableHeader.vue'
 
 export default {
-    name: "DataTableThead",
+    name: "DataTableTableThead",
 
     components: {
         DataTableTh

@@ -10,4 +10,4 @@
     </tbody>
 </template>
 
-<script src="./DataTableTbody.js"></script>
+<script src="./TableBody.js"></script>
