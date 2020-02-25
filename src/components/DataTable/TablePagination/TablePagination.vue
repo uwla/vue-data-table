@@ -28,5 +28,5 @@
     </div>
 </template>
 
-<script src="./DataTablePagination.js"></script>
-<style src="./DataTablePagination.scss" lang="scss"></style>
+<script src="./TablePagination.js"></script>
+<style src="./TablePagination.scss" lang="scss"></style>

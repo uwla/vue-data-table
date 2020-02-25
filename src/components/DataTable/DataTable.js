@@ -1,8 +1,8 @@
-import DataTableEntriesInfo from "./EntriesInfo/DataTableEntriesInfo.vue";
-import DataTableEntriesLength from "./EntriesLength/DataTableEntriesLength.vue";
-import DataTablePagination from "./Pagination/DataTablePagination.vue";
-import DataTableSearchFilter from "./SearchFilter/DataTableSearchFilter.vue";
-import DataTableWrapper from "./Wrapper/DataTableWrapper.vue";
+import DataTableEntriesInfo from "./EntriesInfo/EntriesInfo.vue";
+import DataTableEntriesLength from "./EntriesLength/EntriesLength.vue";
+import DataTablePagination from "./TablePagination/TablePagination.vue";
+import DataTableSearchFilter from "./SearchFilter/SearchFilter.vue";
+import DataTableWrapper from "./TableWrapper/TableWrapper.vue";
 
 export const DataTable = {
     name: "DataTable",

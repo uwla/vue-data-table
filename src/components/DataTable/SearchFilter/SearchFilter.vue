@@ -5,5 +5,5 @@
     </div>
 </template>
 
-<script src="./DataTableSearchFilter.js"></script>
-<style src="./DataTableSearchFilter.scss" lang="scss"></style>
+<script src="./SearchFilter.js"></script>
+<style src="./SearchFilter.scss" lang="scss"></style>

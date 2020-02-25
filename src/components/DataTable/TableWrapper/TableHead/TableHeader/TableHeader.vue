@@ -16,4 +16,4 @@
     </th>
 </template>
 
-<script src="./DataTableTh.js"></script>
+<script src="./TableHeader.js"></script>

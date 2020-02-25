@@ -11,5 +11,5 @@
 </template>
 
 
-<script src="./DataTableEntriesLength.js"></script>
-<style src="./DataTableEntriesLength.scss" lang="scss"></style>
+<script src="./EntriesLength.js"></script>
+<style src="./EntriesLength.scss" lang="scss"></style>

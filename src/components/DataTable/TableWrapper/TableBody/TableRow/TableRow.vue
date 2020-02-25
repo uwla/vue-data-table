@@ -14,4 +14,4 @@
     </tr>
 </template>
 
-<script src="./DataTableTr.js"></script>
+<script src="./TableRow.js"></script>

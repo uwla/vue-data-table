@@ -1,6 +1,6 @@
 import {mapState} from 'vuex'
-import DataTableTbody from './Tbody/DataTableTbody.vue'
-import DataTableThead from './Thead/DataTableThead.vue'
+import DataTableTbody from './TableBody/TableBody.vue'
+import DataTableThead from './TableHead/TableHead.vue'
 
 export default {
     name: "DataTableWrapper",
