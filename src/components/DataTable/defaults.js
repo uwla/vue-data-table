@@ -1,3 +1,7 @@
+import DataTableViewButton from './Actions/ActionButtonView.vue'
+import DataTableEditButton from './Actions/ActionButtonEdit.vue'
+import DataTableDeleteButton from './Actions/ActionButtonDelete.vue'
+
 export default {
     sortingColumns: [],
     search: "",
@@ -19,7 +23,7 @@ export default {
     actionColumn: false, //false, true, "multiple" //
     actionColumnText: "Actions",
     actionColumnsText: {view: "View", edit: "Edit", delete: "Delete"},
-    actionButtons: {view:  "DataTableViewButton", edit: "DataTableEditButton", delete: "DataTableDeleteButton"},
+    actionButtons: {view:  DataTableViewButton, edit: DataTableEditButton, delete: DataTableDeleteButton},
 
     // scroll options
     fixedHeader: true,

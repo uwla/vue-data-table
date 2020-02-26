@@ -1,7 +1,7 @@
 <template>
     <div class="data-table-search-filter">
         <span>{{ searchText }}</span>
-        <input type="text" :value="search" @input="$store.commit('toggleSearch')">
+        <input type="text" :value="search" @input="$store.commit('dataTable/toggleSearch')">
     </div>
 </template>
 
