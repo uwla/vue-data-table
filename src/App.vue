@@ -2,7 +2,7 @@
 
     <div id="app">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-        <data-table :parameters="params"/>
+        <data-table v-bind="{parameters}"/>
     </div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
             return this.$store.state.users;
         },
 
-        params() {
+        parameters() {
             return {
                 data: this.users,
                 actionColumnText: "Ações",
@@ -38,8 +38,13 @@ export default {
                     //{ key: "created_at", title: "Registered at" }
                 ]
             }
-        }
+        },
     },
+
+    created() {
+        let events = ['editData', 'viewData', 'deleteData'];
+        events.forEach(e => DataTableEventBus.$on(e, data => console.log(e, data.id, data)))
+    }
 };
 </script>
 

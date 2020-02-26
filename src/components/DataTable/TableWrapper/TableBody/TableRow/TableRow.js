@@ -1,15 +1,7 @@
 import {mapState} from 'vuex'
-import DataTableViewButton from '../../../Actions/ActionButtonView.vue'
-import DataTableEditButton from '../../../Actions/ActionButtonEdit.vue'
-import DataTableDeleteButton from '../../../Actions/ActionButtonDelete.vue'
-
 
 export default {
     name: "DataTableTr",
-
-    components: {
-        DataTableEditButton, DataTableViewButton, DataTableDeleteButton
-    },
 
     computed: {
         ...mapState('dataTable', ['columns', 'actions', 'actionColumn', 'actionButtons']),
@@ -21,7 +13,7 @@ export default {
         },
 
         actionComponents() {
-            return this.actions.map(action => this.actionButtons[action])
+            return this.actions.map(action => ({action, component: this.actionButtons[action]}))
         }
     },
 

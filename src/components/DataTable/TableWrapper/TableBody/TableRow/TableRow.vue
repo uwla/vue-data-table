@@ -5,11 +5,12 @@
         </td>
 
         <td class="data-table-action-td" v-for="(item, i) in actionItems" :key="('td-action' + i)">
-            <component :is="item"/>
+            <component :is="item.component" v-bind="{data, action: item.action}" />
         </td>
 
         <td class="data-table-action-td" v-if="actionColumn === true">
-            <component :is="item" v-for="(item, i) in actionComponents" :key="('td-action' + i)" />
+            <component :is="item.component" v-bind="{data, action: item.action}"
+                v-for="(item, i) in actionComponents" :key="('td-action' + i)" />
         </td>
     </tr>
 </template>
