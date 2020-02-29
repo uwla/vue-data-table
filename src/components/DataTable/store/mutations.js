@@ -16,6 +16,7 @@ export default {
         let columns = options.columns.map((col, index) => {
             if (!col.title)
                 col.title = col.key.charAt(0).toUpperCase() + col.key.slice(1).replace(/[-_]/ig, ' ')
+
             if (col.orderable !== false) {
                 col.sortIndex = -1
                 col.sortingDirection = ""

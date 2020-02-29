@@ -22,10 +22,12 @@ export default {
     * @return Object
     */
     dataFilteredByEntryLength(state, getters) {
-        let start = getters.firstEntry - 2;
-        let end = getters.lastEntry - 1;
+        // -2 = -1 due to array index + -1 because first item must appear
+        let end = getters.lastEntry, start = getters.firstEntry - 2
+
         if (start < 0)
             start = 0
+
         return getters.dataSorted.slice(start, end);
     },
 
@@ -39,8 +41,6 @@ export default {
         if (search == "" || search == null)
             return data
 
-        // for each objec
-        console.log(getters.searchableColumns)
         return data.filter(object => {
             // for each searchable key in the object
             return getters.searchableColumns.some(column => {
@@ -50,7 +50,6 @@ export default {
                     return value.toLowerCase().includes(search.toLowerCase())
                 if (typeof value == "number")
                     return value.toString().includes(search)
-
                 return false
             })
         })

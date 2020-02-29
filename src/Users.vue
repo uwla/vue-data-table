@@ -58,19 +58,12 @@
         </bootstrap-modal>
 
         <bootstrap-modal id="delete-user-form" title="Delete user" v-if="isDeleting">
-            <h3 class="text-center">
-                Are you sure?
-            </h3>
+            <h3 class="text-center">Are you sure?</h3>
             <p>You cannot revert this!</p>
             <div>
-                <button class="btn btn-danger">
-                    NO, CANCEL
-                </button>
-                <button class="btn btn-success float-right" @click="deleteUser">
-                    YES, DELETE IT!
-                </button>
+                <button class="btn btn-danger">NO, CANCEL</button>
+                <button class="btn btn-success float-right" @click="deleteUser">YES, DELETE IT!</button>
             </div>
-
         </bootstrap-modal>
     </div>
 </template>
@@ -86,13 +79,7 @@ export default {
     },
 
     data() {
-        let keys = [
-            'name', 'email', //'gender',
-            //'city',
-            'country',
-            //'state', 'job', 'company'
-            'created_at'
-            ],
+        let keys = ['name', 'email', 'country', 'created_at'],
             form =  keys.reduce((obj, key) => {
                 obj[key] = ""
                 return obj
@@ -117,6 +104,7 @@ export default {
             return {
                 data: this.users,
                 actionColumn: 'multiple',
+                actions: ['edit', 'delete'],
                 columns: this.keys.map(key => ({key}))
             }
         },
