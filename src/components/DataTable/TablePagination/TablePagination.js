@@ -49,5 +49,5 @@ export default {
                 (pageNumber > 0) && (pageNumber <= this.numberOfPages))
                 this.$store.commit('dataTable/setCurrentPage', pageNumber)
         }
-    }
+    },
 };

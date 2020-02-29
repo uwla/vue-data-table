@@ -22,8 +22,10 @@ export default {
     * @return Object
     */
     dataFilteredByEntryLength(state, getters) {
-        let start = state.currentEntryLength * (state.currentPage - 1);
-        let end = start + state.currentEntryLength;
+        let start = getters.firstEntry - 2;
+        let end = getters.lastEntry - 1;
+        if (start < 0)
+            start = 0
         return getters.dataSorted.slice(start, end);
     },
 
@@ -38,6 +40,7 @@ export default {
             return data
 
         // for each objec
+        console.log(getters.searchableColumns)
         return data.filter(object => {
             // for each searchable key in the object
             return getters.searchableColumns.some(column => {
@@ -45,7 +48,6 @@ export default {
 
                 if (typeof value == "string")
                     return value.toLowerCase().includes(search.toLowerCase())
-
                 if (typeof value == "number")
                     return value.toString().includes(search)
 
@@ -150,5 +152,9 @@ export default {
         return Math.ceil(getters.dataFilteredBySearch.length/state.currentEntryLength) || 1
     },
 
-    currentPage: state => state.currentPage,
+    currentPage(state, getters) {
+        if (state.currentPage > getters.numberOfPages)
+            state.currentPage = getters.numberOfPages
+        return state.currentPage
+    },
 }

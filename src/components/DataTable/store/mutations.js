@@ -15,10 +15,11 @@ export default {
         // map the columns
         let columns = options.columns.map((col, index) => {
             if (!col.title)
-                col.title = col.key.charAt(0).toUpperCase() + col.key.slice(1)
-            if (col.orderable !== false)
+                col.title = col.key.charAt(0).toUpperCase() + col.key.slice(1).replace(/[-_]/ig, ' ')
+            if (col.orderable !== false) {
                 col.sortIndex = -1
                 col.sortingDirection = ""
+            }
 
             return {...state.columnOptions, ...col, index}
         })

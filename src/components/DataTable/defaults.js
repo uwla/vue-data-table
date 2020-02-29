@@ -31,7 +31,7 @@ export default {
     // entry
     defaultEntryLength: 10,
     entriesLengths: [10, 25, 50, 100],
-    text: "Show :entries entries",
+    entriesLengthText: "Show :entries entries",
 
     // Entries Info
     infoText: "Showing :first to :last of :total entries",
