@@ -3,7 +3,7 @@
         <data-table-tr v-for="(row, i) in data" :key="i" :data="row" />
 
         <tr v-if="isEmpty">
-            <td :colspan="columns.length" style="text-align: center">
+            <td :colspan="numberOfColumns" style="text-align: center">
                 {{ emptyTableText }}
             </td>
         </tr>
