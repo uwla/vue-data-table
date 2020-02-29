@@ -10,7 +10,7 @@ export default {
 
     computed: {
         ...mapGetters('dataTable', ['data']),
-        ...mapState('dataTable', ['emptyTableText']),
+        ...mapState('dataTable', ['emptyTableText', 'columns']),
 
         isEmpty() {
             return this.data.length == 0

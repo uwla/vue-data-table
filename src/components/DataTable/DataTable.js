@@ -12,7 +12,19 @@ export const DataTable = {
 
     components: {
         DataTableEntriesInfo, DataTableSearchFilter, DataTablePagination, DataTableEntriesLength, DataTableWrapper
-     },
+    },
+
+    created() {
+        this.mergeParameters()
+    },
+
+    methods: {
+        mergeParameters() {
+            this.$store.commit("dataTable/mergeParameters", this.parameters)
+            let length = this.$store.getters["dataTable/defaultEntryLength"]
+            this.$store.commit("dataTable/setCurrentEntryLength", length)
+        }
+    },
 
     props: {
         parameters: {
@@ -21,13 +33,10 @@ export const DataTable = {
         }
     },
 
-    created() {
-        //
-        this.$store.commit("dataTable/mergeParameters", this.parameters)
-
-        //
-        let length = this.$store.getters["dataTable/defaultEntryLength"]
-        this.$store.commit("dataTable/setCurrentEntryLength", length)
+    watch: {
+        parameters() {
+            this.mergeParameters()
+        }
     },
 };
 
