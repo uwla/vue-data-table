@@ -79,7 +79,7 @@ export default {
     },
 
     data() {
-        let keys = ['name', 'email', 'country', 'created_at'],
+        let keys = ['name', 'email', 'gender', 'country', 'created_at'],
             form =  keys.reduce((obj, key) => {
                 obj[key] = ""
                 return obj

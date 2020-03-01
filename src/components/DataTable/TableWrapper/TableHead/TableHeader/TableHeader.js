@@ -1,15 +1,16 @@
+import {mapState} from 'vuex'
 export default {
     name: "DataTableTh",
 
     computed: {
+        ...mapState('dataTable', ['sortIconComponent', 'sortIndexComponent']),
+        
         attributes() {
              let attributes = {}
-
              if (this.column.orderable)
                  attributes.class = "sortable"
              if (this.column.sortingDirection != "")
                  attributes["data-sorting"] = this.column.sortingDirection
-
              return attributes
         },
     },

@@ -1,19 +1,27 @@
 <template>
     <th @click="sortThisColumn" v-bind="attributes">
-        <div class="data-table-thead-content">
-            <span class="data-table-column-title">
-                {{ title }}
-            </span>
-
-            <span class="data-table-sorting-index" v-if="sortIndex >= 0">
-                {{ sortIndex + 1 }}
-            </span>
-
-            <span class="data-table-sorting-icon" v-if="orderable">
-                &nbsp;
-            </span>
+        <div class="data-table-th-content">
+            <span class="data-table-th-title">{{ title }}</span>
+            <component :is="sortIndexComponent" v-if="(sortIndex >= 0)" :index="sortIndex + 1"/>
+            <component :is="sortIconComponent" v-if="orderable"/>
         </div>
     </th>
 </template>
 
 <script src="./TableHeader.js"></script>
+<style lang="scss">
+th {
+    .data-table-th-content {
+        display: flex;
+        align-items: center;
+    }
+
+    &.sortable {
+        cursor: pointer;
+
+        &:hover {
+            color: #3490DC;
+        }
+    }
+}
+</style>

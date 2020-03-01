@@ -1,0 +1,11 @@
+.data-table-sort-index {
+    margin: 0 0 0 5px;
+    font-size: 80%;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    height: 1.5em;
+    width: 1.5em;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -13,3 +13,5 @@ export default {
     ...ActionButton
 }
 </script>
+
+<style src="./ActionButton.css" lang="css"></style>

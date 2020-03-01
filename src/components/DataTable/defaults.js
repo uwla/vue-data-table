@@ -1,8 +1,14 @@
-import DataTableViewButton from './Actions/ActionButtonView.vue'
-import DataTableEditButton from './Actions/ActionButtonEdit.vue'
-import DataTableDeleteButton from './Actions/ActionButtonDelete.vue'
+import DataTableViewButton from './ActionButtons/ActionButtonView.vue'
+import DataTableEditButton from './ActionButtons/ActionButtonEdit.vue'
+import DataTableDeleteButton from './ActionButtons/ActionButtonDelete.vue'
+import DataTableSortIcon from './SortableColumn/SortIcon.vue'
+import DataTableSortIndex from './SortableColumn/SortIndex.vue'
 
 export default {
+    sortIndexComponent: DataTableSortIndex,
+    sortIconComponent: DataTableSortIcon,
+
+    // initial values
     sortingColumns: [],
     search: "",
     currentPage: 1,

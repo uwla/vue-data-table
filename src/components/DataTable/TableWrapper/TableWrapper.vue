@@ -7,6 +7,10 @@
     </div>
 </template>
 
-
 <script src="./TableWrapper.js"></script>
-<style src="./TableWrapper.scss" lang="scss"></style>
+
+<style lang="css">
+.data-table-wrapper table {
+    margin: 0;
+}
+</style>
