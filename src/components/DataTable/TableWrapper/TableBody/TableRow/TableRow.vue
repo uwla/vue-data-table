@@ -16,3 +16,10 @@
 </template>
 
 <script src="./TableRow.js"></script>
+<style lang="scss">
+.data-table-action-td {
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+</style>

@@ -3,6 +3,7 @@
         <i class="fa fa-trash"></i>
     </button>
 </template>
+
 <script>
 import ActionButton from './ActionButton'
 
@@ -12,3 +13,5 @@ export default {
     ...ActionButton
 }
 </script>
+
+<style src="./ActionButton.css" lang="css"></style>
