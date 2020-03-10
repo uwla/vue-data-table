@@ -1,8 +1,8 @@
 <template>
     <div class="data-table">
         <div class="data-table-head">
-            <data-table-entries-length/>
-            <data-table-search-filter/>
+            <data-table-entries-length v-if="showEntriesLength"/>
+            <data-table-search-filter v-if="showSearchFilter"/>
         </div>
 
         <div class="data-table-body">
@@ -10,8 +10,8 @@
         </div>
 
         <div class="data-table-footer">
-            <data-table-entries-info/>
-            <data-table-pagination/>
+            <data-table-entries-info v-if="showEntriesInfo"/>
+            <data-table-pagination v-if="showPagination"/>
         </div>
     </div>
 </template>

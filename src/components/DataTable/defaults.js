@@ -5,7 +5,7 @@ import DataTableSortIcon from './SortableColumn/SortIcon.vue'
 import DataTableSortIndex from './SortableColumn/SortIndex.vue'
 
 export default {
-    lang: "es",
+    lang: "en",
 
     //
     sortIndexComponent: DataTableSortIndex,
@@ -18,7 +18,10 @@ export default {
     currentEntryLength: 0,
 
     // visible components
-    components: ["EntriesLength", "EntriesInfo", "SearchFilter", "Pagination"],
+    showEntriesLength: true,
+    showEntriesInfo: true,
+    showSearchFilter: true,
+    showPagination: true,
 
     // column options
     data: [],

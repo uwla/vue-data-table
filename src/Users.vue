@@ -9,6 +9,7 @@
 
 export default {
     name: "UsersDashboard",
+
     data() {
         return {
             keys: ['name', 'email', 'gender', 'country', 'job', 'city', 'created_at'],
@@ -24,8 +25,7 @@ export default {
             return {
                 data: this.users,
                 actionColumn: 'multiple',
-                actions: ['edit', 'delete'],
-                columns: this.keys.map(key => ({key}))
+                columns: this.keys.map(key => ({key})),
             }
         },
     },
