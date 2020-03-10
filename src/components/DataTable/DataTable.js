@@ -39,8 +39,13 @@ const DataTable = {
     },
 
     watch: {
-        parameters() {
-            this.mergeParameters()
+        parameters: {
+            handler(value) {
+                this.parameters = value
+                this.mergeParameters()
+            },
+
+            deep: true
         }
     },
 };
