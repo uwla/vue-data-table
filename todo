@@ -1,0 +1,13 @@
+features:
+    ☐ enable single-column sorting
+    ☐ enable row-selection
+    ☐ enable column reorder
+    ☐ add hide-column button
+    ☐ add option to display specific components
+    ☐ add export-to-excel button
+    ☐ add export-to-json button
+public:
+    ☐ write a good read-me
+    ☐ publish the project on npm
+    ☐ add a demo version
+bugs:
