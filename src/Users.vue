@@ -13,6 +13,7 @@ export default {
     data() {
         return {
             keys: ['name', 'email', 'gender', 'country', 'job', 'city', 'created_at'],
+            lang: "es"
         }
     },
 
@@ -23,6 +24,7 @@ export default {
 
         parameters() {
             return {
+                lang: this.lang,
                 data: this.users,
                 actionColumn: 'multiple',
                 columns: this.keys.map(key => ({key})),

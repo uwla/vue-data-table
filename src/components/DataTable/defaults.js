@@ -36,7 +36,7 @@ export default {
     actionButtons: {view:  DataTableViewButton, edit: DataTableEditButton, delete: DataTableDeleteButton},
 
     // scroll options
-    fixedHeader: true,
+    // fixedHeader: true,
 
     // entry
     defaultEntryLength: 10,
