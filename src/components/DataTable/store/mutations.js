@@ -1,3 +1,5 @@
+import translations from '../lang'
+
 export default {
     /**
      * Set the current page of the pagination
@@ -26,6 +28,7 @@ export default {
         })
 
         Object.assign(state, options)
+        Object.assign(state, translations[state.lang])
         state.columns = columns
     },
 
