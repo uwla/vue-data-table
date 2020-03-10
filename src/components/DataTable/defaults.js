@@ -5,6 +5,9 @@ import DataTableSortIcon from './SortableColumn/SortIcon.vue'
 import DataTableSortIndex from './SortableColumn/SortIndex.vue'
 
 export default {
+    lang: "es",
+
+    //
     sortIndexComponent: DataTableSortIndex,
     sortIconComponent: DataTableSortIcon,
 
@@ -27,8 +30,6 @@ export default {
 
     actions: ["view", "edit", "delete"],
     actionColumn: false, //false, true, "multiple" //
-    actionColumnText: "Actions",
-    actionColumnsText: {view: "View", edit: "Edit", delete: "Delete"},
     actionButtons: {view:  DataTableViewButton, edit: DataTableEditButton, delete: DataTableDeleteButton},
 
     // scroll options
@@ -37,19 +38,6 @@ export default {
     // entry
     defaultEntryLength: 10,
     entriesLengths: [10, 25, 50, 100],
-    entriesLengthText: "Show :entries entries",
-
-    // Entries Info
-    infoText: "Showing :first to :last of :total entries",
-    infoTextFiltered: "Showing :first to :last of :filtered (filtered from :total entries)",
-
-    // Pagination
-    nextButtonText: "Next",
-    previousButtonText: "Previous",
-
-    // Search Filter
-    searchText: "search:",
-    emptyTableText: "No matching records found",
 
     // Table
     table: {
