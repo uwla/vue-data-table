@@ -1,17 +1,22 @@
-import DataTableEntriesInfo from "./EntriesInfo/EntriesInfo.vue";
-import DataTableEntriesLength from "./EntriesLength/EntriesLength.vue";
-import DataTablePagination from "./TablePagination/TablePagination.vue";
-import DataTableSearchFilter from "./SearchFilter/SearchFilter.vue";
-import DataTableWrapper from "./TableWrapper/TableWrapper.vue";
+import DataTableEntriesInfo from "./EntriesInfo/EntriesInfo.vue"
+import DataTableEntriesLength from "./EntriesLength/EntriesLength.vue"
+import DataTablePagination from "./TablePagination/TablePagination.vue"
+import DataTableSearchFilter from "./SearchFilter/SearchFilter.vue"
+import DataTableWrapper from "./TableWrapper/TableWrapper.vue"
 import Vue from 'vue'
+import {mapState} from 'vuex'
 
 window.DataTableEventBus = new Vue()
 
-export const DataTable = {
+const DataTable = {
     name: "DataTable",
 
     components: {
         DataTableEntriesInfo, DataTableSearchFilter, DataTablePagination, DataTableEntriesLength, DataTableWrapper
+    },
+
+    computed: {
+        ...mapState("dataTable", ["showEntriesInfo", "showPagination", "showEntriesLength", "showSearchFilter"])
     },
 
     created() {
