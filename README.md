@@ -32,7 +32,7 @@ Data Table is a VueJS plug-in that adds advanced features to an HTML table.
 ### Installation
 
 ```terminal
-npm install --save @asa/vue-data-table
+npm install --save @andresouzaabreu/vue-data-table
 ```
 
 ### Set up
@@ -41,7 +41,7 @@ Add these lines to your main.js
 
 ```javascript
 import DataTable from 'vue-data-table'
-Vue.component("DataTable", DataTable)
+Vue.component("data-table", DataTable)
 ```
 
 Vue Data Table uses Vuex to manage the data. After installing, we need to add DataTable's module to our store.
@@ -49,7 +49,7 @@ Vue Data Table uses Vuex to manage the data. After installing, we need to add Da
 ```javascript
 import Vue from 'vue'
 import Vuex from 'vuex'
-import dataTable from '@asa/vue-data-table/store/index'
+import dataTable from '@andresouzaabreu/vue-data-table/store/index'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -86,8 +86,8 @@ All configuration to customize the DataTable is passed through a prop called par
 | showSearchFilter | `Bool` | `true` | Wheter to show the SearchFilter component |
 | showPagination | `Bool` | `true` | Wheter to show the Pagination component |
 | table | `Object` | `{class: "table table-striped table-hover"}` | The table's html attributes |
-| tableWrapper | `Object` | `style:{overflow: "auto", height: "75vh", width: "100%",}` | The table's container's html attributes |
-| actionColumn | `Bool|String` | false | Whether to show the column with action buttons. Possible values are  `false` (no column), `true` (one column for all action buttons), and `'multiple'` (one column for each action button).
+| tableWrapper | `Object` | `{style:{overflow: "auto", height: "75vh", width: "100%"}}` | The table's container's html attributes |
+| actionColumn | `Bool`, `String` | false | Whether to show the column with action buttons. Possible values are  `false` (no column), `true` (one column for all action buttons), and `'multiple'` (one column for each action button).
 | actions | `Array` | ["view", "edit", "delete"] | The actions for the action buttons. We can ommit some actions or add our own actions |
 | actionButtons | `Object` | DataTableActionButtons | The Vue components to be displayed for each action button.  |
 | sortIndexComponent | `Object` | DataTableSortIndex | The Vue component to be rendered as the sort index for orderable columns |
@@ -108,7 +108,7 @@ Each object in the columns array may have the following keys.
 
 ### Lang
 
-Currently, DataTable has support for three languages: English (en), Brazilian Portuguese (pt-br), and Spanish(es). The `lang` in the `parameteres` specifies in which language to display the text in our table. 
+Currently, DataTable has support for three languages: English (en), Brazilian Portuguese (pt-br), and Spanish(es). The `lang` in the `parameteres` specifies in which language to display the text in our table.
 
 If we want to add a custom text (maybe because there is no language support or because we want a customized text), we have to set the text in the `parameters` property.
 
@@ -130,7 +130,7 @@ The following table shows which texts we may customize and their default values 
 
 ### Action buttons
 
-We provide three components for the actions "view", "edit", and "delete". They use fontawesome and bootstrap.
+We provide three components for the actions `view`, `edit`, and `delete`. They use fontawesome and bootstrap.
 
 #### Default action buttons
 
@@ -213,7 +213,7 @@ Now that we've learned how to register our custom action buttons, we need to per
 
 By default, when we click in one of DataTableActionButtons, it will trigger an event. The name of the event will be the name of the action followed by "Data" (e.g, view => viewData, edit => editData, delete => deleteData). We use a global Vue instance called `DataTableEventBus` to be able to access the event from anywhere in our application.
 
-In the following example, the `data` object passed in the event is equal to the `user`. 
+In the following example, the `data` object passed in the event is equal to the `user`.
 
 ```javascript
 export default {
@@ -278,7 +278,7 @@ Then, in our component (in this case `DownloadButton.vue`), we need to add a cli
 </template>
 
 <script>
-const DownloadButton = {
+export const DownloadButton = {
     methods: {
         download() {
             DataTableEventBus.$emit("downloadData", this.data)
@@ -291,8 +291,7 @@ const DownloadButton = {
             required: true
         },
     }
-}
-export DownloadButton
+};
 </script>
 ```
 
