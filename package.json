@@ -1,6 +1,6 @@
 {
 	"name": "@andresouzaabreu/vue-data-table",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"private": false,
 	"author": "André Souza Abreu",
     "description": "A Vue plug-in that adds features like column ordering, data filtering, pagination to an HTML table.",

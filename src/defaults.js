@@ -1,8 +1,8 @@
-import DataTableViewButton from './ActionButtons/ActionButtonView.vue'
-import DataTableEditButton from './ActionButtons/ActionButtonEdit.vue'
-import DataTableDeleteButton from './ActionButtons/ActionButtonDelete.vue'
-import DataTableSortIcon from './SortableColumn/SortIcon.vue'
-import DataTableSortIndex from './SortableColumn/SortIndex.vue'
+import DataTableViewButton from './components/ActionButtons/ActionButtonView.vue'
+import DataTableEditButton from './components/ActionButtons/ActionButtonEdit.vue'
+import DataTableDeleteButton from './components/ActionButtons/ActionButtonDelete.vue'
+import DataTableSortIcon from './components/SortableColumn/SortIcon.vue'
+import DataTableSortIndex from './components/SortableColumn/SortIndex.vue'
 
 export default {
     lang: "en",

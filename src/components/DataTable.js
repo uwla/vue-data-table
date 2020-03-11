@@ -5,7 +5,7 @@ import DataTableSearchFilter from "./SearchFilter/SearchFilter.vue"
 import DataTableWrapper from "./TableWrapper/TableWrapper.vue"
 import {mapState} from 'vuex'
 
-const DataTable = {
+export default {
     name: "DataTable",
 
     components: {
@@ -46,5 +46,3 @@ const DataTable = {
         }
     },
 };
-
-export default DataTable;
