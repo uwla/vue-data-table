@@ -1,5 +1,3 @@
-import users from './users'
+import defaults from '../defaults'
 
-export default {
-    users,
-}
+export default {...defaults}

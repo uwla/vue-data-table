@@ -3,10 +3,7 @@ import DataTableEntriesLength from "./EntriesLength/EntriesLength.vue"
 import DataTablePagination from "./TablePagination/TablePagination.vue"
 import DataTableSearchFilter from "./SearchFilter/SearchFilter.vue"
 import DataTableWrapper from "./TableWrapper/TableWrapper.vue"
-import Vue from 'vue'
 import {mapState} from 'vuex'
-
-window.DataTableEventBus = new Vue()
 
 const DataTable = {
     name: "DataTable",

@@ -49,7 +49,7 @@ Vue Data Table uses Vuex to manage the data. After installing, we need to add Da
 ```javascript
 import Vue from 'vue'
 import Vuex from 'vuex'
-import dataTable from '@andresouzaabreu/vue-data-table/store/index'
+import {DataTableStore as dataTable} from '@andresouzaabreu/vue-data-table'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
