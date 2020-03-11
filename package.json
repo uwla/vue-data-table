@@ -3,18 +3,19 @@
 	"version": "0.1.0",
 	"private": false,
 	"author": "André Souza Abreu",
-	"description": "A Vue plug-in that adds features like column ordering, data filtering, pagination to an HTML table.",
+    "description": "A Vue plug-in that adds features like column ordering, data filtering, pagination to an HTML table.",
+    "repository": "https://github.com/AndreSouzaAbreu/vue-data-table",
+    "bugs": "https://github.com/AndreSouzaAbreu/vue-data-table/issues",
 	"license": "MIT",
 	"scripts": {
 		"serve": "vue-cli-service serve",
 		"build": "vue-cli-service build",
-		"test:unit": "vue-cli-service test:unit"
-	},
-	"keywords": [
-		"vue",
-		"table",
-		"data"
-	],
+        "test:unit": "vue-cli-service test:unit",
+        "build:npm": "vue-cli-service build --target lib --name DataTable src/components/DataTable.vue"
+    },
+    "main": "dist/DataTable.umd.js",
+    "unpkg": "dist/DataTable.umd.min.js",
+	"keywords": ["vue", "table", "data"],
 	"dependencies": {
 		"bootstrap": "^4.4.1",
 		"core-js": "^3.6.4",
