@@ -27,8 +27,8 @@ export default {
             return {...state.columnOptions, ...col, index}
         })
 
+        Object.assign(state, translations[options.lang || 'en'])
         Object.assign(state, options)
-        Object.assign(state, translations[state.lang])
         state.columns = columns
     },
 
