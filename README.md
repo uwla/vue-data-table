@@ -37,27 +37,23 @@ npm install --save @andresouzaabreu/vue-data-table
 
 ### Set up
 
-Add these lines to your main.js
-
-```javascript
-import DataTable from 'vue-data-table'
-Vue.component("data-table", DataTable)
-```
-
-Vue Data Table uses Vuex to manage the data. After installing, we need to add DataTable's module to our store.
+Add these lines to main.js
 
 ```javascript
 import Vue from 'vue'
-import Vuex from 'vuex'
-import {DataTableStore as dataTable} from '@andresouzaabreu/vue-data-table'
-Vue.use(Vuex)
+import store from 'path/to/your/store.js'
+import installer from '@andresouzaabreu/vue-data-table'
 
-export default new Vuex.Store({
-    modules: {
-        dataTable,
-        // other modules
-    }
-})
+installer(Vue, store)
+```
+
+This will register DataTable as a global Vue component and will add DataTable's module to our store since DataTable uses Vuex to manage data.
+
+Besides bootstrap, DataTable uses its own css to style the table. Add these lines below to main.js to import the stylesheets.
+
+```javascript
+import 'bootstrap/dist/css/bootstrap.min.css'
+import '@andresouzaabreu/vue-data-table/dist/DataTable.css'
 ```
 
 ### Use
