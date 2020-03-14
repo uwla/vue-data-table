@@ -11,13 +11,12 @@
 		"serve": "vue-cli-service serve",
 		"build": "vue-cli-service build",
         "test:unit": "vue-cli-service test:unit",
-        "build:npm": "vue-cli-service build --target lib --name DataTable src/components/DataTable.vue"
+        "build:npm": "vue-cli-service build --target lib --name DataTable src/main.js"
     },
     "main": "dist/DataTable.umd.js",
     "unpkg": "dist/DataTable.umd.min.js",
 	"keywords": ["vue", "table", "data"],
 	"dependencies": {
-		"bootstrap": "^4.4.1",
 		"core-js": "^3.6.4",
 		"vue": "^2.6.11",
 		"vue-router": "^3.1.5",

@@ -1,11 +1,13 @@
 import DataTable from './components/DataTable.vue';
-import DataTableStore from './store/index'
+import DataTableStore from './store/'
 
-import Vue from 'vue'
-window.DataTableEventBus = new Vue()
+export default function install(Vue, store) {
+    window.DataTableEventBus = new Vue()
 
-export {
-    DataTable,
-    DataTableStore,
-	DataTable as default
+    if (!store)
+        console.error('Please provide a store!!')
+
+    Vue.component('data-table', DataTable)
+
+    store.registerModule('dataTable', DataTableStore)
 }
