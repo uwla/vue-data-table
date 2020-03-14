@@ -5,20 +5,21 @@ Data Table is a VueJS plug-in that adds advanced features to an HTML table.
 ## Table of contents
 
 1. [Features](#features)
-2. [Getting started](#get-started)
+2. [Demo](#demo)
+3. [Getting started](#get-started)
     - [Installation](#installation)
     - [Set Up](#set-up)
     - [Use](#use)
-3. [Customize configuration](#get-started)
+4. [Customize configuration](#get-started)
     - [Columns](#columns)
     - [Lang](#lang)
     - [Action Buttons](#action-buttons)
     - [Sorting Components](#sorting-components)
-4. [License](#license)
-5. [Versioning](#versioning)
-6. [Contributing](#contributing)
-7. [Authors](#authors)
-8. [Built-with](#built-with)
+5. [License](#license)
+6. [Versioning](#versioning)
+7. [Contributing](#contributing)
+8. [Authors](#authors)
+9. [Built-with](#built-with)
 
 ## Features
 
@@ -26,6 +27,13 @@ Data Table is a VueJS plug-in that adds advanced features to an HTML table.
 - Action Buttons Column
 - Pagination
 - Search Filter
+
+## Demo
+
+The best way to see if a package suits your needs is by viewing and editing a demo project. Here are some codeplayground in which you can test DataTable.
+
+- [Demo01](https://codesandbox.io/s/vue-data-table-demo01-ygnl5?fontsize=14&hidenavigation=1&theme=dark)
+- [Demo02](https://codesandbox.io/s/vue-data-table-demo02-r94qe?fontsize=14&hidenavigation=1&theme=dark)
 
 ## Get started
 
