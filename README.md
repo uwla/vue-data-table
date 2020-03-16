@@ -1,6 +1,6 @@
-# DATA TABLE
+# VUE DATA TABLE
 
-Data Table is a VueJS plug-in that adds advanced features to an HTML table.
+VueDataTable is a VueJS plug-in that adds advanced features to an HTML table. It was inspired by [DataTable jQuery Plugin](https://datatables.net/), but it uses `Vue`, not `jQuery`.
 
 ## Table of contents
 
@@ -30,7 +30,7 @@ Data Table is a VueJS plug-in that adds advanced features to an HTML table.
 
 ## Demo
 
-The best way to see if a package suits your needs is by viewing and editing a demo project. Here are some codeplayground in which you can test DataTable.
+The best way to see if a package suits your needs is by viewing and editing a demo project. Here are some codeplayground in which you can test VueDataTable.
 
 - [Demo01](https://codesandbox.io/s/vue-data-table-demo01-ygnl5?fontsize=14&hidenavigation=1&theme=dark)
 - [Demo02](https://codesandbox.io/s/vue-data-table-demo02-r94qe?fontsize=14&hidenavigation=1&theme=dark)
@@ -55,9 +55,9 @@ import installer from '@andresouzaabreu/vue-data-table'
 installer(Vue, store)
 ```
 
-This will register DataTable as a global Vue component and will add DataTable's module to our store since DataTable uses Vuex to manage data.
+This will register VueDataTable as a global Vue component and will add VueDataTable's module to our store since VueDataTable uses Vuex to manage data.
 
-Besides bootstrap, DataTable uses its own css to style the table. Add these lines below to main.js to import the stylesheets.
+Besides bootstrap, VueDataTable uses its own css to style the table. Add these lines below to main.js to import the stylesheets.
 
 ```javascript
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -76,7 +76,7 @@ import '@andresouzaabreu/vue-data-table/dist/DataTable.css'
 
 ## Customize configuration
 
-All configuration to customize the DataTable is passed through a prop called parameters. This prop is required and must be of the type Object. Here are the options we can pass in the parameters.
+All configuration to customize the VueDataTable is passed through a prop called parameters. This prop is required and must be of the type Object. Here are the options we can pass in the parameters.
 
 | key | type | default | description |
 | --- | --- | --- | --- |
@@ -112,7 +112,7 @@ Each object in the columns array may have the following keys.
 
 ### Lang
 
-Currently, DataTable has support for three languages: English (en), Brazilian Portuguese (pt-br), and Spanish(es). The `lang` in the `parameteres` specifies in which language to display the text in our table.
+Currently, VueDataTable has support for three languages: English (en), Brazilian Portuguese (pt-br), and Spanish(es). The `lang` in the `parameteres` specifies in which language to display the text in our table.
 
 If we want to add a custom text (maybe because there is no language support or because we want a customized text), we have to set the text in the `parameters` property.
 
@@ -138,7 +138,7 @@ We provide three components for the actions `view`, `edit`, and `delete`. They u
 
 #### Default action buttons
 
-By default, DataTable will show the following components for each action
+By default, VUeDataTable will show the following components for each action
 
 ```html
 <!-- view button -->
@@ -187,7 +187,7 @@ export default {
 
 For each action in `actions` in `parameters`, there must be a vue component associated with that action. If we want to add actions (maybe a "clone" action or "download" action), we must specify a component.
 
-In the following example, we have a `VideosDashboard` component that uses `DataTable`. We have added a `download` action (that download the video) and a `copy` action (which copy the video's url) as follows:
+In the following example, we have a `VideosDashboard` component that uses `VueDataTable`. We have added a `download` action (that download the video) and a `copy` action (which copy the video's url) as follows:
 
 ```javascript
 import DownloadButton from './components/DownloadButton.vue'
@@ -274,7 +274,7 @@ export default {
 }
 ```
 
-Then, in our component (in this case `DownloadButton.vue`), we need to add a click event to our button and also we need to have a `data` property. Inside the click event, we must tell `DataTableEventBus` to emit an event. The first parameters is the event name, and the second parameter is the argument is the data object that matches the row of the button clicked. `DataTable` will pass the data (in this case, a `video` object) to our `actionButton` component, so we don't have to worry about that.
+Then, in our component (in this case `DownloadButton.vue`), we need to add a click event to our button and also we need to have a `data` property. Inside the click event, we must tell `DataTableEventBus` to emit an event. The first parameters is the event name, and the second parameter is the argument is the data object that matches the row of the button clicked. `VueDataTable` will pass the data (in this case, a `video` object) to our `actionButton` component, so we don't have to worry about that.
 
 ```html
 <template>
@@ -305,7 +305,7 @@ export const DownloadButton = {
 
 #### Sorting icon
 
-By default, DataTable will display arrows to indicate the sorting direction when sorting a column. The `SortingIcon` component is wrapped in a `th` element. The `th` element has a `data-sorting` attribute that may be `asc` or `desc` only. Based on this value, we display an `arrow_up` or an `arrow_down` icon using `CSS` rules.
+By default, VueDataTable will display arrows to indicate the sorting direction when sorting a column. The `SortingIcon` component is wrapped in a `th` element. The `th` element has a `data-sorting` attribute that may be `asc` or `desc` only. Based on this value, we display an `arrow_up` or an `arrow_down` icon using `CSS` rules.
 
 ```vue
 <template>
@@ -354,7 +354,7 @@ export default {
 
 #### Sorting Index Icon
 
-When sorting multiple columns, DataTable will display an icon with a index indicating which column had priority in the sorting process.
+When sorting multiple columns, VueDataTable will display an icon with a index indicating which column had priority in the sorting process.
 
 ```vue
 <template>
