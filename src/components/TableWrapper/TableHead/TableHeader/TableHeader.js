@@ -4,7 +4,7 @@ export default {
 
     computed: {
         ...mapState('dataTable', ['sortIconComponent', 'sortIndexComponent']),
-        
+
         attributes() {
              let attributes = {}
              if (this.column.orderable)

@@ -13,23 +13,19 @@ export default {
      * @param Object state
      * @param Object options
      */
-    mergeParameters(state, options) {
+    parseData (state, options) {
         // map the columns
         let columns = options.columns.map((col, index) => {
             if (!col.title)
                 col.title = col.key.charAt(0).toUpperCase() + col.key.slice(1).replace(/[-_]/ig, ' ')
 
-            if (col.orderable !== false) {
-                col.sortIndex = -1
-                col.sortingDirection = ""
-            }
-
-            return {...state.columnOptions, ...col, index}
+            return {...state.columnOptions, ...col, index, sortIndex: -1, sortingDirection: ""}
         })
 
-        Object.assign(state, translations[options.lang || 'en'])
-        Object.assign(state, options)
-        state.columns = columns
+        let {defaultEntryLength, entriesLengths} = options
+        state.currentEntryLength = (entriesLengths.includes(defaultEntryLength)) ? defaultEntryLength : entriesLengths[0]
+
+        Object.assign(state, translations[options.lang], options, options.text, {columns})
     },
 
     /**
@@ -43,7 +39,7 @@ export default {
      * Toggle entry length, but still shows the records from the last entry length
      * @param Object state
      */
-    toggleEntryLength(state) {
+    toggleEntryLength (state) {
         let newEntryLength = Number(window.event.target.value);
         let firstDataIndex = 1 + state.currentEntryLength * (state.currentPage - 1);
 
@@ -58,7 +54,7 @@ export default {
      * @param Object state
      * @return void
      */
-    toggleSearch(state) {
+    toggleSearch (state) {
         state.search = window.event.target.value.trim();
 
         // reset the page to avoid bugs
@@ -71,7 +67,7 @@ export default {
      * @param Object column
      * @return void
      */
-    toggleSorting(state, column) {
+    toggleSorting (state, column) {
         if (!column.orderable)
             return
 

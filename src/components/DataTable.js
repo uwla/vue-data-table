@@ -1,9 +1,18 @@
+// Main components
 import DataTableEntriesInfo from "./EntriesInfo/EntriesInfo.vue"
 import DataTableEntriesLength from "./EntriesLength/EntriesLength.vue"
 import DataTablePagination from "./TablePagination/TablePagination.vue"
 import DataTableSearchFilter from "./SearchFilter/SearchFilter.vue"
 import DataTableWrapper from "./TableWrapper/TableWrapper.vue"
-import {mapState} from 'vuex'
+
+// Action buttons
+import DataTableViewButton from "./ActionButtons/ActionButtonView.vue"
+import DataTableEditButton from "./ActionButtons/ActionButtonEdit.vue"
+import DataTableDeleteButton from "./ActionButtons/ActionButtonDelete.vue"
+
+// Sorting components
+import DataTableSortIcon from "./SortableColumn/SortIcon.vue"
+import DataTableSortIndex from "./SortableColumn/SortIndex.vue"
 
 export default {
     name: "DataTable",
@@ -12,37 +21,99 @@ export default {
         DataTableEntriesInfo, DataTableSearchFilter, DataTablePagination, DataTableEntriesLength, DataTableWrapper
     },
 
-    computed: {
-        ...mapState("dataTable", ["showEntriesInfo", "showPagination", "showEntriesLength", "showSearchFilter"])
-    },
-
     created() {
-        this.mergeParameters()
+        this.parseData()
     },
 
     methods: {
-        mergeParameters() {
-            this.$store.commit("dataTable/mergeParameters", this.parameters)
-            let length = this.$store.getters["dataTable/defaultEntryLength"]
-            this.$store.commit("dataTable/setCurrentEntryLength", length)
+        parseData() {
+            this.$store.commit("dataTable/parseData", this.$props)
         }
     },
 
     props: {
-        parameters: {
+        actions: {
+            type: Array,
+            default: () => ["view", "edit", "delete"]
+        },
+        actionButtons: {
             type: Object,
+            default: () => ({
+                view: DataTableViewButton,
+                edit: DataTableEditButton,
+                delete: DataTableDeleteButton
+            })
+        },
+        actionColumn: {
+            type: [Boolean, String],
+            default: false
+        },
+        columns: {
+            type: Array,
             required: true
+        },
+        data: {
+            type: Array,
+            required: true
+        },
+        defaultEntryLength: {
+            type: Number,
+            default: 10
+        },
+        entriesLengths: {
+            type: Array,
+            default: () => [10, 25, 50, 100]
+        },
+        lang: {
+            type: String,
+            default: "en",
+        },
+        showEntriesInfo: {
+            type: Boolean,
+            default: true
+        },
+        showEntriesLength: {
+            type: Boolean,
+            default: true
+        },
+        showSearchFilter: {
+            type: Boolean,
+            default: true
+        },
+        showPagination: {
+            type: Boolean,
+            default: true
+        },
+        sortIndexComponent: {
+            type: Object,
+            default: () => DataTableSortIndex
+        },
+        sortIconComponent: {
+            type: Object,
+            default: () => DataTableSortIcon
+        },
+        tableClass: {
+            type: String,
+            default: "table table-striped table-hover"
+        },
+        tableWrapperClass: {
+            type: String,
+            default: "data-table-wrapper"
+        },
+        text: {
+            type: Object,
+            required: false
         }
     },
 
     watch: {
-        parameters: {
+        $props: {
             handler(value) {
-                this.parameters = value
-                this.mergeParameters()
+                this.parseData()
+                return value
             },
-
-            deep: true
-        }
+            deep: true,
+            immediate: true,
+        },
     },
 };
