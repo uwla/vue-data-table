@@ -1,5 +1,3 @@
-import defaults from '../defaults';
-
 export default {
     /** COLUMNS */
 
@@ -91,23 +89,6 @@ export default {
         })
 
         return data
-    },
-
-    /* ENTRIES */
-
-    /**
-     * Get the default entry length
-     * @return Number
-     */
-    defaultEntryLength(state) {
-        let {defaultEntryLength, entriesLengths} = state
-
-        if (defaultEntryLength)
-            return defaultEntryLength
-        if (entriesLengths)
-            return entriesLengths[0]
-
-        return defaults.defaultEntryLength
     },
 
     /**

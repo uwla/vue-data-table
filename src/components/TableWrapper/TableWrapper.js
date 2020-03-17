@@ -10,6 +10,6 @@ export default {
     },
 
     computed: {
-        ...mapState('dataTable', ['table', 'tableWrapper']),
+        ...mapState('dataTable', ['tableClass', 'tableWrapperClass']),
     },
 };
