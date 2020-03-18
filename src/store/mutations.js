@@ -23,7 +23,8 @@ export default {
         })
 
         let {defaultEntryLength, entriesLengths} = options
-        state.currentEntryLength = (entriesLengths.includes(defaultEntryLength)) ? defaultEntryLength : entriesLengths[0]
+        state.currentEntryLength = (entriesLengths.includes(defaultEntryLength)) ?
+                                    defaultEntryLength : entriesLengths[0]
 
         Object.assign(state, translations[options.lang], options, options.text, {columns})
     },

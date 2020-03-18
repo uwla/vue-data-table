@@ -69,33 +69,49 @@ import '@andresouzaabreu/vue-data-table/dist/DataTable.css'
 ```vue
 <template>
     <div>
-        <data-table :parameters="params"/>
+        <data-table v-bind="options"/>
     </div>
 </template>
+
+<script>
+export default {
+    computed: {
+        options() {
+            return {
+                columns: [/*the columns*/]
+                data: [/*the data*/]
+                /* other props...*/
+            }
+        }
+    },
+}
+</script>
 ```
+
+**Note** Notice that v-bind will take all key-value pairs in the object (in this case, the `options`), and pass them as props to the VueDataTable. So it's a shortcut to pass multiple props at once.
 
 ## Customize configuration
 
-All configuration to customize the VueDataTable is passed through a prop called parameters. This prop is required and must be of the type Object. Here are the options we can pass in the parameters.
+All configuration to customize the VueDataTable is passed through the following props.
 
 | key | type | default | description |
 | --- | --- | --- | --- |
 | data | `Array` | - | An array of objects with the data to be displayed in the table |
 | columns | `Array` | - | An array of objects that specifies how to render each column |
 | lang | `String` | `en` | The default language |
-| entriesLength | `Array` | [10, 25, 50, 100] | The options for the number of rows being displayed per page |
+| entriesLengths | `Array` | [10, 25, 50, 100] | The options for the number of rows being displayed per page |
 | defaultEntryLength | `Number` | 10 | The default entry length in the `EntriesLength` component. If not specified and if `entriesLength` is specified, then `defaultEntryLength` will be the first value of the `entriesLength` |
 | showEntriesLength | `Bool` | `true` | Wheter to show the `EntriesLength` component |
 | showEntriesInfo | `Bool` | `true` | Wheter to show the EntriesInfo component |
 | showSearchFilter | `Bool` | `true` | Wheter to show the SearchFilter component |
 | showPagination | `Bool` | `true` | Wheter to show the Pagination component |
-| table | `Object` | `{class: "table table-striped table-hover"}` | The table's html attributes |
-| tableWrapper | `Object` | `{style:{overflow: "auto", height: "75vh", width: "100%"}}` | The table's container's html attributes |
-| actionColumn | `Bool`, `String` | false | Whether to show the column with action buttons. Possible values are  `false` (no column), `true` (one column for all action buttons), and `'multiple'` (one column for each action button).
-| actions | `Array` | ["view", "edit", "delete"] | The actions for the action buttons. We can ommit some actions or add our own actions |
-| actionButtons | `Object` | DataTableActionButtons | The Vue components to be displayed for each action button.  |
-| sortIndexComponent | `Object` | DataTableSortIndex | The Vue component to be rendered as the sort index for orderable columns |
-| sortIconComponent | `Object` | DataTableSortIcon | The Vue component to be rendered as the sort icon for orderable columns |
+| tableClass | `String` | `table table-striped table-hover` | The css classes of the table |
+| tableWrapper | `String` | `data-table-wrapper` | The css classes of the table's wrapper |
+| actionColumn | `Bool`, `String` | `false` | Whether to show the column with action buttons. Possible values are  `false` (no column), `true` (one column for all action buttons), and `'multiple'` (one column for each action button).
+| actions | `Array` | `["view", "edit", "delete"]` | The actions for the action buttons. We can ommit some actions or add our own actions |
+| actionButtons | `Object` | `DataTableActionButtons` | The Vue components to be displayed for each action button.  |
+| sortIndexComponent | `Object` | `DataTableSortIndex` | The Vue component to be rendered as the sort index for orderable columns |
+| sortIconComponent | `Object` | `DataTableSortIcon` | The Vue component to be rendered as the sort icon for orderable columns |
 
 **Note:** No default value means that the key is required.
 
@@ -105,18 +121,18 @@ Each object in the columns array may have the following keys.
 
 | key | type | default | description |
 | --- | --- | --- | --- |
-| key | `String` | - | The key of the objects in daa, which will be displayed in a table cell |
+| key | `String` | - | The key of the objects in the `data` prop. The value of the matching key will be displayed in a table cell |
 | title | `String` | `titleCase(key)` | The title to be displayed in the `th` element. If not specified, it will capitalize the `key` and then remove its dashes and underscores |
 | orderable | `Bool` | `true` | Whether to allow sorting the column. It will use the `key` to sort the objects in the `data` |
 | searchable | `Bool` | `true` | Whether to allow filtering the objects in `data` by matching the `search` text in the object's `key` |
 
-### Lang
+### Text
 
 Currently, VueDataTable has support for three languages: English (en), Brazilian Portuguese (pt-br), and Spanish(es). The `lang` in the `parameteres` specifies in which language to display the text in our table.
 
-If we want to add a custom text (maybe because there is no language support or because we want a customized text), we have to set the text in the `parameters` property.
+If we want to add a custom text (maybe because there is no language support or because we want a customized text), we have to set it in the `text` prop.
 
-The following table shows which texts we may customize and their default values for the English language. All of the options must be type `String`, except the `actionColumnsText`, which is of `Array` type and specifies the title of each action column (but only if we enable action buttons)
+The following table shows the texts we can customize and their default values for the English language. All of the options must be type `String`, except the `actionColumnsText`, which is type `Object` and specifies the title of each action column (but only if we enable action buttons).
 
 | key | default |
 | --- | --- |
@@ -131,6 +147,18 @@ The following table shows which texts we may customize and their default values 
 | actionColumnsText | {view: "View", edit: "Edit", delete: "Delete"} |
 
 **Note**: Notice that the items `:first`, `:last`, `:total`, and `filtered` will be automatically replaced with their correspondent numbers.
+
+Example code:
+
+```javascript
+options: {
+    text: {
+        entriesLengthText: "Number of users per page :entries",
+        infoText: "Displaying :first to :last of :total users",
+        emptyTableText: "No users found :(",
+    }
+}
+```
 
 ### Action buttons
 
@@ -159,7 +187,7 @@ By default, VUeDataTable will show the following components for each action
 
 #### Change the default components
 
-To change the default components, we have to pass them to the `actionButtons` key in the `parameters` prop.
+To change the default components, we have to pass them to the `actionButtons` prop.
 
 ```javascript
 import ViewButton from './components/ViewBUtton.vue'
@@ -168,7 +196,7 @@ import DeleteButton from './components/DeleteButton.vue'
 
 export default {
     computed: {
-        parameters() {
+        options() {
             return {
                 actionButtons: {
                     view: ViewButton,
@@ -181,11 +209,11 @@ export default {
 }
 ```
 
-**Note**: in the example above, we omitted other options that should be present in the `parameters` object.
+**Note**: in the example above, we omitted some lines of code to keep it clean.
 
 #### Add custom actions
 
-For each action in `actions` in `parameters`, there must be a vue component associated with that action. If we want to add actions (maybe a "clone" action or "download" action), we must specify a component.
+For each action in the `actions` prop, there must be a vue component associated with that action. If we want to add actions (maybe a "clone" action or "download" action), we must specify a component.
 
 In the following example, we have a `VideosDashboard` component that uses `VueDataTable`. We have added a `download` action (that download the video) and a `copy` action (which copy the video's url) as follows:
 
@@ -196,7 +224,7 @@ import CopyTextButton from './components/CopyTextButton.vue'
 export default {
     name: "VideosDashboard"
     computed: {
-        parameters() {
+        options() {
             return {
                 actions: ["copy", "download"],
                 actionButtons: {
@@ -209,7 +237,7 @@ export default {
 }
 ```
 
-**Note**: in the example above, we ommitted other options that should be present in the `parameters` object.
+**Note**: in the example above, we omitted some lines of code to keep it clean.
 
 #### Triggering events
 
@@ -262,7 +290,7 @@ export default {
     },
 
     computed: {
-        parameters() {
+        options() {
             return {
                 actions: ["download"],
                 actionButtons: {
@@ -343,7 +371,7 @@ import SortIcon from './components/SortIcon.vue'
 export default {
     name: "VideosDashboard"
     computed: {
-        parameters() {
+        options() {
             return {
                 sortIconComponent: SortIcon,
             }
@@ -372,7 +400,7 @@ import SortIndex from './components/SortIndex.vue'
 export default {
     name: "VideosDashboard"
     computed: {
-        parameters() {
+        options() {
             return {
                 sortIndexComponent: SortIndex,
             }
