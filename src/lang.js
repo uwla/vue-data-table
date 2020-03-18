@@ -7,11 +7,9 @@
 
 const files = require.context('./lang/', true, /\.js$/i)
 
-const translations = files.keys().reduce((obj, key) => {
+export default files.keys().reduce((obj, key) => {
     let value = files(key).default
     key = key.replace("./", "").split('.')[0]
     obj[key] = value
     return obj
 }, {})
-
-export default translations

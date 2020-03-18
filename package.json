@@ -1,6 +1,6 @@
 {
     "name": "@andresouzaabreu/vue-data-table",
-    "version": "0.1.6",
+    "version": "1.0.0",
     "private": false,
     "author": "André Souza Abreu",
     "description": "A Vue plug-in that adds features like column ordering, data filtering, pagination to an HTML table.",
@@ -10,7 +10,6 @@
     "scripts": {
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
-        "test:unit": "vue-cli-service test:unit",
         "build:npm": "vue-cli-service build --target lib --name DataTable src/main.js"
     },
     "main": "dist/DataTable.umd.js",
