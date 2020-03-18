@@ -1,7 +1,7 @@
 import DataTable from './components/DataTable.vue';
 import DataTableStore from './store/'
 
-export default function install(Vue, store) {
+export default function install (Vue, store) {
     window.DataTableEventBus = new Vue()
 
     if (!store)
@@ -11,3 +11,5 @@ export default function install(Vue, store) {
 
     store.registerModule('dataTable', DataTableStore)
 }
+
+window.installVueDataTable = install
