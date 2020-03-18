@@ -94,7 +94,7 @@ export default {
 
 All configuration to customize the VueDataTable is passed through the following props.
 
-| key | type | default | description |
+| prop | type | default | description |
 | --- | --- | --- | --- |
 | data | `Array` | - | An array of objects with the data to be displayed in the table |
 | columns | `Array` | - | An array of objects that specifies how to render each column |
@@ -113,7 +113,7 @@ All configuration to customize the VueDataTable is passed through the following 
 | sortIndexComponent | `Object` | `DataTableSortIndex` | The Vue component to be rendered as the sort index for orderable columns |
 | sortIconComponent | `Object` | `DataTableSortIcon` | The Vue component to be rendered as the sort icon for orderable columns |
 
-**Note:** No default value means that the key is required.
+**Note:** No default value means that the prop is required.
 
 ### Columns
 
