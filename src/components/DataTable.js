@@ -22,12 +22,12 @@ export default {
     },
 
     created() {
-        this.parseData()
+        this.parseData(this.$props)
     },
 
     methods: {
-        parseData() {
-            this.$store.commit("dataTable/parseData", this.$props)
+        parseData (data) {
+            this.$store.commit("dataTable/parseData", data)
         }
     },
 
@@ -108,8 +108,8 @@ export default {
 
     watch: {
         $props: {
-            handler(value) {
-                this.parseData()
+            handler (value) {
+                this.parseData(value)
                 return value
             },
             deep: true,
