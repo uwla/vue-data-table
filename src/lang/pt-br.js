@@ -11,8 +11,8 @@ export default {
     infoTextFiltered: "Exibindo :first até :last de :filtered (filtrado de :total dados)",
 
     // pagination
-    nextButtonText: "Anterior",
-    previousButtonText: "Próximo",
+    nextButtonText: "Próximo",
+    previousButtonText: "Anterior",
 
     // search filter
     searchText: "pesquisar:",
