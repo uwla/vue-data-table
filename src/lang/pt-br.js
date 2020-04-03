@@ -14,6 +14,9 @@ export default {
     nextButtonText: "Próximo",
     previousButtonText: "Anterior",
 
+    paginationSearchText: "Ir para página",
+    paginationSearchButtonText: "IR",
+
     // search filter
     searchText: "pesquisar:",
     emptyTableText: "Nenhum dado correspondente à pesquisa foi encontrado",

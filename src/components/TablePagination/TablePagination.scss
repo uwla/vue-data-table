@@ -1,8 +1,19 @@
 .data-table-pagination {
     margin-left: auto;
-    
-    .pagination {
-        margin: 0;
+    gap: 10px;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+
+    .pagination-search {
+        display: flex;
+        gap: .35rem;
+        align-items: center;
+        white-space: nowrap;
+
+        input {
+            width: 70px;
+        }
     }
 }
 
