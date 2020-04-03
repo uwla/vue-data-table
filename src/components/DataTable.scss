@@ -5,8 +5,15 @@
 .data-table-head, .data-table-footer {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
     flex-wrap: wrap;
     white-space: nowrap;
-    gap: 10px;
+
+    & > :first-child {
+        margin-right: 30px;
+    }
+
+    & > * {
+        margin-bottom: 10px;
+    }
 }

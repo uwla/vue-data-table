@@ -1,15 +1,29 @@
 .data-table-pagination {
     margin-left: auto;
-    gap: 10px;
     display: flex;
-    align-content: center;
+    align-items: center;
     flex-wrap: wrap;
+
+    & > :first-child {
+        margin-right: 10px;
+    }
+
+    & > * {
+        margin-bottom: 10px  !important;
+    }
+
+    .pagination {
+        margin: 0;
+    }
 
     .pagination-search {
         display: flex;
-        gap: .35rem;
         align-items: center;
         white-space: nowrap;
+
+        * {
+            margin-right: 5px;
+        }
 
         input {
             width: 70px;
