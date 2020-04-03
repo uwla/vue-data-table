@@ -141,6 +141,8 @@ The following table shows the texts we can customize and their default values fo
 | infoTextFiltered | "Showing :first to :last of :filtered (filtered from :total entries)" |
 | nextButtonText | "Next" |
 | previousButtonText | "Previous" |
+| paginationSearchText | "Go to page" |
+| paginationSearchButtonText | "GO" |
 | searchText | "search:" |
 | emptyTableText | "No matching records found" |
 | actionColumnText | "Actions" |
