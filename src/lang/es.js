@@ -13,6 +13,8 @@ export default {
     // pagination
     nextButtonText: "Siguiente",
     previousButtonText: "Anterior",
+    paginationSearchText: "Ir a la página",
+    paginationSearchButtonText: "IR",
 
     // search filter
     searchText: "buscar:",

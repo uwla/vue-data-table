@@ -14,6 +14,9 @@ export default {
     nextButtonText: "Next",
     previousButtonText: "Previous",
 
+    paginationSearchText: "Go to page",
+    paginationSearchButtonText: "GO",
+
     // search filter
     searchText: "search:",
     emptyTableText: "No matching records found",

@@ -1,5 +1,13 @@
 <template>
     <div class="data-table-pagination">
+        <div class="pagination-search">
+            <span>{{ paginationSearchText }}</span>
+            <input type="number" pattern="^[1-9][0-9]+$" class="form-control" v-model="pageToGo">
+
+            <button @click="setCurrentPage(pageToGo)" class="btn btn-primary" >
+                {{ paginationSearchButtonText }}
+            </button>
+        </div>
         <ul class="pagination">
             <li @click="setCurrentPage(previousPage)"
                 class="page-item" :class="{disabled: isFirstPage}">
