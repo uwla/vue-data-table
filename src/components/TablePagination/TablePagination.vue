@@ -2,9 +2,11 @@
     <div class="data-table-pagination">
         <div class="pagination-search">
             <span>{{ paginationSearchText }}</span>
-            <input type="number" pattern="^[1-9][0-9]+$" class="form-control" v-model="pageToGo">
+            
+            <input type="number" class="form-control" v-model="pageToGo"
+            @keyup.enter="setCurrentPage(pageToGo)">
 
-            <button @click="setCurrentPage(pageToGo)" class="btn btn-primary" >
+            <button class="btn btn-primary" @click="setCurrentPage(pageToGo)">
                 {{ paginationSearchButtonText }}
             </button>
         </div>

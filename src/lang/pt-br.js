@@ -20,4 +20,8 @@ export default {
     // search filter
     searchText: "pesquisar:",
     emptyTableText: "Nenhum dado correspondente à pesquisa foi encontrado",
+
+    // export
+    downloadText: "exportar como:",
+    downloadButtonText: "BAIXAR"
 }
