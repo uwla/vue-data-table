@@ -19,4 +19,8 @@ export default {
     // search filter
     searchText: "buscar:",
     emptyTableText: "No se encontraron datos que coincidan con la búsqueda",
+
+    // download
+    downloadText: "exportar cómo:",
+    downloadButtonText: "DESCARGAR"
 }

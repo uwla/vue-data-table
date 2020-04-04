@@ -27,6 +27,7 @@ VueDataTable is a VueJS plug-in that adds advanced features to an HTML table. It
 - Action Buttons Column
 - Pagination
 - Search Filter
+- Export button (export data to XLS, JSON, CVS, and TXT)
 
 ## Demo
 
@@ -39,7 +40,7 @@ The best way to see if a package suits your needs is by viewing and editing a de
 
 ### Installation
 
-```terminal
+```shell
 npm install --save @andresouzaabreu/vue-data-table
 ```
 
@@ -92,8 +93,6 @@ export default {
 
 ## Customize configuration
 
-All configuration to customize the VueDataTable is passed through the following props.
-
 | prop | type | default | description |
 | --- | --- | --- | --- |
 | data | `Array` | - | An array of objects with the data to be displayed in the table |
@@ -105,19 +104,19 @@ All configuration to customize the VueDataTable is passed through the following 
 | showEntriesInfo | `Bool` | `true` | Wheter to show the EntriesInfo component |
 | showSearchFilter | `Bool` | `true` | Wheter to show the SearchFilter component |
 | showPagination | `Bool` | `true` | Wheter to show the Pagination component |
+| showExportButton | `Bool` | `true` | Wheter to show the Export Button component |
 | tableClass | `String` | `table table-striped table-hover` | The css classes of the table |
 | tableWrapper | `String` | `data-table-wrapper` | The css classes of the table's wrapper |
 | actionColumn | `Bool`, `String` | `false` | Whether to show the column with action buttons. Possible values are  `false` (no column), `true` (one column for all action buttons), and `'multiple'` (one column for each action button).
 | actions | `Array` | `["view", "edit", "delete"]` | The actions for the action buttons. We can ommit some actions or add our own actions |
-| actionButtons | `Object` | `DataTableActionButtons` | The Vue components to be displayed for each action button.  |
+| actionButtons | `Object` | `DataTableActionButtons` | The Vue components to be displayed for each action button. |
 | sortIndexComponent | `Object` | `DataTableSortIndex` | The Vue component to be rendered as the sort index for orderable columns |
 | sortIconComponent | `Object` | `DataTableSortIcon` | The Vue component to be rendered as the sort icon for orderable columns |
+| allowedExports | `Array` | `["xls", "csv", "json", "txt"]` | The options the user can export the data to. Only four export types are available. |
 
 **Note:** No default value means that the prop is required.
 
 ### Columns
-
-Each object in the columns array may have the following keys.
 
 | key | type | default | description |
 | --- | --- | --- | --- |
@@ -144,6 +143,8 @@ The following table shows the texts we can customize and their default values fo
 | paginationSearchText | "Go to page" |
 | paginationSearchButtonText | "GO" |
 | searchText | "search:" |
+| downloadText | "export as:" |
+| downloadButtonText | "DOWNLOAD" |
 | emptyTableText | "No matching records found" |
 | actionColumnText | "Actions" |
 | actionColumnsText | {view: "View", edit: "Edit", delete: "Delete"} |
@@ -306,7 +307,7 @@ export default {
 
 Then, in our component (in this case `DownloadButton.vue`), we need to add a click event to our button and also we need to have a `data` property. Inside the click event, we must tell `DataTableEventBus` to emit an event. The first parameters is the event name, and the second parameter is the argument is the data object that matches the row of the button clicked. `VueDataTable` will pass the data (in this case, a `video` object) to our `actionButton` component, so we don't have to worry about that.
 
-```html
+```vue
 <template>
     <button class="download-button" @click="download">Download</button>
 </template>

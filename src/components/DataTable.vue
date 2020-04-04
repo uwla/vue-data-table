@@ -12,6 +12,7 @@
         <div class="data-table-footer">
             <data-table-entries-info v-if="showEntriesInfo"/>
             <data-table-pagination v-if="showPagination"/>
+            <data-table-export-button v-if="showExportButton"/>
         </div>
     </div>
 </template>

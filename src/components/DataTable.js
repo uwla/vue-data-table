@@ -1,6 +1,7 @@
 // Main components
 import DataTableEntriesInfo from "./EntriesInfo/EntriesInfo.vue"
 import DataTableEntriesLength from "./EntriesLength/EntriesLength.vue"
+import DataTableExportButton from "./ExportButton/ExportButton.vue"
 import DataTablePagination from "./TablePagination/TablePagination.vue"
 import DataTableSearchFilter from "./SearchFilter/SearchFilter.vue"
 import DataTableWrapper from "./TableWrapper/TableWrapper.vue"
@@ -18,7 +19,7 @@ export default {
     name: "DataTable",
 
     components: {
-        DataTableEntriesInfo, DataTableSearchFilter, DataTablePagination, DataTableEntriesLength, DataTableWrapper
+        DataTableEntriesInfo, DataTableSearchFilter, DataTablePagination, DataTableEntriesLength, DataTableWrapper, DataTableExportButton
     },
 
     created() {
@@ -48,6 +49,10 @@ export default {
             type: [Boolean, String],
             default: false
         },
+        allowedExports: {
+            type: Array,
+            default: () => ['xls', 'csv', 'json', 'txt']
+        },
         columns: {
             type: Array,
             required: true
@@ -59,6 +64,10 @@ export default {
         defaultEntryLength: {
             type: Number,
             default: 10
+        },
+        downloadFilename: {
+            type: String,
+            default: "download"
         },
         entriesLengths: {
             type: Array,
@@ -81,6 +90,10 @@ export default {
             default: true
         },
         showPagination: {
+            type: Boolean,
+            default: true
+        },
+        showExportButton: {
             type: Boolean,
             default: true
         },
