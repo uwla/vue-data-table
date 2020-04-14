@@ -111,6 +111,7 @@ export default {
 | actionColumn | `Bool`, `String` | `false` | Whether to show the column with action buttons. Possible values are  `false` (no column), `true` (one column for all action buttons), and `'multiple'` (one column for each action button).
 | actions | `Array` | `["view", "edit", "delete"]` | The actions for the action buttons. We can ommit some actions or add our own actions |
 | actionButtons | `Object` | `DataTableActionButtons` | The Vue components to be displayed for each action button. |
+| sortingMode | `String` | `multiple` | `multiple` enables multiple-column sorting. `single` enables single-column sorting. |
 | sortIndexComponent | `Object` | `DataTableSortIndex` | The Vue component to be rendered as the sort index for orderable columns |
 | sortIconComponent | `Object` | `DataTableSortIcon` | The Vue component to be rendered as the sort icon for orderable columns |
 | allowedExports | `Array` | `["xls", "csv", "json", "txt"]` | The options the user can export the data to. Only four export types are available. |
