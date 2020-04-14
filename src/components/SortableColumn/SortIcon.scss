@@ -1,32 +1,35 @@
-.data-table-sort-icon {
-    width: 23px;
-
-    &::after {
-        right: 0.5em;
-        content: "\2193";
-    }
-
-    &::before {
-        right: 1em;
-        content: "\2191";
-    }
-
-    &::after,
-    &::before {
-        font-size: 140%;
-        line-height: 1;
-        color: black;
-        position: absolute;
-        bottom: 0.7rem;
+.data-table-sorting-icons {
+    display: flex;
+    margin-left: auto;
+    padding-left: .3em;
+  
+    .data-table-sorting-icon {
+        width: 0.75rem;
         display: block;
-        opacity: 0.5;
-    }
 
-    [data-sorting="asc"] &::before {
-        opacity: 1;
-    }
+        &.asc::after {
+            content: "\2193";
+        }
 
-    [data-sorting="desc"] &::after {
-        opacity: 1;
+        &.desc::after {
+            content: "\2191";
+        }
+
+        &.asc::after,
+        &.desc::after {
+            font-size: 130%;
+            line-height: 1;
+            display: block;
+            color: black;
+            opacity: 0.5;
+        }
+
+        [data-sorting="asc"] &.asc::after {
+            opacity: 1;
+        }
+
+        [data-sorting="desc"] &.desc::after {
+            opacity: 1;
+        }
     }
 }
