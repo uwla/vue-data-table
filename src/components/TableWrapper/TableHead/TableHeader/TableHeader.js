@@ -6,9 +6,9 @@ export default {
         ...mapState('dataTable', ['sortIconComponent', 'sortIndexComponent']),
 
         attributes() {
-            let attributes = {}
+            let attributes = {class: "data-table-th"}
             if (this.column.orderable)
-                attributes.class = "sortable"
+                attributes.class += " sortable"
             if (this.column.sortingDirection !== "")
                 attributes["data-sorting"] = this.column.sortingDirection
             return attributes

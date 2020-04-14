@@ -2,8 +2,7 @@
     <th v-bind="attributes"
         @click="sortThisColumn">
         <div class="data-table-th-content">
-            <span class="data-table-th-title">
-                {{ title }}
+            <span class="data-table-th-title" v-html="title">
             </span>
             <component  v-if="(sortIndex >= 0)"
                         :is="sortIndexComponent"
@@ -15,8 +14,8 @@
 </template>
 
 <script src="./TableHeader.js"></script>
-<style lang="scss" scoped>
-th {
+<style lang="scss">
+.data-table-th {
     .data-table-th-content {
         display: flex;
         align-items: center;
