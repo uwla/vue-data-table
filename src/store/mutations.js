@@ -73,11 +73,28 @@ export default {
         if (!column.orderable)
             return
 
-        // set the sorting direction if none is set
+        if (state.sortingMode === "single") {
+            state.columns.forEach(col => {
+                if (col.key !== column.key)
+                    col.sortingDirection = ""
+            })
+
+            if (column.sortingDirection === "")
+                column.sortingDirection = "asc"
+            else if (column.sortingDirection === "asc")
+                column.sortingDirection = "desc"
+            else {
+                column.sortingDirection = ""
+                state.sortingColumns = []
+                return
+            }
+
+            state.sortingColumns = [column]
+            return
+        }
+
         if (column.sortingDirection === "") {
             column.sortingDirection = "asc"
-
-            // add it to our array of columns being sorted
             column.sortIndex = state.sortingColumns.length
             state.sortingColumns.push(column)
             return
@@ -89,7 +106,6 @@ export default {
             return
         }
 
-        // remove it from sorting
         column.sortingDirection = ""
         column.sortIndex = -1
 

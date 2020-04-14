@@ -1,5 +1,5 @@
 features:
-    ☐ enable single-column sorting
+    ✔ enable single-column sorting @done(20-04-14 15:56)
     ☐ enable row-selection
     ☐ enable column reorder
     ☐ add hide-column button

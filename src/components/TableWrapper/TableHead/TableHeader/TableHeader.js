@@ -13,16 +13,28 @@ export default {
                 attributes["data-sorting"] = this.column.sortingDirection
             return attributes
         },
+
+        isSortable() {
+            return this.column.orderable
+        },
+
+        index() {
+            return this.column.index
+        },
+
+        sortIndex() {
+            return this.column.sortIndex
+        },
+
+        title() {
+            return this.column.title
+        },
     },
 
     methods: {
         sortThisColumn() {
             this.$store.commit('dataTable/toggleSorting', this.column)
         },
-    },
-
-    data() {
-        return this.column
     },
 
     props: {
