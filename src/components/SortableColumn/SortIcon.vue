@@ -1,5 +1,8 @@
 <template>
-    <span class="data-table-sort-icon">&nbsp;</span>
+    <div class="data-table-sorting-icons">
+        <span class="data-table-sorting-icon asc">&nbsp;</span>
+        <span class="data-table-sorting-icon desc">&nbsp;</span>
+    </div>
 </template>
 
 <script>
