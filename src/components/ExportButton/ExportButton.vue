@@ -3,16 +3,17 @@
         <span>
             {{ downloadText }}
         </span>
-        <select v-model="exportType" class="form-control">
-            <option
-                v-for="(export_type, i) in allowedExports"
-                :key="i"
-                :value="export_type">
+        <select class="form-control"
+                v-model="exportType">
+            <option v-for="(export_type, index) in allowedExports"
+                    :key="index"
+                    :value="export_type">
 
                 {{ export_type.toUpperCase() }}
             </option>
         </select>
-        <button class="btn btn-primary" @click="download()">
+        <button class="btn btn-primary"
+                @click="download()">
             {{ downloadButtonText }}
         </button>
     </div>
