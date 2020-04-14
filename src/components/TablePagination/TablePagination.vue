@@ -13,6 +13,7 @@
                 {{ paginationSearchButtonText }}
             </button>
         </div>
+        
         <ul class="pagination">
             <li @click="setCurrentPage(previousPage)"
                 :class="{disabled: isFirstPage}"

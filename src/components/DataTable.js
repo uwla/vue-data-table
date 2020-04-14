@@ -55,7 +55,11 @@ export default {
         },
         columns: {
             type: Array,
-            required: true
+            required: false
+        },
+        columnKeys: {
+            type: Array,
+            required: false
         },
         data: {
             type: Array,
@@ -121,12 +125,12 @@ export default {
 
     watch: {
         $props: {
-            handler (value) {
+            handler(value) {
                 this.parseData(value)
                 return value
             },
             deep: true,
-            immediate: true,
+            immediate: true
         },
     },
 };
