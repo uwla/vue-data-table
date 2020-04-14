@@ -1,16 +1,23 @@
 <template>
     <tr>
-        <td v-for="(column, j) in columns" :key="('td' + j)">
+        <td v-for="(column, j) in columns"
+            :key="('td' + j)">
             {{ data[column.key] }}
         </td>
 
-        <td class="data-table-action-td" v-for="(item, i) in actionItems" :key="('td-action' + i)">
-            <component :is="item.component" v-bind="{data, action: item.action}" />
+        <td v-for="(item, index) in actionItems"
+            :key="('td-action' + index)"
+            class="data-table-action-td">
+            <component :is="item.component"
+                        v-bind="{data, action: item.action}"/>
         </td>
 
-        <td class="data-table-action-td" v-if="actionColumn === true">
-            <component :is="item.component" v-bind="{data, action: item.action}"
-                v-for="(item, i) in actionComponents" :key="('td-action' + i)" />
+        <td v-if="(actionColumn === true)"
+            class="data-table-action-td">
+            <component :is="item.component"
+                        v-for="(item, index) in actionComponents"
+                        v-bind="{data, action: item.action}"
+                        :key="('td-action' + index)"/>
         </td>
     </tr>
 </template>

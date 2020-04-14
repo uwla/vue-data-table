@@ -7,7 +7,7 @@ export default {
         ...mapState('dataTable', ['columns', 'actions', 'actionColumn', 'actionButtons']),
 
         actionItems() {
-            if (this.actionColumn != 'multiple')
+            if (this.actionColumn !== 'multiple')
                 return []
             return this.actionComponents
         },

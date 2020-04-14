@@ -1,9 +1,13 @@
 <template>
     <thead>
         <tr>
-            <data-table-th v-for="(col, i) in columns" :key="('th' + i)" :column="col"/>
+            <data-table-th  v-for="(column, index) in columns"
+                            :key="('th' + index)"
+                            :column="column"/>
 
-            <th class="data-table-th-action" v-for="(actionText, j) in actionItems" :key="j">
+            <th class="data-table-th-action"
+                v-for="(actionText, index) in actionItems"
+                :key="index">
                 {{ actionText }}
             </th>
         </tr>
@@ -11,7 +15,7 @@
 </template>
 
 <script src="./TableHead.js"></script>
-<style lang="css">
+<style lang="css" scoped>
 th {
     white-space: nowrap;
     background-color: white;

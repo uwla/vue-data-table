@@ -17,13 +17,13 @@ export default {
         // map the columns
         let columns = options.columns.map((col, index) => {
             if (!col.title)
-                col.title = col.key.charAt(0).toUpperCase() + col.key.slice(1).replace(/[-_]/ig, ' ')
+                col.title = toTitleCase(col.key)
 
             return {...state.columnOptions, ...col, index, sortIndex: -1, sortingDirection: ""}
         })
 
         let {defaultEntryLength, entriesLengths} = options
-        state.currentEntryLength = (entriesLengths.includes(defaultEntryLength)) ?
+        state.currentEntryLength = entriesLengths.includes(defaultEntryLength) ?
                                     defaultEntryLength : entriesLengths[0]
 
         Object.assign(state, translations[options.lang], options, options.text, {columns})
@@ -73,7 +73,7 @@ export default {
             return
 
         // set the sorting direction if none is set
-        if (column.sortingDirection == "") {
+        if (column.sortingDirection === "") {
             column.sortingDirection = "asc"
 
             // add it to our array of columns being sorted
@@ -82,7 +82,7 @@ export default {
             return
         }
 
-        if (column.sortingDirection == "asc") {
+        if (column.sortingDirection === "asc") {
             column.sortingDirection = "desc"
             state.sortingColumns.splice(column.sortIndex, 1, column)
             return
@@ -96,9 +96,13 @@ export default {
         // priority of each column in the sorting. This number
         // is displayed on the right side of the column's title
         state.sortingColumns =
-            state.sortingColumns.filter(col => col.index != column.index).map((col, i) => {
+            state.sortingColumns.filter(col => col.index !== column.index).map((col, i) => {
                 col.sortIndex = i
                 return col
             })
     },
+}
+
+function toTitleCase(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1).replace(/[-_]/ig, ' ')
 }

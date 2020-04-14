@@ -14,11 +14,11 @@ export default {
         ...mapState('dataTable', ['previousButtonText', 'nextButtonText', 'paginationSearchText', 'paginationSearchButtonText']),
 
         isLastPage() {
-            return this.currentPage == this.numberOfPages;
+            return this.currentPage === this.numberOfPages;
         },
 
         isFirstPage() {
-            return this.currentPage == 1;
+            return this.currentPage === 1;
         },
 
         previousPage() {
@@ -32,7 +32,7 @@ export default {
         pages() {
             let {numberOfPages: lastPage, currentPage, previousPage, nextPage} = this;
 
-            if (lastPage == 1)
+            if (lastPage === 1)
                 return [1]
 
             if (lastPage <= 7)
@@ -56,7 +56,7 @@ export default {
         },
 
         isValidPage(pageNumber) {
-            return  (pageNumber != "...") &&
+            return  (pageNumber !== "...") &&
                     (pageNumber != this.currentPage) &&
                     (pageNumber > 0) &&
                     (pageNumber <= this.numberOfPages);
