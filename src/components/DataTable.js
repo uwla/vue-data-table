@@ -51,7 +51,8 @@ export default {
         },
         allowedExports: {
             type: Array,
-            default: () => ['xls', 'csv', 'json', 'txt']
+            default: () => ['xls', 'csv', 'json', 'txt'],
+            validator: exports => exports.every(type => ['xls', 'csv', 'json', 'txt'].includes(type))
         },
         columns: {
             type: Array,
@@ -89,7 +90,7 @@ export default {
             type: Boolean,
             default: true
         },
-        showSearchFilter: {
+        showExportButton: {
             type: Boolean,
             default: true
         },
@@ -97,9 +98,14 @@ export default {
             type: Boolean,
             default: true
         },
-        showExportButton: {
+        showSearchFilter: {
             type: Boolean,
             default: true
+        },
+        sortingMode: {
+            type: String,
+            default: 'multiple',
+            validator: value => ['multiple', 'single'].includes(value)
         },
         sortIndexComponent: {
             type: Object,
