@@ -5,9 +5,9 @@
                             :key="('th' + index)"
                             :column="column"/>
 
-            <th class="data-table-th-action"
-                v-for="(actionText, index) in actionItems"
-                :key="index">
+            <th v-for="(actionText, index) in actionItems"
+                :key="index"
+                class="data-table-th data-table-action-column">
                 {{ actionText }}
             </th>
         </tr>
@@ -15,8 +15,8 @@
 </template>
 
 <script src="./TableHead.js"></script>
-<style lang="css" scoped>
-th {
+<style lang="css">
+.data-table-th {
     white-space: nowrap;
     background-color: white;
     position: sticky;
@@ -27,9 +27,10 @@ th {
     line-height: 1;
     top: 0;
     user-select: none;
+
 }
 
-th.data-table-th-action {
+.data-table-action-column {
     text-align: center;
     width: 1px;
 }
