@@ -14,11 +14,11 @@ export default {
      * @param Object options
      */
     parseData (state, options) {
-        // map the columns
-        let columns = options.columns.map((col, index) => {
+        let columns = options.columns || options.columnKeys.map(key => ({key}))
+
+        columns = columns.map((col, index) => {
             if (!col.title)
                 col.title = toTitleCase(col.key)
-
             return {...state.columnOptions, ...col, index, sortIndex: -1, sortingDirection: ""}
         })
 
@@ -39,6 +39,7 @@ export default {
     /**
      * Toggle entry length, but still shows the records from the last entry length
      * @param Object state
+     * @return void
      */
     toggleEntryLength (state) {
         let newEntryLength = Number(window.event.target.value);
@@ -103,6 +104,12 @@ export default {
     },
 }
 
+/**
+ * Convert a string to title Case (first letter capitalized and words separated by space)
+ *
+ * @param string
+ * @return string
+ */
 function toTitleCase(str) {
     return str.charAt(0).toUpperCase() + str.slice(1).replace(/[-_]/ig, ' ')
 }

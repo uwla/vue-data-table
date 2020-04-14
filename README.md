@@ -96,7 +96,8 @@ export default {
 | prop | type | default | description |
 | --- | --- | --- | --- |
 | data | `Array` | - | An array of objects with the data to be displayed in the table |
-| columns | `Array` | - | An array of objects that specifies how to render each column |
+| columns | `Array` | - | An array of objects that specifies how to render each column. Not required if `columnKeys` is presented. |
+| columnKeys | `Array` | - | An array of strings corresponding to the keys of each object in `data`. This will be discarded if `columns` is present. |
 | lang | `String` | `en` | The default language |
 | entriesLengths | `Array` | [10, 25, 50, 100] | The options for the number of rows being displayed per page |
 | defaultEntryLength | `Number` | 10 | The default entry length in the `EntriesLength` component. If not specified and if `entriesLength` is specified, then `defaultEntryLength` will be the first value of the `entriesLength` |
@@ -114,8 +115,6 @@ export default {
 | sortIconComponent | `Object` | `DataTableSortIcon` | The Vue component to be rendered as the sort icon for orderable columns |
 | allowedExports | `Array` | `["xls", "csv", "json", "txt"]` | The options the user can export the data to. Only four export types are available. |
 
-**Note:** No default value means that the prop is required.
-
 ### Columns
 
 | key | type | default | description |
@@ -124,6 +123,57 @@ export default {
 | title | `String` | `titleCase(key)` | The title to be displayed in the `th` element. If not specified, it will capitalize the `key` and then remove its dashes and underscores |
 | orderable | `Bool` | `true` | Whether to allow sorting the column. It will use the `key` to sort the objects in the `data` |
 | searchable | `Bool` | `true` | Whether to allow filtering the objects in `data` by matching the `search` text in the object's `key` |
+
+If `columns` is not defined, then `columnKeys` must be defined and it will be mapped to a `columns` array with the default parameters. Example:
+
+```javascript
+// we can define the columns
+{
+    data: [/**/],
+    columns: [
+        {
+            key: 'name',
+        },
+        {
+            key: 'email',
+            title: 'Email Address',
+            orderable: false,
+        },
+        {
+            key: 'phone',
+            searchable: false,
+        }
+    ]
+}
+
+// or use columnKeys shortcut
+{
+    data: [/**/],
+    columnKeys: ['name', 'email', 'registered_at']
+},
+
+// which will take the default values and map the array into this
+[
+    {
+        key: 'name',
+        title: 'Name',
+        orderable: true,
+        searchable: true,
+    },
+    {
+        key: 'email',
+        title: 'Email',
+        orderable: true,
+        searchable: true
+    },
+    {
+        key: 'registered_at',
+        title: 'Registered at',
+        orderable: true,
+        searchable: true
+    }
+]
+```
 
 ### Text
 
