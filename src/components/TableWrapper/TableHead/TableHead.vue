@@ -6,8 +6,8 @@
                             :column="column"/>
 
             <th v-for="(actionText, index) in actionItems"
-                :key="index"
-                class="data-table-th data-table-action-column">
+                class="data-table-th data-table-action-column"
+                :key="index">
                 {{ actionText }}
             </th>
         </tr>

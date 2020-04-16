@@ -12,17 +12,18 @@ export default {
          * @return string
         */
         text() {
-            if (this.totalEntries == this.filteredEntries)
+            if (this.totalEntries == this.filteredEntries) {
                 return this.infoText
-                            .replace(":first", this.firstEntry)
-                            .replace(":last", this.lastEntry)
-                            .replace(":total", this.filteredEntries)
+                                .replace(":first", this.firstEntry)
+                                .replace(":last", this.lastEntry)
+                                .replace(":total", this.filteredEntries)
+            }
 
             return this.infoTextFiltered
-                        .replace(":first", this.firstEntry)
-                        .replace(":last", this.lastEntry)
-                        .replace(":filtered", this.filteredEntries)
-                        .replace(":total", this.totalEntries)
+                            .replace(":first", this.firstEntry)
+                            .replace(":last", this.lastEntry)
+                            .replace(":filtered", this.filteredEntries)
+                            .replace(":total", this.totalEntries)
         },
     },
 

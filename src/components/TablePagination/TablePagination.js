@@ -11,7 +11,9 @@ export default {
 
     computed: {
         ...mapGetters('dataTable', ['numberOfPages', 'currentPage']),
-        ...mapState('dataTable', ['previousButtonText', 'nextButtonText', 'paginationSearchText', 'paginationSearchButtonText']),
+        ...mapState('dataTable', [
+            'previousButtonText', 'nextButtonText', 'paginationSearchText', 'paginationSearchButtonText'
+        ]),
 
         isLastPage() {
             return this.currentPage === this.numberOfPages;
