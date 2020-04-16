@@ -1,5 +1,5 @@
 <template>
-    <button class="btn btn-outline-dark" @click="triggerAction">
+    <button class="btn btn-outline-dark" @click="triggerAction()">
         <i class="fa fa-trash"></i>
     </button>
 </template>

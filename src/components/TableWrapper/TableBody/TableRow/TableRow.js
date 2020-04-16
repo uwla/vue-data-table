@@ -1,4 +1,4 @@
-import {mapState} from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
     name: "DataTableTr",
@@ -13,7 +13,10 @@ export default {
         },
 
         actionComponents() {
-            return this.actions.map(action => ({action, component: this.actionButtons[action]}))
+            return this.actions.map(action => ({
+                action,
+                component: this.actionButtons[action]
+            }))
         }
     },
 
