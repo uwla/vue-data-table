@@ -1,13 +1,9 @@
 export default {
-    /** COLUMNS */
-
     /**
      * Get columns that can be searched
      * @return Array
      */
-    searchableColumns: state => state.columns.filter(col => col.searchable),
-
-    /* DATA */
+    searchableColumns: state => state.columns.filter(column => column.searchable),
 
     /**
      * Get the data to be displayed
@@ -36,11 +32,10 @@ export default {
     dataFilteredBySearch(state, getters) {
         let {search, data} = state
 
-        if (search == "" || search == null)
+        if (search === "" || search === null)
             return data
 
         return data.filter(object => {
-            // for each searchable key in the object
             return getters.searchableColumns.some(column => {
                 let {key} = column, value = object[key]
 
@@ -60,31 +55,30 @@ export default {
     dataSorted(state, getters) {
         let data = getters.dataFilteredBySearch
 
-        if (state.sortingColumns.length == 0)
+        if (state.sortingColumns.length === 0)
             return data
 
-        // create a copy of the data
+        // create a copy of data and columns
         data = [...data]
+        let columns = [...state.sortingColumns]
 
-        // get the columns to perform a multiple sort
-        let columns = state.sortingColumns.map(col => {
-            return {key: col.key, direction: col.sortingDirection}
-        })
+        if (data.length === 0)
+            return data
 
         // reverse the columns, so that the first columns
         // will be the last to be sorted. This way, the first
         // columns will have more effect on the final order
         columns.reverse()
 
-        columns.forEach(col => {
-            let {key, direction} = col
+        columns.forEach(column => {
+            let {key, sortingDirection: direction} = column
 
-            if (typeof data[0][key] == "number") // sort numbers
+            if (typeof data[0][key] === "number")
                 data.sort((a, b) => a[key] - b[key])
             else // sort strings
                 data.sort((a, b) => a[key].toLowerCase().localeCompare(b[key].toLowerCase()))
 
-            if (direction == "desc")
+            if (direction === "desc")
                 data.reverse()
         })
 
@@ -116,8 +110,8 @@ export default {
     lastEntry(state, getters) {
         let lastEntry = getters.firstEntry + state.currentEntryLength - 1;
 
-        if (lastEntry > getters.dataFilteredBySearch.length)
-            lastEntry = getters.dataFilteredBySearch.length
+        if (lastEntry > getters.filteredEntries)
+            lastEntry = getters.filteredEntries
 
         return lastEntry
     },
@@ -129,7 +123,7 @@ export default {
      * @return Integer
      */
     numberOfPages(state, getters) {
-        return Math.ceil(getters.dataFilteredBySearch.length/state.currentEntryLength) || 1
+        return Math.ceil(getters.filteredEntries / state.currentEntryLength) || 1
     },
 
     currentPage(state, getters) {

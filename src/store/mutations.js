@@ -19,12 +19,18 @@ export default {
         columns = columns.map((col, index) => {
             if (!col.title)
                 col.title = toTitleCase(col.key)
-            return {...state.columnOptions, ...col, index, sortIndex: -1, sortingDirection: ""}
+            return {
+                ...state.columnOptions,
+                ...col,
+                index,
+                sortIndex: -1,
+                sortingDirection: ""
+            }
         })
 
         let {defaultEntryLength, entriesLengths} = options
         state.currentEntryLength = entriesLengths.includes(defaultEntryLength) ?
-                                    defaultEntryLength : entriesLengths[0]
+            defaultEntryLength : entriesLengths[0]
 
         Object.assign(state, translations[options.lang], options, options.text, {columns})
     },
@@ -74,21 +80,22 @@ export default {
             return
 
         if (state.sortingMode === "single") {
+
             state.columns.forEach(col => {
                 if (col.key !== column.key)
                     col.sortingDirection = ""
             })
 
-            if (column.sortingDirection === "")
-                column.sortingDirection = "asc"
-            else if (column.sortingDirection === "asc")
-                column.sortingDirection = "desc"
-            else {
+            if (column.sortingDirection === "desc") {
                 column.sortingDirection = ""
                 state.sortingColumns = []
                 return
             }
 
+            if (column.sortingDirection === "")
+                column.sortingDirection = "asc"
+            else
+                column.sortingDirection = "desc"
             state.sortingColumns = [column]
             return
         }
@@ -112,11 +119,8 @@ export default {
         // reset the sortIndex of all columns, which indicate the
         // priority of each column in the sorting. This number
         // is displayed on the right side of the column's title
-        state.sortingColumns =
-            state.sortingColumns.filter(col => col.index !== column.index).map((col, i) => {
-                col.sortIndex = i
-                return col
-            })
+        state.sortingColumns = state.sortingColumns.filter(col => col.index !== column.index)
+        state.sortingColumns.forEach((col, index) => col.sortIndex = index)
     },
 }
 

@@ -19,7 +19,12 @@ export default {
     name: "DataTable",
 
     components: {
-        DataTableEntriesInfo, DataTableSearchFilter, DataTablePagination, DataTableEntriesLength, DataTableWrapper, DataTableExportButton
+        DataTableEntriesInfo,
+        DataTableSearchFilter,
+        DataTablePagination,
+        DataTableEntriesLength,
+        DataTableWrapper,
+        DataTableExportButton
     },
 
     created() {
@@ -27,7 +32,7 @@ export default {
     },
 
     methods: {
-        parseData (data) {
+        parseData(data) {
             this.$store.commit("dataTable/parseData", data)
         }
     },

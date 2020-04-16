@@ -6,7 +6,8 @@ export default {
     name: "DataTableWrapper",
 
     components: {
-        DataTableTbody, DataTableThead
+        DataTableTbody,
+        DataTableThead
     },
 
     computed: {
