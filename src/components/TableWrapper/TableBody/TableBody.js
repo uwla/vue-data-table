@@ -19,7 +19,7 @@ export default {
         numberOfColumns() {
             if (!this.actionColumn)
                 return this.columns.length
-            if (this.actionColumn == 'multiple')
+            if (this.actionColumn === 'multiple')
                 return this.columns.length + this.actions.length
             return this.columns.length + 1
         }

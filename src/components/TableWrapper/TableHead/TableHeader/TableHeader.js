@@ -1,4 +1,4 @@
-import {mapState} from 'vuex'
+import { mapState } from 'vuex'
 export default {
     name: "DataTableTh",
 
@@ -6,7 +6,10 @@ export default {
         ...mapState('dataTable', ['sortIconComponent', 'sortIndexComponent']),
 
         attributes() {
-            let attributes = {class: "data-table-th"}
+            let attributes = {
+                class: "data-table-th"
+            }
+
             if (this.column.orderable)
                 attributes.class += " sortable"
             if (this.column.sortingDirection !== "")
@@ -14,16 +17,12 @@ export default {
             return attributes
         },
 
+        sortingIndex() {
+            return this.column.sortIndex
+        },
+    
         isSortable() {
             return this.column.orderable
-        },
-
-        index() {
-            return this.column.index
-        },
-
-        sortIndex() {
-            return this.column.sortIndex
         },
 
         title() {

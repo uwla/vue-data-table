@@ -4,8 +4,8 @@
             {{textBeforeEntries}}
         </span>
 
-        <select :value="currentEntryLength"
-                @input="$store.commit('dataTable/toggleEntryLength')">
+        <select @input="$store.commit('dataTable/toggleEntryLength')"
+                :value="currentEntryLength">
             <option v-for="(length, i) in entriesLengths"
                     :key="i"
                     :value="length">

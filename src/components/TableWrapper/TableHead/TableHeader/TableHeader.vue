@@ -1,16 +1,15 @@
 <template>
-    <th v-bind="attributes"
-        @click="sortThisColumn()">
+    <th v-bind="attributes" @click="sortThisColumn()" >
         <div class="data-table-th-content">
-            <span class="data-table-th-title"
-                  v-html="title">
+            <span
+                class="data-table-th-title"
+                v-html="title">
             </span>
-            <component  v-if="(sortIndex >= 0)"
-                        :is="sortIndexComponent"
-                        :index="(sortIndex + 1)"/>
-
-            <component  v-if="isSortable"
-                        :is="sortIconComponent"/>
+            <component v-if="(sortingIndex >= 0)"
+                       :is="sortIndexComponent"
+                       :index="(sortingIndex + 1)" />
+            <component v-if="isSortable"
+                       :is="sortIconComponent" />
         </div>
     </th>
 </template>
@@ -28,7 +27,7 @@
         cursor: pointer;
 
         &:hover {
-            color: #3490DC;
+            color: #3490dc;
         }
     }
 }

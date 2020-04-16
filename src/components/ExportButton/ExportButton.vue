@@ -8,7 +8,6 @@
             <option v-for="(export_type, index) in allowedExports"
                     :key="index"
                     :value="export_type">
-
                 {{ export_type.toUpperCase() }}
             </option>
         </select>
