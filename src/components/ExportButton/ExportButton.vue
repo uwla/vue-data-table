@@ -33,6 +33,10 @@
         margin-left: 5px;
     }
 
+    select {
+        width: 80px;
+    }
+
     select:-moz-focusring {
         color: transparent;
         text-shadow: 0 0 0 #000;

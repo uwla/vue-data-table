@@ -1,5 +1,5 @@
 <template>
-    <button class="btn btn-outline-success" @click="triggerAction">
+    <button class="btn btn-outline-success" @click="triggerAction()">
         <i class="fa fa-eye"></i>
     </button>
 </template>
