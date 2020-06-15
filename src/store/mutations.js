@@ -1,4 +1,5 @@
 import translations from '../lang'
+import {toTitleCase} from '../helpers'
 
 export default {
     /**
@@ -28,7 +29,8 @@ export default {
             }
         })
 
-        let {defaultEntryLength, entriesLengths} = options
+		let {defaultEntryLength, entriesLengths} = options
+
         state.currentEntryLength = entriesLengths.includes(defaultEntryLength) ?
             defaultEntryLength : entriesLengths[0]
 
@@ -78,8 +80,8 @@ export default {
     toggleSorting (state, column) {
         if (!column.orderable)
             return
-        if (state.sortingMode === "single") {
 
+        if (state.sortingMode === "single") {
             state.columns.forEach(col => {
                 if (col.index !== column.index)
                     col.sortingDirection = ""
@@ -123,12 +125,3 @@ export default {
     },
 }
 
-/**
- * Convert a string to title Case (first letter capitalized and words separated by space)
- *
- * @param string
- * @return string
- */
-function toTitleCase(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1).replace(/[-_]/ig, ' ')
-}
