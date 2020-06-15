@@ -8,7 +8,7 @@
             <component v-if="(sortingIndex >= 0)"
                        :is="sortIndexComponent"
                        :index="(sortingIndex + 1)" />
-            <component v-if="isSortable"
+            <component v-if="orderable"
                        :is="sortIconComponent" />
         </div>
     </th>

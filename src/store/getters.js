@@ -1,3 +1,5 @@
+import {compareNumbers, compareStrings} from '../helpers'
+
 export default {
     /**
      * Get columns that can be searched
@@ -71,14 +73,14 @@ export default {
         columns.reverse()
 
         columns.forEach(column => {
-            let {key, sortingDirection: direction} = column
+            let {key, sortingDirection} = column
 
             if (typeof data[0][key] === "number")
-                data.sort((a, b) => a[key] - b[key])
+                data.sort((a, b) => compareNumbers(a[key], b[key]))
             else // sort strings
-                data.sort((a, b) => a[key].toLowerCase().localeCompare(b[key].toLowerCase()))
+				data.sort((a, b) => compareStrings(a[key], b[key]))
 
-            if (direction === "desc")
+            if (sortingDirection === "desc")
                 data.reverse()
         })
 

@@ -1,4 +1,5 @@
 import translations from '../lang'
+import {toTitleCase} from '../helpers'
 
 export default {
     /**
@@ -16,19 +17,20 @@ export default {
     parseData (state, options) {
         let columns = options.columns || options.columnKeys.map(key => ({key}))
 
-        columns = columns.map((col, index) => {
-            if (!col.title)
-                col.title = toTitleCase(col.key)
+        columns = columns.map((column, index) => {
+            if (!column.title)
+                column.title = toTitleCase(column.key)
             return {
                 ...state.columnOptions,
-                ...col,
+                ...column,
                 index,
-                sortIndex: -1,
+                sortingIndex: -1,
                 sortingDirection: ""
             }
         })
 
-        let {defaultEntryLength, entriesLengths} = options
+		let {defaultEntryLength, entriesLengths} = options
+
         state.currentEntryLength = entriesLengths.includes(defaultEntryLength) ?
             defaultEntryLength : entriesLengths[0]
 
@@ -82,7 +84,7 @@ export default {
         if (state.sortingMode === "single") {
 
             state.columns.forEach(col => {
-                if (col.key !== column.key)
+                if (col.index !== column.index)
                     col.sortingDirection = ""
             })
 
@@ -102,34 +104,25 @@ export default {
 
         if (column.sortingDirection === "") {
             column.sortingDirection = "asc"
-            column.sortIndex = state.sortingColumns.length
+            column.sortingIndex = state.sortingColumns.length
             state.sortingColumns.push(column)
             return
         }
 
         if (column.sortingDirection === "asc") {
             column.sortingDirection = "desc"
-            state.sortingColumns.splice(column.sortIndex, 1, column)
+            state.sortingColumns.splice(column.sortingIndex, 1, column)
             return
         }
 
         column.sortingDirection = ""
-        column.sortIndex = -1
+        column.sortingIndex = -1
 
-        // reset the sortIndex of all columns, which indicate the
+        // reset the sortingIndex of all columns, which indicate the
         // priority of each column in the sorting. This number
         // is displayed on the right side of the column's title
         state.sortingColumns = state.sortingColumns.filter(col => col.index !== column.index)
-        state.sortingColumns.forEach((col, index) => col.sortIndex = index)
+        state.sortingColumns.forEach((col, index) => col.sortingIndex = index)
     },
 }
 
-/**
- * Convert a string to title Case (first letter capitalized and words separated by space)
- *
- * @param string
- * @return string
- */
-function toTitleCase(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1).replace(/[-_]/ig, ' ')
-}
