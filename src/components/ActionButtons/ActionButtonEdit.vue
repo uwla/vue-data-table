@@ -1,5 +1,5 @@
 <template>
-    <button class="btn btn-outline-primary" @click="triggerAction">
+    <button class="btn btn-outline-primary" @click="triggerAction()">
         <i class="fa fa-edit"></i>
     </button>
 </template>
