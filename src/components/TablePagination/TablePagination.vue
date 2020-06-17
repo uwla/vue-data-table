@@ -5,6 +5,8 @@
 
             <input @keyup.enter="setCurrentPage(pageToGo)"
                     v-model="pageToGo"
+                    :max="numberOfPages"
+                    min="1"
                     type="number"
                     class="form-control"/>
 
@@ -23,9 +25,8 @@
                 </span>
             </li>
 
-            <li @click="setCurrentPage(page)"
-                v-for="(page, index) in pages"
-                :key="index"
+            <li v-for="(page, i) in pages" :key="i"
+                @click="setCurrentPage(page)"
                 :class="{
                     disabled: page === '...',
                     active: currentPage === page}"
