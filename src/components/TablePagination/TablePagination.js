@@ -69,5 +69,12 @@ export default {
         currentPage(value) {
             this.pageToGo = value
         },
+        pageToGo(value) {
+            if (value > this.numberOfPages)
+				return this.numberOfPages
+			if (value < 1)
+				return 1
+			return value
+        },
     },
 };
