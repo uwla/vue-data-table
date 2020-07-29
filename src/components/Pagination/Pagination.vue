@@ -1,5 +1,5 @@
 <template>
-    <div class="data-table-pagination">
+    <div class="pagination-container">
         <div class="pagination-search">
             <span>{{ paginationSearchText }}</span>
 
@@ -8,7 +8,7 @@
                     :max="numberOfPages"
                     min="1"
                     type="number"
-                    class="form-control"/>
+                    class="form-control" />
 
             <button @click="setCurrentPage(pageToGo)" class="btn btn-primary">
                 {{ paginationSearchButtonText }}
@@ -16,6 +16,7 @@
         </div>
 
         <ul class="pagination">
+
             <li @click="setCurrentPage(previousPage)"
                 :class="{ disabled: isFirstPage }"
                 class="page-item">
@@ -25,11 +26,11 @@
                 </span>
             </li>
 
-            <li v-for="(page, i) in pages" :key="i"
+            <li v-for="(page, i) in pagination" :key="i"
                 @click="setCurrentPage(page)"
                 :class="{
-                    disabled: page === '...',
-                    active: currentPage === page}"
+                    active: currentPage === page,
+                    disabled: page === '...'}"
                 class="page-item">
 
                 <span class="page-link">
@@ -45,9 +46,10 @@
                     {{ nextButtonText }}
                 </span>
             </li>
+
         </ul>
     </div>
 </template>
 
-<script src="./TablePagination.js"></script>
-<style src="./TablePagination.scss" lang="scss"></style>
+<script src="./Pagination.js"></script>
+<style src="./Pagination.scss" lang="scss"></style>

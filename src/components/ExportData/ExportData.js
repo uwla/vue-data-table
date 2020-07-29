@@ -1,19 +1,11 @@
 import exportFromJSON from 'export-from-json'
-import { mapState } from 'vuex'
 
 export default {
     name: "DataTableExportButton",
 
-    computed: {
-        data() {
-            return this.$store.getters["dataTable/dataSorted"]
-        },
-        ...mapState("dataTable", ["downloadFilename", "downloadText", "downloadButtonText", "allowedExports"])
-    },
-
     data() {
         return {
-            exportType: "",
+            selectedExport: "",
         }
     },
 
@@ -22,15 +14,23 @@ export default {
             exportFromJSON({
                 data: this.data,
                 fileName: this.downloadFilename,
-                exportType: this.exportType
+                exportType: this.selectedExport
             })
         }
+    },
+
+    props: {
+        data: Array,
+        allowedExports: Array,
+        downloadButtonText: String,
+        downloadFilename: String,
+        downloadText: String,
     },
 
     watch: {
         allowedExports: {
             handler(value) {
-                this.exportType = value[0]
+                this.selectedExport = value[0]
             },
             immediate: true
         }

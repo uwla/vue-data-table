@@ -1,147 +1,706 @@
 // Main components
-import DataTableEntriesInfo from "./EntriesInfo/EntriesInfo.vue"
-import DataTableEntriesLength from "./EntriesLength/EntriesLength.vue"
-import DataTableExportButton from "./ExportButton/ExportButton.vue"
-import DataTablePagination from "./TablePagination/TablePagination.vue"
-import DataTableSearchFilter from "./SearchFilter/SearchFilter.vue"
-import DataTableWrapper from "./TableWrapper/TableWrapper.vue"
+import DataTableEntriesInfo from "./EntriesInfo/EntriesInfo.vue";
+import DataTablePerPage from "./PerPage/PerPage.vue";
+import DataTableExportData from "./ExportData/ExportData.vue";
+import DataTablePagination from "./Pagination/Pagination.vue";
+import DataTableSearchFilter from "./SearchFilter/SearchFilter.vue";
+import DataTableTable from "./Table/Table.vue";
 
-// Action buttons
-import DataTableViewButton from "./ActionButtons/ActionButtonView.vue"
-import DataTableEditButton from "./ActionButtons/ActionButtonEdit.vue"
-import DataTableDeleteButton from "./ActionButtons/ActionButtonDelete.vue"
+// Action button components
+import ButtonView from "./ActionButtons/ActionButtonView.vue";
+import ButtonEdit from "./ActionButtons/ActionButtonEdit.vue";
+import ButtonDelete from "./ActionButtons/ActionButtonDelete.vue";
 
 // Sorting components
-import DataTableSortIcon from "./SortableColumn/SortIcon.vue"
-import DataTableSortIndex from "./SortableColumn/SortIndex.vue"
+import DataTableSortingIcon from "./SortableColumn/SortingIcon.vue";
+import DataTableSortingIndex from "./SortableColumn/SortingIndex.vue";
+
+import {
+	min,
+	max,
+	ceil,
+	floor,
+	range,
+	isString,
+	isNumber,
+	isNullable,
+	pickFromObject,
+	sortDataByColumn,
+	stringReplaceFromArray,
+	getEventTargetValue,
+} from "../helpers";
+import { parseColumnProps, parseTextProps } from "../parser";
 
 export default {
-    name: "DataTable",
+	name: "DataTable",
 
-    components: {
-        DataTableEntriesInfo,
-        DataTableSearchFilter,
-        DataTablePagination,
-        DataTableEntriesLength,
-        DataTableWrapper,
-        DataTableExportButton
-    },
+	components: {
+		DataTableEntriesInfo,
+		DataTableSearchFilter,
+		DataTablePagination,
+		DataTablePerPage,
+		DataTableTable,
+		DataTableExportData,
+	},
 
-    created() {
-        this.parseData(this.$props)
-    },
+	computed: {
+		/**
+		 * Get the total number of columns
+		 * @var {Number}
+		 */
+		numberOfColumns() {
+			return this.parsedColumns.length + this.actionColumns.length;
+		},
 
-    methods: {
-        parseData(data) {
-            this.$store.commit("dataTable/parseData", data)
-        }
-    },
+		/**
+		 * Get the column that should be used in searches
+		 * @var {Array}
+		 */
+		searchableColumns() {
+			return this.parsedColumns.filter(column => column.searchable);
+		},
 
-    props: {
-        actions: {
-            type: Array,
-            default: () => ["view", "edit", "delete"]
-        },
-        actionButtons: {
-            type: Object,
-            default: () => ({
-                view: DataTableViewButton,
-                edit: DataTableEditButton,
-                delete: DataTableDeleteButton
-            })
-        },
-        actionColumn: {
-            type: [Boolean, String],
-            default: false
-        },
-        allowedExports: {
-            type: Array,
-            default: () => ['xls', 'csv', 'json', 'txt'],
-            validator: exports => exports.every(type => ['xls', 'csv', 'json', 'txt'].includes(type))
-        },
-        columns: {
-            type: Array,
-            required: false
-        },
-        columnKeys: {
-            type: Array,
-            required: false
-        },
-        data: {
-            type: Array,
-            required: true
-        },
-        defaultEntryLength: {
-            type: Number,
-            default: 10
-        },
-        downloadFilename: {
-            type: String,
-            default: "download"
-        },
-        entriesLengths: {
-            type: Array,
-            default: () => [10, 25, 50, 100]
-        },
-        lang: {
-            type: String,
-            default: "en",
-        },
-        showEntriesInfo: {
-            type: Boolean,
-            default: true
-        },
-        showEntriesLength: {
-            type: Boolean,
-            default: true
-        },
-        showExportButton: {
-            type: Boolean,
-            default: true
-        },
-        showPagination: {
-            type: Boolean,
-            default: true
-        },
-        showSearchFilter: {
-            type: Boolean,
-            default: true
-        },
-        sortingMode: {
-            type: String,
-            default: 'multiple',
-            validator: value => ['multiple', 'single'].includes(value)
-        },
-        sortIndexComponent: {
-            type: Object,
-            default: () => DataTableSortIndex
-        },
-        sortIconComponent: {
-            type: Object,
-            default: () => DataTableSortIcon
-        },
-        tableClass: {
-            type: String,
-            default: "table table-striped table-hover"
-        },
-        tableWrapperClass: {
-            type: String,
-            default: "data-table-wrapper"
-        },
-        text: {
-            type: Object,
-            required: false
-        }
-    },
+		/**
+		 * Get the column that should be used in searches
+		 * @var {Array}
+		 */
+		sortableColumns() {
+			return this.parsedColumns.filter(column => column.sortable);
+		},
 
-    watch: {
-        $props: {
-            handler(value) {
-                this.parseData(value)
-                return value
-            },
-            deep: true,
-            immediate: true
-        },
-    },
+		/**
+		 * The columns that will be used to perform actions on the data
+		 * @var {Number}
+		 */
+		actionColumns() {
+			const {
+				actionMode,
+				actions,
+			} = this;
+
+			if (actionMode === "disabled")
+				return [];
+			if (actionMode === "single")
+				return actions.find(item => item.action === '*');
+			if (actionMode === "multiple")
+				return actions;
+
+			throw new Error("Error in VueDataTable: The prop 'actionMode' is invalid.");
+		},
+
+		//
+		// ─── DATA ───────────────────────────────────────────────────────────────────────
+		//
+
+		/**
+		 * The data displayed in the current table page
+		 * @var {Array}
+		 */
+		dataDisplayed() {
+			const { lastEntry, firstEntry, dataSorted } = this;
+
+			// we need to subtract 1 due to array index
+			// we need also to subtract 1 for the first
+			// item to appear
+			const end = lastEntry;
+			const start = max(0, firstEntry - 2);
+
+			return dataSorted.slice(start, end);
+		},
+
+		/**
+		 * The data filtered by search text
+		 * @var {Array}
+		 */
+		dataFiltered() {
+			const { searchableColumns, data, search } = this;
+
+			if (isNullable(search))
+				return data;
+
+			return data.filter((row) => {
+				return searchableColumns.some((column) => {
+					const cell = column.key, value = row[cell];
+
+					if (isString(value))
+						return value.toLowerCase().includes(search.toLowerCase());
+					if (isNumber(value))
+						return value.toString().includes(search);
+
+					return false;
+				});
+			});
+		},
+
+		/**
+		 * The data after sorting it by the desirable columns
+		 * @var {Array}
+		 */
+		dataSorted() {
+			var { dataFiltered: data, columnsBeingSorted } = this;
+
+			// do not sort if there is no rows or no data to sort
+			if (columnsBeingSorted.length === 0 || data.length === 0)
+				return data;
+
+			// create a copy of data and columns
+			data = [...data];
+			var columns = [...columnsBeingSorted];
+			console.log(columns)
+			// reverse the columns, so that the first columns
+			// will be the last to be sorted. Doing this, we
+			// can sort by multiple columns in such way that
+			// the columns that were select first will have
+			// priority in the process.
+			columns.reverse();
+			columns.forEach(column => sortDataByColumn(data, column));
+
+			return data;
+		},
+
+		/**
+		 * Indicates if there are no rows to shown
+		 * @var {Boolean}
+		 */
+		isEmpty() {
+			return this.dataDisplayed.length === 0;
+		},
+
+		//
+		// ─── PER PAGE ───────────────────────────────────────────────────────────────────
+		//
+
+		/**
+		 * Get the index of the first record being displayed in the current page
+		 * @var {Integer}
+		 */
+		firstEntry() {
+			const { dataFiltered, currentPerPage, currentPage } = this;
+
+			return (dataFiltered.length === 0) ?
+				0 : currentPerPage * (currentPage - 1) + 1;
+		},
+
+		/**
+		 * Get the index of the last record being displayed in the current page
+		 * @var {Integer}
+		 */
+		lastEntry() {
+			return min(
+				this.filteredEntries,
+				this.firstEntry + this.currentPerPage - 1
+			);
+		},
+
+		/**
+		 * Get the number of records
+		 * @var {Integer}
+		 */
+		totalEntries() {
+			return this.data.length;
+		},
+
+		/**
+		 * Get the number of records
+		 * @var {Integer}
+		 */
+		filteredEntries() {
+			return this.dataFiltered.length;
+		},
+
+		/**
+		 * The text containing how many rows are being shown
+		 * @var {String}
+		 */
+		entriesInfoText() {
+			const {
+				infoText,
+				infoTextFiltered,
+				firstEntry,
+				lastEntry,
+				filteredEntries,
+				totalEntries
+			} = this;
+
+			const replacements = [firstEntry, lastEntry, filteredEntries, totalEntries];
+			const searchValues = [":first", ":last", ":filtered", ":total"];
+
+			var text = infoText;
+
+			if (totalEntries !== filteredEntries)
+				text = infoTextFiltered;
+
+			// we take the text provided by the user, then
+			// replace the placeholders with the actual
+			// values, and return the result
+			return stringReplaceFromArray(text, searchValues, replacements);
+		},
+
+		//
+		// ─── PAGINATION ─────────────────────────────────────────────────────────────────
+		//
+
+		/**
+		 * Get the number of pages
+		 * @var {Number}
+		 */
+		numberOfPages() {
+			return max( ceil(this.filteredEntries/this.currentPerPage), 1);
+		},
+
+		/**
+		 * Alias for the number of pages
+		 * @var {Number}
+		 */
+		lastPage() {
+			return this.numberOfPages;
+		},
+
+		/**
+		 * Whether this is the last page of the table
+		 * @var {Boolean}
+		 */
+		isLastPage() {
+			return this.currentPage === this.numberOfPages;
+		},
+
+		/**
+		 * Whether this is the first page of the table
+		 * @var {Boolean}
+		 */
+		isFirstPage() {
+			return this.currentPage === 1;
+		},
+
+		/**
+		 * Get the number of the previous page
+		 * @var {Number}
+		 */
+		previousPage() {
+			return this.currentPage - 1;
+		},
+
+		/**
+		 * Get the number of the next page
+		 * @var {Number}
+		 */
+		nextPage() {
+			return this.currentPage + 1;
+		},
+
+		/**
+		 * Get the text to be shown in pagination menu
+		 * @var {Array}
+		 */
+		pagination() {
+			// extract the variables from "this"
+			// so we don't have to type this.prop
+			// every time we access it.
+			const {
+				lastPage,
+				currentPage,
+				nextPage,
+				previousPage
+			} = this;
+
+			if (lastPage === 1)
+				return [1];
+
+			if (lastPage <= 7)
+				return range(1, lastPage);
+
+			if (lastPage > 7 && currentPage <= 4)
+				return [1, 2, 3, 4, 5, "...", lastPage];
+
+			if (lastPage > 8 && lastPage > currentPage + 3)
+				return [ 1, "...", previousPage, currentPage, nextPage, "...", lastPage];
+
+			if (lastPage > 7 && lastPage <= currentPage + 3)
+				return [1, "...", lastPage - 3, lastPage - 2, lastPage - 1, lastPage];
+		},
+
+		//
+		// ─── BINDINGS ────────────────────────────────────────────────────
+		//
+
+		/**
+		 * The props for the PerPage component
+		 * @var {Object}
+		 */
+		bindingsPerPage() {
+			return pickFromObject(this, 'perPageText', 'perPageSizes', 'currentPerPage');
+		},
+
+		/**
+		 * The props for the SearchFilter component
+		 * @var {Object}
+		 */
+		bindingsSearchFilter() {
+			return pickFromObject(this, 'search', 'searchText');
+		},
+
+		/**
+		 * The props for the Table component
+		 * @var {Object}
+		 */
+		bindingsTable() {
+			return {
+				columns: this.parsedColumns,
+				...pickFromObject(this,
+					'emptyTableText',
+					'numberOfColumns',
+					'actionMode',
+					'actionColumns',
+					'isEmpty',
+					'tableClass',
+					'tableWrapperClass',
+					'sortingIconComponent',
+					'sortingIndexComponent',
+					'dataDisplayed'
+				)
+			};
+		},
+
+		/**
+		 * The props for the EntriesInfo component
+		 * @var {Object}
+		 */
+		bindingsEntriesInfo() {
+			return pickFromObject(this, 'entriesInfoText')
+		},
+
+		/**
+		 * The props for the Pagination component
+		 * @var {Object}
+		 */
+		bindingsPagination() {
+			return pickFromObject(this,
+				'paginationSearchButtonText',
+				'paginationSearchText',
+				'previousButtonText',
+				'nextButtonText',
+				'isFirstPage',
+				'isLastPage',
+				'numberOfPages',
+				'currentPage',
+				'previousPage',
+				'nextPage',
+				'pagination',
+			);
+		},
+
+		/**
+		 * The props for the DownloadButton component
+		 * @var {Object}
+		 */
+		bindingsExportData() {
+			return {
+				data: this.dataFiltered,
+				... pickFromObject(this,
+					'allowedExports',
+					'downloadButtonText',
+					'downloadFileName',
+					'downloadText'
+				)
+			};
+		}
+	},
+
+	mounted() {
+		this.setDefaults();
+	},
+
+	data() {
+		return {
+			currentPage: 1,
+			currentPerPage: 10,
+			parsedColumns: [],
+			columnsBeingSorted: [],
+			downloadFileName: '',
+			perPageText: '',
+			downloadText: '',
+			downloadButtonText: '',
+			emptyTableText: '',
+			infoText: '',
+			infoTextFiltered: '',
+			nextButtonText: '',
+			previousButtonText: '',
+			paginationSearchText: '',
+			paginationSearchButtonText: '',
+			search: '',
+			searchText: '',
+		};
+	},
+
+	methods: {
+		/**
+		 * Indicates if a page is valid
+		 * @param {Object} props
+		 * @returns {Bolean}
+		 */
+		isValidPage(page) {
+			return isNumber(page) &&
+				page <= this.numberOfPages &&
+				page > 0 &&
+				page !== this.currentPage;
+		},
+
+		/**
+		 * Parse props to update Data Table properly
+		 * @param {Object} props
+		 * @returns {void}
+		 */
+		parseProps(props) {
+			const parsedColumns = parseColumnProps(props);
+			const text = parseTextProps(props);
+
+			Object.assign(this, {parsedColumns, ...text});
+		},
+
+		/**
+		 * Toggle the sorting state of a column
+		 * @param {Object} column
+		 * @returns {void}
+		*/
+		sortColumn(column) {
+			return;
+			// code below is not working
+		
+			if (! column.sortable)
+				return
+
+			if (this.sortingMode === "single") {
+				for (let col of this.sortableColumns) {
+					if (col.id !== column.id) {
+						col.sortingMode = ""
+						col.sortingIndex = -1
+					}
+				}
+			}
+
+
+			switch (column.sortingMode) {
+				case "":
+					column.sortingMode = "asc";
+					column.sortingIndex = this.columnsBeingSorted.length + 1;
+					this.columnsBeingSorted.push(column)
+					return;
+				case "asc":
+					column.sortingMode = "desc";
+					break;
+				case "desc":
+					column.sortingIndex = -1;
+					column.sortingMode = "";
+			}
+
+			this.parsedColumns[column.id] = column
+
+			this.columnsBeingSorted = this.columnsBeingSorted.filter(c => c.sortingIndex > 0);
+
+			let i = 0;
+			for (let col of this.columnsBeingSorted) {
+				col.sortingIndex = i + 1;
+				this.parsedColumns[col.id] = col;
+				i++;
+			}
+		},
+
+		/**
+		 * Set the default values of some attributes
+		 * @returns {void}
+		 */
+		setDefaults() {
+			this.setPerPage(this.defaultPerPage);
+		},
+
+		/**
+		 * Set the current page being displayed
+		 * @param {Number}
+		 * @returns {void}
+		 */
+		setPage(value) {
+			if (this.isValidPage(value))
+				this.currentPage = value
+		},
+
+		/**
+		 * Set the current rows per page
+		 * @param {Number}
+		 * @returns {void}
+		 */
+		setPerPage() {
+			// before updating the value of currentPerPage,
+			// we need to store the current firstEntry.
+			// We will use it later to change the current
+			// page.
+			const previousFirstEntry = this.firstEntry;
+
+
+			const value = Number(getEventTargetValue());
+			var newPerPage = this.currentPerPage;
+
+			if (! this.perPageSizes.includes(newPerPage))
+				newPerPage = this.perPageSizes[0];
+
+			if (this.perPageSizes.includes(value))
+				newPerPage = value;
+
+			this.currentPerPage = newPerPage;
+
+			// update current per page so that
+			// the user will see the same first
+			// rows that were being displayed
+			const newCurrentPage = floor(previousFirstEntry / newPerPage) + 1;
+			this.setPage(newCurrentPage);
+		},
+
+		/**
+		 * Set the value being searched
+		 * @param {String}
+		 * @returns {void}
+		 */
+		setSearch() {
+			const value = getEventTargetValue() || "";
+			this.search = value.trim();
+			this.currentPage = 1;
+		},
+
+		/**
+		 * Emit an event when an action is triggered
+		 * @param {String} actionName
+		 * @param {Object} payload
+		 */
+		triggerAction(actionName, payload) {
+			this.$emit('actionTriggered', actionName, payload);
+		}
+	},
+
+	props: {
+		actions: {
+			type: Array,
+			default: () => [
+				{
+					name: "view",
+					component: ButtonView,
+					title: "View",
+				},
+				{
+					name: "edit",
+					component: ButtonEdit,
+					title: "Edit",
+				},
+				{
+					name: "delete",
+					component: ButtonDelete,
+					title: "Delete",
+				},
+				{
+					name: "*",
+					title: "Actions",
+				},
+			],
+		},
+		actionMode: {
+			type: String,
+			default: "disabled",
+			validator: value => ["disabled", "multiple", "single"].includes(value)
+		},
+		allowedExports: {
+			type: Array,
+			default: () => ["xls", "csv", "json", "txt"],
+			validator: exports => exports.every(type => ["xls", "csv", "json", "txt"].includes(type)),
+		},
+		columns: {
+			type: Array,
+			required: false,
+		},
+		columnKeys: {
+			type: Array,
+			required: false,
+		},
+		data: {
+			type: Array,
+			required: true,
+		},
+		defaultColumn: {
+			type: Object,
+			required: false,
+			default: () => ({
+				sortable: true,
+				searchable: true,
+			})
+		},
+		defaultPerPage: {
+			type: Number,
+			default: 10,
+		},
+		downloadFilename: {
+			type: String,
+			default: "download",
+		},
+		perPageSizes: {
+			type: Array,
+			default: () => [10, 25, 50, 100],
+		},
+		lang: {
+			type: String,
+			default: "en",
+		},
+		showEntriesInfo: {
+			type: Boolean,
+			default: true,
+		},
+		showPerPage: {
+			type: Boolean,
+			default: true,
+		},
+		showDownloadButton: {
+			type: Boolean,
+			default: true,
+		},
+		showPagination: {
+			type: Boolean,
+			default: true,
+		},
+		showSearchFilter: {
+			type: Boolean,
+			default: true,
+		},
+		sortingMode: {
+			type: String,
+			default: "multiple",
+			validator: (value) => ["multiple", "single", "disabled"].includes(value),
+		},
+		sortingIndexComponent: {
+			type: Object,
+			default: () => DataTableSortingIndex,
+		},
+		sortingIconComponent: {
+			type: Object,
+			default: () => DataTableSortingIcon,
+		},
+		tableClass: {
+			type: String,
+			default: "table table-striped table-hover",
+		},
+		tableWrapperClass: {
+			type: String,
+			default: "table-wrapper",
+		},
+		text: {
+			type: Object,
+			required: false,
+		},
+	},
+
+	watch: {
+		$props: {
+			handler(value) {
+				this.parseProps(value);
+				return value;
+			},
+			deep: true,
+			immediate: true,
+		},
+	},
 };

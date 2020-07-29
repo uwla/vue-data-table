@@ -14,4 +14,4 @@ export default {
 }
 </script>
 
-<style src="./ActionButton.css" lang="css"></style>
+<style src="./ActionButton.scss" lang="scss" scoped></style>

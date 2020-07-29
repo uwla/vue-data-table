@@ -4,7 +4,7 @@ export default {
     actionColumnsText: {view: "View", edit: "Edit", delete: "Delete"},
 
     // entries length
-    entriesLengthText: "Show :entries entries",
+    perPageText: "Show :entries entries",
 
     // entries info
     infoText: "Showing :first to :last of :total entries",
