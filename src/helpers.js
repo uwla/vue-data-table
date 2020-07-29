@@ -130,11 +130,11 @@ export function isNullable(variable) {
 /**
  * Sort an array, but skip null values in the array
  * @param {Array} array
- * @param {Function} callback
+ * @param {Function} compareFunction
  * @returns {void}
  */
-export function arraySafeSort(array, callback) {
-	array.sort((a, b) => (isNullable(a) || isNullable(b)) ? false : callback(a, b))
+export function arraySafeSort(array, compareFunction) {
+	array.sort((a, b) => (isNullable(a) || isNullable(b)) ? false : compareFunction(a, b))
 }
 
 /**
@@ -144,15 +144,15 @@ export function arraySafeSort(array, callback) {
  * @returns {void}
  */
 export function sortDataByColumn(data, column) {
-	const {key, sortingMode} = column
+	const {key, sortingMode} = column;
 
 	if (isNumber(data[0][key]))
-		arraySafeSort(data, compareNumbers)
+		arraySafeSort(data, (a, b) => compareNumbers(a[key], b[key]))
 	else
-		arraySafeSort(data, compareStrings)
+		arraySafeSort(data, (a, b) => compareStrings(a[key], b[key]))
 
 	if (sortingMode === "desc")
-		data.reverse()
+		data.reverse();
 }
 
 /**
