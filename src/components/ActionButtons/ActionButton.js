@@ -1,7 +1,7 @@
 export default {
     methods: {
         triggerAction() {
-            DataTableEventBus.$emit(this.action + "Data", this.data)
+            this.$emit('actionTriggered', this.action, this.data)
         }
     },
 

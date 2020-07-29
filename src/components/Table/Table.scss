@@ -1,0 +1,45 @@
+.table-wrapper {
+	overflow: auto;
+	max-height: 80vh;
+	width: 100%;
+
+	table {
+		margin: 0;
+	}
+}
+
+.column {
+	white-space: nowrap;
+	background-color: white;
+	position: sticky;
+	padding: 1rem 0.75rem;
+	border: none !important;
+	box-shadow: inset 0px 11px .75px -10px #ddd,
+		inset 0px -11px .75px -10px #ddd;
+	line-height: 1;
+	top: 0;
+	user-select: none;
+
+	&.sortable {
+		cursor: pointer;
+
+		&:hover {
+			color: #3490dc;
+		}
+	}
+}
+
+.column-content {
+	display: flex;
+	align-items: center;
+}
+
+.empty-table-cell {
+	text-align: center;
+}
+
+.action-cell {
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+}

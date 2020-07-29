@@ -1,12 +1,12 @@
 <template>
-    <span class="data-table-sort-index">
+    <span class="sorting-index">
         {{ index }}
     </span>
 </template>
 
 <script>
 export default {
-    name: "DataTableSortIndex",
+    name: "DataTableSortingIndex",
     props: {
         index: {
             type: Number,
@@ -16,4 +16,4 @@ export default {
 }
 </script>
 
-<style src="./SortIndex.css" lang="css"></style>
+<style src="./SortingIndex.scss" lang="scss" scoped></style>

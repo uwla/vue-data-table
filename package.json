@@ -10,7 +10,7 @@
     "scripts": {
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
-        "build:npm": "vue-cli-service build --target lib --name DataTable src/main.js"
+        "build:npm": "vue-cli-service build --target lib --name DataTable src/components/DataTable.vue"
     },
     "main": "dist/DataTable.umd.js",
     "unpkg": "dist/DataTable.umd.min.js",
@@ -20,17 +20,14 @@
         "data"
     ],
     "dependencies": {
-        "bootstrap": "^4.4.1",
         "core-js": "^3.6.4",
         "export-from-json": "^1.1.4",
-        "vue": "^2.6.11",
-        "vuex": "^3.1.2"
+        "vue": "^2.6.11"
     },
     "devDependencies": {
         "@vue/cli-plugin-babel": "~4.2.0",
         "@vue/cli-plugin-router": "~4.2.0",
         "@vue/cli-plugin-unit-mocha": "~4.2.0",
-        "@vue/cli-plugin-vuex": "~4.2.0",
         "@vue/cli-service": "~4.2.0",
         "@vue/test-utils": "1.0.0-beta.31",
         "chai": "^4.1.2",
