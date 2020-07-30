@@ -1,27 +1,32 @@
 export default {
-    // actions
-    actionColumnText: "Ações",
-    actionColumnsText: {view: "Ver", edit: "Editar", delete: "Deletar"},
+	// actions
+	actionsText: {
+		view: "Ver",
+		edit: "Editar",
+		delete: "Deletar",
+		"*": "Ações",
+	},
 
-    // entries length
-    perPageText: "Exibindo :entries dados",
+	// per page
+	perPageText: "Exibindo :entries dados",
 
-    // entries info
-    infoText: "Exibindo :first até :last de :total dados",
-    infoTextFiltered: "Exibindo :first até :last de :filtered (filtrado de :total dados)",
+	// entries info
+	infoText: "Exibindo :first até :last de :total dados",
+	infoTextFiltered:
+		"Exibindo :first até :last de :filtered (filtrado de :total dados)",
 
-    // pagination
-    nextButtonText: "Próximo",
-    previousButtonText: "Anterior",
+	// pagination
+	nextButtonText: "Próximo",
+	previousButtonText: "Anterior",
 
-    paginationSearchText: "Ir para página",
-    paginationSearchButtonText: "IR",
+	paginationSearchText: "Ir para página",
+	paginationSearchButtonText: "IR",
 
-    // search filter
-    searchText: "pesquisar:",
-    emptyTableText: "Nenhum dado correspondente à pesquisa foi encontrado",
+	// search filter
+	searchText: "pesquisar:",
+	emptyTableText: "Nenhum dado correspondente à pesquisa foi encontrado",
 
-    // export
-    downloadText: "exportar como:",
-    downloadButtonText: "BAIXAR"
-}
+	// export data
+	downloadText: "exportar como:",
+	downloadButtonText: "BAIXAR"
+};
