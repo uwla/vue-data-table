@@ -6,6 +6,7 @@ export default {
 		tableWrapperClass: String,
 		columns: Array,
 		actionMode: String,
+		actionColumn: Object,
 		actionColumns: Array,
 		dataDisplayed: Array,
 		emptyTableText: String,
@@ -13,5 +14,11 @@ export default {
 		numberOfColumns: Number,
 		sortingIconComponent: Object,
 		sortingIndexComponent: Object,
+	},
+
+	methods: {
+		actionTriggered(action, data) {
+			this.$emit('actionTriggered', action, data)
+		}
 	},
 };

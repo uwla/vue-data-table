@@ -15,7 +15,7 @@
             <data-table-table
 				v-bind="bindingsTable"
 				@sortColumn="sortColumn"
-				@actionTriggered="triggerAction"/>
+				@actionTriggered="actionTriggered"/>
         </div>
 
         <div class="table-footer">

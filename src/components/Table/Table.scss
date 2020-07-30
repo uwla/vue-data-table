@@ -8,7 +8,7 @@
 	}
 }
 
-.column {
+.column, .action-column {
 	white-space: nowrap;
 	background-color: white;
 	position: sticky;
@@ -27,6 +27,10 @@
 			color: #3490dc;
 		}
 	}
+}
+
+.action-column {
+	text-align: center;
 }
 
 .column-content {

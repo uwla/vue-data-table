@@ -4,8 +4,9 @@
     padding-left: .3em;
 
     .icon {
-        width: 0.75rem;
-        display: block;
+        width: 0.75em;
+		display: block;
+		height: 1em;
 
         &.asc::after {
             content: "\2193";
@@ -17,11 +18,11 @@
 
         &.asc::after,
         &.desc::after {
-            font-size: 130%;
+            font-size: 120%;
             line-height: 1;
             display: block;
             color: black;
-            opacity: 0.5;
+			opacity: 0.5;
         }
 
         [data-sorting="asc"] &.asc::after {

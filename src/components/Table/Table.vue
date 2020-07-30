@@ -11,10 +11,7 @@
                     >
 
                         <div class="column-content">
-                            <span
-                                class="column-title"
-                                v-html="column.title">
-                            </span>
+                            <span v-html="column.title"></span>
 
                             <component
                                 :index="column.sortingIndex"
@@ -26,8 +23,12 @@
                         </div>
                     </th>
 
-                    <th v-for="action in actionColumns" :key="action.name" class="column">
-                        <span class="column-title" v-html="action.title"></span>
+                    <th v-for="action in actionColumns" :key="action.name" class="action-column">
+                        <span v-html="action.title"></span>
+                    </th>
+
+                    <th v-if="actionMode === 'single'" class="action-column">
+                        <span v-html="actionColumn.title"></span>
                     </th>
                 </tr>
             </thead>
@@ -47,17 +48,17 @@
                     <td class="action-cell" v-for="action in actionColumns" :key="action.name" >
                         <component
                             :is="action.component"
-                            v-bind="{ data, action }"
-                            @actionTriggered="$emit('actionTriggered', ...payload)"/>
+                            v-bind="{ data }"
+                            @actionTriggered="actionTriggered"/>
                     </td>
 
                     <!-- display a single cell with all action components (if actionMode is single)-->
                     <td class="action-cell" v-if="(actionMode === 'single')">
                         <component
-                            :is="action.component"
-                            v-bind="{ data, action }"
-                            v-for="action in actionColumns" :key="action.name"
-                            @actionTriggered="$emit('actionTriggered', ...payload)"/>
+                            :is="component"
+                            v-bind="{ data }"
+                            v-for="(component, i) in actionColumn.components" :key="i"
+                            @actionTriggered="actionTriggered"/>
                     </td>
                 </tr>
             </tbody>
