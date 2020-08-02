@@ -34,8 +34,10 @@ VueDataTable is a VueJS plug-in that adds advanced features to an HTML table. It
 
 The best way to see if a package suits your needs is by viewing and editing a demo project. Here are some code playgrounds in which you can test VueDataTable.
 
-- [Demo01](https://codesandbox.io/s/vue-data-table-demo01-ygnl5?fontsize=14&hidenavigation=1&theme=dark)
-- [Demo02](https://codesandbox.io/s/vue-data-table-demo02-r94qe?fontsize=14&hidenavigation=1&theme=dark)
+- [Demo 1 (preview)](https://ygnl5.csb.app/)
+- [Demo 1 (preview and code)](https://codesandbox.io/s/vue-data-table-demo01-ygnl5)
+- [Demo 2 (preview)](https://r94qe.csb.app/)
+- [Demo 2 (preview and code)](https://codesandbox.io/s/vue-data-table-demo02-r94qe)
 
 ## Get started
 
@@ -49,16 +51,14 @@ npm install --save @andresouzaabreu/vue-data-table
 
 ```javascript
 import DataTable from '@andresouzaabreu/vue-data-table'
-
 Vue.component("data-table", DataTable)
-
 ```
 
 Don't forget to add the stylesheets
 
 ```javascript
-import '@andresouzaabreu/vue-data-table/dist/DataTable.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import '@andresouzaabreu/vue-data-table/dist/DataTable.css'
 ```
 
 ### Use
@@ -97,11 +97,11 @@ export default {
 | lang | `String` | `en` | The default language |
 | perPageSizes | `Array` | [10, 25, 50, 100] | The options for the number of rows being displayed per page |
 | defaultPerPage | `Number` | 10 | The default entry length in the `EntriesLength` component. If not specified and if `entriesLength` is specified, then `defaultEntryLength` will be the first value of the `entriesLength` |
-| showPerPage | `Bool` | `true` | Wheter to show the `EntriesLength` component |
-| showEntriesInfo | `Bool` | `true` | Wheter to show the EntriesInfo component |
-| showSearchFilter | `Bool` | `true` | Wheter to show the SearchFilter component |
-| showPagination | `Bool` | `true` | Wheter to show the Pagination component |
-| showExportButton | `Bool` | `true` | Wheter to show the Export Button component |
+| showPerPage | `Bool` | `true` | Whether to show the `EntriesLength` component |
+| showEntriesInfo | `Bool` | `true` | Whether to show the EntriesInfo component |
+| showSearchFilter | `Bool` | `true` | Whether to show the SearchFilter component |
+| showPagination | `Bool` | `true` | Whether to show the Pagination component |
+| showDownloadButton | `Bool` | `true` | Whether to show the button to download the table's data |
 | tableClass | `String` | `table table-striped table-hover` | The css classes of the table |
 | tableWrapper | `String` | `data-table-wrapper` | The css classes of the table's wrapper |
 | actionMode | `String` | `disabled` | How to show action columns. Possible values are `disabled`, `multiple` (one column for each action), and `single` (one column with all actions).
@@ -200,11 +200,15 @@ The following table shows the texts we can customize and their default values fo
 Example code:
 
 ```javascript
-options: {
-    text: {
-        entriesLengthText: "Number of users per page :entries",
-        infoText: "Displaying :first to :last of :total users",
-        emptyTableText: "No users found :(",
+parameters() {
+    return {
+        data: [/**/],
+        columns: [/**/],
+        text: {
+            entriesLengthText: "Number of users per page :entries",
+            infoText: "Displaying :first to :last of :total users",
+            emptyTableText: "No users found :(",
+        }
     }
 }
 ```
@@ -517,8 +521,8 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Authors
+## Author
 
-- **André Souza Abreu** - *Initial work* - [Github](https://github.com/AndreSouzaAbreu)
+- **André Souza Abreu** - [Github](https://github.com/AndreSouzaAbreu)
 
 See also the list of [contributors](https://github.com/AndreSouzaAbreu/vue-data-table/contributors) who participated in this project.
