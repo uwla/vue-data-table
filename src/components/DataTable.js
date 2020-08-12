@@ -68,16 +68,16 @@ export default {
             return this.parsedColumns.filter(column => column.sortable);
         },
 
-		actionColumn() {
-			var actionColumn = {};
-			actionColumn.title = this.actionsText["*"];
-			actionColumn.components = [];
+        actionColumn() {
+            var actionColumn = {};
+            actionColumn.title = this.actionsText["*"];
+            actionColumn.components = [];
 
-			for (let action of this.actions)
-				actionColumn.components.push(this.actionComponents[action]);
+            for (let action of this.actions)
+                actionColumn.components.push(this.actionComponents[action]);
 
-			return actionColumn;
-		},
+            return actionColumn;
+        },
 
         /**
          * Columns used to perform actions on data
@@ -86,27 +86,27 @@ export default {
         actionColumns() {
             const {
                 actionMode,
-				actions,
-				actionsText,
+                actions,
+                actionsText,
                 actionComponents,
             } = this;
 
             if (actionMode === "disabled" || actionMode === "single")
                 return [];
 
-			var actionColumns = [];
+            var actionColumns = [];
 
-			for (let action of actions) {
-				let column = {}
+            for (let action of actions) {
+                let column = {}
 
-				column.name = action;
-				column.title = actionsText[action];
-				column.component = actionComponents[action];
+                column.name = action;
+                column.title = actionsText[action];
+                column.component = actionComponents[action];
 
-				actionColumns.push(column)
-			}
+                actionColumns.push(column)
+            }
 
-			return actionColumns;
+            return actionColumns;
         },
 
         //
@@ -378,7 +378,8 @@ export default {
                     'tableWrapperClass',
                     'sortingIconComponent',
                     'sortingIndexComponent',
-                    'dataDisplayed'
+                    'dataDisplayed',
+                    'unsafeHTML',
                 )
             };
         },
@@ -450,8 +451,8 @@ export default {
             paginationSearchText: '',
             paginationSearchButtonText: '',
             search: '',
-			searchText: '',
-			actionsText: {},
+            searchText: '',
+            actionsText: {},
         };
     },
 
@@ -466,24 +467,24 @@ export default {
                 page <= this.numberOfPages &&
                 page > 0 &&
                 page !== this.currentPage;
-		},
+        },
 
         /**
          * Parse columns (assign default values while enabling customization)
          * @returns {void}
          */
-		parseColumnProps() {
-			var parsedColumns = parseColumnProps(this.$props);
-			Object.assign(this, {parsedColumns})
-		},
+        parseColumnProps() {
+            var parsedColumns = parseColumnProps(this.$props);
+            Object.assign(this, {parsedColumns})
+        },
 
         /**
          * Parse the text (choose correct translation while enabling custom text)
          * @returns {void}
          */
-		parseTextProps() {
-			Object.assign(this, parseTextProps(this.$props));
-		},
+        parseTextProps() {
+            Object.assign(this, parseTextProps(this.$props));
+        },
 
         /**
          * Toggle the sorting state of a column
@@ -501,23 +502,23 @@ export default {
                         col.sortingMode = "";
                         col.sortingIndex = -1;
                     }
-				}
+                }
 
-				if (column.sortingMode === "") {
-					column.sortingMode = "asc";
-					this.columnsBeingSorted = [column];
-					return;
-				}
+                if (column.sortingMode === "") {
+                    column.sortingMode = "asc";
+                    this.columnsBeingSorted = [column];
+                    return;
+                }
 
-				if (column.sortingMode === "asc") {
-					column.sortingMode = "desc";
-					this.columnsBeingSorted = [column];
-					return;
-				}
+                if (column.sortingMode === "asc") {
+                    column.sortingMode = "desc";
+                    this.columnsBeingSorted = [column];
+                    return;
+                }
 
-				column.sortingMode = "";
-				this.columnsBeingSorted = [];
-				return;
+                column.sortingMode = "";
+                this.columnsBeingSorted = [];
+                return;
             }
 
             if (column.sortingMode === "") {
@@ -614,7 +615,7 @@ export default {
         actions: {
             type: Array,
             default: () => ["view", "edit", "delete"],
-		},
+        },
         actionComponents: {
             type: Object,
             required: false,
@@ -715,11 +716,15 @@ export default {
             type: Object,
             required: false,
         },
+        unsafeHTML: {
+            type: Boolean,
+            default: false
+        }
     },
 
     watch: {
         columns: {
-			handler: 'parseColumnProps',
+            handler: 'parseColumnProps',
             deep: true,
             immediate: true,
         },

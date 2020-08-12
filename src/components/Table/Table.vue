@@ -11,7 +11,8 @@
                     >
 
                         <div class="column-content">
-                            <span v-html="column.title"></span>
+                            <span v-if="unsafeHTML" v-html="column.title"></span>
+                            <span v-else v-text="column.title"></span>
 
                             <component
                                 :index="column.sortingIndex"
@@ -41,7 +42,8 @@
 
                 <tr v-for="(data, i) in dataDisplayed" :key="i">
                     <td v-for="(column, j) in columns" :key="j">
-                        {{ data[column.key] }}
+						<div v-if="unsafeHTML" v-html="data[column.key]"></div>
+						<span v-else v-text="data[column.key]"></span>
                     </td>
 
                     <!-- display action components in multiple cells (if actionMode is multiple) -->
