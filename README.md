@@ -111,6 +111,7 @@ export default {
 | sortingIndexComponent | `Object` | `DataTableSortingIndex` | The Vue component to be rendered as the sort index for sortable columns |
 | sortingIconComponent | `Object` | `DataTableSortingIcon` | The Vue component to be rendered as the sort icon for sortable columns |
 | allowedExports | `Array` | `["xls", "csv", "json", "txt"]` | The options the user can export the data to. Only four export types are available. |
+| unsafeHTML | `Boolean` | `false` | Whether the content of the table cells and the column title should be displayed as HTML or as plain text. |
 
 ### Columns
 
@@ -149,7 +150,7 @@ If `columns` is not defined, then `columnKeys` must be defined and it will be ma
     columnKeys: ['name', 'email', 'registered_at']
 },
 
-// which will take the default values and map the array into this
+// which will take the default column and map the array into this
 [
     {
         key: 'name',
