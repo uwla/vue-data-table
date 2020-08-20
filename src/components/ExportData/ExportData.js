@@ -13,7 +13,7 @@ export default {
         download() {
             exportFromJSON({
                 data: this.data,
-                fileName: this.downloadFilename,
+                fileName: this.downloadFileName,
                 exportType: this.selectedExport
             })
         }
@@ -23,7 +23,7 @@ export default {
         data: Array,
         allowedExports: Array,
         downloadButtonText: String,
-        downloadFilename: String,
+        downloadFileName: String,
         downloadText: String,
     },
 

@@ -5169,7 +5169,7 @@ function exportFromJSON_exportFromJSON(_a) {
     download: function download() {
       esm({
         data: this.data,
-        fileName: this.downloadFilename,
+        fileName: this.downloadFileName,
         exportType: this.selectedExport
       });
     }
@@ -5178,7 +5178,7 @@ function exportFromJSON_exportFromJSON(_a) {
     data: Array,
     allowedExports: Array,
     downloadButtonText: String,
-    downloadFilename: String,
+    downloadFileName: String,
     downloadText: String
   },
   watch: {
@@ -6259,7 +6259,7 @@ function parser_parseTextProps(props) {
     bindingsTable: function bindingsTable() {
       return _objectSpread2({
         columns: this.parsedColumns
-      }, pickFromObject(this, 'emptyTableText', 'numberOfColumns', 'actionMode', 'actionColumns', 'actionColumn', 'isEmpty', 'tableClass', 'tableWrapperClass', 'sortingIconComponent', 'sortingIndexComponent', 'dataDisplayed', 'unsafeHTML'));
+      }, pickFromObject(this, 'emptyTableText', 'numberOfColumns', 'actionMode', 'actionColumns', 'actionColumn', 'isEmpty', 'tableClass', 'sortingIconComponent', 'sortingIndexComponent', 'dataDisplayed', 'unsafeHTML'));
     },
 
     /**
@@ -6542,10 +6542,6 @@ function parser_parseTextProps(props) {
       type: Number,
       default: 10
     },
-    downloadFilename: {
-      type: String,
-      default: "download"
-    },
     perPageSizes: {
       type: Array,
       default: function _default() {
@@ -6598,10 +6594,6 @@ function parser_parseTextProps(props) {
     tableClass: {
       type: String,
       default: "table table-striped table-hover"
-    },
-    tableWrapperClass: {
-      type: String,
-      default: "table-wrapper"
     },
     text: {
       type: Object,

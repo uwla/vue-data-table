@@ -375,7 +375,6 @@ export default {
                     'actionColumn',
                     'isEmpty',
                     'tableClass',
-                    'tableWrapperClass',
                     'sortingIconComponent',
                     'sortingIndexComponent',
                     'dataDisplayed',
@@ -668,10 +667,6 @@ export default {
             type: Number,
             default: 10,
         },
-        downloadFilename: {
-            type: String,
-            default: "download",
-        },
         perPageSizes: {
             type: Array,
             default: () => [10, 25, 50, 100],
@@ -716,10 +711,6 @@ export default {
         tableClass: {
             type: String,
             default: "table table-striped table-hover",
-        },
-        tableWrapperClass: {
-            type: String,
-            default: "table-wrapper",
         },
         text: {
             type: Object,
