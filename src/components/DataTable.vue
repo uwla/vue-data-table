@@ -4,7 +4,7 @@
             <data-table-per-page
 				v-if="showPerPage"
 				v-bind="bindingsPerPage"
-				@setPerPage="setPerPage" />
+				@setPerPage="setPerPageFromUserInput" />
             <data-table-search-filter
 				v-if="showSearchFilter"
 				v-bind="bindingsSearchFilter"

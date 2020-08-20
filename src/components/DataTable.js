@@ -561,18 +561,16 @@ export default {
 
         /**
          * Set the current rows per page
+         *
          * @param {Number}
          * @returns {void}
          */
-        setPerPage() {
+        setPerPage(value) {
             // before updating the value of currentPerPage,
             // we need to store the current firstEntry.
-            // We will use it later to change the current
-            // page.
+            // We will use it to change the current page.
             const previousFirstEntry = this.firstEntry;
 
-
-            const value = Number(getEventTargetValue());
             var newPerPage = this.currentPerPage;
 
             if (! this.perPageSizes.includes(newPerPage))
@@ -588,6 +586,17 @@ export default {
             // rows that were being displayed
             const newCurrentPage = floor(previousFirstEntry / newPerPage) + 1;
             this.setPage(newCurrentPage);
+        },
+
+        /**
+         * Set the current rows per page from the user input
+         *
+         * @param {Number}
+         * @returns {void}
+         */
+        setPerPageFromUserInput() {
+            const value = Number(getEventTargetValue());
+            this.setPerPage(value);
         },
 
         /**
