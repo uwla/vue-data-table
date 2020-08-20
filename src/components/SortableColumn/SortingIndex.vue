@@ -1,5 +1,5 @@
 <template>
-    <span class="sorting-index">
+    <span class="data-table-sorting-index">
         {{ index }}
     </span>
 </template>
@@ -16,4 +16,4 @@ export default {
 }
 </script>
 
-<style src="./SortingIndex.scss" lang="scss" scoped></style>
+<style src="./SortingIndex.scss" lang="scss"></style>

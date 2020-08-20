@@ -1,19 +1,67 @@
-.table-body {
-    margin: 0.75rem 0;
-}
+.data-table {
+	display: grid;
+	width: 100%;
+	grid-template-columns: 25% 25% 25% 25%;
 
-.table-head, .table-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    flex-wrap: wrap;
-    white-space: nowrap;
+	& > .data-table-search-filter, .data-table-pagination, .data-table-export-data {
+		margin-left: auto
+	}
 
-    & > :first-child {
-        margin-right: 30px;
-    }
+	@media (min-width: 1401px) {
+		grid-template-areas:
+			"perPage search search search"
+			"table table table table"
+			"info pagination pagination download";
+	}
 
-    & > * {
-        margin-bottom: 10px;
-    }
+	@media (min-width: 1051px) AND (max-width: 1400px) {
+		grid-template-areas:
+			"perPage search search search"
+			"table table table table"
+			"info pagination pagination pagination"
+			". . download download";
+	}
+
+	@media (min-width: 851px) AND (max-width: 1050px) {
+		grid-template-areas:
+			"perPage search search search"
+			"table table table table"
+			"pagination pagination pagination pagination"
+			"info info download download";
+	}
+
+	@media (max-width: 800px) {
+		& > .data-table-pagination {
+			flex-wrap: wrap;
+		}
+	}
+
+	@media (min-width: 651px) AND (max-width: 850px) {
+		grid-template-areas:
+			"perPage search search search"
+			"table table table table"
+			"pagination pagination pagination pagination"
+			"info info info info"
+			"download download download download";
+	}
+
+	@media (max-width: 650px) {
+		grid-template-areas:
+			"search search search search"
+			"perPage perPage perPage perPage "
+			"table table table table"
+			"pagination pagination pagination pagination"
+			"info info info info"
+			"download download download download";
+
+		& > .data-table-per-page {
+			margin-left: auto
+		}
+	}
+
+
+	&> div {
+		margin-top: 1rem;
+		max-width: 100%;
+	}
 }

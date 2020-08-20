@@ -1,5 +1,5 @@
 <template>
-    <div :class="tableWrapperClass">
+    <div class="data-table-table">
         <table :class="tableClass">
             <thead>
                 <tr>
@@ -69,4 +69,4 @@
 </template>
 
 <script src="./Table.js"></script>
-<style src="./Table.scss" scoped lang="scss"></style>
+<style src="./Table.scss" lang="scss"></style>
