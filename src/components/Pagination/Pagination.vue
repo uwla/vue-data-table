@@ -1,5 +1,5 @@
 <template>
-    <div class="pagination-container">
+    <div class="data-table-pagination">
         <div class="pagination-search">
             <span>{{ paginationSearchText }}</span>
 

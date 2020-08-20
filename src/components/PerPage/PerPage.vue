@@ -1,5 +1,5 @@
 <template>
-    <div class="per-page">
+    <div class="data-table-per-page">
         <span>
             {{ textBeforeSelector }}
         </span>
@@ -17,4 +17,4 @@
 </template>
 
 <script src="./PerPage.js"></script>
-<style src="./PerPage.scss" lang="scss" scoped></style>
+<style src="./PerPage.scss" lang="scss"></style>

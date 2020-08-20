@@ -3,7 +3,6 @@ export default {
 
 	props: {
 		tableClass: String,
-		tableWrapperClass: String,
 		columns: Array,
 		actionMode: String,
 		actionColumn: Object,

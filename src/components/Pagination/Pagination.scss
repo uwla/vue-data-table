@@ -1,8 +1,9 @@
-.pagination-container {
-    margin-left: auto;
+.data-table-pagination {
+	margin-left: auto;
+	grid-area: pagination;
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
+	flex-wrap: nowrap;
 
     & > :first-child {
         margin-right: 10px;
@@ -13,13 +14,15 @@
     }
 
     .pagination {
-        margin: 0;
+		margin: 0;
+		padding: 0;
+		overflow: auto;
     }
 
     .pagination-search {
         display: flex;
         align-items: center;
-        white-space: nowrap;
+		white-space: nowrap;
 
         * {
             margin-right: 5px;
@@ -28,13 +31,14 @@
         input {
             width: 70px;
         }
-    }
+	}
+
+	.page-item {
+		user-select: none;
+	}
+
+	.page-link {
+		cursor: pointer;
+	}
 }
 
-.page-item {
-    user-select: none;
-}
-
-.page-link {
-    cursor: pointer;
-}

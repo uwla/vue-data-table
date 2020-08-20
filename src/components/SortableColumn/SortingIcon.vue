@@ -1,7 +1,7 @@
 <template>
-    <div class="sorting-icons-wrapper">
-        <span class="icon asc">&nbsp;</span>
-        <span class="icon desc">&nbsp;</span>
+    <div class="data-table-sorting-icons">
+        <div class="icon asc"></div>
+        <div class="icon desc"></div>
     </div>
 </template>
 
@@ -10,4 +10,4 @@ export default {
     name: "DataTableSortingIcon",
 }
 </script>
-<style src="./SortingIcon.scss" lang="scss" scoped></style>
+<style src="./SortingIcon.scss" lang="scss"></style>

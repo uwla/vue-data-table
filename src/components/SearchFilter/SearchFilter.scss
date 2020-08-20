@@ -1,5 +1,7 @@
-.search-filter {
-    margin-left: auto;
+.data-table-search-filter {
+	grid-area: search;
+	display: flex;
+	align-items: center;
 
     input {
         margin: 0;

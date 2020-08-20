@@ -1,5 +1,5 @@
 <template>
-    <div class="export-data">
+    <div class="data-table-export-data">
         <span>
             {{ downloadText }}
         </span>
@@ -16,4 +16,4 @@
 </template>
 
 <script src="./ExportData.js"></script>
-<style src="./ExportData.scss" lang="scss" scoped></style>
+<style src="./ExportData.scss" lang="scss"></style>

@@ -1,6 +1,7 @@
-.per-page {
+.data-table-per-page {
     display: flex;
-    align-items: center;
+	align-items: center;
+	grid-area: perPage;
 
     select {
         margin: 0 5px;
