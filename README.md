@@ -414,6 +414,85 @@ export const DownloadButton = {
 
 **Note**: We can give any name to the event. We just have to remember to update this name in all places that we are using it.
 
+### Custom order of components
+
+VueDataTable uses CSS's grid display to specify the position of its components (search filter, pagination, entries info, per page options, download button).
+
+**We can specify the position of the components by including our custom CSS/SCSS and overriding the defaults.**
+
+By default, this is how VueDataTable displays the components:
+
+```scss
+.data-table {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 25% 25% 25% 25%;
+
+    &> div {
+        margin-top: 1rem;
+        max-width: 100%;
+    }
+
+    & > .data-table-search-filter, .data-table-pagination, .data-table-export-data {
+        margin-left: auto
+    }
+
+    @media (min-width: 1401px) {
+        grid-template-areas:
+            "perPage search search search"
+            "table table table table"
+            "info pagination pagination download";
+    }
+
+    @media (min-width: 1051px) AND (max-width: 1400px) {
+        grid-template-areas:
+            "perPage search search search"
+            "table table table table"
+            "info pagination pagination pagination"
+            ". . download download";
+    }
+
+    @media (min-width: 851px) AND (max-width: 1050px) {
+        grid-template-areas:
+            "perPage search search search"
+            "table table table table"
+            "pagination pagination pagination pagination"
+            "info info download download";
+    }
+
+    @media (max-width: 800px) {
+        & > .data-table-pagination {
+            flex-wrap: wrap;
+        }
+    }
+
+    @media (min-width: 651px) AND (max-width: 850px) {
+        grid-template-areas:
+            "perPage search search search"
+            "table table table table"
+            "pagination pagination pagination pagination"
+            "info info info info"
+            "download download download download";
+    }
+
+    @media (max-width: 650px) {
+        grid-template-areas:
+            "search search search search"
+            "perPage perPage perPage perPage "
+            "table table table table"
+            "pagination pagination pagination pagination"
+            "info info info info"
+            "download download download download";
+
+        & > .data-table-per-page {
+            margin-left: auto
+        }
+    }
+}
+```
+
+Feel free to copy the styles above, modify it, and then set the position of the components as you want.
+
 ### Sorting components
 
 #### Sorting icon
