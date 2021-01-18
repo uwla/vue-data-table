@@ -5653,6 +5653,7 @@ var es_string_replace = __webpack_require__("5319");
 
 
 
+
 /**
  * Compares two numbers
  * @param {String} a
@@ -5660,8 +5661,6 @@ var es_string_replace = __webpack_require__("5319");
  * @returns {Boolean}
  */
 function compareNumbers(a, b) {
-  if (typeof a !== "number") return true;
-  if (typeof b !== "number") return false;
   return b - a > 0;
 }
 /**
@@ -5803,14 +5802,29 @@ function arraySafeSort(array, compareFunction) {
  */
 
 function sortDataByColumn(data, column) {
-  var key = column.key,
-      sortingMode = column.sortingMode;
-  if (isNumber(data[0][key])) arraySafeSort(data, function (a, b) {
-    return compareNumbers(a[key], b[key]);
-  });else arraySafeSort(data, function (a, b) {
-    return compareStrings(a[key], b[key]);
-  });
-  if (sortingMode === "desc") data.reverse();
+  var key = column.key;
+
+  if (column.type === 'number') {
+    if (column.sortingMode === "desc") {
+      arraySafeSort(data, function (a, b) {
+        return Number(b[key]) - Number(a[key]);
+      });
+    } else {
+      arraySafeSort(data, function (a, b) {
+        return Number(a[key]) - Number(b[key]);
+      });
+    }
+  } else {
+    if (column.sortingMode === "desc") {
+      arraySafeSort(data, function (a, b) {
+        return compareStrings(b[key], a[key]);
+      });
+    } else {
+      arraySafeSort(data, function (a, b) {
+        return compareStrings(a[key], b[key]);
+      });
+    }
+  }
 }
 /**
  * Pick properties from an object, returning new object
@@ -6544,7 +6558,8 @@ function parser_parseTextProps(props) {
       default: function _default() {
         return {
           sortable: true,
-          searchable: true
+          searchable: true,
+          type: "string"
         };
       }
     },
