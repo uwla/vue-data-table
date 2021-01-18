@@ -9,24 +9,14 @@ export function parseColumnProps(props) {
 	columns.forEach((column, i) => {
 		const title = column.title || toTitleCase(column.key)
 
-		if (column.component !== undefined ) {
-			columns[i] = {
-				...column,
-				title,
-				sortable: false,
-				searchable: false,
-				sortingIndex: -1,
-			}
-		} else {
-			columns[i] = {
-				...defaultColumn,
-				...column,
-				sortingIndex: -1,
-				sortingMode: "",
-				id: i,
-				title,
-			};
-		}
+		columns[i] = {
+			...defaultColumn,
+			...column,
+			sortingIndex: -1,
+			sortingMode: "",
+			id: i,
+			title,
+		};
 	});
 
 	return columns;
