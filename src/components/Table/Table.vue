@@ -42,7 +42,8 @@
 
                 <tr v-for="(data, i) in dataDisplayed" :key="i">
                     <td v-for="(column, j) in columns" :key="j">
-						<div v-if="unsafeHTML" v-html="data[column.key]"></div>
+						<component v-if="column.component" :is="column.component" :data="data" />
+						<div v-else-if="unsafeHTML" v-html="data[column.key]"></div>
 						<span v-else v-text="data[column.key]"></span>
                     </td>
 
