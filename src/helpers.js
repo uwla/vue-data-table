@@ -5,10 +5,6 @@
  * @returns {Boolean}
  */
 export function compareNumbers(a, b) {
-	if (typeof a !== "number")
-		return true
-	if (typeof b !== "number")
-		return false
 	return (b - a) > 0
 }
 
@@ -144,15 +140,21 @@ export function arraySafeSort(array, compareFunction) {
  * @returns {void}
  */
 export function sortDataByColumn(data, column) {
-	const {key, sortingMode} = column;
-
-	if (isNumber(data[0][key]))
-		arraySafeSort(data, (a, b) => compareNumbers(a[key], b[key]))
-	else
-		arraySafeSort(data, (a, b) => compareStrings(a[key], b[key]))
-
-	if (sortingMode === "desc")
-		data.reverse();
+	const {key} = column;
+	if (column.type === 'number') {
+		if (column.sortingMode === "desc") {
+			arraySafeSort(data, (a, b) => Number(b[key]) - Number(a[key]))
+		} else {
+			arraySafeSort(data, (a, b) => Number(a[key]) - Number(b[key]))
+		}
+	}
+	else {
+		if (column.sortingMode === "desc") {
+			arraySafeSort(data, (a, b) => compareStrings(b[key], a[key]))
+		} else {
+			arraySafeSort(data, (a, b) => compareStrings(a[key], b[key]))
+		}
+	}
 }
 
 /**

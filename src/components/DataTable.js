@@ -660,7 +660,8 @@ export default {
             required: false,
             default: () => ({
                 sortable: true,
-                searchable: true,
+				searchable: true,
+				type: "string"
             })
         },
         defaultPerPage: {
