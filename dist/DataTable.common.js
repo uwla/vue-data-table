@@ -5661,7 +5661,7 @@ var es_string_replace = __webpack_require__("5319");
  * @returns {Boolean}
  */
 function compareNumbers(a, b) {
-  return b - a > 0;
+  return b - a;
 }
 /**
  * Performs a case-insensitive comparison of two strings
@@ -5671,8 +5671,6 @@ function compareNumbers(a, b) {
  */
 
 function compareStrings(a, b) {
-  if (typeof a !== "string" || a === "") return true;
-  if (typeof b !== "string" || b === "") return false;
   return a.toLowerCase().localeCompare(b.toLowerCase());
 }
 /**
@@ -5791,7 +5789,7 @@ function isNullable(variable) {
 
 function arraySafeSort(array, compareFunction) {
   array.sort(function (a, b) {
-    return isNullable(a) || isNullable(b) ? false : compareFunction(a, b);
+    return isNullable(a) || isNullable(b) ? 0 : compareFunction(a, b);
   });
 }
 /**
@@ -5803,27 +5801,31 @@ function arraySafeSort(array, compareFunction) {
 
 function sortDataByColumn(data, column) {
   var key = column.key;
+  var compareFunction;
+  /* pick up the compare function, allowing user to set a custom one */
 
-  if (column.type === 'number') {
-    if (column.sortingMode === "desc") {
-      arraySafeSort(data, function (a, b) {
-        return Number(b[key]) - Number(a[key]);
-      });
-    } else {
-      arraySafeSort(data, function (a, b) {
-        return Number(a[key]) - Number(b[key]);
-      });
-    }
+  if (column.sortingFunction) {
+    compareFunction = column.sortingFunction;
+  } else if (column.type === 'number') {
+    compareFunction = function compareFunction(a, b) {
+      return Number(a[key]) - Number(b[key]);
+    };
   } else {
-    if (column.sortingMode === "desc") {
-      arraySafeSort(data, function (a, b) {
-        return compareStrings(b[key], a[key]);
-      });
-    } else {
-      arraySafeSort(data, function (a, b) {
-        return compareStrings(a[key], b[key]);
-      });
-    }
+    compareFunction = function compareFunction(a, b) {
+      return compareStrings(a[key], b[key]);
+    };
+  }
+  /* sort */
+
+
+  if (column.sortingMode === "desc") {
+    arraySafeSort(data, function (a, b) {
+      return compareFunction(b, a);
+    });
+  } else {
+    arraySafeSort(data, function (a, b) {
+      return compareFunction(a, b);
+    });
   }
 }
 /**
@@ -5902,22 +5904,12 @@ function parser_parseColumnProps(props) {
   var defaultColumn = props.defaultColumn;
   columns.forEach(function (column, i) {
     var title = column.title || toTitleCase(column.key);
-
-    if (column.component !== undefined) {
-      columns[i] = _objectSpread2(_objectSpread2({}, column), {}, {
-        title: title,
-        sortable: false,
-        searchable: false,
-        sortingIndex: -1
-      });
-    } else {
-      columns[i] = _objectSpread2(_objectSpread2(_objectSpread2({}, defaultColumn), column), {}, {
-        sortingIndex: -1,
-        sortingMode: "",
-        id: i,
-        title: title
-      });
-    }
+    columns[i] = _objectSpread2(_objectSpread2(_objectSpread2({}, defaultColumn), column), {}, {
+      sortingIndex: -1,
+      sortingMode: "",
+      id: i,
+      title: title
+    });
   });
   return columns;
 }
