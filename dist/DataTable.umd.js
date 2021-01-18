@@ -4438,6 +4438,10 @@ module.exports = function (key) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "DataTable", function() { return /* reexport */ DataTable; });
+__webpack_require__.d(__webpack_exports__, "languageServiceProvider", function() { return /* reexport */ languageServiceProvider; });
+
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/setPublicPath.js
 // This file is imported into lib/wc client bundles.
 
@@ -5886,17 +5890,30 @@ var es_array_map = __webpack_require__("d81d");
  * The following block of code is used to automatically register the
  * lang files. It will recursively scan the lang directory and
  * register them with their "basename".
- *
  */
 var files = __webpack_require__("1981");
 
 var translations = {};
 files.keys().forEach(function (key) {
   var translation = files(key).default;
-  var lang = key.replace("./", "").split('.')[0];
+  var lang = key.replace("./", "").split(".")[0];
   translations[lang] = translation;
 });
+/* utility for the user to change or add new translations */
+
+var languageServiceProvider = {
+  setLang: function setLang(lang, translation) {
+    translations[lang] = translation;
+  },
+  removeLang: function removeLang(lang) {
+    delete translations[lang];
+  },
+  setLangText: function setLangText(lang, key, text) {
+    translations[lang][key] = text;
+  }
+};
 /* harmony default export */ var src_lang = (translations);
+
 // CONCATENATED MODULE: ./src/parser.js
 
 
@@ -6674,6 +6691,10 @@ var DataTable_component = normalizeComponent(
 )
 
 /* harmony default export */ var DataTable = (DataTable_component.exports);
+// CONCATENATED MODULE: ./src/main.js
+
+
+
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib.js
 
 
@@ -6821,6 +6842,6 @@ module.exports = NATIVE_SYMBOL
 
 /***/ })
 
-/******/ })["default"];
+/******/ });
 });
 //# sourceMappingURL=DataTable.umd.js.map
