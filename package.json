@@ -9,8 +9,7 @@
     "license": "MIT",
     "scripts": {
         "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build",
-        "build:npm": "vue-cli-service build --target lib --name DataTable src/components/DataTable.vue"
+        "build": "vue-cli-service build --target lib --name DataTable src/components/DataTable.vue"
     },
     "main": "dist/DataTable.umd.js",
     "unpkg": "dist/DataTable.umd.min.js",
