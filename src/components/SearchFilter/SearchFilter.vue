@@ -1,9 +1,8 @@
 <template>
-    <div class="data-table-search-filter">
-        <span>{{ searchText }}</span>
-        <input  type="text" :value="search" @input="$emit('setSearch')">
-    </div>
+	<div class="data-table-search-filter">
+		<span>{{ searchText }}</span>
+		<input type="text" :value="search" @input="$emit('set-search')" />
+	</div>
 </template>
-
 <script src="./SearchFilter.js"></script>
 <style src="./SearchFilter.scss" lang="scss"></style>
