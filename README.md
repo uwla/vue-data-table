@@ -50,15 +50,15 @@ npm install --save @andresouzaabreu/vue-data-table
 ### Set up
 
 ```javascript
-import DataTable from '@andresouzaabreu/vue-data-table'
-Vue.component("data-table", DataTable)
+import DataTable from "@andresouzaabreu/vue-data-table";
+Vue.component("data-table", DataTable);
 ```
 
-Don't forget to add the stylesheets
+Don"t forget to add the stylesheets
 
 ```javascript
-import 'bootstrap/dist/css/bootstrap.min.css'
-import '@andresouzaabreu/vue-data-table/dist/DataTable.css'
+import "bootstrap/dist/css/bootstrap.min.css";
+import "@andresouzaabreu/vue-data-table/dist/DataTable.css";
 ```
 
 ### Use
@@ -119,27 +119,45 @@ export default {
 | --- | --- | --- | --- |
 | key | `String` | - | The key of the objects in the `data` prop. The value of the matching key will be displayed in a table cell |
 | title | `String` | `titleCase(key)` | The title to be displayed in the `th` element. If not specified, it will capitalize the `key` and then remove its dashes and underscores |
-| sortable | `Bool` | `true` | Whether to allow sorting the column. It will use the `key` to sort the objects in the `data` |
 | searchable | `Bool` | `true` | Whether to allow filtering the objects in `data` by matching the `search` text in the object's `key` |
+| sortable | `Bool` | `true` | Whether to allow sorting the column. It will use the `key` to sort the objects in the `data` |
+| type | `String` | `string` | Where to sort the column as a string or as a number. Allowed values are `string` and `number`. |
+| sortingFunction | `Function` | - | Custom function provided by the user to sort the column. |
+| index | `Number` | 0 | A higher index puts the column to the right of the table. A lower index puts the column to the left of the table.  |
+| component | `Object|String` | - | Custom Vue Component provided by the user. This component should have a prop called `data`, which contains the data of current row.  |
 
 If `columns` is not defined, then `columnKeys` must be defined and it will be mapped to a `columns` array with the default parameters. Example:
 
 ```javascript
 // we can define the columns
 {
-    data: [/**/],
+    data: users,
     columns: [
         {
-            key: 'name',
+            key: "name",
         },
         {
-            key: 'email',
-            title: 'Email Address',
+            key: "email",
+            title: "Email Address",
             sortable: false,
         },
         {
-            key: 'phone',
+            key: "phone",
+            sortable: false,
             searchable: false,
+            /* this will make this column appear to the right of the table
+            since its index is greater than others*/
+            index: 100,
+        },
+        {
+            key: "permissions",
+            /* custom function sort users by which user has more permissions */
+            sortingFunction: function(a, b) {
+                // permissions is an array
+                return a.permissions.length - b.permissions.length;
+            },
+            /* custom component to display the permissions */
+            component: UserPermissionList,
         }
     ]
 }
@@ -147,26 +165,26 @@ If `columns` is not defined, then `columnKeys` must be defined and it will be ma
 // or use columnKeys shortcut
 {
     data: [/**/],
-    columnKeys: ['name', 'email', 'registered_at']
+    columnKeys: ["name", "email", "registered_at"]
 },
 
 // which will take the default column and map the array into this
 [
     {
-        key: 'name',
-        title: 'Name',
+        key: "name",
+        title: "Name",
         sortable: true,
         searchable: true,
     },
     {
-        key: 'email',
-        title: 'Email',
+        key: "email",
+        title: "Email",
         sortable: true,
         searchable: true
     },
     {
-        key: 'registered_at',
-        title: 'Registered at',
+        key: "registered_at",
+        title: "Registered at",
         sortable: true,
         searchable: true
     }
@@ -214,6 +232,41 @@ parameters() {
 }
 ```
 
+#### Adding global custom language
+
+If your lang is not yet supported, you can add a new language and use it in any VueDataTable instance as follow:
+
+```javascript
+import { languageServiceProvider } from "@andresouzaabreu/vue-data-table";
+const loremIpsumLanguage = {
+    perPageText: "lorem ppsum",
+    nextButtonText: "labore nostrud",
+    /* more ... */
+};
+languageServiceProvider.setLang("lorem", loremIpsumLanguage)
+
+/**
+ * @function setLang
+ * @param {String} lang           the name of the language
+ * @param {Object} translations   an object with the translated text
+*/
+```
+
+You can also change any default text for an existing language and that will reflect the changes globally. For example:
+
+```javascript
+// the default text for the download button in the export component is "export as"
+// we may want change that to "download as"
+languageServiceProvider.setLangText("en", "downloadText", "download as:")
+
+/**
+ * @function setLangText
+ * @param lang
+ * @param {String} key     the key in the lang object
+ * @param {String} text    the text will be display to the user
+*/
+```
+
 ### Action Components
 
 We provide three components for the actions `view`, `edit`, and `delete`. They use fontawesome and bootstrap.
@@ -244,9 +297,9 @@ By default, VUeDataTable will show the following components for each action
 To change the default components, we have to pass them to the `actionButtons` prop.
 
 ```javascript
-import CustomViewComponent from './path/to/CustomViewComponent.vue'
-import CustomEditComponent from './path/to/CustomEditComponent.vue'
-import CustomDeleteComponent from './path/to/CustomDeleteComponent.vue'
+import CustomViewComponent from "./path/to/CustomViewComponent.vue";
+import CustomEditComponent from "./path/to/CustomEditComponent.vue";
+import CustomDeleteComponent from "./path/to/CustomDeleteComponent.vue";
 
 export default {
     computed: {
@@ -257,10 +310,10 @@ export default {
                     edit: CustomEditComponent,
                     delete: CustomDeleteComponent
                 },
-            }
+            };
         }
     }
-}
+};
 ```
 
 **Note**: in the example above, we omitted some lines of code to keep it clean.
@@ -272,11 +325,11 @@ For each action in the `actions` prop, there must be a vue component associated 
 In the following example, we have a `VideosDashboard` component that uses `VueDataTable`. We have added a `download` action (that download the video) and a `copy` action (which copy the video's url) as follows:
 
 ```javascript
-import DownloadButton from './path/to/DownloadButton.vue'
-import CopyTextButton from './path/to/CopyTextButton.vue'
+import DownloadButton from "./path/to/DownloadButton.vue";
+import CopyTextButton from "./path/to/CopyTextButton.vue";
 
 export default {
-    name: "VideosDashboard"
+    name: "VideosDashboard",
     computed: {
         options() {
             return {
@@ -289,10 +342,10 @@ export default {
                     "download": "Download now",
                     "copy": "Copy url",
                 }
-            }
+            };
         }
     }
-}
+};
 ```
 
 **Note**: in the example above, we omitted some code to keep it clean.
@@ -352,11 +405,10 @@ If we add custom actions, the idea is the same.
 </template>
 
 <script>
-import DownloadButton from './path/to/DownloadButton.vue'
+import DownloadButton from "./path/to/DownloadButton.vue";
 
 export default {
     name: "VideosDashboard",
-
     methods: {
         handleAction(actionName, data) {
             switch(actionName) {
@@ -364,13 +416,12 @@ export default {
                     this.downloadVideo(data);
                     break;
                 /* other stuff */
-            }
+            };
         },
         downloadVideo(video) {
             // do stuff
         },
     },
-
     computed: {
         bindings() {
             return {
@@ -380,7 +431,7 @@ export default {
                 actionComponents: {
                     "download": DownloadButton
                 }
-            }
+            };
         }
     }
 }
@@ -530,7 +581,7 @@ By default, VueDataTable will display arrows to indicate the sorting direction w
 If we want to add our custom icons for this, then we can register our component.
 
 ```javascript
-import SortingIcon from './path/to/SortIcon.vue'
+import SortingIcon from "./path/to/SortIcon.vue";
 
 export default {
     computed: {
@@ -539,7 +590,7 @@ export default {
                 SortingIconComponent: SortingIcon,
                 data: [],
                 /**/
-            }
+            };
         }
     }
 }
@@ -560,7 +611,7 @@ When sorting multiple columns, VueDataTable will display an icon with a index in
 If we want to add our own component for this, we can register it just like we did before.
 
 ```javascript
-import SortingIndex from './path/to/SortingIndex.vue'
+import SortingIndex from "./path/to/SortingIndex.vue";
 
 export default {
     computed: {
@@ -569,10 +620,10 @@ export default {
                 SortingIndexComponent: SortingIndex,
                 data: [],
                 /**/
-            }
+            };
         }
     }
-}
+};
 ```
 
 In our `SortingIndex` component, we must have a `index` property, which correspondent to the index of the column in the sorting process.
@@ -586,7 +637,7 @@ export default {
             required: true
         }
     }
-}
+};
 ```
 
 ## License
