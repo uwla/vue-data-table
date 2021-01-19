@@ -124,7 +124,7 @@ export default {
 | type | `String` | `string` | Where to sort the column as a string or as a number. Allowed values are `string` and `number`. |
 | sortingFunction | `Function` | - | Custom function provided by the user to sort the column. |
 | index | `Number` | 0 | A higher index puts the column to the right of the table. A lower index puts the column to the left of the table.  |
-| component | `Object|String` | - | Custom Vue Component provided by the user. This component should have a prop called `data`, which contains the data of current row.  |
+| component | `Object,String` | - | Custom Vue Component provided by the user. This component should have a prop called `data`, which contains the data of current row.  |
 
 If `columns` is not defined, then `columnKeys` must be defined and it will be mapped to a `columns` array with the default parameters. Example:
 
