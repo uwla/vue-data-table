@@ -2,18 +2,17 @@
 	display: grid;
 	width: 100%;
 	grid-template-columns: 25% 25% 25% 25%;
-
-	& > .data-table-search-filter, .data-table-pagination, .data-table-export-data {
+	&>.data-table-search-filter,
+	.data-table-pagination,
+	.data-table-export-data {
 		margin-left: auto
 	}
-
 	@media (min-width: 1401px) {
 		grid-template-areas:
 			"perPage search search search"
 			"table table table table"
 			"info pagination pagination download";
 	}
-
 	@media (min-width: 1051px) AND (max-width: 1400px) {
 		grid-template-areas:
 			"perPage search search search"
@@ -21,7 +20,6 @@
 			"info pagination pagination pagination"
 			". . download download";
 	}
-
 	@media (min-width: 851px) AND (max-width: 1050px) {
 		grid-template-areas:
 			"perPage search search search"
@@ -29,13 +27,11 @@
 			"pagination pagination pagination pagination"
 			"info info download download";
 	}
-
 	@media (max-width: 800px) {
-		& > .data-table-pagination {
+		&>.data-table-pagination {
 			flex-wrap: wrap;
 		}
 	}
-
 	@media (min-width: 651px) AND (max-width: 850px) {
 		grid-template-areas:
 			"perPage search search search"
@@ -44,7 +40,6 @@
 			"info info info info"
 			"download download download download";
 	}
-
 	@media (max-width: 650px) {
 		grid-template-areas:
 			"search search search search"
@@ -54,13 +49,11 @@
 			"info info info info"
 			"download download download download";
 
-		& > .data-table-per-page {
+		&>.data-table-per-page {
 			margin-left: auto
 		}
 	}
-
-
-	&> div {
+	&>div {
 		margin-top: 1rem;
 		max-width: 100%;
 	}

@@ -1,44 +1,35 @@
 .data-table-pagination {
 	margin-left: auto;
 	grid-area: pagination;
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 	flex-wrap: nowrap;
-
-    & > :first-child {
-        margin-right: 10px;
-    }
-
-    & > * {
-        margin-bottom: 10px  !important;
-    }
-
-    .pagination {
+	&> :first-child {
+		margin-right: 10px;
+	}
+	&>* {
+		margin-bottom: 10px !important;
+	}
+	.pagination {
 		margin: 0;
 		padding: 0;
 		overflow: auto;
-    }
-
-    .pagination-search {
-        display: flex;
-        align-items: center;
-		white-space: nowrap;
-
-        * {
-            margin-right: 5px;
-        }
-
-        input {
-            width: 70px;
-        }
 	}
-
+	.pagination-search {
+		display: flex;
+		align-items: center;
+		white-space: nowrap;
+		* {
+			margin-right: 5px;
+		}
+		input {
+			width: 70px;
+		}
+	}
 	.page-item {
 		user-select: none;
 	}
-
 	.page-link {
 		cursor: pointer;
 	}
 }
-
