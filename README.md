@@ -502,18 +502,16 @@ export default {
 
 ## License
 
-See the [LICENSE](LICENSE.md) file for details
+Do whatever you want with the code of this repo. Really.
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/AndreSouzaAbreu/vue-data-table/tags).
+We use [SemVer](http://semver.org/) for versioning.
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Pull requests are welcome.
 
 ## Author
 
 - **André Souza Abreu** - [Github](https://github.com/AndreSouzaAbreu)
-
-See also the list of [contributors](https://github.com/AndreSouzaAbreu/vue-data-table/contributors) who participated in this project.
