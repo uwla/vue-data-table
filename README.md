@@ -8,14 +8,14 @@ was written from scratch using Vue.
 
 1. [Features](#features)
 2. [Demo](#demo)
-3. [Getting started](#get-started)
+3. [Getting started](#getting-started)
     - [Installation](#installation)
     - [Set Up](#set-up)
     - [Use](#use)
-4. [Customize configuration](#get-started)
+4. [Configuration](#configuration)
     - [Columns](#columns)
     - [Lang](#lang)
-    - [Components](#components)
+    - [Custom components](#custom-components)
 5. [License](#license)
 6. [Versioning](#versioning)
 7. [Contributing](#contributing)
@@ -41,7 +41,7 @@ VueDataTable.
 - [Demo 2 (preview)](https://r94qe.csb.app/)
 - [Demo 2 (preview and code)](https://codesandbox.io/s/vue-data-table-demo02-r94qe)
 
-## Get started
+## Getting started
 
 ### Installation
 
@@ -90,7 +90,7 @@ export default {
 this case, the `bindings`), and pass them as props to the VueDataTable. So,
 this is a shortcut to pass multiple props at once.
 
-## Customize configuration
+## Configuration
 
 Only `data` e `columns` are required. Other props are optional.
 
@@ -500,6 +500,7 @@ And we pass this component as follow:
 <template>
 	<data-table v-bind="tableProps"/>
 </template>
+<script>
 import TableFooter from './TableFooter.vue'
 
 export default {
@@ -514,6 +515,7 @@ export default {
 		}
 	}
 }
+</script>
 ```
 
 Alternately, you can register the component and pass a string:
