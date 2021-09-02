@@ -1,6 +1,8 @@
 # VUE DATA TABLE
 
-VueDataTable is a VueJS plug-in that adds advanced features to an HTML table. It was inspired by [DataTable jQuery Plugin](https://datatables.net/), but it was written from scratch using Vue.
+VueDataTable is a Vue plugin that adds advanced features to an HTML table.
+It was inspired by [DataTable jQuery Plugin](https://datatables.net/), but it
+was written from scratch using Vue.
 
 ## Table of contents
 
@@ -13,12 +15,11 @@ VueDataTable is a VueJS plug-in that adds advanced features to an HTML table. It
 4. [Customize configuration](#get-started)
     - [Columns](#columns)
     - [Lang](#lang)
-    - [Sorting Components](#sorting-components)
+    - [Components](#components)
 5. [License](#license)
 6. [Versioning](#versioning)
 7. [Contributing](#contributing)
 8. [Authors](#authors)
-9. [Built-with](#built-with)
 
 ## Features
 
@@ -31,7 +32,9 @@ VueDataTable is a VueJS plug-in that adds advanced features to an HTML table. It
 
 ## Demo
 
-The best way to see if a package suits your needs is by viewing and editing a demo project. Here are some code playgrounds in which you can test VueDataTable.
+The best way to see if a package suits your needs is by viewing and editing a
+demo project. Here are some code playgrounds in which you can test
+VueDataTable.
 
 - [Demo 1 (preview)](https://ygnl5.csb.app/)
 - [Demo 1 (preview and code)](https://codesandbox.io/s/vue-data-table-demo01-ygnl5)
@@ -53,7 +56,7 @@ import DataTable from "@andresouzaabreu/vue-data-table";
 Vue.component("data-table", DataTable);
 ```
 
-Don"t forget to add the stylesheets
+Don"t forget to add the style sheets
 
 ```javascript
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -83,45 +86,49 @@ export default {
 </script>
 ```
 
-**Note** Notice that v-bind will take all key-value pairs in the object (in this case, the `bindings`), and pass them as props to the VueDataTable. So, this is a shortcut to pass multiple props at once.
+**Note** Notice that v-bind will take all key-value pairs in the object (in
+this case, the `bindings`), and pass them as props to the VueDataTable. So,
+this is a shortcut to pass multiple props at once.
 
 ## Customize configuration
 
 Only `data` e `columns` are required. Other props are optional.
 
-| prop | type | default | description |
-| --- | --- | --- | --- |
-| data | `Array` | - | An array of objects with the data to be displayed in the table |
-| columns | `Array` | - | An array of objects that specifies how to render each column. Not required if `columnKeys` is presented. |
-| columnKeys | `Array` | - | An array of strings corresponding to the keys of each object in `data`. This will be discarded if `columns` is present. |
-| lang | `String` | `en` | The default language |
-| perPageSizes | `Array` | [10, 25, 50, 100] | The options for the number of rows being displayed per page |
-| defaultPerPage | `Number` | 10 | The default entry length in the `PerPage` component. If not specified and if `perPageSizes` is specified, then `defaultPerPage` will be the first value of the `perPageSizes` |
-| showPerPage | `Bool` | `true` | Whether to show the `PerPage` component |
-| showEntriesInfo | `Bool` | `true` | Whether to show the EntriesInfo component |
-| showSearchFilter | `Bool` | `true` | Whether to show the SearchFilter component |
-| showPagination | `Bool` | `true` | Whether to show the Pagination component |
-| showDownloadButton | `Bool` | `true` | Whether to show the button to download the table's data |
-| tableClass | `String` | `table table-striped table-hover` | The css classes of the table |
-| sortingMode | `String` | `multiple` | `multiple` enables multiple-column sorting. `single` enables single-column sorting. |
-| sortingIndexComponent | `Object` | `DataTableSortingIndex` | The Vue component to be rendered as the sort index for sortable columns |
-| sortingIconComponent | `Object` | `DataTableSortingIcon` | The Vue component to be rendered as the sort icon for sortable columns |
-| allowedExports | `Array` | `["xls", "csv", "json", "txt"]` | The options the user can export the data to. Only four export types are available. |
+| prop                  | type               | default                           | description                                                                                                    |
+| ---                   | ---                | ---                               | ---                                                                                                            |
+| data                  | `Array`            | -                                 | An array of objects with the data to be displayed in the table                                                 |
+| columns               | `Array`            | -                                 | An array of objects that specifies how to render each column. Not required if `columnKeys` is presented.       |
+| columnKeys            | `Array`            | -                                 | An array of strings corresponding to the keys of each object in `data`. This is discarded if `columns` is set. |
+| lang                  | `String`           | `en`                              | The default language                                                                                           |
+| perPageSizes          | `Array`            | [10, 25, 50, 100]                 | The options for the number of rows being displayed per page                                                    |
+| defaultPerPage        | `Number`           | 10                                | The default number of entries. If unset, then it will be the first value of `perPageSizes`                     |
+| showPerPage           | `Bool`             | `true`                            | Whether to show the `PerPage` component                                                                        |
+| showEntriesInfo       | `Bool`             | `true`                            | Whether to show the EntriesInfo component                                                                      |
+| showSearchFilter      | `Bool`             | `true`                            | Whether to show the SearchFilter component                                                                     |
+| showPagination        | `Bool`             | `true`                            | Whether to show the Pagination component                                                                       |
+| showDownloadButton    | `Bool`             | `true`                            | Whether to show the button to download the table's data                                                        |
+| tableClass            | `String`           | `table table-striped table-hover` | The css classes of the table                                                                                   |
+| sortingMode           | `String`           | `multiple`                        | `multiple` enables multiple-column sorting. `single` enables single-column sorting.                            |
+| sortingIndexComponent | `Object`, `String` | `DataTableSortingIndex`           | The Vue component for the sort index for sortable columns                                                      |
+| sortingIconComponent  | `Object`, `String` | `DataTableSortingIcon`            | The Vue component for the sort icon for sortable columns                                                       |
+| footerComponent       | `Object`, `String` | `null`                            | The Vue component for a custom table footer                                                                    |
+| allowedExports        | `Array`            | `["xls", "csv", "json", "txt"]`   | The options the user can export the data to. Only four export types are available.                             |
 
 ### Columns
 
-| key | type | default | description |
-| --- | --- | --- | --- |
-| key | `String` | - | The key of the objects in the `data` prop. The value of the matching key will be displayed in a table cell |
-| title | `String` | `titleCase(key)` | The title to be displayed in the `th` element. If not specified, it will capitalize the `key` and then remove its dashes and underscores |
-| searchable | `Bool` | `true` | Whether to allow filtering the objects in `data` by matching the `search` text in the object's `key` |
-| sortable | `Bool` | `true` | Whether to allow sorting the column. It will use the `key` to sort the objects in the `data` |
-| type | `String` | `string` | Where to sort the column as a string or as a number. Allowed values are `string` and `number`. |
-| sortingFunction | `Function` | - | Custom function provided by the user to sort the column. |
-| index | `Number` | 0 | A higher index puts the column to the right of the table. A lower index puts the column to the left of the table.  |
-| component | `Object,String` | - | Custom Vue Component provided by the user. This component should have a prop called `data`, which contains the data of current row.  |
+| key             | type            | default          | description                                                                                                                              |
+| ---             | ---             | ---              | ---                                                                                                                                      |
+| key             | `String`        | -                | The key of the objects in the `data` prop. The value of the matching key will be displayed in a table cell                               |
+| title           | `String`        | `titleCase(key)` | The title to be displayed in the `th` element. If not specified, it will capitalize the `key` and then remove its dashes and underscores |
+| searchable      | `Bool`          | `true`           | Whether to allow filtering the objects in `data` by matching the `search` text in the object's `key`                                     |
+| sortable        | `Bool`          | `true`           | Whether to allow sorting the column. It will use the `key` to sort the objects in the `data`                                             |
+| type            | `String`        | `string`         | Where to sort the column as a string or as a number. Allowed values are `string` and `number`.                                           |
+| sortingFunction | `Function`      | -                | Custom function provided by the user to sort the column.                                                                                 |
+| index           | `Number`        | 0                | A higher index puts the column to the right of the table. A lower index puts the column to the left of the table.                        |
+| component       | `Object,String` | -                | Custom Vue Component provided by the user. This component should have a prop called `data`, which contains the data of current row.      |
 
-If `columns` is not defined, then `columnKeys` must be defined and it will be mapped to a `columns` array with the default parameters. Example:
+If `columns` is not defined, then `columnKeys` must be defined and it will be
+mapped to a `columns` array with the default parameters. Example:
 
 ```javascript
 // we can define the columns
@@ -198,7 +205,8 @@ config = {
 
 #### Custom component
 
-In the example above, we used a custom component called UserPermissionList. Below is a sample of that custom component.
+In the example above, we used a custom component called UserPermissionList.
+Below is a sample of that custom component.
 
 ```html
 <template>
@@ -265,27 +273,32 @@ export default {
 
 ### Text
 
-Currently, VueDataTable has support for three languages: English (en), Brazilian Portuguese (pt-br), and Spanish(es). The `lang` prop specifies in which language to display the text in our table.
+Currently, VueDataTable has support for three languages: English (en),
+Brazilian Portuguese (pt-br), and Spanish(es). The `lang` prop specifies in
+which language to display the text in our table.
 
-If we want to add a custom text (maybe because there is no language support or because we want something else), we have to set it in the `text` prop.
+If we want to add a custom text (maybe because there is no language support or
+because we want something else), we have to set it in the `text` prop.
 
-The following table shows the texts we can customize and their default values for the English language.
+The following table shows the texts we can customize and their default values
+for the English language.
 
-| key | default |
-| --- | --- |
-| perPageText | "Show :entries entries" |
-| infoText | "Showing :first to :last of :total entries" |
-| infoTextFiltered | "Showing :first to :last of :filtered (filtered from :total entries)" |
-| nextButtonText | "Next" |
-| previousButtonText | "Previous" |
-| paginationSearchText | "Go to page" |
-| paginationSearchButtonText | "GO" |
-| searchText | "search:" |
-| downloadText | "export as:" |
-| downloadButtonText | "DOWNLOAD" |
-| emptyTableText | "No matching records found" |
+| key                        | default                                                               |
+| ---                        | ---                                                                   |
+| perPageText                | "Show :entries entries"                                               |
+| infoText                   | "Showing :first to :last of :total entries"                           |
+| infoTextFiltered           | "Showing :first to :last of :filtered (filtered from :total entries)" |
+| nextButtonText             | "Next"                                                                |
+| previousButtonText         | "Previous"                                                            |
+| paginationSearchText       | "Go to page"                                                          |
+| paginationSearchButtonText | "GO"                                                                  |
+| searchText                 | "search:"                                                             |
+| downloadText               | "export as:"                                                          |
+| downloadButtonText         | "DOWNLOAD"                                                            |
+| emptyTableText             | "No matching records found"                                           |
 
-**Note**: Notice that the placeholders `:first`, `:last`, `:total`, and `filtered` will be automatically replaced with the proper numbers.
+**Note**: Notice that the placeholders `:first`, `:last`, `:total`, and
+`filtered` will be automatically replaced with the proper numbers.
 
 Example code:
 
@@ -305,7 +318,8 @@ parameters() {
 
 #### Adding global custom language
 
-If your lang is not yet supported, you can add a new language and use it in any VueDataTable instance as follow:
+If your lang is not yet supported, you can add a new language and use it in any
+VueDataTable instance as follow:
 
 ```javascript
 import { languageServiceProvider } from "@andresouzaabreu/vue-data-table";
@@ -323,7 +337,8 @@ languageServiceProvider.setLang("lorem", loremIpsumLanguage)
 */
 ```
 
-You can also change any default text for an existing language and that will reflect the changes globally. For example:
+You can also change any default text for an existing language and that will
+reflect the changes globally. For example:
 
 ```javascript
 // the default text for the download button in the export component is "export as"
@@ -340,9 +355,11 @@ languageServiceProvider.setLangText("en", "downloadText", "download as:")
 
 ### Custom order of components
 
-VueDataTable uses CSS's grid display to specify the position of its components (search filter, pagination, entries info, per page options, download button).
+VueDataTable uses CSS's grid display to specify the position of its components
+(search filter, pagination, entries info, per page options, download button).
 
-**We can specify the position of the components by including our custom CSS/SCSS and overriding the defaults.**
+**We can specify the position of the components by including our custom
+CSS/SCSS and overriding the defaults.**
 
 By default, this is how VueDataTable displays the components:
 
@@ -406,13 +423,117 @@ By default, this is how VueDataTable displays the components:
 }
 ```
 
-Feel free to copy the styles above, modify it, and then set the position of the components as you want.
+Feel free to copy the styles above, modify it, and then set the position of the
+components as you want.
 
-### Sorting components
+### Custom Components
+
+Besides a custom component for each column, you provide custom components
+for the table's footer, the column's `sorting icon` (the icon displayed if
+the columns is sorted), and the column's `sorting index` (the index of the
+current column if it is being sorted and multi column sorting is enabled).
+
+#### Footer
+
+The property `footerComponent` sets the component to render the table's footer.
+The component can be either the component `Object`, or a `String` equals to the
+name of the registered component.
+
+The `footerComponent` must be a `<tfoot>` HTML element and it must have the
+properties `data`, `dataDisplayed`, `dataFiltered`. If the component does not
+specify those properties in `props`, Vue will probably think they are some
+custom HTML attribute and their values will be show as HTML attributes, which
+is really messy.
+
+The property `data` correspond to all data passed to VueDataTable. The
+`dataDisplayed` corresponds to all data that is currently visible on the table.
+The `dataFiltered` corresponds to all data that was filtered by a search query.
+These properties can be used to perform common operations such as calculating
+the sum of the values of the total rows of a certain column.
+
+#### Example
+
+Suppose we have a table that of fruits. The `data` is an array of objects
+whose properties are `name`, `price`, and `amount`. We can provide a custom
+footer to show the total amount of fruits bought and the total price.
+
+The footer component would be something like:
+
+```html
+<template>
+  <tfoot v-show="dataDisplayed.length > 0">
+    <td>Total</td>
+    <td></td> 
+    <td>{{ totalAmount }}</td> 
+    <td>{{ totalPrice }}</td>
+  </tfoot>  
+</template>
+<script>
+export default {
+  name: "TableFooter",
+  computed: {
+    totalPrice() {
+      let s = 0;
+      for (let f of this.dataDisplayed)
+        s += f.price * f.amount;
+      return s;
+    }, 
+    totalAmount() {
+      let s = 0;
+      for (let f of this.dataDisplayed)
+        s += f.amount;
+      return s;
+    }
+  },
+  props: {
+    data: Array,
+    dataDisplayed: Array,
+    dataFiltered: Array,
+  }
+}
+</script>
+```
+
+And we pass this component as follow:
+
+```html
+<template>
+	<data-table v-bind="tableProps"/>
+</template>
+import TableFooter from './TableFooter.vue'
+
+export default {
+	/* ... some code */
+	data() {
+		return {
+			tableProps: {
+				columns: [ /* ... code */ ],
+				data: [ /* ... more code */ ],
+				footerComponent: TableFooter,
+			}
+		}
+	}
+}
+```
+
+Alternately, you can register the component and pass a string:
+
+```javascript
+/* earlier on */
+import TableFooter from './TableFooter.vue'
+Vue.component("table-footer", TableFooter)
+
+/* later on */
+	footerComponent: "table-flooter"
+```
 
 #### Sorting icon
 
-By default, VueDataTable will display arrows to indicate the sorting direction when sorting a column. The `SortingIcon` component is wrapped in a `th` element. The `th` element has a `data-sorting` attribute that may be `asc` or `desc` only. Based on this value, we display an `arrow_up` or an `arrow_down` icon using `CSS` rules.
+By default, VueDataTable will display arrows to indicate the sorting direction
+when sorting a column. The `SortingIcon` component is wrapped in a `th`
+element. The `th` element has a `data-sorting` attribute that may be `asc` or
+`desc` only. Based on this value, we display an `arrow_up` or an `arrow_down`
+icon using `CSS` rules.
 
 ```html
 <template>
@@ -438,7 +559,8 @@ By default, VueDataTable will display arrows to indicate the sorting direction w
 
 **Note**: Some code was omitted to keep it clean.
 
-If we want to add our custom icons for this, then we can register our component.
+If we want to add our custom icons for this, then we can register our
+component.
 
 ```javascript
 import SortingIcon from "./path/to/SortIcon.vue";
@@ -458,7 +580,8 @@ export default {
 
 #### Sorting Index Icon
 
-When sorting multiple columns, VueDataTable will display an icon with a index indicating which column has the priority in the sorting process.
+When sorting multiple columns, VueDataTable will display an icon with a index
+indicating which column has the priority in the sorting process.
 
 ```html
 <template>
@@ -468,7 +591,8 @@ When sorting multiple columns, VueDataTable will display an icon with a index in
 </template>
 ```
 
-If we want to add our own component for this, we can register it just like we did before.
+If we want to add our own component for this, we can register it just like we
+did before.
 
 ```javascript
 import SortingIndex from "./path/to/SortingIndex.vue";
@@ -486,7 +610,8 @@ export default {
 };
 ```
 
-In our `SortingIndex` component, we must have a `index` property, which correspondent to the index of the column in the sorting process.
+In our `SortingIndex` component, we must have a `index` property, which
+correspondent to the index of the column in the sorting process.
 
 ```javascript
 export default {
@@ -502,11 +627,11 @@ export default {
 
 ## License
 
-Do whatever you want with the code of this repo. Really.
+Do whatever you want with the code of this repository. Really.
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning.
+This project uses [SemVer](http://semver.org/).
 
 ## Contributing
 
