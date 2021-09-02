@@ -330,8 +330,11 @@ export default {
 		propsTable() {
 			return {
 				columns: this.parsedColumns,
+				data: this.data,
 				dataDisplayed: this.dataDisplayed,
+				dataFiltered: this.dataFiltered,
 				emptyTableText: this.emptyTableText,
+				footerComponent: this.footerComponent,
 				isEmpty: this.isEmpty,
 				numberOfColumns: this.numberOfColumns,
 				sortingIconComponent: this.sortingIconComponent,
@@ -600,6 +603,10 @@ export default {
 		defaultPerPage: {
 			type: Number,
 			default: 10
+		},
+		footerComponent: {
+			type: [Object, String],
+			default: null
 		},
 		perPageSizes: {
 			type: Array,

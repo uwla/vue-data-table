@@ -42,6 +42,11 @@
 					</td>
 				</tr>
 			</tbody>
+			<component
+				v-if="footerComponent !== null"
+				:is="footerComponent"
+				v-bind="{ data, dataDisplayed, dataFiltered }"
+			/>
 		</table>
 	</div>
 </template>
