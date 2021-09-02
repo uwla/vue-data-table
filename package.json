@@ -1,43 +1,32 @@
 {
-    "name": "@andresouzaabreu/vue-data-table",
-    "version": "3.0.0",
-    "private": false,
-    "author": "André Souza Abreu",
-    "description": "A Vue plug-in that adds features like column ordering, data filtering, pagination to an HTML table.",
-    "repository": "https://github.com/AndreSouzaAbreu/vue-data-table",
-    "bugs": "https://github.com/AndreSouzaAbreu/vue-data-table/issues",
-    "license": "MIT",
-    "scripts": {
-        "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build --target lib --name DataTable src/main.js"
-    },
-    "main": "dist/DataTable.umd.js",
-    "unpkg": "dist/DataTable.umd.min.js",
-    "keywords": [
-        "vue",
-        "table",
-        "data"
-    ],
-    "dependencies": {
-        "core-js": "^3.6.4",
-        "export-from-json": "^1.1.4",
-        "vue": "^2.6.11"
-    },
-    "devDependencies": {
-        "@vue/cli-plugin-babel": "~4.2.0",
-        "@vue/cli-plugin-router": "~4.2.0",
-        "@vue/cli-plugin-unit-mocha": "~4.2.0",
-        "@vue/cli-service": "~4.2.0",
-        "@vue/test-utils": "1.0.0-beta.31",
-        "chai": "^4.1.2",
-        "node-sass": "^4.14.1",
-        "sass-loader": "^8.0.2",
-        "vue-template-compiler": "^2.6.11"
-    },
-    "files": [
-        "dist/*",
-        "src/*",
-        "*.json",
-        "*.js"
-    ]
+	"name": "@andresouzaabreu/vue-data-table",
+	"version": "3.0.0",
+	"private": false,
+	"author": "André Souza Abreu",
+	"description": "A Vue plug-in that adds features like column ordering, data filtering, pagination to an HTML table.",
+	"repository": "https://github.com/AndreSouzaAbreu/vue-data-table",
+	"bugs": "https://github.com/AndreSouzaAbreu/vue-data-table/issues",
+	"license": "MIT",
+	"scripts": {
+		"serve": "vue-cli-service serve",
+		"build": "vue-cli-service build --target lib --name DataTable src/main.js"
+	},
+	"main": "dist/DataTable.umd.js",
+	"unpkg": "dist/DataTable.umd.min.js",
+	"keywords": [
+		"vue",
+		"table",
+		"data"
+	],
+	"dependencies": {
+		"export-from-json": "1.4.0",
+		"vue": "2.6.14"
+	},
+	"devDependencies": {
+		"@vue/cli-plugin-babel": "4.5.13",
+		"@vue/cli-service": "4.5.13",
+		"node-sass": "6.0.1",
+		"sass-loader": "10.2.0",
+		"vue-template-compiler": "2.6.14"
+	}
 }
