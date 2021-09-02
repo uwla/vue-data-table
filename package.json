@@ -1,9 +1,9 @@
 {
 	"name": "@andresouzaabreu/vue-data-table",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"private": false,
 	"author": "André Souza Abreu",
-	"description": "A Vue plug-in that adds features like column ordering, data filtering, pagination to an HTML table.",
+	"description": "A Vue plugin that adds advanced features to an HTML table",
 	"repository": "https://github.com/AndreSouzaAbreu/vue-data-table",
 	"bugs": "https://github.com/AndreSouzaAbreu/vue-data-table/issues",
 	"license": "MIT",
