@@ -38,7 +38,7 @@
 							:is="column.component"
 							:data="data"
 						/>
-						<span>{{ data[column.key] }}</span>
+						<span v-else>{{ data[column.key] }}</span>
 					</td>
 				</tr>
 			</tbody>
