@@ -37,6 +37,7 @@
 							v-if="column.component"
 							:is="column.component"
 							:data="data"
+							:column="column"
 						/>
 						<span v-else>{{ data[column.key] }}</span>
 					</td>
