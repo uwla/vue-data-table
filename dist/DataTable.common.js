@@ -6184,7 +6184,7 @@ function parser_parseTextProps(props) {
       // item to appear
 
       var end = lastEntry;
-      var start = Math.max(0, firstEntry - 2);
+      var start = Math.max(0, firstEntry - 1);
       return dataSorted.slice(start, end);
     },
 
