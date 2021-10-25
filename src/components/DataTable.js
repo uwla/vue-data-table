@@ -64,7 +64,7 @@ export default {
 			// we need also to subtract 1 for the first
 			// item to appear
 			const end = lastEntry;
-			const start = Math.max(0, firstEntry - 2);
+			const start = Math.max(0, firstEntry - 1);
 			return dataSorted.slice(start, end);
 		},
 
