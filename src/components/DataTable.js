@@ -380,7 +380,7 @@ export default {
 		propsExportData() {
 			return {
 				allowedExports: this.allowedExports,
-				data: this.dataFiltered,
+				data: this.dataDisplayed,
 				downloadButtonText: this.downloadButtonText,
 				downloadFileName: this.downloadFileName,
 				downloadText: this.downloadText,
