@@ -398,7 +398,6 @@ export default {
 			currentPerPage: 10,
 			parsedColumns: [],
 			columnsBeingSorted: [],
-			downloadFileName: "",
 			perPageText: "",
 			downloadText: "",
 			downloadButtonText: "",
@@ -603,6 +602,10 @@ export default {
 		defaultPerPage: {
 			type: Number,
 			default: 10
+		},
+		downloadFileName: {
+			type: String,
+			default: "download",
 		},
 		footerComponent: {
 			type: [Object, String],
