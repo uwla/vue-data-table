@@ -40,6 +40,12 @@ VueDataTable.
 - [Demo 1 (preview and code)](https://codesandbox.io/s/vue-data-table-demo01-ygnl5)
 - [Demo 2 (preview)](https://r94qe.csb.app/)
 - [Demo 2 (preview and code)](https://codesandbox.io/s/vue-data-table-demo02-r94qe)
+- [Demo 3 (preview)](https://fg8ok.csb.app/)
+- [Demo 3 (preview and code)](https://codesandbox.io/s/vue-data-table-demo03-fg8ok)
+
+Both Demo 1 and Demo 2 are from older versions of this plugin, but should still work
+with newer versions because the API didn't change much. Demo 3 is from the newest
+version and has an example of a custom footer component.
 
 ## Getting started
 
