@@ -94,25 +94,27 @@ this is a shortcut to pass multiple props at once.
 
 Only `data` e `columns` are required. Other props are optional.
 
-| prop                  | type               | default                           | description                                                                                                    |
-| ---                   | ---                | ---                               | ---                                                                                                            |
-| data                  | `Array`            | -                                 | An array of objects with the data to be displayed in the table                                                 |
-| columns               | `Array`            | -                                 | An array of objects that specifies how to render each column. Not required if `columnKeys` is presented.       |
-| columnKeys            | `Array`            | -                                 | An array of strings corresponding to the keys of each object in `data`. This is discarded if `columns` is set. |
-| lang                  | `String`           | `en`                              | The default language                                                                                           |
-| perPageSizes          | `Array`            | [10, 25, 50, 100]                 | The options for the number of rows being displayed per page                                                    |
-| defaultPerPage        | `Number`           | 10                                | The default number of entries. If unset, then it will be the first value of `perPageSizes`                     |
-| showPerPage           | `Bool`             | `true`                            | Whether to show the `PerPage` component                                                                        |
-| showEntriesInfo       | `Bool`             | `true`                            | Whether to show the EntriesInfo component                                                                      |
-| showSearchFilter      | `Bool`             | `true`                            | Whether to show the SearchFilter component                                                                     |
-| showPagination        | `Bool`             | `true`                            | Whether to show the Pagination component                                                                       |
-| showDownloadButton    | `Bool`             | `true`                            | Whether to show the button to download the table's data                                                        |
-| tableClass            | `String`           | `table table-striped table-hover` | The css classes of the table                                                                                   |
-| sortingMode           | `String`           | `multiple`                        | `multiple` enables multiple-column sorting. `single` enables single-column sorting.                            |
-| sortingIndexComponent | `Object`, `String` | `DataTableSortingIndex`           | The Vue component for the sort index for sortable columns                                                      |
-| sortingIconComponent  | `Object`, `String` | `DataTableSortingIcon`            | The Vue component for the sort icon for sortable columns                                                       |
-| footerComponent       | `Object`, `String` | `null`                            | The Vue component for a custom table footer                                                                    |
-| allowedExports        | `Array`            | `["xls", "csv", "json", "txt"]`   | The options the user can export the data to. Only four export types are available.                             |
+| prop                  | type               | default                           | description                                                                                     |
+| ---                   | ---                | ---                               | ---                                                                                             |
+| data                  | `Array`            | -                                 | Array of objects with the data to be displayed on the table                                     |
+| columns               | `Array`            | -                                 | Array of objects that specifies how to render each column. Optional if `columnKeys` is present. |
+| columnKeys            | `Array`            | -                                 | Array of strings matching the object keys in `data`. This is discarded if `columns` is set.     |
+| lang                  | `String`           | `en`                              | The default language                                                                            |
+| perPageSizes          | `Array`            | [10, 25, 50, 100]                 | The options for the number of rows being displayed per page                                     |
+| defaultPerPage        | `Number`           | 10                                | The default number of entries. If unset, then it will be the first value of `perPageSizes`      |
+| isLoading             | `Bool`             | `false`                           | Whether table data is loading. Table rows are shown only if this value is set to `false`.       |
+| loadingComponent      | `Object`, `String` | -                                 | VueJS component to be shown if `isLoading` is set to `true`                                     |
+| showPerPage           | `Bool`             | `true`                            | Whether to show the `PerPage` component                                                         |
+| showEntriesInfo       | `Bool`             | `true`                            | Whether to show the EntriesInfo component                                                       |
+| showSearchFilter      | `Bool`             | `true`                            | Whether to show the SearchFilter component                                                      |
+| showPagination        | `Bool`             | `true`                            | Whether to show the Pagination component                                                        |
+| showDownloadButton    | `Bool`             | `true`                            | Whether to show the button to download the table's data                                         |
+| tableClass            | `String`           | `table table-striped table-hover` | The table's HTML `class` attribute                                                              |
+| sortingMode           | `String`           | `multiple`                        | Whether to sort a single column or multiple columns at once                                     |
+| sortingIndexComponent | `Object`, `String` | `DataTableSortingIndex`           | VueJS component for the sorting index on sortable columns                                       |
+| sortingIconComponent  | `Object`, `String` | `DataTableSortingIcon`            | VueJS component for the sorting icon on sortable columns                                        |
+| footerComponent       | `Object`, `String` | `null`                            | VueJS component for custom table footer                                                         |
+| allowedExports        | `Array`            | `["xls", "csv", "json", "txt"]`   | Formats the user can export the data to. Only four export types are available.                  |
 
 ### Columns
 
