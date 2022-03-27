@@ -44,11 +44,14 @@ VueDataTable.
 - [Demo 3 (preview and code)](https://codesandbox.io/s/vue-data-table-demo03-fg8ok)
 - [Demo 4 (preview)](https://qyetb7.csb.app/)
 - [Demo 4 (preview and code)](https://codesandbox.io/s/vue-data-table-demo04-qyetb7)
+- [Demo 5 (preview)](https://0jkyuj.csb.app/)
+- [Demo 5 (pewview and code)](https://codesandbox.io/s/vue-data-table-demo05-0jkyuj)
 
 Both Demo 1 and Demo 2 are from older versions of this plugin, but should still work
 with newer versions because the API didn't change much. Demo 3 is from the newest
 version and has an example of a custom footer component. Demo 4 implements mass-selection
-of rows using custom component and checkboxes.
+of rows using custom component and checkboxes. Demo 5 uses a custom loading component
+that is shown to the user while data is being loaded.
 
 ## Getting started
 
