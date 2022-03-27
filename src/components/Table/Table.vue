@@ -25,7 +25,7 @@
 					</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody v-if="! isLoading">
 				<tr v-if="isEmpty">
 					<td :colspan="numberOfColumns" class="empty-table-cell">
 						{{ emptyTableText }}
@@ -43,9 +43,9 @@
 					</td>
 				</tr>
 			</tbody>
+			<component v-if="isLoading" :is="loadingComponent">
 			<component
-				v-if="footerComponent !== null"
-				:is="footerComponent"
+				v-if="footerComponent !== null" :is="footerComponent"
 				v-bind="{ data, dataDisplayed, dataFiltered }"
 			/>
 		</table>

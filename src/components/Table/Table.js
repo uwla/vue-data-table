@@ -9,6 +9,8 @@ export default {
 		emptyTableText: String,
 		footerComponent: [Object, String],
 		isEmpty: Boolean,
+		isLoading: Boolean,
+		loadingComponent: [Object, String],
 		numberOfColumns: Number,
 		sortingIconComponent: Object,
 		sortingIndexComponent: Object,
