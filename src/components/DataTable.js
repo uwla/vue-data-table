@@ -336,6 +336,8 @@ export default {
 				emptyTableText: this.emptyTableText,
 				footerComponent: this.footerComponent,
 				isEmpty: this.isEmpty,
+				isLoading: this.isLoading,
+				loadingComponent: this.loadingComponent,
 				numberOfColumns: this.numberOfColumns,
 				sortingIconComponent: this.sortingIconComponent,
 				sortingIndexComponent: this.sortingIndexComponent,
@@ -618,6 +620,14 @@ export default {
 		lang: {
 			type: String,
 			default: "en"
+		},
+		isLoading: {
+			type: Boolean,
+			default: false,
+		},
+		loadingComponent: {
+			type: [Object, String],
+			default: () => "",
 		},
 		showEntriesInfo: {
 			type: Boolean,
