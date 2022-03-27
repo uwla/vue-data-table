@@ -71,7 +71,6 @@ Vue.component("data-table", DataTable);
 Don"t forget to add the style sheets
 
 ```javascript
-import "bootstrap/dist/css/bootstrap.min.css";
 import "@andresouzaabreu/vue-data-table/dist/DataTable.css";
 ```
 
