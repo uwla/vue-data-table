@@ -300,7 +300,7 @@ for the English language.
 | ---                        | ---                                                                   |
 | perPageText                | "Show :entries entries"                                               |
 | infoText                   | "Showing :first to :last of :total entries"                           |
-| infoTextFiltered           | "Showing :first to :last of :filtered (filtered from :total entries)" |
+| infoFilteredText           | "Showing :first to :last of :filtered (filtered from :total entries)" |
 | nextButtonText             | "Next"                                                                |
 | previousButtonText         | "Previous"                                                            |
 | paginationSearchText       | "Go to page"                                                          |
