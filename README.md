@@ -45,7 +45,7 @@ VueDataTable.
 - [Demo 4 (preview)](https://qyetb7.csb.app/)
 - [Demo 4 (preview and code)](https://codesandbox.io/s/vue-data-table-demo04-qyetb7)
 - [Demo 5 (preview)](https://0jkyuj.csb.app/)
-- [Demo 5 (pewview and code)](https://codesandbox.io/s/vue-data-table-demo05-0jkyuj)
+- [Demo 5 (preview and code)](https://codesandbox.io/s/vue-data-table-demo05-0jkyuj)
 
 Both Demo 1 and Demo 2 are from older versions of this plugin, but should still work
 with newer versions because the API didn't change much. Demo 3 is from the newest
