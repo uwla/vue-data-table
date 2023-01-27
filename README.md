@@ -642,7 +642,7 @@ export default {
 
 ## License
 
-Do whatever you want with the code of this repository. Really.
+MIT
 
 ## Versioning
 
@@ -650,8 +650,4 @@ This project uses [SemVer](http://semver.org/).
 
 ## Contributing
 
-Pull requests are welcome.
-
-## Author
-
-- **André Souza Abreu** - [Github](https://github.com/AndreSouzaAbreu)
+Pull requests are very welcome.
