@@ -1,11 +1,16 @@
 {
-    "name": "vue-data-table",
-    "version": "0.1.0",
+    "name": "@uwlajs/vue-data-table",
+    "version": "1.0.0",
     "private": false,
+    "author": "uwla",
+	"description": "A Vue plugin that adds advanced features to an HTML table",
+    "license": "MIT",
     "scripts": {
         "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build --target lib src/main.js"
+        "build": "vue-cli-service build --target lib --name VueDataTable src/main.js"
     },
+	"main": "dist/VueDataTable.umd.js",
+	"unpkg": "dist/VueDataTable.umd.min.js",
     "dependencies": {
         "export-from-json": "1.7.2",
         "vue": "2.6.11"

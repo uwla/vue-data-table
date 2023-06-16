@@ -1,14 +1,4 @@
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else if(typeof exports === 'object')
-		exports["vue-data-table"] = factory();
-	else
-		root["vue-data-table"] = factory();
-})((typeof self !== 'undefined' ? self : this), () => {
-return /******/ (() => { // webpackBootstrap
+/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
 /***/ 143:
@@ -2012,8 +2002,7 @@ var DataTable_component = normalizeComponent(
 
 })();
 
-/******/ 	return __webpack_exports__;
+module.exports = __webpack_exports__;
 /******/ })()
 ;
-});
-//# sourceMappingURL=vue-data-table.umd.js.map
+//# sourceMappingURL=VueDataTable.common.js.map
