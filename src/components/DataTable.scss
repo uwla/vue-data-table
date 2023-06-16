@@ -1,0 +1,118 @@
+.vue-data-table {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 25% 25% 25% 25%;
+
+    & > .vdt-search, .vdt-pagination, .vdt-export {
+        margin-left: auto
+    }
+
+    @media (min-width: 1401px) {
+        grid-template-areas:
+        "perPage search search search"
+        "table table table table"
+        "info pagination pagination download";
+    }
+
+    @media (min-width: 1051px) AND (max-width: 1400px) {
+        grid-template-areas:
+        "perPage search search search"
+        "table table table table"
+        "info pagination pagination pagination"
+        ". . download download";
+    }
+
+    @media (min-width: 851px) AND (max-width: 1050px) {
+        grid-template-areas:
+        "perPage search search search"
+        "table table table table"
+        "pagination pagination pagination pagination"
+        "info info download download";
+    }
+
+    @media (max-width: 800px) {
+        &>.vdt-pagination {
+            flex-wrap: wrap;
+        }
+    }
+
+    @media (min-width: 651px) AND (max-width: 850px) {
+        grid-template-areas:
+        "perPage search search search"
+        "table table table table"
+        "pagination pagination pagination pagination"
+        "info info info info"
+        "download download download download";
+    }
+
+    @media (max-width: 650px) {
+        grid-template-areas:
+        "search search search search"
+        "perPage perPage perPage perPage "
+        "table table table table"
+        "pagination pagination pagination pagination"
+        "info info info info"
+        "download download download download";
+
+        &>.vdt-perpage {
+            margin-left: auto
+        }
+    }
+
+    &>div {
+        margin-top: 1rem;
+        max-width: 100%;
+    }
+}
+
+// GENERIC CLASSES
+
+.vdt-input {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+
+.vdt-btn {
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition:
+    color .15s ease-in-out,
+    background-color .15s ease-in-out,
+    border-color .15s ease-in-out,
+    box-shadow .15s ease-in-out;
+}
+
+.vdt-btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
