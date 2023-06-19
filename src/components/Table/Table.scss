@@ -5,34 +5,34 @@
     grid-area: table;
 
     table {
-      border-collapse: collapse;
+        border-collapse: collapse;
         margin: 0;
     }
 
     .table {
-      width: 100%;
-      margin-bottom: 1rem;
-      color: #212529;
+        width: 100%;
+        margin-bottom: 1rem;
+        color: #212529;
     }
 
     .table thead th {
-      vertical-align: bottom;
-      border-bottom: 2px solid #dee2e6;
+        vertical-align: bottom;
+        border-bottom: 2px solid #dee2e6;
     }
 
     .table td, .table th {
-      padding: .75rem;
-      vertical-align: top;
-      border-top: 1px solid #dee2e6;
+        padding: .75rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
     }
 
     .table-striped tbody tr:nth-of-type(odd) {
-      background-color: rgba(0,0,0,.05);
+        background-color: rgba(0,0,0,.05);
     }
 
     .table-hover tbody tr:hover {
-      color: #212529;
-      background-color: rgba(0,0,0,.075);
+        color: #212529;
+        background-color: rgba(0,0,0,.075);
     }
 
     .vdt-column {
