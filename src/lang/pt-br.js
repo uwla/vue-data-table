@@ -10,4 +10,4 @@ export default {
     emptyTableText: "Nenhum dado correspondente à pesquisa foi encontrado",
     downloadText: "exportar como:",
     downloadButtonText: "BAIXAR"
-};
+}

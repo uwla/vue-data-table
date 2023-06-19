@@ -1,12 +1,12 @@
-import VdtEntriesInfo from "./EntriesInfo/EntriesInfo.vue";
-import VdtPerPage from "./PerPage/PerPage.vue";
-import VdtExportData from "./ExportData/ExportData.vue";
-import VdtPagination from "./Pagination/Pagination.vue";
-import VdtSearchFilter from "./SearchFilter/SearchFilter.vue";
-import VdtTable from "./Table/Table.vue";
+import VdtEntriesInfo from "./EntriesInfo/EntriesInfo.vue"
+import VdtPerPage from "./PerPage/PerPage.vue"
+import VdtExportData from "./ExportData/ExportData.vue"
+import VdtPagination from "./Pagination/Pagination.vue"
+import VdtSearchFilter from "./SearchFilter/SearchFilter.vue"
+import VdtTable from "./Table/Table.vue"
 import VdtTableCell from "./Table/TableCell.vue"
-import VdtSortingIcon from "./SortableColumn/SortingIcon.vue";
-import VdtSortingIndex from "./SortableColumn/SortingIndex.vue";
+import VdtSortingIcon from "./SortableColumn/SortingIcon.vue"
+import VdtSortingIndex from "./SortableColumn/SortingIndex.vue"
 
 import {
     range,
@@ -14,8 +14,8 @@ import {
     sortDataByColumn,
     stringReplaceFromArray,
     getEventTargetValue,
-} from "../helpers";
-import { parseColumnProps, parseTextProps } from "../parser";
+} from "../helpers"
+import { parseColumnProps, parseTextProps } from "../parser"
 
 export default {
     name: "VueDataTable",
@@ -33,7 +33,7 @@ export default {
          * @var {Number}
          */
         numberOfColumns() {
-            return this.parsedColumns.length;
+            return this.parsedColumns.length
         },
 
         /**
@@ -41,7 +41,7 @@ export default {
          * @var {Array}
          */
         searchableColumns() {
-            return this.parsedColumns.filter(column => column.searchable);
+            return this.parsedColumns.filter(column => column.searchable)
         },
 
         /**
@@ -49,7 +49,7 @@ export default {
          * @var {Array}
          */
         sortableColumns() {
-            return this.parsedColumns.filter(column => column.sortable);
+            return this.parsedColumns.filter(column => column.sortable)
         },
 
         //
@@ -61,13 +61,13 @@ export default {
          * @var {Array}
          */
         dataDisplayed() {
-            const { lastEntry, firstEntry, dataSorted } = this;
+            const { lastEntry, firstEntry, dataSorted } = this
             // we need to subtract 1 due to array index
             // we need also to subtract 1 for the first
             // item to appear
-            const end = lastEntry;
-            const start = Math.max(0, firstEntry - 1);
-            return dataSorted.slice(start, end);
+            const end = lastEntry
+            const start = Math.max(0, firstEntry - 1)
+            return dataSorted.slice(start, end)
         },
 
         /**
@@ -75,25 +75,25 @@ export default {
          * @var {Array}
          */
         dataFiltered() {
-            const { searchableColumns, data, search } = this;
+            const { searchableColumns, data, search } = this
             if (isNullable(search)) {
-                return data;
+                return data
             }
             return data.filter(function(row) {
                 return searchableColumns.some(function(column) {
                     const cell = column.key,
-                        value = row[cell];
+                        value = row[cell]
                     if (typeof value === "string") {
                         return value
                             .toLowerCase()
-                            .includes(search.toLowerCase());
+                            .includes(search.toLowerCase())
                     }
                     if (typeof value === "number") {
-                        return value.toString().includes(search);
+                        return value.toString().includes(search)
                     }
-                    return false;
-                });
-            });
+                    return false
+                })
+            })
         },
 
         /**
@@ -101,25 +101,25 @@ export default {
          * @var {Array}
          */
         dataSorted() {
-            var { dataFiltered: data, columnsBeingSorted } = this;
+            var { dataFiltered: data, columnsBeingSorted } = this
 
             // do not sort if there is no rows or no data to sort
             if (columnsBeingSorted.length === 0 || data.length === 0) {
-                return data;
+                return data
             }
 
             // create a copy of data and columns
-            data = [...data];
-            var columns = [...columnsBeingSorted];
+            data = [...data]
+            var columns = [...columnsBeingSorted]
 
             // reverse the columns, so that the first columns
             // will be the last to be sorted. Doing this, we
             // can sort by multiple columns in such way that
             // the columns that were select first will have
             // priority in the process.
-            columns.reverse();
-            columns.forEach(column => sortDataByColumn(data, column));
-            return data;
+            columns.reverse()
+            columns.forEach(column => sortDataByColumn(data, column))
+            return data
         },
 
         /**
@@ -127,7 +127,7 @@ export default {
          * @var {Boolean}
          */
         isEmpty() {
-            return this.dataDisplayed.length === 0;
+            return this.dataDisplayed.length === 0
         },
 
         //
@@ -139,11 +139,11 @@ export default {
          * @var {Integer}
          */
         firstEntry() {
-            const { dataFiltered, currentPerPage, currentPage } = this;
+            const { dataFiltered, currentPerPage, currentPage } = this
             if (dataFiltered.length === 0) {
-                return 0;
+                return 0
             }
-            return currentPerPage * (currentPage - 1) + 1;
+            return currentPerPage * (currentPage - 1) + 1
         },
 
         /**
@@ -154,7 +154,7 @@ export default {
             return Math.min(
                 this.filteredEntries,
                 this.firstEntry + this.currentPerPage - 1
-            );
+            )
         },
 
         /**
@@ -162,7 +162,7 @@ export default {
          * @var {Integer}
          */
         totalEntries() {
-            return this.data.length;
+            return this.data.length
         },
 
         /**
@@ -170,7 +170,7 @@ export default {
          * @var {Integer}
          */
         filteredEntries() {
-            return this.dataFiltered.length;
+            return this.dataFiltered.length
         },
 
         /**
@@ -185,22 +185,22 @@ export default {
                 lastEntry,
                 filteredEntries,
                 totalEntries
-            } = this;
+            } = this
             const replacements = [
                 firstEntry,
                 lastEntry,
                 filteredEntries,
                 totalEntries
-            ];
-            const searchValues = [":first", ":last", ":filtered", ":total"];
-            var text = infoText;
+            ]
+            const searchValues = [":first", ":last", ":filtered", ":total"]
+            var text = infoText
             if (totalEntries !== filteredEntries) {
-                text = infoFilteredText;
+                text = infoFilteredText
             }
             // we take the text provided by the user, then
             // replace the placeholders with the actual
             // values, and return the result
-            return stringReplaceFromArray(text, searchValues, replacements);
+            return stringReplaceFromArray(text, searchValues, replacements)
         },
         //
         // ─── PAGINATION ─────────────────────────────────────────────────────────────────
@@ -214,7 +214,7 @@ export default {
             return Math.max(
                 Math.ceil(this.filteredEntries / this.currentPerPage),
                 1
-            );
+            )
         },
 
         /**
@@ -222,7 +222,7 @@ export default {
          * @var {Number}
          */
         lastPage() {
-            return this.numberOfPages;
+            return this.numberOfPages
         },
 
         /**
@@ -230,7 +230,7 @@ export default {
          * @var {Boolean}
          */
         isLastPage() {
-            return this.currentPage === this.numberOfPages;
+            return this.currentPage === this.numberOfPages
         },
 
         /**
@@ -238,7 +238,7 @@ export default {
          * @var {Boolean}
          */
         isFirstPage() {
-            return this.currentPage === 1;
+            return this.currentPage === 1
         },
 
         /**
@@ -246,7 +246,7 @@ export default {
          * @var {Number}
          */
         previousPage() {
-            return this.currentPage - 1;
+            return this.currentPage - 1
         },
 
         /**
@@ -254,7 +254,7 @@ export default {
          * @var {Number}
          */
         nextPage() {
-            return this.currentPage + 1;
+            return this.currentPage + 1
         },
 
         /**
@@ -265,15 +265,15 @@ export default {
             // extract the variables from "this"
             // so we don't have to type this.prop
             // every time we access it.
-            const { lastPage, currentPage, nextPage, previousPage } = this;
+            const { lastPage, currentPage, nextPage, previousPage } = this
             if (lastPage === 1) {
-                return [1];
+                return [1]
             }
             if (lastPage <= 7) {
-                return range(1, lastPage);
+                return range(1, lastPage)
             }
             if (lastPage > 7 && currentPage <= 4) {
-                return [1, 2, 3, 4, 5, "...", lastPage];
+                return [1, 2, 3, 4, 5, "...", lastPage]
             }
             if (lastPage > 8 && lastPage > currentPage + 3) {
                 return [
@@ -284,7 +284,7 @@ export default {
                     nextPage,
                     "...",
                     lastPage
-                ];
+                ]
             }
             if (lastPage > 7 && lastPage <= currentPage + 3) {
                 return [
@@ -294,7 +294,7 @@ export default {
                     lastPage - 2,
                     lastPage - 1,
                     lastPage
-                ];
+                ]
             }
         },
 
@@ -311,7 +311,7 @@ export default {
                 currentPerPage: this.currentPerPage,
                 perPageSizes: this.perPageSizes,
                 perPageText: this.perPageText,
-            };
+            }
         },
 
         /**
@@ -322,7 +322,7 @@ export default {
             return {
                 search: this.search,
                 searchText: this.searchText,
-            };
+            }
         },
 
         /**
@@ -344,7 +344,7 @@ export default {
                 sortingIconComponent: this.sortingIconComponent,
                 sortingIndexComponent: this.sortingIndexComponent,
                 tableClass: this.tableClass,
-            };
+            }
         },
 
         /**
@@ -354,7 +354,7 @@ export default {
         propsEntriesInfo() {
             return {
                 entriesInfoText: this.entriesInfoText
-            };
+            }
         },
 
         /**
@@ -374,7 +374,7 @@ export default {
                 paginationSearchText: this.paginationSearchText,
                 previousButtonText: this.previousButtonText,
                 previousPage: this.previousPage,
-            };
+            }
         },
 
         /**
@@ -388,12 +388,12 @@ export default {
                 downloadButtonText: this.downloadButtonText,
                 downloadFileName: this.downloadFileName,
                 downloadText: this.downloadText,
-            };
+            }
         }
     },
 
     mounted() {
-        this.setDefaults();
+        this.setDefaults()
     },
 
     data() {
@@ -414,7 +414,7 @@ export default {
             paginationSearchButtonText: "",
             search: "",
             searchText: ""
-        };
+        }
     },
 
     methods: {
@@ -438,15 +438,15 @@ export default {
                 page <= this.numberOfPages &&
                 page > 0 &&
                 page !== this.currentPage
-            );
+            )
         },
         /**
          * Parse columns (assign default values while enabling customization)
          * @returns {void}
          */
         parseColumnProps() {
-            var parsedColumns = parseColumnProps(this.$props);
-            Object.assign(this, { parsedColumns });
+            var parsedColumns = parseColumnProps(this.$props)
+            Object.assign(this, { parsedColumns })
         },
 
         /**
@@ -454,7 +454,7 @@ export default {
          * @returns {void}
          */
         parseTextProps() {
-            Object.assign(this, parseTextProps(this.$props));
+            Object.assign(this, parseTextProps(this.$props))
         },
 
         /**
@@ -469,7 +469,7 @@ export default {
         sortColumn(column) {
             // column is not sortable, ignore it
             if (!column.sortable) {
-                return;
+                return
             }
 
             // case when the current mode is to only sort a single column
@@ -479,69 +479,69 @@ export default {
                 // skipping the current column
                 for (let col of this.sortableColumns) {
                     if (col.id !== column.id) {
-                        col.sortingMode = "";
-                        col.sortingIndex = -1;
+                        col.sortingMode = ""
+                        col.sortingIndex = -1
                     }
                 }
 
                 // the column is not being sorted
                 // so, mark it as sorted in ascending mode
                 if (column.sortingMode === "") {
-                    column.sortingMode = "asc";
-                    this.columnsBeingSorted = [column];
-                    return;
+                    column.sortingMode = "asc"
+                    this.columnsBeingSorted = [column]
+                    return
                 }
 
                 // the column is being sorted in ascending mode
                 // so, mark it as sorted in descending mode
                 if (column.sortingMode === "asc") {
-                    column.sortingMode = "desc";
-                    this.columnsBeingSorted = [column];
-                    return;
+                    column.sortingMode = "desc"
+                    this.columnsBeingSorted = [column]
+                    return
                 }
 
                 // column is being sorted in descending mode
                 // so, mark it as not being sorted
-                column.sortingMode = "";
-                this.columnsBeingSorted = [];
-                return;
+                column.sortingMode = ""
+                this.columnsBeingSorted = []
+                return
             }
 
             // column is not being sorted
             // so, mark it as sorted in ascending mode
             if (column.sortingMode === "") {
-                column.sortingMode = "asc";
-                column.sortingIndex = this.columnsBeingSorted.length + 1;
-                this.columnsBeingSorted.push(column);
-                return;
+                column.sortingMode = "asc"
+                column.sortingIndex = this.columnsBeingSorted.length + 1
+                this.columnsBeingSorted.push(column)
+                return
             }
 
             // column is being sorted in ascending mode
             // so, mark it as sorted in descending mode
             if (column.sortingMode === "asc") {
-                column.sortingMode = "desc";
+                column.sortingMode = "desc"
                 this.columnsBeingSorted.splice(
                     column.sortingIndex - 1,
                     1,
                     column
-                );
-                return;
+                )
+                return
             }
 
             // column is being sorted in descending mode
             // so, mark it as not being sorted
-            column.sortingMode = "";
-            column.sortingIndex = -1;
+            column.sortingMode = ""
+            column.sortingIndex = -1
             this.columnsBeingSorted = this.columnsBeingSorted.filter(function(c) {
-                return c.id !== column.id;
-            });
+                return c.id !== column.id
+            })
 
             // in this case,
             // it is necessary to update the sorting index of other columns
             // to reflect the fact that there is one less column.
             this.columnsBeingSorted.forEach(function(col, i) {
-                col.sortingIndex = i + 1;
-            });
+                col.sortingIndex = i + 1
+            })
         },
 
         /**
@@ -549,7 +549,7 @@ export default {
          * @returns {void}
          */
         setDefaults() {
-            this.setPerPage(this.defaultPerPage);
+            this.setPerPage(this.defaultPerPage)
         },
 
         /**
@@ -559,7 +559,7 @@ export default {
          */
         setPage(value) {
             if (this.isValidPage(value)) {
-                this.currentPage = value;
+                this.currentPage = value
             }
         },
 
@@ -569,26 +569,26 @@ export default {
          * @returns {void}
          */
         setPerPage(value) {
-            var previousFirstEntry, newPerPage, newCurrentPage;
+            var previousFirstEntry, newPerPage, newCurrentPage
             // before updating the value of currentPerPage,
             // we need to store the current firstEntry.
             // We will use it to change the current page.
-            previousFirstEntry = this.firstEntry;
-            newPerPage = this.currentPerPage;
+            previousFirstEntry = this.firstEntry
+            newPerPage = this.currentPerPage
 
             if (!this.perPageSizes.includes(newPerPage)) {
-                newPerPage = this.perPageSizes[0];
+                newPerPage = this.perPageSizes[0]
             }
             if (this.perPageSizes.includes(value)) {
-                newPerPage = value;
+                newPerPage = value
             }
-            this.currentPerPage = newPerPage;
+            this.currentPerPage = newPerPage
 
             // update current per page so that
             // the user will see the same first
             // rows that were being displayed
-            newCurrentPage = Math.floor(previousFirstEntry / newPerPage) + 1;
-            this.setPage(newCurrentPage);
+            newCurrentPage = Math.floor(previousFirstEntry / newPerPage) + 1
+            this.setPage(newCurrentPage)
         },
 
         /**
@@ -597,8 +597,8 @@ export default {
          * @returns {void}
          */
         setPerPageFromUserInput() {
-            const value = Number(getEventTargetValue());
-            this.setPerPage(value);
+            const value = Number(getEventTargetValue())
+            this.setPerPage(value)
         },
 
         /**
@@ -607,9 +607,9 @@ export default {
          * @returns {void}
          */
         setSearch() {
-            const value = getEventTargetValue() || "";
-            this.search = value.trim();
-            this.currentPage = 1;
+            const value = getEventTargetValue() || ""
+            this.search = value.trim()
+            this.currentPage = 1
         }
     },
 
@@ -700,13 +700,13 @@ export default {
         sortingIndexComponent: {
             type: Object,
             default: function() {
-                return VdtSortingIndex;
+                return VdtSortingIndex
             }
         },
         sortingIconComponent: {
             type: Object,
             default: function() {
-                return VdtSortingIcon;
+                return VdtSortingIcon
             }
         },
         tableClass: {
@@ -738,4 +738,4 @@ export default {
             handler: "parseTextProps"
         }
     }
-};
+}

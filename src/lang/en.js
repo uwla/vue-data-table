@@ -10,4 +10,4 @@ export default {
     emptyTableText: "No matching records found",
     downloadText: "export as:",
     downloadButtonText: "DOWNLOAD"
-};
+}

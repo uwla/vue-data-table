@@ -1,11 +1,11 @@
-import exportFromJSON from "export-from-json";
+import exportFromJSON from "export-from-json"
 
 export default {
     name: "VdtExportData",
     data() {
         return {
             selectedExport: ""
-        };
+        }
     },
     methods: {
         download() {
@@ -13,7 +13,7 @@ export default {
                 data: this.data,
                 fileName: this.downloadFileName,
                 exportType: this.selectedExport
-            });
+            })
         }
     },
     props: {
@@ -26,9 +26,9 @@ export default {
     watch: {
         allowedExports: {
             handler(value) {
-                this.selectedExport = value[0];
+                this.selectedExport = value[0]
             },
             immediate: true
         }
     }
-};
+}

@@ -25,4 +25,4 @@ export default {
         sortingIconComponent: Object,
         sortingIndexComponent: Object,
     },
-};
+}

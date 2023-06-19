@@ -10,4 +10,4 @@ export default {
     emptyTableText: "No se encontraron datos que coincidan con la búsqueda",
     downloadText: "exportar cómo:",
     downloadButtonText: "DESCARGAR"
-};
+}

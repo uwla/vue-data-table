@@ -4,4 +4,4 @@ export default {
         searchText: String,
         search: String
     }
-};
+}

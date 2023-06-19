@@ -5,7 +5,7 @@
  * @returns {Boolean}
  */
 export function compareStrings(a, b) {
-    return a.toLowerCase().localeCompare(b.toLowerCase());
+    return a.toLowerCase().localeCompare(b.toLowerCase())
 }
 
 /**
@@ -14,7 +14,7 @@ export function compareStrings(a, b) {
  * @returns {String}
  */
 export function toTitleCase(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1).replace(/[-_]/gui, " ");
+    return str.charAt(0).toUpperCase() + str.slice(1).replace(/[-_]/gui, " ")
 }
 
 /**
@@ -26,9 +26,9 @@ export function toTitleCase(str) {
  */
 export function stringReplaceFromArray(target, searchValues, replacements) {
     for (let i = 0; i < searchValues.length; i++) {
-        target = target.replace(searchValues[i], replacements[i]);
+        target = target.replace(searchValues[i], replacements[i])
     }
-    return target;
+    return target
 }
 
 /**
@@ -39,11 +39,11 @@ export function stringReplaceFromArray(target, searchValues, replacements) {
  * @returns {Array}
  */
 export function range(min, max, step = 1) {
-    var range = [];
+    var range = []
     for (let i = min; i <= max; i += step) {
-        range.push(i);
+        range.push(i)
     }
-    return range;
+    return range
 }
 
 /**
@@ -52,7 +52,7 @@ export function range(min, max, step = 1) {
  * @returns {Boolean}
  */
 export function isNullable(variable) {
-    return variable === null || variable === "" || variable === undefined;
+    return variable === null || variable === "" || variable === undefined
 }
 
 /**
@@ -63,8 +63,8 @@ export function isNullable(variable) {
  */
 export function arraySafeSort(array, compareFunction) {
     array.sort(function(a, b) {
-        return isNullable(a) || isNullable(b) ? 0 : compareFunction(a, b);
-    });
+        return isNullable(a) || isNullable(b) ? 0 : compareFunction(a, b)
+    })
 }
 
 /**
@@ -74,23 +74,23 @@ export function arraySafeSort(array, compareFunction) {
  * @returns {void}
  */
 export function sortDataByColumn(data, column) {
-    const { key } = column;
-    let compareFunction;
+    const { key } = column
+    let compareFunction
 
     /* pick up the compare function, allowing user to set a custom one */
     if (column.sortingFunction) {
-        compareFunction = column.sortingFunction;
+        compareFunction = column.sortingFunction
     } else if (column.type === "number") {
-        compareFunction = (a, b) => Number(a[key]) - Number(b[key]);
+        compareFunction = (a, b) => Number(a[key]) - Number(b[key])
     } else {
-        compareFunction = (a, b) => compareStrings(a[key], b[key]);
+        compareFunction = (a, b) => compareStrings(a[key], b[key])
     }
 
     /* sort */
     if (column.sortingMode === "desc") {
-        arraySafeSort(data, (a, b) => compareFunction(b, a));
+        arraySafeSort(data, (a, b) => compareFunction(b, a))
     } else {
-        arraySafeSort(data, (a, b) => compareFunction(a, b));
+        arraySafeSort(data, (a, b) => compareFunction(a, b))
     }
 }
 
@@ -99,13 +99,13 @@ export function sortDataByColumn(data, column) {
  * @returns {*}
  */
 export function getEventTargetValue(event) {
-    event = event || window.event;
-    var target;
+    event = event || window.event
+    var target
     if (event !== undefined) {
-        target = event.target || event.srcElement;
+        target = event.target || event.srcElement
     }
     if (target !== undefined) {
-        return target.value;
+        return target.value
     }
-    return null;
+    return null
 }

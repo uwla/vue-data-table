@@ -12,6 +12,6 @@ export default {
             required: true
         }
     }
-};
+}
 </script>
 <style src="./SortingIndex.scss" lang="scss"></style>

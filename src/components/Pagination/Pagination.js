@@ -3,11 +3,11 @@ export default {
     data() {
         return {
             pageToGo: 1
-        };
+        }
     },
     methods: {
         setCurrentPage(page) {
-            this.$emit("set-page", Number(page));
+            this.$emit("set-page", Number(page))
         }
     },
     props: {
@@ -25,16 +25,16 @@ export default {
     },
     watch: {
         currentPage(value) {
-            this.pageToGo = value;
+            this.pageToGo = value
         },
         pageToGo(value) {
             if (value > this.numberOfPages) {
-                return this.numberOfPages;
+                return this.numberOfPages
             }
             if (value < 1) {
-                return 1;
+                return 1
             }
-            return value;
+            return value
         }
     }
-};
+}

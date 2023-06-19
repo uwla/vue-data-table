@@ -7,6 +7,6 @@
 <script>
 export default {
     name: "VdtSortingIcon"
-};
+}
 </script>
 <style src="./SortingIcon.scss" lang="scss"></style>

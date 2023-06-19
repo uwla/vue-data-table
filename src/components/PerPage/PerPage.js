@@ -2,15 +2,15 @@ export default {
     name: "VdtPerPage",
     computed: {
         textBeforeOptions() {
-            return this.perPageText.split(":entries")[0].trim();
+            return this.perPageText.split(":entries")[0].trim()
         },
         textAfterOptions() {
-            return (this.perPageText.split(":entries")[1] || "").trim();
+            return (this.perPageText.split(":entries")[1] || "").trim()
         }
     },
     methods: {
         stringNotEmpty(string) {
-            return string !== "";
+            return string !== ""
         }
     },
     props: {
@@ -27,4 +27,4 @@ export default {
             required: true
         }
     }
-};
+}

@@ -1,18 +1,18 @@
-import { toTitleCase } from "./helpers";
-import translations from "./lang";
+import { toTitleCase } from "./helpers"
+import translations from "./lang"
 
 export function parseColumnProps(props) {
     // extract the columns
     // if not set, columns are derived from columnKeys
-    let columns = props.columns || props.columnKeys.map(key => ({ key }));
+    let columns = props.columns || props.columnKeys.map(key => ({ key }))
 
     // extract the default column
-    let { defaultColumn } = props;
+    let { defaultColumn } = props
 
     // merge default column with the columns
     columns = columns.map(function(column, i) {
         // get explicit title or guess title from `key`
-        let title = column.title || toTitleCase(column.key);
+        let title = column.title || toTitleCase(column.key)
 
         // if a custom component is not set,
         // we need to pass some props to the default component
@@ -42,10 +42,10 @@ export function parseColumnProps(props) {
     })
 
     // finally, return the parsed columns
-    return columns;
+    return columns
 }
 
 export function parseTextProps(props) {
-    const { lang, text } = props;
+    const { lang, text } = props
     return { ...translations[lang], ...text }
 }
