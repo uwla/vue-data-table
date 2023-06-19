@@ -4,8 +4,10 @@ import DataTableExportData from "./ExportData/ExportData.vue";
 import DataTablePagination from "./Pagination/Pagination.vue";
 import DataTableSearchFilter from "./SearchFilter/SearchFilter.vue";
 import DataTableTable from "./Table/Table.vue";
+import DataTableTableCell from "./Table/TableCell.vue"
 import DataTableSortingIcon from "./SortableColumn/SortingIcon.vue";
 import DataTableSortingIndex from "./SortableColumn/SortingIndex.vue";
+
 import {
     range,
     isNullable,
@@ -633,10 +635,13 @@ export default {
             required: false,
             default: function() {
                 return {
-                    sortable: true,
+                    component: DataTableTableCell,
+                    componentProps: {},
+                    index: 0,
                     searchable: true,
-                    type: "string"
-                };
+                    sortable: true,
+                    type: "string",
+                }
             }
         },
         defaultPerPage: {

@@ -6,8 +6,7 @@
                 <tr>
                     <!-- COLUMN HEADER -->
                     <th v-for="(column, i) in columns" :key="i"
-                        class="vdt-column"
-                        :class="{ sortable: column.sortable }"
+                        class="vdt-column" :class="{ sortable: column.sortable }"
                         :data-sorting="column.sortingMode"
                         @click="$emit('sort-column', column)">
 
@@ -17,8 +16,7 @@
 
                             <!-- SORTING INDEX -->
                             <component v-if="column.sortingIndex > 0"
-                                :is="sortingIndexComponent"
-                                :index="column.sortingIndex" />
+                                :is="sortingIndexComponent" :index="column.sortingIndex" />
 
                             <!-- SORTING ICON -->
                             <component v-if="column.sortable"
@@ -40,12 +38,8 @@
                 <!-- NON-EMPTY BODY -->
                 <tr v-for="(data, i) in dataDisplayed" :key="i">
                     <td v-for="(column, j) in columns" :key="j">
-                        <component v-if="column.component"
-                            :is="column.component"
-                            :data="data"
-                            :column="column"
-                            @userEvent="emitUserEvent"/>
-                        <span v-else>{{ data[column.key] }}</span>
+                        <component :is="column.component" @userEvent="emitUserEvent"
+                            v-bind="{ ...column.componentProps, column, data }" />
                     </td>
                 </tr>
             </tbody>
@@ -54,8 +48,7 @@
             <component v-if="isLoading" :is="loadingComponent" />
 
             <!-- TABLE FOOTER -->
-            <component v-if="footerComponent !== null"
-                    :is="footerComponent"
+            <component v-if="footerComponent" :is="footerComponent"
                     v-bind="{ data, dataDisplayed, dataFiltered }" />
         </table>
     </div>
