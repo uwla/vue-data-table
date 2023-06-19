@@ -1,12 +1,12 @@
 import VdtEntriesInfo from "./EntriesInfo/EntriesInfo.vue"
-import VdtPerPage from "./PerPage/PerPage.vue"
 import VdtExportData from "./ExportData/ExportData.vue"
 import VdtPagination from "./Pagination/Pagination.vue"
+import VdtPerPage from "./PerPage/PerPage.vue"
 import VdtSearchFilter from "./SearchFilter/SearchFilter.vue"
-import VdtTable from "./Table/Table.vue"
-import VdtTableCell from "./Table/TableCell.vue"
 import VdtSortingIcon from "./SortableColumn/SortingIcon.vue"
 import VdtSortingIndex from "./SortableColumn/SortingIndex.vue"
+import VdtTable from "./Table/Table.vue"
+import VdtTableCell from "./Table/TableCell.vue"
 
 import {
     range,

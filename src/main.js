@@ -1,3 +1,4 @@
-import DataTable from "./components/DataTable.vue"
+import VdtActionButtons from "./components/ActionButtons/ActionButtons.vue"
+import VueDataTable from "./components/DataTable.vue"
 import { languageServiceProvider } from "./lang.js"
-export { DataTable, DataTable as default, languageServiceProvider }
+export { VdtActionButtons, VueDataTable, VueDataTable as default,  languageServiceProvider }
