@@ -417,6 +417,15 @@ export default {
 
     methods: {
         /**
+         * Propage upwards an event from a user custom component
+         *
+         * @returns {void}
+         */
+        emitUserEvent(payload) {
+            this.$emit('userEvent', payload)
+        },
+
+        /**
          * Indicates if a page is valid
          * @param {Object} props
          * @returns {Boolean}

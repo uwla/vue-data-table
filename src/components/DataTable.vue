@@ -13,6 +13,7 @@
         <data-table-table
             v-bind="propsTable"
             @sort-column="sortColumn"
+            @user-event="emitUserEvent"
         />
         <data-table-entries-info
             v-if="showEntriesInfo"

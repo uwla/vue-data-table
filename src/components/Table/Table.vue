@@ -43,7 +43,8 @@
                         <component v-if="column.component"
                             :is="column.component"
                             :data="data"
-                            :column="column" />
+                            :column="column"
+                            @userEvent="emitUserEvent"/>
                         <span v-else>{{ data[column.key] }}</span>
                     </td>
                 </tr>
