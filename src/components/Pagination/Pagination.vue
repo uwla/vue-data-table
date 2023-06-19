@@ -13,8 +13,8 @@
             </button>
         </div>
         <ul class="vdt-pagination-items">
-            <li class="page-item" :class="{ disabled: isFirstPage }" @click="setCurrentPage(previousPage)" >
-                <span class="page-link">
+            <li class="vdt-page-item" :class="{ disabled: isFirstPage }" @click="setCurrentPage(previousPage)" >
+                <span class="vdt-page-link">
                     {{ previousButtonText }}
                 </span>
             </li>
