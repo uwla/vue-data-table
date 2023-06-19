@@ -1,5 +1,5 @@
 export default {
-    name: "VueDataTablePerPage",
+    name: "VdtPerPage",
     computed: {
         textBeforeOptions() {
             return this.perPageText.split(":entries")[0].trim();

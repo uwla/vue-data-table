@@ -1,12 +1,12 @@
-import DataTableEntriesInfo from "./EntriesInfo/EntriesInfo.vue";
-import DataTablePerPage from "./PerPage/PerPage.vue";
-import DataTableExportData from "./ExportData/ExportData.vue";
-import DataTablePagination from "./Pagination/Pagination.vue";
-import DataTableSearchFilter from "./SearchFilter/SearchFilter.vue";
-import DataTableTable from "./Table/Table.vue";
-import DataTableTableCell from "./Table/TableCell.vue"
-import DataTableSortingIcon from "./SortableColumn/SortingIcon.vue";
-import DataTableSortingIndex from "./SortableColumn/SortingIndex.vue";
+import VdtEntriesInfo from "./EntriesInfo/EntriesInfo.vue";
+import VdtPerPage from "./PerPage/PerPage.vue";
+import VdtExportData from "./ExportData/ExportData.vue";
+import VdtPagination from "./Pagination/Pagination.vue";
+import VdtSearchFilter from "./SearchFilter/SearchFilter.vue";
+import VdtTable from "./Table/Table.vue";
+import VdtTableCell from "./Table/TableCell.vue"
+import VdtSortingIcon from "./SortableColumn/SortingIcon.vue";
+import VdtSortingIndex from "./SortableColumn/SortingIndex.vue";
 
 import {
     range,
@@ -20,12 +20,12 @@ import { parseColumnProps, parseTextProps } from "../parser";
 export default {
     name: "VueDataTable",
     components: {
-        DataTableEntriesInfo,
-        DataTableSearchFilter,
-        DataTablePagination,
-        DataTablePerPage,
-        DataTableTable,
-        DataTableExportData
+        VdtEntriesInfo,
+        VdtExportData,
+        VdtPagination,
+        VdtPerPage,
+        VdtSearchFilter,
+        VdtTable,
     },
     computed: {
         /**
@@ -635,7 +635,7 @@ export default {
             required: false,
             default: function() {
                 return {
-                    component: DataTableTableCell,
+                    component: VdtTableCell,
                     componentProps: {},
                     index: 0,
                     searchable: true,
@@ -700,13 +700,13 @@ export default {
         sortingIndexComponent: {
             type: Object,
             default: function() {
-                return DataTableSortingIndex;
+                return VdtSortingIndex;
             }
         },
         sortingIconComponent: {
             type: Object,
             default: function() {
-                return DataTableSortingIcon;
+                return VdtSortingIcon;
             }
         },
         tableClass: {

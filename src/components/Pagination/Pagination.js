@@ -1,5 +1,5 @@
 export default {
-    name: "VueDataTablePagination",
+    name: "VdtPagination",
     data() {
         return {
             pageToGo: 1

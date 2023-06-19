@@ -6,7 +6,7 @@
 </template>
 <script>
 export default {
-    name: "VueDataTableSortingIcon"
+    name: "VdtSortingIcon"
 };
 </script>
 <style src="./SortingIcon.scss" lang="scss"></style>

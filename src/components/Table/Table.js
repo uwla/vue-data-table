@@ -1,5 +1,5 @@
 export default {
-    name: "VueDataTableTable",
+    name: "VdtTable",
     methods: {
         /**
          * Propage upwards an event from a user custom component

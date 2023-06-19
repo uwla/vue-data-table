@@ -7,12 +7,17 @@ export function parseColumnProps(props) {
     let columns = props.columns || props.columnKeys.map(key => ({ key }));
 
     // extract the default column
-    const { defaultColumn } = props;
+    let { defaultColumn } = props;
 
     // merge default column with the columns
     columns = columns.map(function(column, i) {
         // get explicit title or guess title from `key`
         let title = column.title || toTitleCase(column.key);
+
+        // if a custom component is not set,
+        // we need to pass some props to the default component
+        if (! column.component)
+            defaultColumn.componentProps = { columnKey: column.key }
 
         return {
             ...defaultColumn,

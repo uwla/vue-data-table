@@ -1,5 +1,5 @@
 export default {
-    name: "VueDataTableSearchFilter",
+    name: "VdtSearchFilter",
     props: {
         searchText: String,
         search: String

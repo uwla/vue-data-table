@@ -1,5 +1,5 @@
 export default {
-    name: "VueDataTableEntriesInfo",
+    name: "VdtEntriesInfo",
     props: {
         entriesInfoText: {
             type: String,

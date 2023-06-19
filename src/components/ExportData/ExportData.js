@@ -1,7 +1,7 @@
 import exportFromJSON from "export-from-json";
 
 export default {
-    name: "VueDataTableExportData",
+    name: "VdtExportData",
     data() {
         return {
             selectedExport: ""

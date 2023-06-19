@@ -1,7 +1,7 @@
 export default {
-    name: "VueDataTableTableCell",
+    name: "VdtTableCell",
     props: {
-        column: Object,
+        columnKey: String,
         data: Object,
     }
 }

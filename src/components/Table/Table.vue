@@ -39,7 +39,7 @@
                 <tr v-for="(data, i) in dataDisplayed" :key="i">
                     <td v-for="(column, j) in columns" :key="j">
                         <component :is="column.component" @userEvent="emitUserEvent"
-                            v-bind="{ ...column.componentProps, column, data }" />
+                            v-bind="{ data, ...column.componentProps }" />
                     </td>
                 </tr>
             </tbody>

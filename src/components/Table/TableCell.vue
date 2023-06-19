@@ -1,4 +1,4 @@
 <template>
-    <span>{{ data[column.key] }}</span>
+    <span>{{ data[columnKey] }}</span>
 </template>
 <script src="./TableCell.js"></script>

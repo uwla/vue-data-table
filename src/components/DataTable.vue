@@ -1,30 +1,30 @@
 <template>
     <div class="vue-data-table">
-        <data-table-per-page
+        <vdt-per-page
             v-if="showPerPage"
             v-bind="propsPerPage"
             @set-per-page="setPerPageFromUserInput"
         />
-        <data-table-search-filter
+        <vdt-search-filter
             v-if="showSearchFilter"
             v-bind="propsSearchFilter"
             @set-search="setSearch"
         />
-        <data-table-table
+        <vdt-table
             v-bind="propsTable"
             @sort-column="sortColumn"
             @user-event="emitUserEvent"
         />
-        <data-table-entries-info
+        <vdt-entries-info
             v-if="showEntriesInfo"
             v-bind="propsEntriesInfo"
         />
-        <data-table-pagination
+        <vdt-pagination
             v-if="showPagination"
             v-bind="propsPagination"
             @set-page="setPage"
         />
-        <data-table-export-data
+        <vdt-export-data
             v-if="showDownloadButton"
             v-bind="propsExportData"
         />

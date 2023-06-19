@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-    name: "VueDataTableSortingIndex",
+    name: "VdtSortingIndex",
     props: {
         index: {
             type: Number,
