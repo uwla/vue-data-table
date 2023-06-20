@@ -6,7 +6,6 @@
     .icon {
         width: 0.75em;
         display: block;
-        height: 1em;
 
         &.asc::after {
             content: "\2193";
@@ -17,7 +16,6 @@
         }
 
         &.asc::after, &.desc::after {
-            font-size: 120%;
             line-height: 1;
             display: block;
             color: black;

@@ -6,7 +6,9 @@
                 <tr>
                     <!-- COLUMN HEADER -->
                     <th v-for="(column, i) in columns" :key="i"
-                        class="vdt-column" :class="{ sortable: column.sortable }"
+                        class="vdt-column"
+                        :class="column.cssClass"
+                        :data-sortable="column.sortable"
                         :data-sorting="column.sortingMode"
                         @click="$emit('sort-column', column)">
 

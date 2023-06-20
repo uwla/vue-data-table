@@ -6,7 +6,6 @@ import VdtSearchFilter from "./SearchFilter/SearchFilter.vue"
 import VdtSortingIcon from "./SortableColumn/SortingIcon.vue"
 import VdtSortingIndex from "./SortableColumn/SortingIndex.vue"
 import VdtTable from "./Table/Table.vue"
-import VdtTableCell from "./Table/TableCell.vue"
 
 import {
     range,
@@ -472,6 +471,7 @@ export default {
                 return
             }
 
+
             // case when the current mode is to only sort a single column
             if (this.sortingMode === "single") {
 
@@ -479,7 +479,7 @@ export default {
                 // skipping the current column
                 for (let col of this.sortableColumns) {
                     if (col.id !== column.id) {
-                        col.sortingMode = ""
+                        col.sortingMode = null
                         col.sortingIndex = -1
                     }
                 }
@@ -502,14 +502,14 @@ export default {
 
                 // column is being sorted in descending mode
                 // so, mark it as not being sorted
-                column.sortingMode = ""
+                column.sortingMode = null
                 this.columnsBeingSorted = []
                 return
             }
 
             // column is not being sorted
             // so, mark it as sorted in ascending mode
-            if (column.sortingMode === "") {
+            if (column.sortingMode === null) {
                 column.sortingMode = "asc"
                 column.sortingIndex = this.columnsBeingSorted.length + 1
                 this.columnsBeingSorted.push(column)
@@ -530,7 +530,7 @@ export default {
 
             // column is being sorted in descending mode
             // so, mark it as not being sorted
-            column.sortingMode = ""
+            column.sortingMode = null
             column.sortingIndex = -1
             this.columnsBeingSorted = this.columnsBeingSorted.filter(function(c) {
                 return c.id !== column.id
@@ -633,16 +633,7 @@ export default {
         defaultColumn: {
             type: Object,
             required: false,
-            default: function() {
-                return {
-                    component: VdtTableCell,
-                    componentProps: {},
-                    index: 0,
-                    searchable: true,
-                    sortable: true,
-                    type: "string",
-                }
-            }
+            default: () => ({})
         },
         defaultPerPage: {
             type: Number,

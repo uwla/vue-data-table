@@ -46,7 +46,7 @@
         top: 0;
         user-select: none;
 
-        &.sortable {
+        &[data-sortable] {
             cursor: pointer;
 
             &:hover {
@@ -55,9 +55,16 @@
         }
     }
 
+    .vdt-column-center span {
+        text-align: center;
+        width: 100%;
+        display: block;
+    }
+
     .vdt-column-content {
         display: flex;
         align-items: center;
+        justify-content: center;
     }
 
     .vdt-empty-body {
