@@ -3,13 +3,15 @@
  * lang files. It will recursively scan the lang directory and
  * register them with their "basename".
  */
-const files = require.context("./lang/", true, /\.js$/ui)
-const translations = {}
-files.keys().forEach(function(key) {
-    const translation = files(key).default
-    const lang = key.replace("./", "").split(".")[0]
-    translations[lang] = translation
-})
+import en from './lang/en'
+import es from './lang/es'
+import pt from './lang/pt-br'
+
+const translations = {
+    "pt-br": pt,
+    "en": en,
+    "es": es,
+}
 
 /* utility for the user to change or add new translations */
 const languageServiceProvider = {
