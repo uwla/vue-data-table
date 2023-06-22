@@ -63,7 +63,11 @@ export function isNullable(variable) {
  */
 export function arraySafeSort(array, compareFunction) {
     array.sort(function(a, b) {
-        return isNullable(a) || isNullable(b) ? 0 : compareFunction(a, b)
+        if (isNullable(a))
+            return 1
+        if (isNullable(b))
+            return -1
+        return compareFunction(a,b)
     })
 }
 
