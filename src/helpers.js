@@ -9,12 +9,22 @@ export function compareStrings(a, b) {
 }
 
 /**
- * Capitalize first letter and separate words by space
+ * Capitalize the first letter of each word and separate words by space
  * @param {String} str
  * @returns {String}
  */
 export function toTitleCase(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1).replace(/[-_]/gui, " ")
+    // convert snake case to title case
+    str = str.replace(/_/g, ' ');
+
+    // convert camel case to title case
+    str = str.replace(/([a-z])([A-Z])/g, '$1 $2');
+
+    // capitalize first letter of each word
+    str = str.replace(/\b\w/g, w => w[0].toUpperCase() + w.slice(1).toLowerCase())
+
+    // return the result
+    return str
 }
 
 /**

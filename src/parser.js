@@ -3,7 +3,7 @@ import { toTitleCase } from "./helpers"
 import translations from "./lang"
 
 // default common to all instances of VDT
-const globalDefaultColumn = {
+export const globalDefaultColumn = {
     component: VdtTableCell,
     componentProps: {},
     index: 0,
@@ -18,7 +18,7 @@ export function parseColumnProps(props) {
     let columns = props.columns || props.columnKeys.map(key => ({ key }))
 
     // extract the local default column
-    let { defaultColumn } = props
+    let defaultColumn = props.defaultColumn || {}
 
     // merge default column with the columns
     columns = columns.map(function(column, i) {
