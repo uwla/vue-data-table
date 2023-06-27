@@ -1,6 +1,9 @@
-import { mount, flushPromises } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { faker } from '@faker-js/faker'
 import VueDataTable from '../src/components/DataTable.vue'
+
+////////////////////////////////////////////////////////////////////////////////
+// DATA
 
 // number of fake entries
 const n = 400
@@ -15,10 +18,6 @@ const data = []
 for (let i = 0; i < n; i++)
     data.push({ name: names[i], job: jobs[i], gender: genders[i] })
 
-// little helper to get the text of the given row
-const rowText = (i) =>
-    wrapper.findAll(`tbody td:nth-child(${i})`).wrappers.map(el => el.text())
-
 // mount the component
 const wrapper = mount(VueDataTable, {
     propsData: {
@@ -28,43 +27,41 @@ const wrapper = mount(VueDataTable, {
     },
 })
 
+// vue is not updating fast enough... that's why we need a 10ms delay
+const DELAY = 10
+
+////////////////////////////////////////////////////////////////////////////////
+// HELPERS
+
+// get the text of the given row
+const rowText = (i) =>
+    wrapper.findAll(`tbody td:nth-child(${i})`).wrappers.map(el => el.text())
+
+// check the rows match the given data
+function testRowsMatchData(data) {
+    setTimeout(() => {
+        expect(rowText(1)).toEqual(data.map(x=>x.name))
+        expect(rowText(2)).toEqual(data.map(x=>x.gender))
+        expect(rowText(3)).toEqual(data.map(x=>x.job))
+    }, DELAY)
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // TESTS
 
-test('it shows the correct number of rows', async () => {
-    // in order to test to work, it is necessary that  the  computed  properties
-    // have been all updated. But there is a little delay  with  the  update  of
-    // computed properties. One  workaround  is  to  force  the  update  of  the
-    // desired properties.
-    await wrapper.setData({ currentPerPage: n })
-
-    // Another workaround would be to wait for some miliseconds like this:
-    // setTimeout(() => {
-    //     const rows = wrapper.find('tbody tr')
-    //     expect(rows.length).toBe(n)
-    // }, 300)
-
-    const rows = wrapper.findAll('tbody tr')
-    expect(rows.length).toBe(n)
-})
-
-test('it shows the correct data on the table', () => {
-    const displayedNames = rowText(1)
-    const displayedGenders = rowText(2)
-    const displayedJobs = rowText(3)
-    expect(displayedNames).toEqual(names)
-    expect(displayedGenders).toEqual(genders)
-    expect(displayedJobs).toEqual(jobs)
+test('it shows the correct data on the table', async () => {
+    testRowsMatchData(data)
 })
 
 test('it filters data', async () => {
     let search = 'Engineer'
     await wrapper.find('.vdt-search input').setValue(search)
-    let filteredJobs = jobs.filter(s => s.includes(search))
-    expect(rowText(3)).toEqual(filteredJobs)
+    let copy = data.filter(x => x.job.includes(search))
+    testRowsMatchData(copy)
 
     // clear the field aftwards
     await wrapper.find('.vdt-search input').setValue("")
-    expect(rowText(3)).toEqual(jobs)
+    testRowsMatchData(data)
 })
 
 test('it sorts data', async () => {
@@ -84,6 +81,36 @@ test('it sorts data', async () => {
     // click the button again cancels sorting
     await wrapper.find('th:first-child').trigger('click')
     expect(rowText(1)).toEqual(names)
+})
+
+test('it sorts only one column', async () => {
+    let copy = []
+
+    // sets the sorting mode
+    await wrapper.setProps({ sortingMode: 'single' })
+
+    // sort by first column
+    await wrapper.find('th:first-child').trigger('click')
+    copy = [... data]
+    copy.sort((a,b) => a.name.localeCompare(b.name))
+    testRowsMatchData(copy)
+
+    // sort by second column
+    await wrapper.find('th:nth-child(2)').trigger('click')
+    copy = [... data]
+    copy.sort((a,b) => a.gender.localeCompare(b.gender))
+    testRowsMatchData(copy)
+
+    // sort by third row
+    await wrapper.find('th:nth-child(3)').trigger('click')
+    copy = [... data]
+    copy.sort((a,b) => a.job.localeCompare(b.job))
+    testRowsMatchData(copy)
+
+    // reset things
+    await wrapper.find('th:nth-child(3)').trigger('click')
+    await wrapper.find('th:nth-child(3)').trigger('click')
+    await wrapper.setProps({ sortingMode: 'multiple' })
 })
 
 test('it sorts filtered data', async () => {
@@ -113,16 +140,9 @@ test('it sorts filtered data', async () => {
 })
 
 test('it sorts multiple rows', async () => {
+
     // copy the data
     let copy = [...data]
-
-    // little helper to avoid repetition
-    let testIt = () => {
-        let orderedNames = copy.map(x => x.name)
-        let orderedJobs = copy.map(x => x.job)
-        expect(rowText(1)).toEqual(orderedNames)
-        expect(rowText(3)).toEqual(orderedJobs)
-    }
 
     // sort by second column, then by third column
     await wrapper.find('th:nth-child(2)').trigger('click')
@@ -132,7 +152,7 @@ test('it sorts multiple rows', async () => {
         if (a[key] == b[key]) key = 'job'
         return a[key].localeCompare(b[key])
     })
-    testIt()
+    testRowsMatchData(copy)
 
    // reverse sort by third column
     await wrapper.find('th:nth-child(3)').trigger('click')
@@ -142,7 +162,7 @@ test('it sorts multiple rows', async () => {
         key = 'job'
         return b[key].localeCompare(a[key])
     })
-    testIt()
+    testRowsMatchData(copy)
 
     // reverse sort by second column
     await wrapper.find('th:nth-child(2)').trigger('click')
@@ -151,15 +171,31 @@ test('it sorts multiple rows', async () => {
         if (a[key] == b[key]) key = 'job'
         return b[key].localeCompare(a[key])
     })
-    testIt()
+    testRowsMatchData(copy)
 
     // unsort second column
     await wrapper.find('th:nth-child(2)').trigger('click')
     copy.sort((a,b) => a.job.localeCompare(b.job))
-    testIt()
+    testRowsMatchData(copy)
 
     // unsort third column
     await wrapper.find('th:nth-child(3)').trigger('click')
+})
+
+test('it sets correct per page sizes', async () => {
+    let perPageSizes = [25, 50, 100, 200]
+    await wrapper.setProps({ perPageSizes })
+
+    // test default per page
+    let select = wrapper.find('.vdt-perpage select')
+    expect(Number(select.element.value)).toBe(perPageSizes[0])
+
+    // test rows length with different per page sizes
+    for (let size of perPageSizes)
+    {
+        await select.setValue(size)
+        testRowsMatchData(data.slice(0, size))
+    }
 })
 
 // TODO:
