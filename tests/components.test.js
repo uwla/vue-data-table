@@ -1,12 +1,14 @@
 import { mount } from '@vue/test-utils'
 import { faker } from '@faker-js/faker'
 import VueDataTable from '../src/components/DataTable.vue'
+import {stringReplaceFromArray} from '../src/helpers'
+import translations from '../src/lang'
 
 ////////////////////////////////////////////////////////////////////////////////
 // DATA
 
 // number of fake entries
-const n = 400
+const n = 800
 
 // generate fake data
 const names = faker.helpers.multiple(faker.person.fullName, { count: n })
@@ -22,10 +24,20 @@ for (let i = 0; i < n; i++)
 const wrapper = mount(VueDataTable, {
     propsData: {
         data: data,
-        columnKeys: ['name', 'gender', 'job'],
+        columns: [
+            { key: 'name' },
+            { key: 'gender' },
+            { key: 'job' },
+        ],
         perPageSizes: [n], // this should render all rows in the table
     },
 })
+
+const col1 = wrapper.find('th:nth-child(1)')
+const col2 = wrapper.find('th:nth-child(2)')
+const col3 = wrapper.find('th:nth-child(3)')
+const searchInput = wrapper.find('.vdt-search input')
+const paginationInput = wrapper.find('.vdt-pagination input')
 
 // vue is not updating fast enough... that's why we need a 10ms delay
 const DELAY = 10
@@ -33,9 +45,15 @@ const DELAY = 10
 ////////////////////////////////////////////////////////////////////////////////
 // HELPERS
 
+// click on something
+async function click(el) {
+    el.trigger('click')
+}
+
 // get the text of the given row
-const rowText = (i) =>
-    wrapper.findAll(`tbody td:nth-child(${i})`).wrappers.map(el => el.text())
+function rowText(i) {
+    return wrapper.findAll(`tbody td:nth-child(${i})`).wrappers.map(el => el.text())
+}
 
 // check the rows match the given data
 function testRowsMatchData(data) {
@@ -54,14 +72,55 @@ test('it shows the correct data on the table', async () => {
 })
 
 test('it filters data', async () => {
-    let search = 'Engineer'
-    await wrapper.find('.vdt-search input').setValue(search)
-    let copy = data.filter(x => x.job.includes(search))
-    testRowsMatchData(copy)
+    let searchValues = ['Engineer', 'Executive', 'Designer', 'Manager']
+    for (let search of searchValues)
+    {
+        await wrapper.find('.vdt-search input').setValue(search)
+        let copy = data.filter(x => x.job.includes(search))
+        testRowsMatchData(copy)
+
+        // also, test the text of filtered data
+        let m = copy.length
+        let f = (m > 0) ? 1 : 0
+        let text = translations["en"]["infoFilteredText"]
+        let placeholders = [':first', ':last', ':filtered', ':total']
+        text = stringReplaceFromArray(text, placeholders, [f, m, m, n])
+        expect(wrapper.find('.vdt-info').text()).toBe(text)
+    }
 
     // clear the field aftwards
     await wrapper.find('.vdt-search input').setValue("")
     testRowsMatchData(data)
+})
+
+test('it filters only searchable columns', async () => {
+    await wrapper.setProps({
+        columns: [
+            { key: 'name' },
+            { key: 'gender', searchable: false },
+            { key: 'job', searchable: false },
+        ]
+    })
+
+    let searchValues = ['Fe', 'Ma']
+    for (let search of searchValues)
+    {
+        await searchInput.setValue(search)
+        let copy = data.filter(x => x.name.includes(search))
+        testRowsMatchData(copy)
+    }
+
+    // clear the field aftwards
+    await searchInput.setValue("")
+
+    // reset columns
+    await wrapper.setProps({
+        columns: [
+            { key: 'name' },
+            { key: 'gender' },
+            { key: 'job' },
+        ]
+    })
 })
 
 test('it sorts data', async () => {
@@ -69,17 +128,17 @@ test('it sorts data', async () => {
     let orderedNames = [... names]
 
     // sort by first column
-    await wrapper.find('th:first-child').trigger('click')
+    await click(col1)
     orderedNames.sort()
     expect(rowText(1)).toEqual(orderedNames)
 
     // sort again, which just reverses the sort
-    await wrapper.find('th:first-child').trigger('click')
+    await click(col1)
     orderedNames.reverse()
     expect(rowText(1)).toEqual(orderedNames)
 
     // click the button again cancels sorting
-    await wrapper.find('th:first-child').trigger('click')
+    await click(col1)
     expect(rowText(1)).toEqual(names)
 })
 
@@ -90,49 +149,49 @@ test('it sorts only one column', async () => {
     await wrapper.setProps({ sortingMode: 'single' })
 
     // sort by first column
-    await wrapper.find('th:first-child').trigger('click')
+    await click(col1)
     copy = [... data]
     copy.sort((a,b) => a.name.localeCompare(b.name))
     testRowsMatchData(copy)
 
     // sort by second column
-    await wrapper.find('th:nth-child(2)').trigger('click')
+    await click(col2)
     copy = [... data]
     copy.sort((a,b) => a.gender.localeCompare(b.gender))
     testRowsMatchData(copy)
 
     // sort by third row
-    await wrapper.find('th:nth-child(3)').trigger('click')
+    await click(col3)
     copy = [... data]
     copy.sort((a,b) => a.job.localeCompare(b.job))
     testRowsMatchData(copy)
 
     // reset things
-    await wrapper.find('th:nth-child(3)').trigger('click')
-    await wrapper.find('th:nth-child(3)').trigger('click')
+    await click(col3)
+    await click(col3)
     await wrapper.setProps({ sortingMode: 'multiple' })
 })
 
 test('it sorts filtered data', async () => {
     let search = 'Executive'
-    await wrapper.find('.vdt-search input').setValue(search)
+    await searchInput.setValue(search)
 
     // clone the array
     let names = data.filter(x => x.job.includes(search)).map(x => x.name)
     let orderedNames = [...names]
 
     // sort by first column
-    await wrapper.find('th:first-child').trigger('click')
+    await click(col1)
     orderedNames.sort()
     expect(rowText(1)).toEqual(orderedNames)
 
     // sort again, which just reverses the sort
-    await wrapper.find('th:first-child').trigger('click')
+    await click(col1)
     orderedNames.reverse()
     expect(rowText(1)).toEqual(orderedNames)
 
     // click the button again cancels sorting
-    await wrapper.find('th:first-child').trigger('click')
+    await click(col1)
     expect(rowText(1)).toEqual(names)
 
     // clear the field aftwards
@@ -140,13 +199,12 @@ test('it sorts filtered data', async () => {
 })
 
 test('it sorts multiple rows', async () => {
-
     // copy the data
     let copy = [...data]
 
     // sort by second column, then by third column
-    await wrapper.find('th:nth-child(2)').trigger('click')
-    await wrapper.find('th:nth-child(3)').trigger('click')
+    await click(col2)
+    await click(col3)
     copy.sort((a,b) => {
         let key = 'gender'
         if (a[key] == b[key]) key = 'job'
@@ -155,7 +213,7 @@ test('it sorts multiple rows', async () => {
     testRowsMatchData(copy)
 
    // reverse sort by third column
-    await wrapper.find('th:nth-child(3)').trigger('click')
+    await click(col3)
     copy.sort((a,b) => {
         let key = 'gender'
         if (a[key] != b[key]) return a[key].localeCompare(b[key])
@@ -165,7 +223,7 @@ test('it sorts multiple rows', async () => {
     testRowsMatchData(copy)
 
     // reverse sort by second column
-    await wrapper.find('th:nth-child(2)').trigger('click')
+    await click(col2)
     copy.sort((a,b) => {
         let key = 'gender'
         if (a[key] == b[key]) key = 'job'
@@ -174,13 +232,49 @@ test('it sorts multiple rows', async () => {
     testRowsMatchData(copy)
 
     // unsort second column
-    await wrapper.find('th:nth-child(2)').trigger('click')
+    await click(col2)
     copy.sort((a,b) => a.job.localeCompare(b.job))
     testRowsMatchData(copy)
 
     // unsort third column
-    await wrapper.find('th:nth-child(3)').trigger('click')
+    await click(col3)
 })
+
+test('it sorts only sortable columns', async () => {
+    await wrapper.setProps({
+        columns: [
+            { key: 'name', sortable: false },
+            { key: 'gender', sortable: false },
+            { key: 'job' },
+        ]
+    })
+
+    // first and second columns are not sortable
+    await click(col1)
+    testRowsMatchData(data)
+    await click(col2)
+    testRowsMatchData(data)
+
+    // third column is sortable
+    await click(col3)
+    let copy = [...data]
+    copy.sort((a,b) => a.job.localeCompare(b.job))
+    testRowsMatchData(copy)
+
+    // 'unsort' it
+    await click(col3)
+    await click(col3)
+
+    // reset props
+    await wrapper.setProps({
+        columns: [
+            { key: 'name' },
+            { key: 'gender' },
+            { key: 'job' },
+        ]
+    })
+})
+
 
 test('it sets correct per page sizes', async () => {
     let perPageSizes = [25, 50, 100, 200]
@@ -215,15 +309,15 @@ test('it changes pages by clicking on buttons', async () => {
     testRowsMatchData(data.slice(0, perPage))
 
     // go to the next page
-    await nextBtn.trigger('click')
+    await click(nextBtn)
     testRowsMatchData(data.slice(perPage, perPage*2))
 
     // go to the next page again
-    await nextBtn.trigger('click')
+    await click(nextBtn)
     testRowsMatchData(data.slice(perPage*2, perPage*3))
 
     // go back one page
-    await prevBtn.trigger('click')
+    await click(prevBtn)
     testRowsMatchData(data.slice(perPage, perPage*2))
 
     // first entry of the last page
@@ -231,24 +325,24 @@ test('it changes pages by clicking on buttons', async () => {
     let firstEntry = (lastPage - 1) * perPage
 
     // go to last page by clicking on the last page button
-    await buttons.at(l-2).trigger('click')
+    await click(buttons.at(l-2))
     testRowsMatchData(data.slice(firstEntry, firstEntry + perPage))
 
     // go to first page by clicking on the first button
-    await buttons.at(1).trigger('click')
+    await click(buttons.at(1))
     testRowsMatchData(data.slice(0, perPage))
 
     // go to the third page by clicking the 'third-page' button
-    await buttons.at(2).trigger('click')
+    await click(buttons.at(2))
     testRowsMatchData(data.slice(perPage*2, perPage*3))
 
 })
 
 test('it changes pages by setting current page', async () => {
-    const paginationInput = wrapper.find('.vdt-pagination input')
     const lastPage = paginationInput.attributes('max')
 
-    for (let i = 1; i <= lastPage; i+=1) {
+    for (let i = 1; i <= lastPage; i+=1)
+    {
         await paginationInput.setValue(i)
         let end = perPage*i
         let start = end - perPage
@@ -256,9 +350,47 @@ test('it changes pages by setting current page', async () => {
     }
 })
 
-// test('it shows the correct number of entries', async () => {
-//
-// })
+test('it changes pages on filtered data sorted by multiple columns', async () => {
+    // set smaller per page sizes
+    await wrapper.setProps({ perPageSizes: [10, 20, 50], defaultPerPage: 10 })
+
+    // sort by second column, then by third column
+    await click(col2)
+    await click(col3)
+
+    let searchValues = ['Engineer', 'Manager']
+    for (let search of searchValues)
+    {
+        // filter data
+        await searchInput.setValue(search)
+        let copy = data.filter(x => x.job.includes(search))
+
+        // sort data
+        copy.sort((a,b) => {
+            let key = 'gender'
+            if (a[key] == b[key]) key = 'job'
+            return a[key].localeCompare(b[key])
+        })
+
+        let lastPage = Math.ceil(copy.length/10)
+        for (let i = 1; i <= lastPage; i+=1)
+        {
+            await paginationInput.setValue(i)
+            let end = perPage*i
+            let start = end - perPage
+            testRowsMatchData(copy.slice(start, end))
+        }
+    }
+
+    // clear search
+    await searchInput.setValue("")
+
+    // clear sorting
+    await click(col2)
+    await click(col2)
+    await click(col3)
+    await click(col3)
+})
 
 // TODO:
 //  - test sorting data
