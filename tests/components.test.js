@@ -1,14 +1,15 @@
 import { mount } from '@vue/test-utils'
 import { faker } from '@faker-js/faker'
 import VueDataTable from '../src/components/DataTable.vue'
-import {stringReplaceFromArray} from '../src/helpers'
+import VdtActionButtons from "../src/components/ActionButtons/ActionButtons.vue"
+import { stringReplaceFromArray } from '../src/helpers'
 import translations from '../src/lang'
 
 ////////////////////////////////////////////////////////////////////////////////
 // DATA
 
 // number of fake entries
-const n = 800
+const n = 500
 
 // generate fake data
 const names = faker.helpers.multiple(faker.person.fullName, { count: n })
@@ -75,11 +76,13 @@ test('it filters data', async () => {
     let searchValues = ['Engineer', 'Executive', 'Designer', 'Manager']
     for (let search of searchValues)
     {
-        await wrapper.find('.vdt-search input').setValue(search)
+        await searchInput.setValue(search)
+
+        // test filtered rows
         let copy = data.filter(x => x.job.includes(search))
         testRowsMatchData(copy)
 
-        // also, test the text of filtered data
+        // test the text of filtered data
         let m = copy.length
         let f = (m > 0) ? 1 : 0
         let text = translations["en"]["infoFilteredText"]
@@ -89,9 +92,22 @@ test('it filters data', async () => {
     }
 
     // clear the field aftwards
-    await wrapper.find('.vdt-search input').setValue("")
+    await searchInput.setValue("")
     testRowsMatchData(data)
 })
+
+test('it filters data on multiple columns', async () => {
+    let searchValues = ["na", "si", "Te"]
+    for (let search of searchValues)
+    {
+        await searchInput.setValue(search)
+        let copy = data.filter(x => x.name.includes(search) || x.job.includes(search))
+        testRowsMatchData(copy)
+    }
+
+    await searchInput.setValue("")
+})
+
 
 test('it filters only searchable columns', async () => {
     await wrapper.setProps({
@@ -275,9 +291,21 @@ test('it sorts only sortable columns', async () => {
     })
 })
 
+// the per page for the pagination tests
+const perPage = 25
+const perPageSizes = [25, 50, 100, 200]
+
+test('it displays correct per page sizes', async () => {
+    await wrapper.setProps({ perPageSizes })
+
+    let options = wrapper.findAll('.vdt-perpage option').wrappers
+    let values = []
+    for (let option of options)
+        values.push(Number(option.element.value))
+    expect(values).toEqual(perPageSizes)
+})
 
 test('it sets correct per page sizes', async () => {
-    let perPageSizes = [25, 50, 100, 200]
     await wrapper.setProps({ perPageSizes })
 
     // test default per page
@@ -291,9 +319,6 @@ test('it sets correct per page sizes', async () => {
         testRowsMatchData(data.slice(0, size))
     }
 })
-
-// the per page for the pagination tests
-const perPage = 25
 
 test('it changes pages by clicking on buttons', async () => {
     await wrapper.setData({ currentPerPage: perPage })
@@ -392,7 +417,87 @@ test('it changes pages on filtered data sorted by multiple columns', async () =>
     await click(col3)
 })
 
-// TODO:
-//  - test sorting data
-//  - test filtering data
-//  - test pagination
+test('it renders custom components', async () => {
+    // The component to test
+    const customComponent = {
+        props: { data: Object },
+        render(h) {
+            return h('p', [
+                h('b', this.data.name),
+                ' works as ',
+                h('i', this.data.job)
+            ]);
+        }
+    }
+
+    // use this component in the first column
+    await wrapper.setProps({
+        columns: [
+            { title: "Person info", component: customComponent },
+            { key: 'gender' },
+        ],
+        perPageSizes: [n],
+    })
+
+    // get the text to test, which is within by bold and italitc tags
+    let _names = wrapper.findAll("tbody td b").wrappers.map(t => t.text())
+    let _jobs = wrapper.findAll("tbody td i").wrappers.map(t => t.text())
+
+    setTimeout(() => {
+        expect(_names).toEqual(names)
+        expect(_jobs).toEqual(jobs)
+    }, DELAY)
+})
+
+test('it emmits user events from custom components', async () => {
+    await wrapper.setProps({
+        columns: [
+            { key: 'name' },
+            { key: 'gender' },
+            { key: 'job' },
+            { title: 'actions', component: VdtActionButtons },
+        ],
+        perPageSizes,
+    })
+
+    // which buttons to click
+    let clickedButtons = [
+        [2, 'view'],
+        [5, 'edit'],
+        [7, 'edit'],
+        [10, 'delete'],
+    ]
+
+    // click many buttons
+    for (let clicked of clickedButtons) {
+        let row = clicked[0]
+        let action = clicked[1]
+        let selector = `tr:nth-child(${row}) .vdt-action-${action}`
+        await click(wrapper.find(selector))
+    }
+
+    // Wait until $emits have been handled
+    await wrapper.vm.$nextTick()
+
+    //
+    const event = wrapper.emitted('userEvent')
+    // assert event has been emitted
+    expect(event).toBeTruthy()
+
+    // assert event count
+    expect(event.length).toBe(clickedButtons.length)
+
+    let eventCounter = 0
+    for (let clicked of clickedButtons) {
+        // determine the payload
+        let row = clicked[0]
+        let action = clicked[1]
+        let payload = [{ action: action, data: data[row-1] }]
+
+        // assert payload
+        expect(event[eventCounter]).toEqual(payload)
+
+        // increment counter
+        eventCounter += 1
+    }
+})
