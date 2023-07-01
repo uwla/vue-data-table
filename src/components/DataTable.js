@@ -80,17 +80,7 @@ export default {
             }
             return data.filter(function(row) {
                 return searchableColumns.some(function(column) {
-                    const cell = column.key,
-                        value = row[cell]
-                    if (typeof value === "string") {
-                        return value
-                            .toLowerCase()
-                            .includes(search.toLowerCase())
-                    }
-                    if (typeof value === "number") {
-                        return value.toString().includes(search)
-                    }
-                    return false
+                    return column.searchFunction(row, search, column.key)
                 })
             })
         },

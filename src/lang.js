@@ -5,10 +5,10 @@
  */
 import en from './lang/en'
 import es from './lang/es'
-import pt from './lang/pt-br'
+import ptBr from './lang/pt-br'
 
 const translations = {
-    "pt-br": pt,
+    "pt-br": ptBr,
     "en": en,
     "es": es,
 }

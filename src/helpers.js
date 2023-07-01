@@ -9,6 +9,16 @@ export function compareStrings(a, b) {
 }
 
 /**
+ * Perform a comparison of numeric values (possibly strings)
+ * @param {String} a
+ * @param {String} b
+ * @returns {Boolean}
+ */
+export function compareNumbers(a, b) {
+    return Number(a) - Number(b)
+}
+
+/**
  * Capitalize the first letter of each word and separate words by space
  * @param {String} str
  * @returns {String}
@@ -88,24 +98,20 @@ export function arraySafeSort(array, compareFunction) {
  * @returns {void}
  */
 export function sortDataByColumn(data, column) {
-    const { key } = column
-    let compareFunction
+    let { compareFunction, sortingMode } = column
 
-    /* pick up the compare function, allowing user to set a custom one */
-    if (column.sortingFunction) {
-        compareFunction = column.sortingFunction
-    } else if (column.type === "number") {
-        compareFunction = (a, b) => Number(a[key]) - Number(b[key])
-    } else {
-        compareFunction = (a, b) => compareStrings(a[key], b[key])
+    if (! compareFunction) {
+        let { key, type } = column
+        if (type === "string")
+            compareFunction = (a, b) => compareStrings(a[key], b[key])
+        if (type === "numeric" || type === "number")
+            compareFunction = (a, b) => compareNumbers(a[key], b[key])
     }
 
-    /* sort */
-    if (column.sortingMode === "desc") {
+    if (sortingMode === "desc")
         arraySafeSort(data, (a, b) => compareFunction(b, a))
-    } else {
+    else
         arraySafeSort(data, (a, b) => compareFunction(a, b))
-    }
 }
 
 /**
@@ -122,4 +128,27 @@ export function getEventTargetValue(event) {
         return target.value
     }
     return null
+}
+
+
+/**
+ * Performs search on strings
+ * @param {Object} data
+ * @param {String} search
+ * @param {String} key
+ * @returns {Boolean}
+ */
+export function searchStringColumn(data, search, key) {
+    return data[key].toLowerCase().includes(search.toLowerCase())
+}
+
+/**
+ * Performs search on numeric values
+ * @param {Object} data
+ * @param {String} search
+ * @param {String} key
+ * @returns {Boolean}
+ */
+export function searchNumericColumn(data, search, key) {
+    return data[key].toString().includes(search)
 }

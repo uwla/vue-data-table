@@ -1,8 +1,8 @@
 import VdtTableCell from "./components/Table/TableCell.vue"
-import { toTitleCase } from "./helpers"
+import { searchNumericColumn, searchStringColumn, toTitleCase } from "./helpers"
 import translations from "./lang"
 
-// default common to all instances of VDT
+// default column to all instances of VDT
 export const globalDefaultColumn = {
     component: VdtTableCell,
     componentProps: {},
@@ -12,9 +12,14 @@ export const globalDefaultColumn = {
     type: "string",
 }
 
+const type2searchFunction = {
+    string: searchStringColumn,
+    numeric: searchNumericColumn,
+    number: searchNumericColumn,
+}
+
 export function parseColumnProps(props) {
-    // extract the columns
-    // if not set, columns are derived from columnKeys
+    // extract the columns. If not set, columns are derived from columnKeys
     let columns = props.columns || props.columnKeys.map(key => ({ key }))
 
     // extract the local default column
@@ -22,41 +27,39 @@ export function parseColumnProps(props) {
 
     // merge default column with the columns
     columns = columns.map(function(column, i) {
-        // get explicit title or guess title from `key`
-        let title = column.title || toTitleCase(column.key)
+        let { key } = column
 
-        // if a custom component is not set,
-        // we need to pass some props to the default component
+        // if component not set, need to pass the key to the default component
         if (column.component == null)
-            column.componentProps = { columnKey: column.key }
+            column.componentProps = { columnKey: key }
 
-        // also, by default,
-        // columns with custom components shall not be sortable or searchable
+        // by default, columns with custom components are not sortable or searchable
         if (column.component != null) {
-            column.searchable = column.searchable || false
-            column.sortable = column.sortable || false
+            column.searchable ??= false
+            column.sortable ??= false
         }
 
-        return {
-            ...globalDefaultColumn,
-            ...defaultColumn,
-            ...column,
+        // merge the column with the default values
+        column = { ...globalDefaultColumn, ...defaultColumn, ...column }
 
-            // options below are used internally,
-            // and shall not be overwritten by the user
-            sortingIndex: -1,
-            sortingMode: null,
-            title: title,
-            id: i,
-        }
+        // some default values are dynamically computed
+        let { type } = column
+        column.title ??= toTitleCase(key)
+        column.searchFunction ??= type2searchFunction[type]
+
+        // options below are used internally
+        // shall not be overwritten by the user
+        column.sortingIndex = -1
+        column.sortingMode = null
+        column.id = i
+
+        return column
     })
 
     /* order the columns by the index, so the user can
     set a custom order for the columns to be displayed */
     columns.sort(function(a, b) {
-        if (a.index !== b.index) {
-            return a.index - b.index
-        }
+        if (a.index !== b.index) return a.index - b.index
         return a.id - b.id
     })
 
