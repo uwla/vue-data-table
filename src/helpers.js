@@ -100,7 +100,7 @@ export function arraySafeSort(array, compareFunction) {
 export function sortDataByColumn(data, column) {
     let { compareFunction, sortingMode } = column
 
-    if (! compareFunction) {
+    if (isNullable(compareFunction)) {
         let { key, type } = column
         if (type === "string")
             compareFunction = (a, b) => compareStrings(a[key], b[key])

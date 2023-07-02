@@ -6,7 +6,7 @@ import translations from "./lang"
 export const globalDefaultColumn = {
     component: VdtTableCell,
     componentProps: {},
-    index: 0,
+    index: 1000,
     searchable: true,
     sortable: true,
     type: "string",
@@ -59,8 +59,7 @@ export function parseColumnProps(props) {
     /* order the columns by the index, so the user can
     set a custom order for the columns to be displayed */
     columns.sort(function(a, b) {
-        if (a.index !== b.index) return a.index - b.index
-        return a.id - b.id
+        return a.index - b.index
     })
 
     // finally, return the parsed columns
