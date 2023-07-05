@@ -10,7 +10,7 @@ import VdtTable from "./Table/Table.vue"
 import {
     range,
     isNullable,
-    sortDataByColumn,
+    sortDataByColumns,
     stringReplaceFromArray,
     getEventTargetValue,
 } from "../helpers"
@@ -97,18 +97,7 @@ export default {
                 return data
             }
 
-            // create a copy of data and columns
-            data = [...data]
-            var columns = [...columnsBeingSorted]
-
-            // reverse the columns, so that the first columns
-            // will be the last to be sorted. Doing this, we
-            // can sort by multiple columns in such way that
-            // the columns that were select first will have
-            // priority in the process.
-            columns.reverse()
-            columns.forEach(column => sortDataByColumn(data, column))
-            return data
+            return sortDataByColumns(data, columnsBeingSorted)
         },
 
         /**
@@ -463,7 +452,7 @@ export default {
 
 
             // case when the current mode is to only sort a single column
-            if (this.sortingMode === "single") {
+            if (this.sortingMode == "single") {
 
                 // mark other columns as not being sorted
                 // skipping the current column
@@ -476,7 +465,7 @@ export default {
 
                 // the column is not being sorted
                 // so, mark it as sorted in ascending mode
-                if (column.sortingMode === "") {
+                if (column.sortingMode === null) {
                     column.sortingMode = "asc"
                     this.columnsBeingSorted = [column]
                     return
@@ -717,6 +706,10 @@ export default {
         },
         lang: {
             handler: "parseTextProps"
+        },
+        perPageSizes: {
+            handler: "setDefaults",
+            deep: true
         }
     }
 }

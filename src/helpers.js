@@ -76,19 +76,37 @@ export function isNullable(variable) {
 }
 
 /**
- * Sort an array, but skip null values in the array
+ * Sort an array using stable sort
+ * @param {Array} array to be sorted
+ * @param {Function} compare function
+ * @returns {array}
+ */
+export function stableSort(arr, compare) {
+    return arr.map((item, index) => ({item, index}))
+        .sort((a, b) => compare(a.item, b.item) || a.index - b.index)
+        .map(({item}) => item)
+}
+/**
+ * Safely compare two items, which may be nullable
+ * @param {Function} compare function
+ * @returns {Function}
+ */
+export function stableCompare(compareFunction) {
+    return function(a, b) {
+        if (isNullable(a)) return 1
+        if (isNullable(b)) return -1
+        return compareFunction(a,b)
+    }
+}
+
+/**
+ * Safely stable sort an array that may have null elements
  * @param {Array} array
  * @param {Function} compareFunction
- * @returns {void}
+ * @returns {Array}
  */
 export function arraySafeSort(array, compareFunction) {
-    array.sort(function(a, b) {
-        if (isNullable(a))
-            return 1
-        if (isNullable(b))
-            return -1
-        return compareFunction(a,b)
-    })
+    return stableSort(array, stableCompare(compareFunction))
 }
 
 /**
@@ -97,21 +115,36 @@ export function arraySafeSort(array, compareFunction) {
  * @param {Array} column
  * @returns {void}
  */
-export function sortDataByColumn(data, column) {
-    let { compareFunction, sortingMode } = column
+export function sortDataByColumns(data, columns) {
+    let l = columns.length
 
-    if (isNullable(compareFunction)) {
-        let { key, type } = column
-        if (type === "string")
-            compareFunction = (a, b) => compareStrings(a[key], b[key])
-        if (type === "numeric" || type === "number")
-            compareFunction = (a, b) => compareNumbers(a[key], b[key])
+    let fn = (a, b) => {
+        let i = 0
+        while (i < l) {
+            let c = columns[i]
+            let { sortingMode, compareFunction: f } = c
+
+            if (isNullable(f))
+            {
+                let { key, type } = c
+                if (type === "string")
+                    f = (a,b) => compareStrings(a[key], b[key])
+                if (type === "numeric" || type === "number")
+                    f = (a,b) => compareNumbers(a[key], b[key])
+            }
+
+            let result
+            if (sortingMode == "asc") result = f(a, b)
+            else result = f(b, a)
+
+            if (result != 0)
+                return result
+            i += 1
+        }
+        return 0
     }
 
-    if (sortingMode === "desc")
-        arraySafeSort(data, (a, b) => compareFunction(b, a))
-    else
-        arraySafeSort(data, (a, b) => compareFunction(a, b))
+    return arraySafeSort(data, fn)
 }
 
 /**

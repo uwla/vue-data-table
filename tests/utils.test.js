@@ -12,6 +12,6 @@ test('test safe sort', function() {
     let
     arr = [2, 45, null, 10, 20, null, 15]
     const fn = (a, b) => a - b
-    arraySafeSort(arr, fn)
+    arr = arraySafeSort(arr, fn)
     expect(arr).toEqual([2, 10, 15, 20, 45, null, null])
 })
