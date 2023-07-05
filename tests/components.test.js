@@ -158,32 +158,40 @@ test('it sorts data', async () => {
     }
 })
 
-// test('it sorts only one column', async () => {
-//     let arr
-//
-//     // sets the sorting mode
-//     await wrapper.setProps({ sortingMode: 'single' })
-//
-//     // // sort by first column
-//     await click(col(1))
-//     arr = arraySafeSort(data, (a,b) => a.name.localeCompare(b.name))
-//     testRowsMatchData(arr)
-//
-//     // // sort by second column
-//     // await click(col(2))
-//     // arr = arraySafeSort(data, (a,b) => a.gender.localeCompare(b.gender))
-//     // testRowsMatchData(arr)
-//
-//     // sort by third column
-//     // await click(col(3))
-//     // arr = arraySafeSort(data, (a,b) => a.job.localeCompare(b.job))
-//     // testRowsMatchData(arr)
-//
-//     // reset things
-//     await click(col(1))
-//     await click(col(1))
-//     await wrapper.setProps({ sortingMode: 'multiple' })
-// })
+
+test('it sorts only one column', async () => {
+    let arr
+
+    // sets the sorting mode
+    await wrapper.setProps({ sortingMode: 'single' })
+
+    // // sort by first column
+    await click(col(1))
+    arr = arraySafeSort(data, (a,b) => a.name.localeCompare(b.name))
+    testRowsMatchData(arr)
+
+    // // sort by second column
+    await click(col(2))
+    arr = arraySafeSort(data, (a,b) => a.gender.localeCompare(b.gender))
+    testRowsMatchData(arr)
+
+
+    // sort by third column
+    await click(col(3))
+    arr = arraySafeSort(data, (a,b) => a.job.localeCompare(b.job))
+    testRowsMatchData(arr)
+
+    // reverse sort by third column
+    await click(col(3))
+    arr = arraySafeSort(data, (a,b) => b.job.localeCompare(a.job))
+    testRowsMatchData(arr)
+
+    // reset things
+    await click(col(3))
+    testRowsMatchData(data)
+    await wrapper.setProps({ sortingMode: 'multiple' })
+})
+
 
 test('it sorts filtered data', async () => {
     let search = 'Executive'
