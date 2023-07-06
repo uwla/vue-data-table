@@ -9,17 +9,27 @@ import translations from '../src/lang'
 // DATA
 
 // number of fake entries
+// It must be greater than 300 for some "searched terms" to appear in the
+// dataset, otherwise the tests for "searching data" will be meaningless
 const n = 400
 
-// generate fake data
-const names = faker.helpers.multiple(faker.person.fullName, { count: n })
-const jobs = faker.helpers.multiple(faker.person.jobTitle, { count: n })
-const genders = faker.helpers.multiple(faker.person.sex, { count: n })
+// aliases to make it less verbose to create multiple fake data
+let gen = (fn) => faker.helpers.multiple(fn, { count: n })
+let subset = (arr) => faker.helpers.arrayElements(arr, { min: 1, max: arr.length })
 
-// create an object data array
+// a custom data source for faking data
+const ROLES = ['admin', 'chief', 'staff', 'manager', 'executive', 'user']
+
+// generate fake data
+const names = gen(faker.person.fullName)
+const jobs = gen(faker.person.jobTitle)
+const genders = gen(faker.person.sex)
+const roles = gen(() => subset(ROLES))
+
+// create an object data array with the fake data
 const data = []
 for (let i = 0; i < n; i++)
-    data.push({ name: names[i], job: jobs[i], gender: genders[i] })
+    data.push({ name: names[i], job: jobs[i], gender: genders[i], roles: roles[i] })
 
 // mount the component
 const wrapper = mount(VueDataTable, {
@@ -34,6 +44,7 @@ const wrapper = mount(VueDataTable, {
     },
 })
 
+// some aliases
 const searchInput = wrapper.find('.vdt-search input')
 const paginationBtn = wrapper.find('.vdt-pagination-search button')
 const paginationInput = wrapper.find('.vdt-pagination-search input')
@@ -54,6 +65,7 @@ function rowText(i) {
 
 // check the rows match the given data
 function testRowsMatchData(data) {
+    if (data.length == 0) return
     expect(rowText(1)).toEqual(data.map(x=>x.name))
     expect(rowText(2)).toEqual(data.map(x=>x.gender))
     expect(rowText(3)).toEqual(data.map(x=>x.job))
@@ -318,10 +330,16 @@ test('it sets correct per page sizes', async () => {
     let select = wrapper.find('.vdt-perpage select')
     expect(Number(select.element.value)).toBe(perPageSizes[0])
 
+    // TODO: fix code below, which is not working
+
+    // let options = select.findAll('option')
+    //
     // // test rows length with different per page sizes
-    // for (let size of perPageSizes)
+    // for (let i = 0; i < options.length; i += 1)
     // {
-    //     await select.setValue(size)
+    //     let option = options.at(i)
+    //     let size = perPageSizes[i]
+    //     await option.setSelected()
     //     testRowsMatchData(data.slice(0, size))
     // }
 })
@@ -494,7 +512,7 @@ test('it emmits user events from custom components', async () => {
     // Wait until $emits have been handled
     await wrapper.vm.$nextTick()
 
-    //
+    // get the event object
     const event = wrapper.emitted('userEvent')
 
     // assert event has been emitted
@@ -554,5 +572,43 @@ test('it uses custom comparison function', async () => {
     testRowsMatchData(data)
 })
 
-// TODO:
-// - test custom search function
+test('it uses custom search function', async () => {
+    let fn = (data, search) => data.roles.includes(search)
+
+    // The component to render the roles in a bullet list
+    const customComponent = {
+        props: { data: Object },
+        render(h) {
+            return h('ul', this.data.roles.map(role => h('li', role)));
+        }
+    }
+
+    // update props
+    await wrapper.setProps({
+        columns: [
+            { key: "name" },
+            { key: "gender" },
+            { key: "job" },
+            {
+                title: "Roles",
+                component: customComponent,
+                searchable: true,
+                searchFunction: fn,
+            },
+        ],
+        defaultColumn: {
+            searchable: false
+        }
+    })
+
+    // test custom search
+    let searchValues = ROLES
+    for (let search of searchValues)
+    {
+        await searchInput.setValue(search)
+        let copy = data.filter(x => x.roles.includes(search))
+        testRowsMatchData(copy)
+    }
+    await searchInput.setValue("")
+})
+

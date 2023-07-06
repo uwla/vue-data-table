@@ -665,7 +665,7 @@ export default {
         sortingMode: {
             type: String,
             default: "multiple",
-            validator: value => ["multiple", "single", "disabled"].includes(value)
+            validator: value => ["multiple", "single"].includes(value)
         },
         sortingIndexComponent: {
             type: Object,
@@ -709,7 +709,6 @@ export default {
         },
         perPageSizes: {
             handler: "setDefaults",
-            deep: true
         }
     }
 }
