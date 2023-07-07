@@ -35,8 +35,8 @@ export function parseColumnProps(props) {
 
         // by default, columns with custom components are not sortable or searchable
         if (column.component != null) {
-            column.searchable ??= false
-            column.sortable ??= false
+            column.searchable = column.searchable || false
+            column.sortable = column.sortable || false
         }
 
         // merge the column with the default values
@@ -44,8 +44,8 @@ export function parseColumnProps(props) {
 
         // some default values are dynamically computed
         let { type } = column
-        column.title ??= toTitleCase(key)
-        column.searchFunction ??= type2searchFunction[type]
+        column.title = column.title || toTitleCase(key)
+        column.searchFunction = column.searchFunction || type2searchFunction[type]
 
         // options below are used internally
         // shall not be overwritten by the user
