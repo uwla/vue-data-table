@@ -1,6 +1,6 @@
 {
     "name": "@uwlajs/vue-data-table",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "private": false,
     "author": "uwla",
     "description": "A Vue plugin that adds advanced features to an HTML table",
