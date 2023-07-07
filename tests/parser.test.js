@@ -36,6 +36,37 @@ test('test parsing columns', function() {
     expect(parsed[4].sortable).toBe(false)
 })
 
+test('test parsing columns with custom default column', function() {
+    let columns = [
+        { key: 'name' },
+        { key: 'mail' },
+        { key: 'age', sortable: true, searchable: true },
+        { key: 'gender' },
+        { key: 'phone_number' },
+    ]
+    let defaultColumn = {
+        searchable: false,
+        sortable: false,
+    }
+    let parsed = parseColumnProps({ columns, defaultColumn })
+
+    //
+    expect(typeof parsed).toBe(typeof columns)
+    expect(parsed.length).toBe(columns.length)
+
+    for (let i = 0; i < parsed.length; i+=1)
+    {
+        if (parsed[i].key == 'age') continue;
+        expect(parsed[i].sortable).toBe(defaultColumn.sortable)
+        expect(parsed[i].searchable).toBe(defaultColumn.searchable)
+    }
+
+    // age column
+    expect(parsed[2].sortable).toBe(true)
+    expect(parsed[2].searchable).toBe(true)
+})
+
+
 test('test parsing column keys', function() {
     let columnKeys = ['first_name', 'phone_number', 'streetName', 'companyName']
     let parsed = parseColumnProps({ columnKeys })

@@ -83,12 +83,24 @@ test('it filters data', async () => {
     for (let search of searchValues)
     {
         await searchInput.setValue(search)
-
-        // test filtered rows
         let copy = data.filter(x => x.job.includes(search))
         testRowsMatchData(copy)
+    }
+
+    // clear the field aftwards
+    await searchInput.setValue("")
+    testRowsMatchData(data)
+})
+
+
+test('it shows correct text for filtered data', async () => {
+    let searchValues = ['Engineer', 'Executive']
+    for (let search of searchValues)
+    {
+        await searchInput.setValue(search)
 
         // test the text of filtered data
+        let copy = data.filter(x => x.job.includes(search))
         let m = copy.length
         let f = (m > 0) ? 1 : 0
         let text = translations["en"]["infoFilteredText"]
@@ -99,7 +111,6 @@ test('it filters data', async () => {
 
     // clear the field aftwards
     await searchInput.setValue("")
-    testRowsMatchData(data)
 })
 
 test('it filters data on multiple columns', async () => {
@@ -128,12 +139,32 @@ test('it filters only searchable columns', async () => {
 
     // if the gender column were searchable,
     // then all rows would match because they all contain 'Male' or 'Female'
-    let searchValues = ['fe', 'ma']
+    let searchValues = ['fe', 'ma', 'le']
     for (let search of searchValues)
     {
         await searchInput.setValue(search)
         let copy = data.filter(x => x.name.toLowerCase().includes(search))
         testRowsMatchData(copy)
+    }
+
+    // now try it with the default column set to not sort
+    await wrapper.setProps({
+        columns: [
+            { key: 'name' },
+            { key: 'gender' },
+            { key: 'job' },
+        ],
+        defaultColumn: {
+            searchable: false
+        }
+    })
+
+    for (let search of searchValues)
+    {
+        await searchInput.setValue(search)
+
+        // empty table will show a single row: "no records found" message
+        expect(wrapper.findAll('tbody tr').length).toBe(1)
     }
 
     // clear the field aftwards
@@ -145,7 +176,10 @@ test('it filters only searchable columns', async () => {
             { key: 'name' },
             { key: 'gender' },
             { key: 'job' },
-        ]
+        ],
+        defaultColumn: {
+            searchable: true
+        }
     })
 })
 
