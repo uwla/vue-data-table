@@ -9,139 +9,9 @@
 		root["VueDataTable"] = factory();
 })((typeof self !== 'undefined' ? self : this), () => {
 return /******/ (() => { // webpackBootstrap
-/******/ 	var __webpack_modules__ = ({
-
-/***/ 143:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-    perPageText: "Show :entries entries",
-    infoText: "Showing :first to :last of :total entries",
-    infoFilteredText: "Showing :first to :last of :filtered (filtered from :total entries)",
-    nextButtonText: "Next",
-    previousButtonText: "Previous",
-    paginationSearchText: "Go to page",
-    paginationSearchButtonText: "GO",
-    searchText: "search:",
-    emptyTableText: "No matching records found",
-    downloadText: "export as:",
-    downloadButtonText: "DOWNLOAD"
-});
-
-
-/***/ }),
-
-/***/ 982:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-    perPageText: "Mostrando :entries datos",
-    infoText: "Mostrando :first hasta :last de :total datos",
-    infoFilteredText: "Mostrando :first hasta :last de :filtered (filtrado de :total datos)",
-    nextButtonText: "Siguiente",
-    previousButtonText: "Anterior",
-    paginationSearchText: "Ir a la página",
-    paginationSearchButtonText: "IR",
-    searchText: "buscar:",
-    emptyTableText: "No se encontraron datos que coincidan con la búsqueda",
-    downloadText: "exportar cómo:",
-    downloadButtonText: "DESCARGAR"
-});
-
-
-/***/ }),
-
-/***/ 402:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-    perPageText: "Exibindo :entries dados",
-    infoText: "Exibindo :first até :last de :total dados",
-    infoFilteredText: "Exibindo :first até :last de :filtered (filtrado de :total dados)",
-    nextButtonText: "Próximo",
-    previousButtonText: "Anterior",
-    paginationSearchText: "Ir para página",
-    paginationSearchButtonText: "IR",
-    searchText: "pesquisar:",
-    emptyTableText: "Nenhum dado correspondente à pesquisa foi encontrado",
-    downloadText: "exportar como:",
-    downloadButtonText: "BAIXAR"
-});
-
-
-/***/ }),
-
-/***/ 600:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var map = {
-	"./en.js": 143,
-	"./es.js": 982,
-	"./pt-br.js": 402
-};
-
-
-function webpackContext(req) {
-	var id = webpackContextResolve(req);
-	return __webpack_require__(id);
-}
-function webpackContextResolve(req) {
-	if(!__webpack_require__.o(map, req)) {
-		var e = new Error("Cannot find module '" + req + "'");
-		e.code = 'MODULE_NOT_FOUND';
-		throw e;
-	}
-	return map[req];
-}
-webpackContext.keys = function webpackContextKeys() {
-	return Object.keys(map);
-};
-webpackContext.resolve = webpackContextResolve;
-module.exports = webpackContext;
-webpackContext.id = 600;
-
-/***/ })
-
-/******/ 	});
-/************************************************************************/
-/******/ 	// The module cache
-/******/ 	var __webpack_module_cache__ = {};
-/******/ 	
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/ 		// Check if module is in cache
-/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
-/******/ 		if (cachedModule !== undefined) {
-/******/ 			return cachedModule.exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			// no module.id needed
-/******/ 			// no module.loaded needed
-/******/ 			exports: {}
-/******/ 		};
-/******/ 	
-/******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
+/******/ 	"use strict";
+/******/ 	// The require scope
+/******/ 	var __webpack_require__ = {};
 /******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/define property getters */
@@ -179,15 +49,13 @@ webpackContext.id = 600;
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
-(() => {
-"use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  DataTable: () => (/* reexport */ DataTable),
+  VdtActionButtons: () => (/* reexport */ ActionButtons),
+  VueDataTable: () => (/* reexport */ DataTable),
   "default": () => (/* binding */ entry_lib),
   languageServiceProvider: () => (/* reexport */ languageServiceProvider)
 });
@@ -209,29 +77,42 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ const setPublicPath = (null);
 
-;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/DataTable.vue?vue&type=template&id=5db66d72&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vue-data-table"},[(_vm.showPerPage)?_c('data-table-per-page',_vm._b({on:{"set-per-page":_vm.setPerPageFromUserInput}},'data-table-per-page',_vm.propsPerPage,false)):_vm._e(),(_vm.showSearchFilter)?_c('data-table-search-filter',_vm._b({on:{"set-search":_vm.setSearch}},'data-table-search-filter',_vm.propsSearchFilter,false)):_vm._e(),_c('data-table-table',_vm._b({on:{"sort-column":_vm.sortColumn}},'data-table-table',_vm.propsTable,false)),(_vm.showEntriesInfo)?_c('data-table-entries-info',_vm._b({},'data-table-entries-info',_vm.propsEntriesInfo,false)):_vm._e(),(_vm.showPagination)?_c('data-table-pagination',_vm._b({on:{"set-page":_vm.setPage}},'data-table-pagination',_vm.propsPagination,false)):_vm._e(),(_vm.showDownloadButton)?_c('data-table-export-data',_vm._b({},'data-table-export-data',_vm.propsExportData,false)):_vm._e()],1)}
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/ActionButtons/ActionButtons.vue?vue&type=template&id=d37bf7a2&
+var render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('div',{staticClass:"vdt-action-buttons"},_vm._l((_vm.actionIcons),function(icon,action,i){return _c('button',{directives:[{name:"show",rawName:"v-show",value:(_vm.actions.includes(action)),expression:"actions.includes(action)"}],key:i,class:'vdt-action-' + action,on:{"click":function($event){return _vm.triggerAction(action)}}},[_vm._v(" "+_vm._s(icon)+" ")])}),0)
+}
 var staticRenderFns = []
 
 
-;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/EntriesInfo/EntriesInfo.vue?vue&type=template&id=0ca8b42c&
-var EntriesInfovue_type_template_id_0ca8b42c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vdt-info"},[_vm._v(" "+_vm._s(_vm.entriesInfoText)+" ")])}
-var EntriesInfovue_type_template_id_0ca8b42c_staticRenderFns = []
-
-
-;// CONCATENATED MODULE: ./src/components/EntriesInfo/EntriesInfo.js?vue&type=script&lang=js&
-/* harmony default export */ const EntriesInfovue_type_script_lang_js_ = ({
-    name: "VueDataTableEntriesInfo",
-    props: {
-        entriesInfoText: {
-            type: String,
-            required: true
+;// CONCATENATED MODULE: ./src/components/ActionButtons/ActionButtons.js?vue&type=script&lang=js&
+/* harmony default export */ const ActionButtonsvue_type_script_lang_js_ = ({
+    name: "VdtActionButtons",
+    methods: {
+        triggerAction(action) {
+            this.$emit('userEvent', {
+                action: action,
+                data: this.data,
+            })
         }
+    },
+    props: {
+        actions: {
+            type: Array,
+            default: () => ['view', 'edit', 'delete']
+        },
+        actionIcons: {
+            type: Object,
+            default: () => ({
+                view: "👁️",
+                edit: "✏️ ",
+                delete: "🗑️",
+            })
+        },
+        data: Object
     }
 });
 
-;// CONCATENATED MODULE: ./src/components/EntriesInfo/EntriesInfo.js?vue&type=script&lang=js&
- /* harmony default export */ const EntriesInfo_EntriesInfovue_type_script_lang_js_ = (EntriesInfovue_type_script_lang_js_); 
+;// CONCATENATED MODULE: ./src/components/ActionButtons/ActionButtons.js?vue&type=script&lang=js&
+ /* harmony default export */ const ActionButtons_ActionButtonsvue_type_script_lang_js_ = (ActionButtonsvue_type_script_lang_js_); 
 ;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
 
@@ -330,7 +211,7 @@ function normalizeComponent(
   }
 }
 
-;// CONCATENATED MODULE: ./src/components/EntriesInfo/EntriesInfo.vue
+;// CONCATENATED MODULE: ./src/components/ActionButtons/ActionButtons.vue
 
 
 
@@ -340,6 +221,52 @@ function normalizeComponent(
 /* normalize component */
 
 var component = normalizeComponent(
+  ActionButtons_ActionButtonsvue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ const ActionButtons = (component.exports);
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/DataTable.vue?vue&type=template&id=7d7251c0&
+var DataTablevue_type_template_id_7d7251c0_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('div',{staticClass:"vue-data-table"},[(_vm.showPerPage)?_c('vdt-per-page',_vm._b({on:{"set-per-page":_vm.setPerPageFromUserInput}},'vdt-per-page',_vm.propsPerPage,false)):_vm._e(),(_vm.showSearchFilter)?_c('vdt-search-filter',_vm._b({on:{"set-search":_vm.setSearch}},'vdt-search-filter',_vm.propsSearchFilter,false)):_vm._e(),_c('vdt-table',_vm._b({on:{"sort-column":_vm.sortColumn,"user-event":_vm.emitUserEvent}},'vdt-table',_vm.propsTable,false)),(_vm.showEntriesInfo)?_c('vdt-entries-info',_vm._b({},'vdt-entries-info',_vm.propsEntriesInfo,false)):_vm._e(),(_vm.showPagination)?_c('vdt-pagination',_vm._b({on:{"set-page":_vm.setPage}},'vdt-pagination',_vm.propsPagination,false)):_vm._e(),(_vm.showDownloadButton)?_c('vdt-export-data',_vm._b({},'vdt-export-data',_vm.propsExportData,false)):_vm._e()],1)
+}
+var DataTablevue_type_template_id_7d7251c0_staticRenderFns = []
+
+
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/EntriesInfo/EntriesInfo.vue?vue&type=template&id=0ca8b42c&
+var EntriesInfovue_type_template_id_0ca8b42c_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('div',{staticClass:"vdt-info"},[_vm._v(" "+_vm._s(_vm.entriesInfoText)+" ")])
+}
+var EntriesInfovue_type_template_id_0ca8b42c_staticRenderFns = []
+
+
+;// CONCATENATED MODULE: ./src/components/EntriesInfo/EntriesInfo.js?vue&type=script&lang=js&
+/* harmony default export */ const EntriesInfovue_type_script_lang_js_ = ({
+    name: "VdtEntriesInfo",
+    props: {
+        entriesInfoText: {
+            type: String,
+            required: true
+        }
+    }
+});
+
+;// CONCATENATED MODULE: ./src/components/EntriesInfo/EntriesInfo.js?vue&type=script&lang=js&
+ /* harmony default export */ const EntriesInfo_EntriesInfovue_type_script_lang_js_ = (EntriesInfovue_type_script_lang_js_); 
+;// CONCATENATED MODULE: ./src/components/EntriesInfo/EntriesInfo.vue
+
+
+
+;
+
+
+/* normalize component */
+
+var EntriesInfo_component = normalizeComponent(
   EntriesInfo_EntriesInfovue_type_script_lang_js_,
   EntriesInfovue_type_template_id_0ca8b42c_render,
   EntriesInfovue_type_template_id_0ca8b42c_staticRenderFns,
@@ -350,69 +277,10 @@ var component = normalizeComponent(
   
 )
 
-/* harmony default export */ const EntriesInfo = (component.exports);
-;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/PerPage/PerPage.vue?vue&type=template&id=362239ad&
-var PerPagevue_type_template_id_362239ad_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vdt-perpage"},[_c('span',[_vm._v(_vm._s(_vm.textBeforeOptions))]),_c('select',{domProps:{"value":_vm.currentPerPage},on:{"input":function($event){return _vm.$emit('set-per-page')}}},_vm._l((_vm.perPageSizes),function(length,i){return _c('option',{key:i,domProps:{"value":length}},[_vm._v(" "+_vm._s(length)+" ")])}),0),_c('span',[_vm._v(_vm._s(_vm.textAfterOptions))])])}
-var PerPagevue_type_template_id_362239ad_staticRenderFns = []
-
-
-;// CONCATENATED MODULE: ./src/components/PerPage/PerPage.js?vue&type=script&lang=js&
-/* harmony default export */ const PerPagevue_type_script_lang_js_ = ({
-    name: "VueDataTablePerPage",
-    computed: {
-        textBeforeOptions() {
-            return this.perPageText.split(":entries")[0].trim();
-        },
-        textAfterOptions() {
-            return (this.perPageText.split(":entries")[1] || "").trim();
-        }
-    },
-    methods: {
-        stringNotEmpty(string) {
-            return string !== "";
-        }
-    },
-    props: {
-        perPageText: {
-            type: String,
-            required: true
-        },
-        currentPerPage: {
-            type: Number,
-            required: true
-        },
-        perPageSizes: {
-            type: Array,
-            required: true
-        }
-    }
-});
-
-;// CONCATENATED MODULE: ./src/components/PerPage/PerPage.js?vue&type=script&lang=js&
- /* harmony default export */ const PerPage_PerPagevue_type_script_lang_js_ = (PerPagevue_type_script_lang_js_); 
-;// CONCATENATED MODULE: ./src/components/PerPage/PerPage.vue
-
-
-
-;
-
-
-/* normalize component */
-
-var PerPage_component = normalizeComponent(
-  PerPage_PerPagevue_type_script_lang_js_,
-  PerPagevue_type_template_id_362239ad_render,
-  PerPagevue_type_template_id_362239ad_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ const PerPage = (PerPage_component.exports);
-;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/ExportData/ExportData.vue?vue&type=template&id=08d107a6&
-var ExportDatavue_type_template_id_08d107a6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vdt-export"},[_c('span',[_vm._v(_vm._s(_vm.downloadText))]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectedExport),expression:"selectedExport"}],staticClass:"vdt-input",on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.selectedExport=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.allowedExports),function(exportType,i){return _c('option',{key:i,domProps:{"value":exportType}},[_vm._v(" "+_vm._s(exportType)+" ")])}),0),_c('button',{staticClass:"vdt-btn vdt-btn-primary",on:{"click":function($event){return _vm.download()}}},[_vm._v(" "+_vm._s(_vm.downloadButtonText)+" ")])])}
+/* harmony default export */ const EntriesInfo = (EntriesInfo_component.exports);
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/ExportData/ExportData.vue?vue&type=template&id=08d107a6&
+var ExportDatavue_type_template_id_08d107a6_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('div',{staticClass:"vdt-export"},[_c('span',[_vm._v(_vm._s(_vm.downloadText))]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectedExport),expression:"selectedExport"}],staticClass:"vdt-input",on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.selectedExport=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.allowedExports),function(exportType,i){return _c('option',{key:i,domProps:{"value":exportType}},[_vm._v(" "+_vm._s(exportType)+" ")])}),0),_c('button',{staticClass:"vdt-btn vdt-btn-primary",on:{"click":function($event){return _vm.download()}}},[_vm._v(" "+_vm._s(_vm.downloadButtonText)+" ")])])
+}
 var ExportDatavue_type_template_id_08d107a6_staticRenderFns = []
 
 
@@ -777,11 +645,11 @@ exportFromJSON.processors = { downloadFile: downloadFile };
 
 
 /* harmony default export */ const ExportDatavue_type_script_lang_js_ = ({
-    name: "VueDataTableExportData",
+    name: "VdtExportData",
     data() {
         return {
             selectedExport: ""
-        };
+        }
     },
     methods: {
         download() {
@@ -789,7 +657,7 @@ exportFromJSON.processors = { downloadFile: downloadFile };
                 data: this.data,
                 fileName: this.downloadFileName,
                 exportType: this.selectedExport
-            });
+            })
         }
     },
     props: {
@@ -802,7 +670,7 @@ exportFromJSON.processors = { downloadFile: downloadFile };
     watch: {
         allowedExports: {
             handler(value) {
-                this.selectedExport = value[0];
+                this.selectedExport = value[0]
             },
             immediate: true
         }
@@ -832,22 +700,23 @@ var ExportData_component = normalizeComponent(
 )
 
 /* harmony default export */ const ExportData = (ExportData_component.exports);
-;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Pagination/Pagination.vue?vue&type=template&id=289666e0&
-var Paginationvue_type_template_id_289666e0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vdt-pagination"},[_c('div',{staticClass:"vdt-pagination-search"},[_c('span',[_vm._v(_vm._s(_vm.paginationSearchText))]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.pageToGo),expression:"pageToGo"}],staticClass:"vdt-input",attrs:{"min":"1","max":_vm.numberOfPages,"type":"number"},domProps:{"value":(_vm.pageToGo)},on:{"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.setCurrentPage(_vm.pageToGo)},"input":function($event){if($event.target.composing){ return; }_vm.pageToGo=$event.target.value}}}),_c('button',{staticClass:"vdt-btn vdt-btn-primary",on:{"click":function($event){return _vm.setCurrentPage(_vm.pageToGo)}}},[_vm._v(" "+_vm._s(_vm.paginationSearchButtonText)+" ")])]),_c('ul',{staticClass:"vdt-pagination-items"},[_c('li',{staticClass:"page-item",class:{ disabled: _vm.isFirstPage },on:{"click":function($event){return _vm.setCurrentPage(_vm.previousPage)}}},[_c('span',{staticClass:"page-link"},[_vm._v(" "+_vm._s(_vm.previousButtonText)+" ")])]),_vm._l((_vm.pagination),function(page,i){return _c('li',{key:i,staticClass:"vdt-page-item",class:{ active: _vm.currentPage === page, disabled: page === '...'},on:{"click":function($event){return _vm.setCurrentPage(page)}}},[_c('span',{staticClass:"vdt-page-link"},[_vm._v(" "+_vm._s(page)+" ")])])}),_c('li',{staticClass:"vdt-page-item",class:{ disabled: _vm.isLastPage },on:{"click":function($event){return _vm.setCurrentPage(_vm.nextPage)}}},[_c('span',{staticClass:"vdt-page-link"},[_vm._v(" "+_vm._s(_vm.nextButtonText)+" ")])])],2)])}
-var Paginationvue_type_template_id_289666e0_staticRenderFns = []
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Pagination/Pagination.vue?vue&type=template&id=044219b0&
+var Paginationvue_type_template_id_044219b0_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('div',{staticClass:"vdt-pagination"},[_c('div',{staticClass:"vdt-pagination-search"},[_c('span',[_vm._v(_vm._s(_vm.paginationSearchText))]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.pageToGo),expression:"pageToGo"}],staticClass:"vdt-input",attrs:{"min":"1","max":_vm.numberOfPages,"type":"number"},domProps:{"value":(_vm.pageToGo)},on:{"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter"))return null;return _vm.setCurrentPage(_vm.pageToGo)},"input":function($event){if($event.target.composing)return;_vm.pageToGo=$event.target.value}}}),_c('button',{staticClass:"vdt-btn vdt-btn-primary",on:{"click":function($event){return _vm.setCurrentPage(_vm.pageToGo)}}},[_vm._v(" "+_vm._s(_vm.paginationSearchButtonText)+" ")])]),_c('ul',{staticClass:"vdt-pagination-items"},[_c('li',{staticClass:"vdt-page-item",class:{ disabled: _vm.isFirstPage },on:{"click":function($event){return _vm.setCurrentPage(_vm.previousPage)}}},[_c('span',{staticClass:"vdt-page-link"},[_vm._v(" "+_vm._s(_vm.previousButtonText)+" ")])]),_vm._l((_vm.pagination),function(page,i){return _c('li',{key:i,staticClass:"vdt-page-item",class:{ active: _vm.currentPage === page, disabled: page === '...'},on:{"click":function($event){return _vm.setCurrentPage(page)}}},[_c('span',{staticClass:"vdt-page-link"},[_vm._v(" "+_vm._s(page)+" ")])])}),_c('li',{staticClass:"vdt-page-item",class:{ disabled: _vm.isLastPage },on:{"click":function($event){return _vm.setCurrentPage(_vm.nextPage)}}},[_c('span',{staticClass:"vdt-page-link"},[_vm._v(" "+_vm._s(_vm.nextButtonText)+" ")])])],2)])
+}
+var Paginationvue_type_template_id_044219b0_staticRenderFns = []
 
 
 ;// CONCATENATED MODULE: ./src/components/Pagination/Pagination.js?vue&type=script&lang=js&
 /* harmony default export */ const Paginationvue_type_script_lang_js_ = ({
-    name: "VueDataTablePagination",
+    name: "VdtPagination",
     data() {
         return {
             pageToGo: 1
-        };
+        }
     },
     methods: {
         setCurrentPage(page) {
-            this.$emit("set-page", Number(page));
+            this.$emit("set-page", Number(page))
         }
     },
     props: {
@@ -865,16 +734,16 @@ var Paginationvue_type_template_id_289666e0_staticRenderFns = []
     },
     watch: {
         currentPage(value) {
-            this.pageToGo = value;
+            this.pageToGo = value
         },
         pageToGo(value) {
             if (value > this.numberOfPages) {
-                return this.numberOfPages;
+                return this.numberOfPages
             }
             if (value < 1) {
-                return 1;
+                return 1
             }
-            return value;
+            return value
         }
     }
 });
@@ -892,8 +761,8 @@ var Paginationvue_type_template_id_289666e0_staticRenderFns = []
 
 var Pagination_component = normalizeComponent(
   Pagination_Paginationvue_type_script_lang_js_,
-  Paginationvue_type_template_id_289666e0_render,
-  Paginationvue_type_template_id_289666e0_staticRenderFns,
+  Paginationvue_type_template_id_044219b0_render,
+  Paginationvue_type_template_id_044219b0_staticRenderFns,
   false,
   null,
   null,
@@ -902,14 +771,76 @@ var Pagination_component = normalizeComponent(
 )
 
 /* harmony default export */ const Pagination = (Pagination_component.exports);
-;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/SearchFilter/SearchFilter.vue?vue&type=template&id=8d3eb916&
-var SearchFiltervue_type_template_id_8d3eb916_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vdt-search"},[_c('span',[_vm._v(_vm._s(_vm.searchText))]),_c('input',{attrs:{"type":"search"},domProps:{"value":_vm.search},on:{"input":function($event){return _vm.$emit('set-search')}}})])}
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/PerPage/PerPage.vue?vue&type=template&id=362239ad&
+var PerPagevue_type_template_id_362239ad_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('div',{staticClass:"vdt-perpage"},[_c('span',[_vm._v(_vm._s(_vm.textBeforeOptions))]),_c('select',{domProps:{"value":_vm.currentPerPage},on:{"input":function($event){return _vm.$emit('set-per-page')}}},_vm._l((_vm.perPageSizes),function(length,i){return _c('option',{key:i,domProps:{"value":length}},[_vm._v(" "+_vm._s(length)+" ")])}),0),_c('span',[_vm._v(_vm._s(_vm.textAfterOptions))])])
+}
+var PerPagevue_type_template_id_362239ad_staticRenderFns = []
+
+
+;// CONCATENATED MODULE: ./src/components/PerPage/PerPage.js?vue&type=script&lang=js&
+/* harmony default export */ const PerPagevue_type_script_lang_js_ = ({
+    name: "VdtPerPage",
+    computed: {
+        textBeforeOptions() {
+            return this.perPageText.split(":entries")[0].trim()
+        },
+        textAfterOptions() {
+            return (this.perPageText.split(":entries")[1] || "").trim()
+        }
+    },
+    methods: {
+        stringNotEmpty(string) {
+            return string !== ""
+        }
+    },
+    props: {
+        perPageText: {
+            type: String,
+            required: true
+        },
+        currentPerPage: {
+            type: Number,
+            required: true
+        },
+        perPageSizes: {
+            type: Array,
+            required: true
+        }
+    }
+});
+
+;// CONCATENATED MODULE: ./src/components/PerPage/PerPage.js?vue&type=script&lang=js&
+ /* harmony default export */ const PerPage_PerPagevue_type_script_lang_js_ = (PerPagevue_type_script_lang_js_); 
+;// CONCATENATED MODULE: ./src/components/PerPage/PerPage.vue
+
+
+
+;
+
+
+/* normalize component */
+
+var PerPage_component = normalizeComponent(
+  PerPage_PerPagevue_type_script_lang_js_,
+  PerPagevue_type_template_id_362239ad_render,
+  PerPagevue_type_template_id_362239ad_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ const PerPage = (PerPage_component.exports);
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/SearchFilter/SearchFilter.vue?vue&type=template&id=8d3eb916&
+var SearchFiltervue_type_template_id_8d3eb916_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('div',{staticClass:"vdt-search"},[_c('span',[_vm._v(_vm._s(_vm.searchText))]),_c('input',{attrs:{"type":"search"},domProps:{"value":_vm.search},on:{"input":function($event){return _vm.$emit('set-search')}}})])
+}
 var SearchFiltervue_type_template_id_8d3eb916_staticRenderFns = []
 
 
 ;// CONCATENATED MODULE: ./src/components/SearchFilter/SearchFilter.js?vue&type=script&lang=js&
 /* harmony default export */ const SearchFiltervue_type_script_lang_js_ = ({
-    name: "VueDataTableSearchFilter",
+    name: "VdtSearchFilter",
     props: {
         searchText: String,
         search: String
@@ -939,14 +870,104 @@ var SearchFilter_component = normalizeComponent(
 )
 
 /* harmony default export */ const SearchFilter = (SearchFilter_component.exports);
-;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Table/Table.vue?vue&type=template&id=6895c64c&
-var Tablevue_type_template_id_6895c64c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vdt-table"},[_c('table',{class:_vm.tableClass},[_c('thead',[_c('tr',_vm._l((_vm.columns),function(column,i){return _c('th',{key:i,staticClass:"vdt-column",class:{ sortable: column.sortable },attrs:{"data-sorting":column.sortingMode},on:{"click":function($event){return _vm.$emit('sort-column', column)}}},[_c('div',{staticClass:"vdt-column-content"},[_c('span',[_vm._v(_vm._s(column.title))]),(column.sortingIndex > 0)?_c(_vm.sortingIndexComponent,{tag:"component",attrs:{"index":column.sortingIndex}}):_vm._e(),(column.sortable)?_c(_vm.sortingIconComponent,{tag:"component"}):_vm._e()],1)])}),0)]),(! _vm.isLoading)?_c('tbody',[(_vm.isEmpty)?_c('tr',[_c('td',{staticClass:"vdt-empty-body",attrs:{"colspan":_vm.numberOfColumns}},[_vm._v(" "+_vm._s(_vm.emptyTableText)+" ")])]):_vm._e(),_vm._l((_vm.dataDisplayed),function(data,i){return _c('tr',{key:i},_vm._l((_vm.columns),function(column,j){return _c('td',{key:j},[(column.component)?_c(column.component,{tag:"component",attrs:{"data":data,"column":column}}):_c('span',[_vm._v(_vm._s(data[column.key]))])],1)}),0)})],2):_vm._e(),(_vm.isLoading)?_c(_vm.loadingComponent,{tag:"component"}):_vm._e(),(_vm.footerComponent !== null)?_c(_vm.footerComponent,_vm._b({tag:"component"},'component',{ data: _vm.data, dataDisplayed: _vm.dataDisplayed, dataFiltered: _vm.dataFiltered },false)):_vm._e()],1)])}
-var Tablevue_type_template_id_6895c64c_staticRenderFns = []
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/SortableColumn/SortingIcon.vue?vue&type=template&id=cfe38036&
+var SortingIconvue_type_template_id_cfe38036_render = function render(){var _vm=this,_c=_vm._self._c;return _vm._m(0)
+}
+var SortingIconvue_type_template_id_cfe38036_staticRenderFns = [function (){var _vm=this,_c=_vm._self._c;return _c('div',{staticClass:"vdt-sorting-icon"},[_c('div',{staticClass:"icon asc"}),_c('div',{staticClass:"icon desc"})])
+}]
+
+
+;// CONCATENATED MODULE: ./src/components/SortableColumn/SortingIcon.vue?vue&type=template&id=cfe38036&
+
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/SortableColumn/SortingIcon.vue?vue&type=script&lang=js&
+
+/* harmony default export */ const SortingIconvue_type_script_lang_js_ = ({
+    name: "VdtSortingIcon"
+});
+
+;// CONCATENATED MODULE: ./src/components/SortableColumn/SortingIcon.vue?vue&type=script&lang=js&
+ /* harmony default export */ const SortableColumn_SortingIconvue_type_script_lang_js_ = (SortingIconvue_type_script_lang_js_); 
+;// CONCATENATED MODULE: ./src/components/SortableColumn/SortingIcon.vue
+
+
+
+;
+
+
+/* normalize component */
+
+var SortingIcon_component = normalizeComponent(
+  SortableColumn_SortingIconvue_type_script_lang_js_,
+  SortingIconvue_type_template_id_cfe38036_render,
+  SortingIconvue_type_template_id_cfe38036_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ const SortingIcon = (SortingIcon_component.exports);
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/SortableColumn/SortingIndex.vue?vue&type=template&id=e3b5806a&
+var SortingIndexvue_type_template_id_e3b5806a_render = function render(){var _vm=this,_c=_vm._self._c;return _c('span',{staticClass:"vdt-sorting-index"},[_vm._v(" "+_vm._s(_vm.index)+" ")])
+}
+var SortingIndexvue_type_template_id_e3b5806a_staticRenderFns = []
+
+
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/SortableColumn/SortingIndex.vue?vue&type=script&lang=js&
+
+/* harmony default export */ const SortingIndexvue_type_script_lang_js_ = ({
+    name: "VdtSortingIndex",
+    props: {
+        index: {
+            type: Number,
+            required: true
+        }
+    }
+});
+
+;// CONCATENATED MODULE: ./src/components/SortableColumn/SortingIndex.vue?vue&type=script&lang=js&
+ /* harmony default export */ const SortableColumn_SortingIndexvue_type_script_lang_js_ = (SortingIndexvue_type_script_lang_js_); 
+;// CONCATENATED MODULE: ./src/components/SortableColumn/SortingIndex.vue
+
+
+
+;
+
+
+/* normalize component */
+
+var SortingIndex_component = normalizeComponent(
+  SortableColumn_SortingIndexvue_type_script_lang_js_,
+  SortingIndexvue_type_template_id_e3b5806a_render,
+  SortingIndexvue_type_template_id_e3b5806a_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ const SortingIndex = (SortingIndex_component.exports);
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Table/Table.vue?vue&type=template&id=6ce1c4bf&
+var Tablevue_type_template_id_6ce1c4bf_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('div',{staticClass:"vdt-table"},[_c('table',{class:_vm.tableClass},[_c('thead',[_c('tr',_vm._l((_vm.columns),function(column,i){return _c('th',{key:i,staticClass:"vdt-column",class:column.cssClass,attrs:{"data-sortable":column.sortable,"data-sorting":column.sortingMode},on:{"click":function($event){return _vm.$emit('sort-column', column)}}},[_c('div',{staticClass:"vdt-column-content"},[_c('span',[_vm._v(_vm._s(column.title))]),(column.sortingIndex > 0)?_c(_vm.sortingIndexComponent,{tag:"component",attrs:{"index":column.sortingIndex}}):_vm._e(),(column.sortable)?_c(_vm.sortingIconComponent,{tag:"component"}):_vm._e()],1)])}),0)]),(! _vm.isLoading)?_c('tbody',[(_vm.isEmpty)?_c('tr',[_c('td',{staticClass:"vdt-empty-body",attrs:{"colspan":_vm.numberOfColumns}},[_vm._v(" "+_vm._s(_vm.emptyTableText)+" ")])]):_vm._e(),_vm._l((_vm.dataDisplayed),function(data,i){return _c('tr',{key:i},_vm._l((_vm.columns),function(column,j){return _c('td',{key:j},[_c(column.component,_vm._b({tag:"component",on:{"userEvent":_vm.emitUserEvent}},'component',{ data, ...column.componentProps },false))],1)}),0)})],2):_vm._e(),(_vm.isLoading)?_c(_vm.loadingComponent,{tag:"component"}):_vm._e(),(_vm.footerComponent)?_c(_vm.footerComponent,_vm._b({tag:"component"},'component',{ data: _vm.data, dataDisplayed: _vm.dataDisplayed, dataFiltered: _vm.dataFiltered },false)):_vm._e()],1)])
+}
+var Tablevue_type_template_id_6ce1c4bf_staticRenderFns = []
 
 
 ;// CONCATENATED MODULE: ./src/components/Table/Table.js?vue&type=script&lang=js&
 /* harmony default export */ const Tablevue_type_script_lang_js_ = ({
-    name: "VueDataTableTable",
+    name: "VdtTable",
+    methods: {
+        /**
+         * Propage upwards an event from a user custom component
+         *
+         * @returns {void}
+         */
+        emitUserEvent(payload) {
+            this.$emit('user-event', payload)
+        },
+    },
     props: {
         tableClass: String,
         columns: Array,
@@ -977,8 +998,8 @@ var Tablevue_type_template_id_6895c64c_staticRenderFns = []
 
 var Table_component = normalizeComponent(
   Table_Tablevue_type_script_lang_js_,
-  Tablevue_type_template_id_6895c64c_render,
-  Tablevue_type_template_id_6895c64c_staticRenderFns,
+  Tablevue_type_template_id_6ce1c4bf_render,
+  Tablevue_type_template_id_6ce1c4bf_staticRenderFns,
   false,
   null,
   null,
@@ -987,93 +1008,6 @@ var Table_component = normalizeComponent(
 )
 
 /* harmony default export */ const Table = (Table_component.exports);
-;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/SortableColumn/SortingIcon.vue?vue&type=template&id=87fde5e8&
-var SortingIconvue_type_template_id_87fde5e8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
-var SortingIconvue_type_template_id_87fde5e8_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vdt-sorting-icon"},[_c('div',{staticClass:"icon asc"}),_c('div',{staticClass:"icon desc"})])}]
-
-
-;// CONCATENATED MODULE: ./src/components/SortableColumn/SortingIcon.vue?vue&type=template&id=87fde5e8&
-
-;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/SortableColumn/SortingIcon.vue?vue&type=script&lang=js&
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ const SortingIconvue_type_script_lang_js_ = ({
-    name: "VueDataTableSortingIcon"
-});
-
-;// CONCATENATED MODULE: ./src/components/SortableColumn/SortingIcon.vue?vue&type=script&lang=js&
- /* harmony default export */ const SortableColumn_SortingIconvue_type_script_lang_js_ = (SortingIconvue_type_script_lang_js_); 
-;// CONCATENATED MODULE: ./src/components/SortableColumn/SortingIcon.vue
-
-
-
-;
-
-
-/* normalize component */
-
-var SortingIcon_component = normalizeComponent(
-  SortableColumn_SortingIconvue_type_script_lang_js_,
-  SortingIconvue_type_template_id_87fde5e8_render,
-  SortingIconvue_type_template_id_87fde5e8_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ const SortingIcon = (SortingIcon_component.exports);
-;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/SortableColumn/SortingIndex.vue?vue&type=template&id=1cf5e53a&
-var SortingIndexvue_type_template_id_1cf5e53a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"vdt-sorting-index"},[_vm._v(" "+_vm._s(_vm.index)+" ")])}
-var SortingIndexvue_type_template_id_1cf5e53a_staticRenderFns = []
-
-
-;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/SortableColumn/SortingIndex.vue?vue&type=script&lang=js&
-//
-//
-//
-//
-//
-
-/* harmony default export */ const SortingIndexvue_type_script_lang_js_ = ({
-    name: "VueDataTableSortingIndex",
-    props: {
-        index: {
-            type: Number,
-            required: true
-        }
-    }
-});
-
-;// CONCATENATED MODULE: ./src/components/SortableColumn/SortingIndex.vue?vue&type=script&lang=js&
- /* harmony default export */ const SortableColumn_SortingIndexvue_type_script_lang_js_ = (SortingIndexvue_type_script_lang_js_); 
-;// CONCATENATED MODULE: ./src/components/SortableColumn/SortingIndex.vue
-
-
-
-;
-
-
-/* normalize component */
-
-var SortingIndex_component = normalizeComponent(
-  SortableColumn_SortingIndexvue_type_script_lang_js_,
-  SortingIndexvue_type_template_id_1cf5e53a_render,
-  SortingIndexvue_type_template_id_1cf5e53a_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ const SortingIndex = (SortingIndex_component.exports);
 ;// CONCATENATED MODULE: ./src/helpers.js
 /**
  * Performs a case-insensitive comparison of two strings
@@ -1082,16 +1016,36 @@ var SortingIndex_component = normalizeComponent(
  * @returns {Boolean}
  */
 function compareStrings(a, b) {
-    return a.toLowerCase().localeCompare(b.toLowerCase());
+    return a.toLowerCase().localeCompare(b.toLowerCase())
 }
 
 /**
- * Capitalize first letter and separate words by space
+ * Perform a comparison of numeric values (possibly strings)
+ * @param {String} a
+ * @param {String} b
+ * @returns {Boolean}
+ */
+function compareNumbers(a, b) {
+    return Number(a) - Number(b)
+}
+
+/**
+ * Capitalize the first letter of each word and separate words by space
  * @param {String} str
  * @returns {String}
  */
 function toTitleCase(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1).replace(/[-_]/gui, " ");
+    // convert snake case to title case
+    str = str.replace(/_/g, ' ');
+
+    // convert camel case to title case
+    str = str.replace(/([a-z])([A-Z])/g, '$1 $2');
+
+    // capitalize first letter of each word
+    str = str.replace(/\b\w/g, w => w[0].toUpperCase() + w.slice(1).toLowerCase())
+
+    // return the result
+    return str
 }
 
 /**
@@ -1103,9 +1057,9 @@ function toTitleCase(str) {
  */
 function stringReplaceFromArray(target, searchValues, replacements) {
     for (let i = 0; i < searchValues.length; i++) {
-        target = target.replace(searchValues[i], replacements[i]);
+        target = target.replace(searchValues[i], replacements[i])
     }
-    return target;
+    return target
 }
 
 /**
@@ -1116,11 +1070,11 @@ function stringReplaceFromArray(target, searchValues, replacements) {
  * @returns {Array}
  */
 function range(min, max, step = 1) {
-    var range = [];
+    var range = []
     for (let i = min; i <= max; i += step) {
-        range.push(i);
+        range.push(i)
     }
-    return range;
+    return range
 }
 
 /**
@@ -1129,19 +1083,41 @@ function range(min, max, step = 1) {
  * @returns {Boolean}
  */
 function isNullable(variable) {
-    return variable === null || variable === "" || variable === undefined;
+    return variable === null || variable === "" || variable === undefined
 }
 
 /**
- * Sort an array, but skip null values in the array
+ * Sort an array using stable sort
+ * @param {Array} array to be sorted
+ * @param {Function} compare function
+ * @returns {array}
+ */
+function stableSort(arr, compare) {
+    return arr.map((item, index) => ({item, index}))
+        .sort((a, b) => compare(a.item, b.item) || a.index - b.index)
+        .map(({item}) => item)
+}
+/**
+ * Safely compare two items, which may be nullable
+ * @param {Function} compare function
+ * @returns {Function}
+ */
+function stableCompare(compareFunction) {
+    return function(a, b) {
+        if (isNullable(a)) return 1
+        if (isNullable(b)) return -1
+        return compareFunction(a,b)
+    }
+}
+
+/**
+ * Safely stable sort an array that may have null elements
  * @param {Array} array
  * @param {Function} compareFunction
- * @returns {void}
+ * @returns {Array}
  */
 function arraySafeSort(array, compareFunction) {
-    array.sort(function(a, b) {
-        return isNullable(a) || isNullable(b) ? 0 : compareFunction(a, b);
-    });
+    return stableSort(array, stableCompare(compareFunction))
 }
 
 /**
@@ -1150,25 +1126,36 @@ function arraySafeSort(array, compareFunction) {
  * @param {Array} column
  * @returns {void}
  */
-function sortDataByColumn(data, column) {
-    const { key } = column;
-    let compareFunction;
+function sortDataByColumns(data, columns) {
+    let l = columns.length
 
-    /* pick up the compare function, allowing user to set a custom one */
-    if (column.sortingFunction) {
-        compareFunction = column.sortingFunction;
-    } else if (column.type === "number") {
-        compareFunction = (a, b) => Number(a[key]) - Number(b[key]);
-    } else {
-        compareFunction = (a, b) => compareStrings(a[key], b[key]);
+    let fn = (a, b) => {
+        let i = 0
+        while (i < l) {
+            let c = columns[i]
+            let { sortingMode, compareFunction: f } = c
+
+            if (isNullable(f))
+            {
+                let { key, type } = c
+                if (type === "string")
+                    f = (a,b) => compareStrings(a[key], b[key])
+                if (type === "numeric" || type === "number")
+                    f = (a,b) => compareNumbers(a[key], b[key])
+            }
+
+            let result
+            if (sortingMode == "asc") result = f(a, b)
+            else result = f(b, a)
+
+            if (result != 0)
+                return result
+            i += 1
+        }
+        return 0
     }
 
-    /* sort */
-    if (column.sortingMode === "desc") {
-        arraySafeSort(data, (a, b) => compareFunction(b, a));
-    } else {
-        arraySafeSort(data, (a, b) => compareFunction(a, b));
-    }
+    return arraySafeSort(data, fn)
 }
 
 /**
@@ -1176,16 +1163,121 @@ function sortDataByColumn(data, column) {
  * @returns {*}
  */
 function getEventTargetValue(event) {
-    event = event || window.event;
-    var target;
+    event = event || window.event
+    var target
     if (event !== undefined) {
-        target = event.target || event.srcElement;
+        target = event.target || event.srcElement
     }
     if (target !== undefined) {
-        return target.value;
+        return target.value
     }
-    return null;
+    return null
 }
+
+
+/**
+ * Performs search on strings
+ * @param {Object} data
+ * @param {String} search
+ * @param {String} key
+ * @returns {Boolean}
+ */
+function searchStringColumn(data, search, key) {
+    return data[key].toLowerCase().includes(search.toLowerCase())
+}
+
+/**
+ * Performs search on numeric values
+ * @param {Object} data
+ * @param {String} search
+ * @param {String} key
+ * @returns {Boolean}
+ */
+function searchNumericColumn(data, search, key) {
+    return data[key].toString().includes(search)
+}
+
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Table/TableCell.vue?vue&type=template&id=521441c0&
+var TableCellvue_type_template_id_521441c0_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('span',[_vm._v(_vm._s(_vm.data[_vm.columnKey]))])
+}
+var TableCellvue_type_template_id_521441c0_staticRenderFns = []
+
+
+;// CONCATENATED MODULE: ./src/components/Table/TableCell.js?vue&type=script&lang=js&
+/* harmony default export */ const TableCellvue_type_script_lang_js_ = ({
+    name: "VdtTableCell",
+    props: {
+        columnKey: String,
+        data: Object,
+    }
+});
+
+;// CONCATENATED MODULE: ./src/components/Table/TableCell.js?vue&type=script&lang=js&
+ /* harmony default export */ const Table_TableCellvue_type_script_lang_js_ = (TableCellvue_type_script_lang_js_); 
+;// CONCATENATED MODULE: ./src/components/Table/TableCell.vue
+
+
+
+
+
+/* normalize component */
+;
+var TableCell_component = normalizeComponent(
+  Table_TableCellvue_type_script_lang_js_,
+  TableCellvue_type_template_id_521441c0_render,
+  TableCellvue_type_template_id_521441c0_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ const TableCell = (TableCell_component.exports);
+;// CONCATENATED MODULE: ./src/lang/en.js
+/* harmony default export */ const en = ({
+    perPageText: "Show :entries entries",
+    infoText: "Showing :first to :last of :total entries",
+    infoFilteredText: "Showing :first to :last of :filtered (filtered from :total entries)",
+    nextButtonText: "Next",
+    previousButtonText: "Previous",
+    paginationSearchText: "Go to page",
+    paginationSearchButtonText: "GO",
+    searchText: "search:",
+    emptyTableText: "No matching records found",
+    downloadText: "export as:",
+    downloadButtonText: "DOWNLOAD"
+});
+
+;// CONCATENATED MODULE: ./src/lang/es.js
+/* harmony default export */ const es = ({
+    perPageText: "Mostrando :entries datos",
+    infoText: "Mostrando :first hasta :last de :total datos",
+    infoFilteredText: "Mostrando :first hasta :last de :filtered (filtrado de :total datos)",
+    nextButtonText: "Siguiente",
+    previousButtonText: "Anterior",
+    paginationSearchText: "Ir a la página",
+    paginationSearchButtonText: "IR",
+    searchText: "buscar:",
+    emptyTableText: "No se encontraron datos que coincidan con la búsqueda",
+    downloadText: "exportar cómo:",
+    downloadButtonText: "DESCARGAR"
+});
+
+;// CONCATENATED MODULE: ./src/lang/pt-br.js
+/* harmony default export */ const pt_br = ({
+    perPageText: "Exibindo :entries dados",
+    infoText: "Exibindo :first até :last de :total dados",
+    infoFilteredText: "Exibindo :first até :last de :filtered (filtrado de :total dados)",
+    nextButtonText: "Próximo",
+    previousButtonText: "Anterior",
+    paginationSearchText: "Ir para página",
+    paginationSearchButtonText: "IR",
+    searchText: "pesquisar:",
+    emptyTableText: "Nenhum dado correspondente à pesquisa foi encontrado",
+    downloadText: "exportar como:",
+    downloadButtonText: "BAIXAR"
+});
 
 ;// CONCATENATED MODULE: ./src/lang.js
 /**
@@ -1193,26 +1285,28 @@ function getEventTargetValue(event) {
  * lang files. It will recursively scan the lang directory and
  * register them with their "basename".
  */
-const files = __webpack_require__(600);
-const translations = {};
-files.keys().forEach(function(key) {
-    const translation = files(key).default;
-    const lang = key.replace("./", "").split(".")[0];
-    translations[lang] = translation;
-});
+
+
+
+
+const translations = {
+    "pt-br": pt_br,
+    "en": en,
+    "es": es,
+}
 
 /* utility for the user to change or add new translations */
 const languageServiceProvider = {
     setLang(lang, translation) {
-        translations[lang] = translation;
+        translations[lang] = translation
     },
     removeLang(lang) {
-        delete translations[lang];
+        delete translations[lang]
     },
     setLangText(lang, key, text) {
-        translations[lang][key] = text;
+        translations[lang][key] = text
     }
-};
+}
 
 /* harmony default export */ const src_lang = (translations);
 
@@ -1221,36 +1315,74 @@ const languageServiceProvider = {
 
 
 
+
+// default column to all instances of VDT
+const globalDefaultColumn = {
+    component: TableCell,
+    componentProps: {},
+    index: 1000,
+    searchable: true,
+    sortable: true,
+    type: "string",
+}
+
+const type2searchFunction = {
+    string: searchStringColumn,
+    numeric: searchNumericColumn,
+    number: searchNumericColumn,
+}
+
 function parseColumnProps(props) {
-    let columns = props.columns || props.columnKeys.map(key => ({ key }));
-    const { defaultColumn } = props;
+    // extract the columns. If not set, columns are derived from columnKeys
+    let columns = props.columns || props.columnKeys.map(key => ({ key }))
+
+    // extract the local default column
+    let defaultColumn = props.defaultColumn || {}
+
+    // merge default column with the columns
     columns = columns.map(function(column, i) {
-        let title = column.title || toTitleCase(column.key);
-        return {
-            ...defaultColumn,
-            index: 0,
-            ...column,
-            sortingIndex: -1,
-            sortingMode: "",
-            id: i,
-            title
-        };
-    });
+        let { key } = column
+
+        // if component not set, need to pass the key to the default component
+        if (column.component == null)
+            column.componentProps = { columnKey: key }
+
+        // by default, columns with custom components are not sortable or searchable
+        if (column.component != null) {
+            column.searchable ??= false
+            column.sortable ??= false
+        }
+
+        // merge the column with the default values
+        column = { ...globalDefaultColumn, ...defaultColumn, ...column }
+
+        // some default values are dynamically computed
+        let { type } = column
+        column.title ??= toTitleCase(key)
+        column.searchFunction ??= type2searchFunction[type]
+
+        // options below are used internally
+        // shall not be overwritten by the user
+        column.sortingIndex = -1
+        column.sortingMode = null
+        column.id = i
+
+        return column
+    })
 
     /* order the columns by the index, so the user can
     set a custom order for the columns to be displayed */
     columns.sort(function(a, b) {
-        if (a.index !== b.index) {
-            return a.index - b.index;
-        }
-        return a.id - b.id;
-    });
-    return columns;
+        return a.index - b.index
+    })
+
+    // finally, return the parsed columns
+    return columns
 }
 
 function parseTextProps(props) {
-    const { lang, text } = props;
-    return { ...src_lang[lang], ...text };
+    const { lang, text } = props
+    return { ...src_lang[lang], ...text }
 }
 
 ;// CONCATENATED MODULE: ./src/components/DataTable.js?vue&type=script&lang=js&
@@ -1265,15 +1397,16 @@ function parseTextProps(props) {
 
 
 
+
 /* harmony default export */ const DataTablevue_type_script_lang_js_ = ({
     name: "VueDataTable",
     components: {
-        DataTableEntriesInfo: EntriesInfo,
-        DataTableSearchFilter: SearchFilter,
-        DataTablePagination: Pagination,
-        DataTablePerPage: PerPage,
-        DataTableTable: Table,
-        DataTableExportData: ExportData
+        VdtEntriesInfo: EntriesInfo,
+        VdtExportData: ExportData,
+        VdtPagination: Pagination,
+        VdtPerPage: PerPage,
+        VdtSearchFilter: SearchFilter,
+        VdtTable: Table,
     },
     computed: {
         /**
@@ -1281,7 +1414,7 @@ function parseTextProps(props) {
          * @var {Number}
          */
         numberOfColumns() {
-            return this.parsedColumns.length;
+            return this.parsedColumns.length
         },
 
         /**
@@ -1289,7 +1422,7 @@ function parseTextProps(props) {
          * @var {Array}
          */
         searchableColumns() {
-            return this.parsedColumns.filter(column => column.searchable);
+            return this.parsedColumns.filter(column => column.searchable)
         },
 
         /**
@@ -1297,7 +1430,7 @@ function parseTextProps(props) {
          * @var {Array}
          */
         sortableColumns() {
-            return this.parsedColumns.filter(column => column.sortable);
+            return this.parsedColumns.filter(column => column.sortable)
         },
 
         //
@@ -1309,13 +1442,13 @@ function parseTextProps(props) {
          * @var {Array}
          */
         dataDisplayed() {
-            const { lastEntry, firstEntry, dataSorted } = this;
+            const { lastEntry, firstEntry, dataSorted } = this
             // we need to subtract 1 due to array index
             // we need also to subtract 1 for the first
             // item to appear
-            const end = lastEntry;
-            const start = Math.max(0, firstEntry - 1);
-            return dataSorted.slice(start, end);
+            const end = lastEntry
+            const start = Math.max(0, firstEntry - 1)
+            return dataSorted.slice(start, end)
         },
 
         /**
@@ -1323,25 +1456,15 @@ function parseTextProps(props) {
          * @var {Array}
          */
         dataFiltered() {
-            const { searchableColumns, data, search } = this;
+            const { searchableColumns, data, search } = this
             if (isNullable(search)) {
-                return data;
+                return data
             }
             return data.filter(function(row) {
                 return searchableColumns.some(function(column) {
-                    const cell = column.key,
-                        value = row[cell];
-                    if (typeof value === "string") {
-                        return value
-                            .toLowerCase()
-                            .includes(search.toLowerCase());
-                    }
-                    if (typeof value === "number") {
-                        return value.toString().includes(search);
-                    }
-                    return false;
-                });
-            });
+                    return column.searchFunction(row, search, column.key)
+                })
+            })
         },
 
         /**
@@ -1349,25 +1472,14 @@ function parseTextProps(props) {
          * @var {Array}
          */
         dataSorted() {
-            var { dataFiltered: data, columnsBeingSorted } = this;
+            var { dataFiltered: data, columnsBeingSorted } = this
 
             // do not sort if there is no rows or no data to sort
             if (columnsBeingSorted.length === 0 || data.length === 0) {
-                return data;
+                return data
             }
 
-            // create a copy of data and columns
-            data = [...data];
-            var columns = [...columnsBeingSorted];
-
-            // reverse the columns, so that the first columns
-            // will be the last to be sorted. Doing this, we
-            // can sort by multiple columns in such way that
-            // the columns that were select first will have
-            // priority in the process.
-            columns.reverse();
-            columns.forEach(column => sortDataByColumn(data, column));
-            return data;
+            return sortDataByColumns(data, columnsBeingSorted)
         },
 
         /**
@@ -1375,7 +1487,7 @@ function parseTextProps(props) {
          * @var {Boolean}
          */
         isEmpty() {
-            return this.dataDisplayed.length === 0;
+            return this.dataDisplayed.length === 0
         },
 
         //
@@ -1387,11 +1499,11 @@ function parseTextProps(props) {
          * @var {Integer}
          */
         firstEntry() {
-            const { dataFiltered, currentPerPage, currentPage } = this;
+            const { dataFiltered, currentPerPage, currentPage } = this
             if (dataFiltered.length === 0) {
-                return 0;
+                return 0
             }
-            return currentPerPage * (currentPage - 1) + 1;
+            return currentPerPage * (currentPage - 1) + 1
         },
 
         /**
@@ -1402,7 +1514,7 @@ function parseTextProps(props) {
             return Math.min(
                 this.filteredEntries,
                 this.firstEntry + this.currentPerPage - 1
-            );
+            )
         },
 
         /**
@@ -1410,7 +1522,7 @@ function parseTextProps(props) {
          * @var {Integer}
          */
         totalEntries() {
-            return this.data.length;
+            return this.data.length
         },
 
         /**
@@ -1418,7 +1530,7 @@ function parseTextProps(props) {
          * @var {Integer}
          */
         filteredEntries() {
-            return this.dataFiltered.length;
+            return this.dataFiltered.length
         },
 
         /**
@@ -1433,22 +1545,22 @@ function parseTextProps(props) {
                 lastEntry,
                 filteredEntries,
                 totalEntries
-            } = this;
+            } = this
             const replacements = [
                 firstEntry,
                 lastEntry,
                 filteredEntries,
                 totalEntries
-            ];
-            const searchValues = [":first", ":last", ":filtered", ":total"];
-            var text = infoText;
+            ]
+            const searchValues = [":first", ":last", ":filtered", ":total"]
+            var text = infoText
             if (totalEntries !== filteredEntries) {
-                text = infoFilteredText;
+                text = infoFilteredText
             }
             // we take the text provided by the user, then
             // replace the placeholders with the actual
             // values, and return the result
-            return stringReplaceFromArray(text, searchValues, replacements);
+            return stringReplaceFromArray(text, searchValues, replacements)
         },
         //
         // ─── PAGINATION ─────────────────────────────────────────────────────────────────
@@ -1462,7 +1574,7 @@ function parseTextProps(props) {
             return Math.max(
                 Math.ceil(this.filteredEntries / this.currentPerPage),
                 1
-            );
+            )
         },
 
         /**
@@ -1470,7 +1582,7 @@ function parseTextProps(props) {
          * @var {Number}
          */
         lastPage() {
-            return this.numberOfPages;
+            return this.numberOfPages
         },
 
         /**
@@ -1478,7 +1590,7 @@ function parseTextProps(props) {
          * @var {Boolean}
          */
         isLastPage() {
-            return this.currentPage === this.numberOfPages;
+            return this.currentPage === this.numberOfPages
         },
 
         /**
@@ -1486,7 +1598,7 @@ function parseTextProps(props) {
          * @var {Boolean}
          */
         isFirstPage() {
-            return this.currentPage === 1;
+            return this.currentPage === 1
         },
 
         /**
@@ -1494,7 +1606,7 @@ function parseTextProps(props) {
          * @var {Number}
          */
         previousPage() {
-            return this.currentPage - 1;
+            return this.currentPage - 1
         },
 
         /**
@@ -1502,7 +1614,7 @@ function parseTextProps(props) {
          * @var {Number}
          */
         nextPage() {
-            return this.currentPage + 1;
+            return this.currentPage + 1
         },
 
         /**
@@ -1513,15 +1625,15 @@ function parseTextProps(props) {
             // extract the variables from "this"
             // so we don't have to type this.prop
             // every time we access it.
-            const { lastPage, currentPage, nextPage, previousPage } = this;
+            const { lastPage, currentPage, nextPage, previousPage } = this
             if (lastPage === 1) {
-                return [1];
+                return [1]
             }
             if (lastPage <= 7) {
-                return range(1, lastPage);
+                return range(1, lastPage)
             }
             if (lastPage > 7 && currentPage <= 4) {
-                return [1, 2, 3, 4, 5, "...", lastPage];
+                return [1, 2, 3, 4, 5, "...", lastPage]
             }
             if (lastPage > 8 && lastPage > currentPage + 3) {
                 return [
@@ -1532,7 +1644,7 @@ function parseTextProps(props) {
                     nextPage,
                     "...",
                     lastPage
-                ];
+                ]
             }
             if (lastPage > 7 && lastPage <= currentPage + 3) {
                 return [
@@ -1542,7 +1654,7 @@ function parseTextProps(props) {
                     lastPage - 2,
                     lastPage - 1,
                     lastPage
-                ];
+                ]
             }
         },
 
@@ -1559,7 +1671,7 @@ function parseTextProps(props) {
                 currentPerPage: this.currentPerPage,
                 perPageSizes: this.perPageSizes,
                 perPageText: this.perPageText,
-            };
+            }
         },
 
         /**
@@ -1570,7 +1682,7 @@ function parseTextProps(props) {
             return {
                 search: this.search,
                 searchText: this.searchText,
-            };
+            }
         },
 
         /**
@@ -1592,7 +1704,7 @@ function parseTextProps(props) {
                 sortingIconComponent: this.sortingIconComponent,
                 sortingIndexComponent: this.sortingIndexComponent,
                 tableClass: this.tableClass,
-            };
+            }
         },
 
         /**
@@ -1602,7 +1714,7 @@ function parseTextProps(props) {
         propsEntriesInfo() {
             return {
                 entriesInfoText: this.entriesInfoText
-            };
+            }
         },
 
         /**
@@ -1622,7 +1734,7 @@ function parseTextProps(props) {
                 paginationSearchText: this.paginationSearchText,
                 previousButtonText: this.previousButtonText,
                 previousPage: this.previousPage,
-            };
+            }
         },
 
         /**
@@ -1636,12 +1748,12 @@ function parseTextProps(props) {
                 downloadButtonText: this.downloadButtonText,
                 downloadFileName: this.downloadFileName,
                 downloadText: this.downloadText,
-            };
+            }
         }
     },
 
     mounted() {
-        this.setDefaults();
+        this.setDefaults()
     },
 
     data() {
@@ -1662,10 +1774,19 @@ function parseTextProps(props) {
             paginationSearchButtonText: "",
             search: "",
             searchText: ""
-        };
+        }
     },
 
     methods: {
+        /**
+         * Propage upwards an event from a user custom component
+         *
+         * @returns {void}
+         */
+        emitUserEvent(payload) {
+            this.$emit('userEvent', payload)
+        },
+
         /**
          * Indicates if a page is valid
          * @param {Object} props
@@ -1677,15 +1798,15 @@ function parseTextProps(props) {
                 page <= this.numberOfPages &&
                 page > 0 &&
                 page !== this.currentPage
-            );
+            )
         },
         /**
          * Parse columns (assign default values while enabling customization)
          * @returns {void}
          */
         parseColumnProps() {
-            var parsedColumns = parseColumnProps(this.$props);
-            Object.assign(this, { parsedColumns });
+            var parsedColumns = parseColumnProps(this.$props)
+            Object.assign(this, { parsedColumns })
         },
 
         /**
@@ -1693,7 +1814,7 @@ function parseTextProps(props) {
          * @returns {void}
          */
         parseTextProps() {
-            Object.assign(this, parseTextProps(this.$props));
+            Object.assign(this, parseTextProps(this.$props))
         },
 
         /**
@@ -1708,79 +1829,80 @@ function parseTextProps(props) {
         sortColumn(column) {
             // column is not sortable, ignore it
             if (!column.sortable) {
-                return;
+                return
             }
 
+
             // case when the current mode is to only sort a single column
-            if (this.sortingMode === "single") {
+            if (this.sortingMode == "single") {
 
                 // mark other columns as not being sorted
                 // skipping the current column
                 for (let col of this.sortableColumns) {
                     if (col.id !== column.id) {
-                        col.sortingMode = "";
-                        col.sortingIndex = -1;
+                        col.sortingMode = null
+                        col.sortingIndex = -1
                     }
                 }
 
                 // the column is not being sorted
                 // so, mark it as sorted in ascending mode
-                if (column.sortingMode === "") {
-                    column.sortingMode = "asc";
-                    this.columnsBeingSorted = [column];
-                    return;
+                if (column.sortingMode === null) {
+                    column.sortingMode = "asc"
+                    this.columnsBeingSorted = [column]
+                    return
                 }
 
                 // the column is being sorted in ascending mode
                 // so, mark it as sorted in descending mode
                 if (column.sortingMode === "asc") {
-                    column.sortingMode = "desc";
-                    this.columnsBeingSorted = [column];
-                    return;
+                    column.sortingMode = "desc"
+                    this.columnsBeingSorted = [column]
+                    return
                 }
 
                 // column is being sorted in descending mode
                 // so, mark it as not being sorted
-                column.sortingMode = "";
-                this.columnsBeingSorted = [];
-                return;
+                column.sortingMode = null
+                this.columnsBeingSorted = []
+                return
             }
 
             // column is not being sorted
             // so, mark it as sorted in ascending mode
-            if (column.sortingMode === "") {
-                column.sortingMode = "asc";
-                column.sortingIndex = this.columnsBeingSorted.length + 1;
-                this.columnsBeingSorted.push(column);
-                return;
+            if (column.sortingMode === null) {
+                column.sortingMode = "asc"
+                column.sortingIndex = this.columnsBeingSorted.length + 1
+                this.columnsBeingSorted.push(column)
+                return
             }
 
             // column is being sorted in ascending mode
             // so, mark it as sorted in descending mode
             if (column.sortingMode === "asc") {
-                column.sortingMode = "desc";
+                column.sortingMode = "desc"
                 this.columnsBeingSorted.splice(
                     column.sortingIndex - 1,
                     1,
                     column
-                );
-                return;
+                )
+                return
             }
 
             // column is being sorted in descending mode
             // so, mark it as not being sorted
-            column.sortingMode = "";
-            column.sortingIndex = -1;
+            column.sortingMode = null
+            column.sortingIndex = -1
             this.columnsBeingSorted = this.columnsBeingSorted.filter(function(c) {
-                return c.id !== column.id;
-            });
+                return c.id !== column.id
+            })
 
             // in this case,
             // it is necessary to update the sorting index of other columns
             // to reflect the fact that there is one less column.
             this.columnsBeingSorted.forEach(function(col, i) {
-                col.sortingIndex = i + 1;
-            });
+                col.sortingIndex = i + 1
+            })
         },
 
         /**
@@ -1788,7 +1910,7 @@ function parseTextProps(props) {
          * @returns {void}
          */
         setDefaults() {
-            this.setPerPage(this.defaultPerPage);
+            this.setPerPage(this.defaultPerPage)
         },
 
         /**
@@ -1798,7 +1920,7 @@ function parseTextProps(props) {
          */
         setPage(value) {
             if (this.isValidPage(value)) {
-                this.currentPage = value;
+                this.currentPage = value
             }
         },
 
@@ -1808,26 +1930,26 @@ function parseTextProps(props) {
          * @returns {void}
          */
         setPerPage(value) {
-            var previousFirstEntry, newPerPage, newCurrentPage;
+            var previousFirstEntry, newPerPage, newCurrentPage
             // before updating the value of currentPerPage,
             // we need to store the current firstEntry.
             // We will use it to change the current page.
-            previousFirstEntry = this.firstEntry;
-            newPerPage = this.currentPerPage;
+            previousFirstEntry = this.firstEntry
+            newPerPage = this.currentPerPage
 
             if (!this.perPageSizes.includes(newPerPage)) {
-                newPerPage = this.perPageSizes[0];
+                newPerPage = this.perPageSizes[0]
             }
             if (this.perPageSizes.includes(value)) {
-                newPerPage = value;
+                newPerPage = value
             }
-            this.currentPerPage = newPerPage;
+            this.currentPerPage = newPerPage
 
             // update current per page so that
             // the user will see the same first
             // rows that were being displayed
-            newCurrentPage = Math.floor(previousFirstEntry / newPerPage) + 1;
-            this.setPage(newCurrentPage);
+            newCurrentPage = Math.floor(previousFirstEntry / newPerPage) + 1
+            this.setPage(newCurrentPage)
         },
 
         /**
@@ -1836,8 +1958,8 @@ function parseTextProps(props) {
          * @returns {void}
          */
         setPerPageFromUserInput() {
-            const value = Number(getEventTargetValue());
-            this.setPerPage(value);
+            const value = Number(getEventTargetValue())
+            this.setPerPage(value)
         },
 
         /**
@@ -1846,9 +1968,9 @@ function parseTextProps(props) {
          * @returns {void}
          */
         setSearch() {
-            const value = getEventTargetValue() || "";
-            this.search = value.trim();
-            this.currentPage = 1;
+            const value = getEventTargetValue() || ""
+            this.search = value.trim()
+            this.currentPage = 1
         }
     },
 
@@ -1872,13 +1994,7 @@ function parseTextProps(props) {
         defaultColumn: {
             type: Object,
             required: false,
-            default: function() {
-                return {
-                    sortable: true,
-                    searchable: true,
-                    type: "string"
-                };
-            }
+            default: () => ({})
         },
         defaultPerPage: {
             type: Number,
@@ -1931,18 +2047,18 @@ function parseTextProps(props) {
         sortingMode: {
             type: String,
             default: "multiple",
-            validator: value => ["multiple", "single", "disabled"].includes(value)
+            validator: value => ["multiple", "single"].includes(value)
         },
         sortingIndexComponent: {
             type: Object,
             default: function() {
-                return SortingIndex;
+                return SortingIndex
             }
         },
         sortingIconComponent: {
             type: Object,
             default: function() {
-                return SortingIcon;
+                return SortingIcon
             }
         },
         tableClass: {
@@ -1972,6 +2088,9 @@ function parseTextProps(props) {
         },
         lang: {
             handler: "parseTextProps"
+        },
+        perPageSizes: {
+            handler: "setDefaults",
         }
     }
 });
@@ -1989,8 +2108,8 @@ function parseTextProps(props) {
 
 var DataTable_component = normalizeComponent(
   components_DataTablevue_type_script_lang_js_,
-  render,
-  staticRenderFns,
+  DataTablevue_type_template_id_7d7251c0_render,
+  DataTablevue_type_template_id_7d7251c0_staticRenderFns,
   false,
   null,
   null,
@@ -2004,13 +2123,12 @@ var DataTable_component = normalizeComponent(
 
 
 
+
 ;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib.js
 
 
 /* harmony default export */ const entry_lib = (DataTable);
 
-
-})();
 
 /******/ 	return __webpack_exports__;
 /******/ })()
