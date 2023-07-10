@@ -1341,6 +1341,7 @@ function parseColumnProps(props) {
 
     // merge default column with the columns
     columns = columns.map(function(column, i) {
+        column = { ... column }
         let { key } = column
 
         // if component not set, need to pass the key to the default component
