@@ -1,44 +1,5 @@
 .vdt-action-buttons {
     display: flex;
     justify-content: center;
-    grid-gap: 5px;
-}
-
-.vdt-action-buttons button {
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: 0.25rem;
-    background-color: #fff;
-    cursor: pointer;
-}
-
-.vdt-action-view {
-    color: #28a745;
-    border: 1px solid #28a745;
-
-    &:hover {
-        color: #fff;
-        background-color: #28a745;
-    }
-}
-
-.vdt-action-edit {
-    color: #007bff;
-    border: 1px solid #007bff;
-
-    &:hover {
-        color: #fff;
-        background-color: #007bff;
-    }
-}
-
-.vdt-action-delete {
-    color: #343a40;
-    border: 1px solid #343a40;
-
-    &:hover {
-        color: #fff;
-        background-color: #343a40;
-    }
+    grid-gap: .3em;
 }

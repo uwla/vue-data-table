@@ -1,0 +1,12 @@
+.vdt-cell-editable  {
+    .view-cell, .edit-cell {
+        display: flex;
+        gap: .3em;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+}
+
+.vdt-cell-editable svg {
+    vertical-align: text-bottom;
+}

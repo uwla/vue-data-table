@@ -2,26 +2,5 @@
     grid-area: search;
     display: flex;
     align-items: center;
-}
-
-.vdt-input {
-    background-color: #fff;
-    border: 1px solid #ced4da;
-    border-radius: 6px;
-    color: #495057;
-    display: inline-block;
-    line-height: 1.5;
-    margin: 0;
-    margin-left: 0.5em;
-    outline: none;
-    padding: 0.25rem 0.5rem;
-
-    &:focus {
-        background-color: #fff;
-        border-color: #80bdff;
-        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-        color: #495057;
-        outline: 0;
-        -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-    }
+    gap: .5em;
 }
