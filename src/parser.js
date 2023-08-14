@@ -1,4 +1,5 @@
 import VdtTableCell from "./components/Table/TableCell.vue"
+import VdtTableCellEditable from "./components/Table/TableCellEditable.vue"
 import { searchNumericColumn, searchStringColumn, toTitleCase } from "./helpers"
 import translations from "./lang"
 
@@ -9,6 +10,7 @@ export const globalDefaultColumn = {
     index: 1000,
     searchable: true,
     sortable: true,
+    editable: false,
     type: "string",
 }
 
@@ -39,6 +41,10 @@ export function parseColumnProps(props) {
             column.searchable = column.searchable || false
             column.sortable = column.sortable || false
         }
+
+        // editable cell
+        if (column.editable)
+            column.component = VdtTableCellEditable
 
         // merge the column with the default values
         column = { ...globalDefaultColumn, ...defaultColumn, ...column }

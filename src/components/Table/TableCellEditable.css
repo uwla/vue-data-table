@@ -1,0 +1,29 @@
+.vdt-cell-editable .view-cell,
+.vdt-cell-editable .edit-cell {
+    display: flex;
+    gap: .5em;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.vdt-cell-editable svg {
+    vertical-align: text-bottom;
+}
+
+.vdt-btn-edit {
+    color: #fff !important;
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+}
+
+.vdt-btn-view, .vdt-btn-check {
+    color: #fff !important;
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+}
+
+.vdt-btn-cancel {
+    color: #fff !important;
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+}
