@@ -19,7 +19,7 @@ export default {
             this.$emit('userEvent', {
                 action: 'updateCell',
                 data: this.data,
-                key: this.columnKey ,
+                key: this.columnKey,
                 value: this.text,
             })
         }

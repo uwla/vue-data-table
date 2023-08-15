@@ -1,4 +1,5 @@
 import { globalDefaultColumn, parseColumnProps } from "../src/parser"
+import VdtTableCellEditable from '../src/components/Table/TableCellEditable.vue'
 
 test('test parsing columns', function() {
     let columns = [
@@ -7,6 +8,7 @@ test('test parsing columns', function() {
         { key: 'age', type: 'number' },
         { key: 'gender', searchable: false },
         { key: 'phone_number', sortable: false },
+        { key: 'job', editable: true },
     ]
     let defaultColumn = globalDefaultColumn
     let parsed = parseColumnProps({ columns, defaultColumn })
@@ -34,6 +36,10 @@ test('test parsing columns', function() {
     // phone number column
     expect(parsed[4].title).toBe('Phone Number')
     expect(parsed[4].sortable).toBe(false)
+
+    //
+    expect(parsed[5].editable).toBe(true)
+    expect(parsed[5].component).toEqual(VdtTableCellEditable)
 })
 
 test('test parsing columns with custom default column', function() {
