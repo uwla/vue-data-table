@@ -1,7 +1,7 @@
 # VUE DATA TABLE
 
-`VueDataTable` is a Vue plugin that adds advanced features  to an HTML table. It
-was inspired by [DataTable jQuery Plugin](https://datatables.net/), but it was
+`VueDataTable` is a Vue plugin that adds advanced features to an HTML table.  It
+was inspired by [DataTable jQuery Plugin](https://datatables.net/), but  it  was
 written from scratch using Vue.
 
 ## Table of contents
@@ -33,8 +33,7 @@ written from scratch using Vue.
 ## Demo
 
 The best way to see if a package suits your needs is by viewing  and  editing  a
-demo  project.  Here  are  some  code  playgrounds  in  which   you   can   test
-VueDataTable.
+demo project. Here is a code playground in which you can test `VueDataTable`:
 
 - [Demo (preview)](https://vtlyhz.csb.app/)
 - [Demo (preview and code)](https://codesandbox.io/s/vue-data-table-demo-vtlyhz)
@@ -83,9 +82,9 @@ export default {
 </script>
 ```
 
-**Note** Notice that v-bind will take all key-value  pairs  in  the  object  (in
-this case, the `bindings`), and pass them as  props  to  the  VueDataTable.  So,
-this is a shortcut to pass multiple props at once.
+**Note** Notice that v-bind will take all key-value pairs in the object (in this
+case, the `bindings`), and pass them as props to the `VueDataTable.` So, this is
+a shortcut to pass multiple props at once.
 
 ## Configuration
 
@@ -244,9 +243,9 @@ export default {
 </script>
 ```
 
-To handle events triggered by a custom component (such as clicking a  button  in
-a component), the component should emit an event called `userEvent` and pass  an
-arbitrary payload to it. The event will be propagated upwards  by  VueDataTable,
+To handle events triggered by a custom component (such as clicking a button in a
+component), the component should emit an event called `userEvent`  and  pass  an
+arbitrary payload to it. The event will be propagated upwards by `VueDataTable`,
 which will also emit an event called `userEvent` whose payload is  the  same  as
 the one emitted by the custom component. For example:
 
@@ -278,8 +277,8 @@ export {
 </script>
 ```
 
-When the users clicks the checkbox, it will emit an `userEvent` event, which
-can be accessed from the `VueDataTable`. Here is an continuation of the previous
+When the users clicks the checkbox, it will emit an `userEvent` event, which can
+be accessed from the `VueDataTable`. Here is an  continuation  of  the  previous
 example.
 
 ```html
@@ -331,7 +330,7 @@ will deleted the selected rows from the table (on the client side only).
 
 #### Action Buttons
 
-VueDataTable provides a component called `VdtActionButtons`, which can  be  used
+`VueDataTable` provides a component called `VdtActionButtons`, which can be used
 to display buttons for common CRUD action such as viewing, editing, deleting.
 
 Here is an example with all buttons (view, edit, delete) in one column:
@@ -364,7 +363,7 @@ export default {
         }
     }
 }
-</script:>
+</script>
 ```
 
 Another example, this time one button per column:
@@ -440,7 +439,7 @@ can enter a new value for the cell. The user can cancel the editing or  confirm.
 If the user confirms editing,  `VueDataTable`  will  emit  a  `userEvent`  whose
 payload looks like the following:
 
-```json
+```javascript
 {
     action: 'updateCell',
     key: '<key String>',
@@ -449,9 +448,9 @@ payload looks like the following:
 }
 ```
 
-Where `key` is the key of the column (if user edits the `name` column, the  `key
+Where `key` is the key of the column (if user edits the `name` column, the `key`
 will be `name`), the `data` is the object of the row which was edit (an example:
-`{ id: 100, name: 'joe', email: 'joe@email.test' }`), and  `value`  is the value
+`{ id: 100, name: 'joe', email: 'joe@email.test' }`), and `value` is  the  value
 inserted by the user (such as `Joe Doe`).
 
 It is up to the developer to handle the event to update the row by, for example,
@@ -494,14 +493,14 @@ export default {
 
 ### Text
 
-Currently, `VueDataTable` has  support  for  three  languages:   English   (en),
+Currently, `VueDataTable` has support for the following languages: English (en),
 Brazilian Portuguese (pt-br), and Spanish(es).  The  `lang`  prop  specifies  in
 which language to display the text in our table.
 
 If we want to add a custom text (maybe because there is no language  support  or
 because we want something else), we have to set it in the `text` prop.
 
-The following table shows the texts we can customize and their default values
+The following table shows the texts we can customize and  their  default  values
 for the English language.
 
 | key                        | default                                                               |
@@ -579,8 +578,8 @@ languageServiceProvider.setLangText("en", "downloadText", "download as:")
 `VueDataTable` uses CSS's grid display to specify the position of its components
 (search filter, pagination, entries info, per page options, download button).
 
-**We can specify the position of the components by including our custom
-CSS/SCSS and overriding the defaults.**
+**We can specify the position of the components by including our custom CSS/SCSS
+and overriding the defaults.**
 
 By default, this is how `VueDataTable` displays the components:
 
@@ -663,10 +662,10 @@ name of the registered component.
 The `footerComponent` must be a `<tfoot>` HTML element  and  it  must  have  the
 properties `data`, `dataDisplayed`, `dataFiltered`. If the  component  does  not
 specify those properties in `props`, Vue  will  probably  think  they  are  some
-custom HTML attribute and their values will be show as  HTML  attributes,  which
-is really messy.
+custom HTML attribute and their values will be show as HTML attributes, which is
+really messy.
 
-The  property  `data`  correspond  to  all  data  passed  to `VueDataTable`. The
+The property `data`  correspond  to  all  data  passed  to  `VueDataTable`.  The
 `dataDisplayed` corresponds to all data that is currently visible on the  table.
 The `dataFiltered` corresponds to all data that was filtered by a search  query.
 These properties can be used to perform common operations  such  as  calculating
@@ -712,7 +711,7 @@ export default {
     dataFiltered: Array,
   }
 }
-</0>
+</script>
 ```
 
 And we pass this component as follow:
@@ -752,11 +751,11 @@ Vue.component("table-footer", TableFooter)
 
 #### Sorting icon
 
-By  default,  `VueDataTable`  will  display  arrows  to  indicate  the   sorting
-direction when sorting a column. The `SortingIcon` component  is  wrapped  in  a
-`th` element. The `th` element has a `data-sorting` attribute that may be  `asc`
-or  `desc`  only.  Based  on  this  value,  we  display  an  `arrow_up`  or   an
-`arrow_down` icon using `CSS` rules.
+By default, `VueDataTable` will display arrows to indicate the sorting direction
+when sorting a column. The `SortingIcon` component is wrapped in a `th` element.
+The `th` element has a `data-sorting` attribute that  may  be  `asc`  or  `desc`
+only. Based on this value, we display an  `arrow_up`  or  an  `arrow_down`  icon
+using `CSS` rules.
 
 ```html
 <template>
