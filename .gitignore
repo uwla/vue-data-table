@@ -6,4 +6,5 @@ dist/demo.html
 
 # ignore IDE files
 tags
-
+.vscode
+.vim
