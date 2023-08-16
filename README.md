@@ -26,7 +26,7 @@ written from scratch using Vue.
 - Pagination
 - Search Filter
 - Multiple Column Sorting
-- Export data (XLS, JSON, CVS, TXT or XLS)
+- Export data (JSON, CVS, TXT or XLS)
 - Custom component to be rendered
 - Support for multiple languages
 
@@ -121,6 +121,7 @@ Only `data` e `columns` are required. Other props are optional.
 | title           | `String`   | `titleCase(key)` | The title displayed in the header.                        |
 | searchable      | `Bool`     | `true`           | Whether to allow searching rows by this column field      |
 | sortable        | `Bool`     | `true`           | Whether to allow sorting the data by this column field    |
+| editable        | `Bool`     | `true`           | Whether the column is editable by the user.               |
 | type            | `String`   | `string`         | Data type of `key`. Allowed values: `string`, `number`    |
 | compareFunction | `Function` | -                | Custom function provided by the user to sort the column   |
 | searchFunction  | `Function` | -                | Custom function provided by the user to search the column |
@@ -216,12 +217,6 @@ config = {
 Custom components must have a `data` property to receive the data of the current
 row for the component to display it.
 
-To handle events triggered by a custom component (such as clicking a  button  in
-a component), the component should emit an event called `userEvent` and pass  an
-arbitrary payload to it. The event will be propagated upwards  by  VueDataTable,
-which will also emit an event called `userEvent` whose payload is  the  same  as
-the one emitted by the custom component.
-
 In the previous code snippet, we used our custom component `UserPermissionList`.
 Below is a sample of that custom component.
 
@@ -249,6 +244,91 @@ export default {
 </script>
 ```
 
+To handle events triggered by a custom component (such as clicking a  button  in
+a component), the component should emit an event called `userEvent` and pass  an
+arbitrary payload to it. The event will be propagated upwards  by  VueDataTable,
+which will also emit an event called `userEvent` whose payload is  the  same  as
+the one emitted by the custom component. For example:
+
+```html
+<template>
+    <input type="checkbox" class="form-control" :checked="value" @change='toggleChecked' />
+</template>
+<script>
+export {
+    name: 'CheckboxCell',
+    data() {
+        return {
+            value: false,
+        }
+    },
+    methods: {
+        toggleChecked() {
+            const payload = {
+                id: this.data.id,
+                checked: this.value,
+            }
+            this.$emit('userEvent', payload)
+        }
+    },
+    props: {
+        data: Object,
+    }
+}
+</script>
+```
+
+When the users clicks the checkbox, it will emit an `userEvent` event, which
+can be accessed from the `VueDataTable`. Here is an continuation of the previous
+example.
+
+```html
+<template>
+    <div class="dashboard">
+        <h1>DASHBOARD</h1>
+        <button class="btn btn-danger">
+            DELETE SELECTED ROWS
+        </button>
+        <vue-data-table
+            :data="data"
+            :columns="columns"
+            @userEvent="handleEvent" />
+    </div>
+</template>
+<script>
+export default {
+    data() {
+        return {
+            data: [/**/],
+            columns: [/**/],
+            selectedRows: [],
+        }
+    },
+    methods: {
+        handleEvent(payload) {
+            const { checked, id } = payload
+            if (checked === true) {
+                if (! this.selectedRows.includes(id))
+                    this.selectedRows.push(id)
+            } else {
+                this.selectedRows = this.selectedRows.filter(rowId => rowId !== id)
+            }
+        },
+        deleteRows() {
+            this.data = this.data.filter(row => ! this.selectedRows.includes(row.id))
+            this.selectedRows = []
+        }
+    }
+}
+</script>
+```
+
+In the code snippet above, when the user checks the  checkbox  rendered  by  the
+custom component `CheckboxCell`, it will emit an event that is  handled  by  the
+method `handleEvent`. This method will add/remove the `id` of  the  row  to/from
+the `selectedRows` array. When the user clicks the "dangerous delete button", it
+will deleted the selected rows from the table (on the client side only).
+
 #### Action Buttons
 
 VueDataTable provides a component called `VdtActionButtons`, which can  be  used
@@ -256,7 +336,7 @@ to display buttons for common CRUD action such as viewing, editing, deleting.
 
 Here is an example with all buttons (view, edit, delete) in one column:
 
-```vue
+```html
 <template>
     <main>
         <h1>DASHBOARD</h1>
@@ -284,12 +364,12 @@ export default {
         }
     }
 }
-</script>
+</script:>
 ```
 
 Another example, this time one button per column:
 
-```vue
+```html
 <template>
     <main>
         <h1>DASHBOARD</h1>
@@ -339,6 +419,78 @@ payload is an object with two fields: `action` and `data`. The `action`  is  the
 name of the action (view, edit, delete) and `data` is the data of the row.
 
 Check out the demo to see a real working example of using action buttons.
+
+#### Editable cells
+
+It is possible to make a column editable by settings `editable` to true in the
+column definition.
+
+```javascript
+columns: {
+    [ 'key': name, editable: true],
+    [ 'key': email, editable: true],
+    [ 'key': phone, editable: true],
+    // ...
+}
+```
+
+This will make `VueDataTable` display an `edit` button on the right side of  the
+cell's text. When the user clicks the button, it will show an input, so the user
+can enter a new value for the cell. The user can cancel the editing or  confirm.
+If the user confirms editing,  `VueDataTable`  will  emit  a  `userEvent`  whose
+payload looks like the following:
+
+```json
+{
+    action: 'updateCell',
+    key: '<key String>',
+    data: '<data Object>',
+    value: '<value String>',
+}
+```
+
+Where `key` is the key of the column (if user edits the `name` column, the  `key
+will be `name`), the `data` is the object of the row which was edit (an example:
+`{ id: 100, name: 'joe', email: 'joe@email.test' }`), and  `value`  is the value
+inserted by the user (such as `Joe Doe`).
+
+It is up to the developer to handle the event to update the row by, for example,
+sending an AJAX request to the API, then updating the `data` array on the client
+side. Here is an example of how to update the data array on the client side:
+
+```html
+<template>
+  <vue-data-table :data="data" :columns="columns" @userEvent="handleUserEvent"/>
+</template>
+<script>
+export default {
+    /* ... */
+
+    methods: {
+        handleUserEvent(payload) {
+            if (payload.action === 'updateCell')
+            {
+                // send some ajax request
+                // ...
+
+                // then update the cell
+                this.updateDataCell(payload.data, payload.key, payload.value)
+
+            } else {
+                // some other event
+            }
+        },
+        updateDataCell(row, field, value) {
+            let ind = this.data.findIndex(r => r.id === row.id)
+            if (ind < 0) return
+            let newRow = {... this.data[ind]}
+            newRow[field] = value
+            this.data.splice(ind, 1, newRow)
+        },
+    }
+}
+</script>
+```
 
 ### Text
 
@@ -528,7 +680,7 @@ show the total amount of fruits bought and the total price.
 
 The footer component would be something like:
 
-```vue
+```html
 <template>
   <tfoot v-show="dataDisplayed.length > 0">
     <td>Total</td>
@@ -560,29 +712,29 @@ export default {
     dataFiltered: Array,
   }
 }
-</script>
+</0>
 ```
 
 And we pass this component as follow:
 
 ```html
 <template>
-	<data-table v-bind="tableProps"/>
+    <data-table v-bind="tableProps"/>
 </template>
 <script>
 import TableFooter from './TableFooter.vue'
 
 export default {
-	/* ... some code */
-	data() {
-		return {
-			tableProps: {
-				columns: [ /* ... code */ ],
-				data: [ /* ... more code */ ],
-				footerComponent: TableFooter,
-			}
-		}
-	}
+    /* ... some code */
+    data() {
+        return {
+            tableProps: {
+                columns: [ /* ... code */ ],
+                data: [ /* ... more code */ ],
+                footerComponent: TableFooter,
+            }
+        }
+    }
 }
 </script>
 ```
@@ -595,7 +747,7 @@ import TableFooter from './TableFooter.vue'
 Vue.component("table-footer", TableFooter)
 
 /* later on */
-	footerComponent: "table-footer"
+    footerComponent: "table-footer"
 ```
 
 #### Sorting icon
