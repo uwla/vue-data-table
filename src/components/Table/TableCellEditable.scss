@@ -2,6 +2,7 @@
     .view-cell, .edit-cell {
         display: flex;
         gap: .3em;
+        align-items: start;
         flex-wrap: nowrap;
         justify-content: space-between;
     }
