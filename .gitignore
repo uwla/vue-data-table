@@ -1,6 +1,5 @@
 # ignore vendor packages
 node_modules
-
 dist/
 
 # ignore IDE files
