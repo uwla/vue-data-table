@@ -1,24 +1,4 @@
 /**
- * Performs a case-insensitive comparison of two strings
- * @param {String} a
- * @param {String} b
- * @returns {Boolean}
- */
-export function compareStrings(a, b) {
-    return a.toLowerCase().localeCompare(b.toLowerCase())
-}
-
-/**
- * Perform a comparison of numeric values (possibly strings)
- * @param {String} a
- * @param {String} b
- * @returns {Boolean}
- */
-export function compareNumbers(a, b) {
-    return Number(a) - Number(b)
-}
-
-/**
  * Capitalize the first letter of each word and separate words by space
  * @param {String} str
  * @returns {String}
@@ -91,7 +71,7 @@ export function stableSort(arr, compare) {
  * @param {Function} compare function
  * @returns {Function}
  */
-export function stableCompare(compareFunction) {
+export function safeCompare(compareFunction) {
     return function(a, b) {
         if (isNullable(a)) return 1
         if (isNullable(b)) return -1
@@ -100,13 +80,33 @@ export function stableCompare(compareFunction) {
 }
 
 /**
+ * Performs a case-insensitive comparison of two strings
+ * @param {String} a
+ * @param {String} b
+ * @returns {Boolean}
+ */
+export const compareStrings = safeCompare(function(a, b) {
+    return a.toLowerCase().localeCompare(b.toLowerCase())
+})
+
+/**
+ * Perform a comparison of numeric values (possibly strings)
+ * @param {String} a
+ * @param {String} b
+ * @returns {Boolean}
+ */
+export const compareNumbers = safeCompare(function(a, b) {
+    return Number(a) - Number(b)
+})
+
+/**
  * Safely stable sort an array that may have null elements
  * @param {Array} array
  * @param {Function} compareFunction
  * @returns {Array}
  */
 export function arraySafeSort(array, compareFunction) {
-    return stableSort(array, stableCompare(compareFunction))
+    return stableSort(array, safeCompare(compareFunction))
 }
 
 /**
@@ -124,6 +124,7 @@ export function sortDataByColumns(data, columns) {
             let c = columns[i]
             let { sortingMode, compareFunction: f } = c
 
+            // get default value for f
             if (isNullable(f))
             {
                 let { key, type } = c
@@ -133,12 +134,21 @@ export function sortDataByColumns(data, columns) {
                     f = (a,b) => compareNumbers(a[key], b[key])
             }
 
-            let result
-            if (sortingMode == "asc") result = f(a, b)
-            else result = f(b, a)
+            // reverse comparison
+            let reverseSearch = (sortingMode === 'desc')
+            let old_f = f
+            if (reverseSearch)
+                f = (a,b) => old_f(b,a)
 
-            if (result != 0)
+            // make it safe when comparing null
+            f = safeCompare(f)
+
+            // get the result
+            let result = f(a,b)
+            if (result !== 0)
                 return result
+
+            // comparison return equal. Proceed to the next comparison
             i += 1
         }
         return 0
