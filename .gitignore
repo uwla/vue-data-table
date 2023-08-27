@@ -1,8 +1,7 @@
 # ignore vendor packages
 node_modules
 
-# this demo is useless
-dist/demo.html
+dist/
 
 # ignore IDE files
 tags
