@@ -172,7 +172,7 @@ export function getEventTargetValue(event) {
  * @returns {Boolean}
  */
 export function searchStringColumn(data, search, key) {
-    return data[key].toLowerCase().includes(search.toLowerCase())
+    return (data[key] || '').toLowerCase().includes(search.toLowerCase())
 }
 
 /**
@@ -183,5 +183,5 @@ export function searchStringColumn(data, search, key) {
  * @returns {Boolean}
  */
 export function searchNumericColumn(data, search, key) {
-    return data[key].toString().includes(search)
+    return (data[key] || '').toString().includes(search)
 }
