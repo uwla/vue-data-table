@@ -1,9 +1,9 @@
 {
     "name": "@uwlajs/vue-data-table",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "private": false,
     "author": "uwla",
-    "description": "A Vue plugin that adds advanced features to an HTML table",
+    "description": "Vue plugin that adds advanced features to an HTML table",
     "license": "MIT",
     "scripts": {
         "build": "vue-cli-service build --target lib --name VueDataTable src/main.js",
