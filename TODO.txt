@@ -1,0 +1,4 @@
+# TODO
+
+- split component test suites into smaller test suites
+- add tests for searching on null values
