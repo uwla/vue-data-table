@@ -11,8 +11,8 @@ test('test string replacement', function() {
 test('test safe sort', function() {
     let arr = [2, 45, null, 10, 20, null, 15]
     let res
-    let f = safeCompare((a, b) => a - b)
-    let g = safeCompare((a, b) => b - a)
+    let f = (a, b) => a - b
+    let g = (a, b) => b - a
     res = arraySafeSort(arr, f)
     expect(res).toEqual([2, 10, 15, 20, 45, null, null])
     res = arraySafeSort(arr, g)
@@ -20,6 +20,8 @@ test('test safe sort', function() {
 
     // keyed
     arr = [{n: 2}, {n: 45}, {n: null}, {n: 10}, {n: 20}, {n: null}, {n: 15}]
+    f = safeCompare(f)
+    g = safeCompare(g)
     let f2 = (a, b) => f(a.n, b.n)
     let g2 = (a, b) => g(a.n, b.n)
     res = arraySafeSort(arr, f2).map(x => x.n)

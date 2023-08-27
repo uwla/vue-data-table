@@ -66,9 +66,10 @@ export function stableSort(arr, compare) {
         .sort((a, b) => compare(a.item, b.item) || a.index - b.index)
         .map(({item}) => item)
 }
+
 /**
  * Safely compare two items, which may be nullable
- * @param {Function} compare function
+ * @param {Function} compareFunction
  * @returns {Function}
  */
 export function safeCompare(compareFunction) {
@@ -80,14 +81,36 @@ export function safeCompare(compareFunction) {
 }
 
 /**
+ * Safely compare two items, which may be nullable
+ * @param {Function} compareFunction
+ * @returns {Function}
+ */
+export function safeKeyCompare(compareFunction, key) {
+    return function(a, b) {
+        if (isNullable(a[key])) return 1
+        if (isNullable(b[key])) return -1
+        return compareFunction(a[key], b[key])
+    }
+}
+
+/**
+ * Reverse a comparison function
+ * @param {Function} compareFunction
+ * @returns {Function}
+ */
+export function reverseCompare(compareFunction) {
+    return (a,b) => compareFunction(b,a)
+}
+
+/**
  * Performs a case-insensitive comparison of two strings
  * @param {String} a
  * @param {String} b
  * @returns {Boolean}
  */
-export const compareStrings = safeCompare(function(a, b) {
+export function compareStrings(a, b) {
     return a.toLowerCase().localeCompare(b.toLowerCase())
-})
+}
 
 /**
  * Perform a comparison of numeric values (possibly strings)
@@ -95,9 +118,9 @@ export const compareStrings = safeCompare(function(a, b) {
  * @param {String} b
  * @returns {Boolean}
  */
-export const compareNumbers = safeCompare(function(a, b) {
+export function compareNumbers (a, b) {
     return Number(a) - Number(b)
-})
+}
 
 /**
  * Safely stable sort an array that may have null elements
@@ -124,24 +147,24 @@ export function sortDataByColumns(data, columns) {
             let c = columns[i]
             let { sortingMode, compareFunction: f } = c
 
+            // reverse comparison
+            let reverseSearch = (sortingMode === 'desc')
+
             // get default value for f
             if (isNullable(f))
             {
                 let { key, type } = c
                 if (type === "string")
-                    f = (a,b) => compareStrings(a[key], b[key])
+                    f = compareStrings
                 if (type === "numeric" || type === "number")
-                    f = (a,b) => compareNumbers(a[key], b[key])
+                    f = compareNumbers
+                if (reverseSearch)
+                    f = reverseCompare(f)
+                // make it safe to search null keys, and put them last
+                f = safeKeyCompare(f, key)
+            } else if (reverseSearch) {
+                f = reverseCompare(f)
             }
-
-            // reverse comparison
-            let reverseSearch = (sortingMode === 'desc')
-            let old_f = f
-            if (reverseSearch)
-                f = (a,b) => old_f(b,a)
-
-            // make it safe when comparing null
-            f = safeCompare(f)
 
             // get the result
             let result = f(a,b)
