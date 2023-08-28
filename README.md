@@ -1,6 +1,6 @@
 # VUE DATA TABLE
 
-`VueDataTable` is a Vue plugin that adds advanced features to an HTML table.  It
+`VueDataTable` is a Vue plugin that adds advanced features to Support for muan HTML table.  It
 was inspired by [DataTable jQuery Plugin](https://datatables.net/), but  it  was
 written from scratch using Vue.
 
@@ -11,24 +11,29 @@ written from scratch using Vue.
 3. [Getting started](#getting-started)
     - [Installation](#installation)
     - [Set Up](#set-up)
-    - [Use](#use)
+    - [Usage](#usage)
 4. [Configuration](#configuration)
     - [Columns](#columns)
-    - [Lang](#lang)
+    - [Text](#text)
+    - [Layout](#layout)
     - [Custom components](#custom-components)
 5. [License](#license)
 6. [Versioning](#versioning)
 7. [Contributing](#contributing)
-8. [Authors](#authors)
 
 ## Features
 
 - Pagination
-- Search Filter
-- Multiple Column Sorting
-- Export data (JSON, CVS, TXT or XLS)
-- Custom component to be rendered
+- Search filter
+- Single column sorting
+- Multiple column sorting
+- Customize every visible text
 - Support for multiple languages
+- Export data (JSON, CVS, TXT or XLS)
+- Acton buttons (view, edit, delete)
+- Editable cells (edit cell values)
+- Custom Vue Components to render cells
+- Custom Footer to display data summary
 
 ## Demo
 
@@ -59,7 +64,7 @@ Don"t forget to add the style sheets
 import "@uwlajs/vue-data-table/dist/VueDataTable.css";
 ```
 
-### Usage example
+### Usage
 
 ```html
 <template>
@@ -211,7 +216,7 @@ config = {
 ]
 ```
 
-#### Custom component
+#### Custom cell component
 
 Custom components must have a `data` property to receive the data of the current
 row for the component to display it.
@@ -573,7 +578,7 @@ languageServiceProvider.setLangText("en", "downloadText", "download as:")
 */
 ```
 
-### Custom order of components
+### Layout
 
 `VueDataTable` uses CSS's grid display to specify the position of its components
 (search filter, pagination, entries info, per page options, download button).
@@ -670,8 +675,6 @@ The property `data`  correspond  to  all  data  passed  to  `VueDataTable`.  The
 The `dataFiltered` corresponds to all data that was filtered by a search  query.
 These properties can be used to perform common operations  such  as  calculating
 the sum of the values of the total rows of a certain column.
-
-#### Example
 
 Suppose we have a table that of fruits. The `data` is an array of objects  whose
 properties are `name`, `price`, and `amount`. We can provide a custom footer  to
@@ -850,10 +853,6 @@ export default {
 ## License
 
 MIT
-
-## Versioning
-
-This project uses [SemVer](http://semver.org/).
 
 ## Contributing
 
