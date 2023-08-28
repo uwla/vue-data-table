@@ -1,4 +1,8 @@
 # TODO
 
 - split component test suites into smaller test suites
+- provide string notation syntax sugar for defining columns
+- provide option for showing all data
+- provide column aliases
 - add tests for searching on null values
+- add tests for footer component
