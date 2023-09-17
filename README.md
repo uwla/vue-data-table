@@ -1,10 +1,10 @@
 # VUE DATA TABLE
 
-`VueDataTable` is a Vue plugin that adds advanced features to Support for muan HTML table.  It
-was inspired by [DataTable jQuery Plugin](https://datatables.net/), but  it  was
-written from scratch using Vue.
+`VueDataTable` is a Vue plugin that adds advanced features to an HTML table.
 
-## Table of contents
+It was inspired by DataTable jQuery Plugin, but was written from scratch in Vue.
+
+## TABLE OF CONTENTS
 
 1. [Features](#features)
 2. [Demo](#demo)
@@ -17,11 +17,11 @@ written from scratch using Vue.
     - [Text](#text)
     - [Layout](#layout)
     - [Custom components](#custom-components)
-5. [License](#license)
-6. [Versioning](#versioning)
+5. [Roadmap](#roadmap)
+6. [License](#license)
 7. [Contributing](#contributing)
 
-## Features
+## FEATURES
 
 - Pagination
 - Search filter
@@ -35,7 +35,7 @@ written from scratch using Vue.
 - Custom Vue Components to render cells
 - Custom Footer to display data summary
 
-## Demo
+## DEMO
 
 The best way to see if a package suits your needs is by viewing  and  editing  a
 demo project. Here is a code playground in which you can test `VueDataTable`:
@@ -43,7 +43,7 @@ demo project. Here is a code playground in which you can test `VueDataTable`:
 - [Demo (preview)](https://vtlyhz.csb.app/)
 - [Demo (preview and code)](https://codesandbox.io/s/vue-data-table-demo-vtlyhz)
 
-## Getting started
+## GETTING STARTED
 
 ### Installation
 
@@ -91,7 +91,7 @@ export default {
 case, the `bindings`), and pass them as props to the `VueDataTable.` So, this is
 a shortcut to pass multiple props at once.
 
-## Configuration
+## CONFIGURATION
 
 Only `data` e `columns` are required. Other props are optional.
 
@@ -850,10 +850,15 @@ export default {
 };
 ```
 
-## License
+## ROADMAP
+
+- Support for Vue3
+- String notation for defining columns
+
+## LICENSE
 
 MIT
 
-## Contributing
+## CONTRIBUTING
 
 Pull requests are very welcome.
