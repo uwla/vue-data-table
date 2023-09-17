@@ -6,3 +6,5 @@ dist/
 tags
 .vscode
 .vim
+
+.vue*.json
