@@ -25,6 +25,7 @@ type Column = {
     componentProps: VueComponentProps,
     displayIndex: number,
     editable: boolean,
+    key: string,
     id: number,
     searchable: boolean,
     searchFunction: Function,
@@ -51,3 +52,6 @@ type LanguageDictKey =
 type LanguageDictVal = string
 type LanguageDict = Record<LanguageDictKey, LanguageDictVal>
 type Translation = Record<LanguageName, LanguageDict>
+
+type Cell = { [key: string]: any }
+type Data = Cell[]
