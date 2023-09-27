@@ -1,6 +1,7 @@
 // import VdtTableCell from "../components/Table/TableCell.vue"
 // import VdtTableCellEditable from "../components/Table/TableCellEditable.vue"
 import { searchNumericColumn, searchStringColumn, toTitleCase } from "../utils"
+import { SORTING_MODE } from "../const"
 import translations from "../lang"
 
 // default column to all instances of VDT

@@ -5,20 +5,7 @@ type VueComponent = string|any
 type VueComponentProps = { [key: string] : any }
 
 type SortingMode = 'asc' | 'desc' | 'none'
-const SORTING_MODE = {
-    ASC: 'asc',
-    DESC: 'desc',
-    NONE: 'none'
-} as { [key: string] : SortingMode }
-
 type ColumnType = 'numeric' | 'string' | 'array' | 'other'
-const COLUMN_TYPE = {
-    NUMERIC: 'numeric',
-    STRING: 'string',
-    ARRAY: 'array',
-    OTHER: 'other',
-} as { [key: string] : ColumnType }
-
 type Column = {
     compareFunction: Function,
     component: VueComponent
