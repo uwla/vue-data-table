@@ -35,16 +35,19 @@ type Column = {
     type: string,
 }
 
-type LanguageDict = {
-    perPageText?: string,
-    infoText?: string,
-    infoFilteredText?: string,
-    nextButtonText?: string,
-    previousButtonText?: string,
-    paginationSearchText?: string,
-    paginationSearchButtonText?: string,
-    searchText?: string,
-    emptyTableText?: string,
-    downloadText?: string,
-    downloadButtonText?: string,
-}
+type LanguageName = string
+type LanguageDictKey =
+    'downloadButtonText' |
+    'downloadText' |
+    'emptyTableText' |
+    'infoFilteredText' |
+    'infoText' |
+    'nextButtonText' |
+    'paginationSearchButtonText' |
+    'paginationSearchText' |
+    'perPageText' |
+    'previousButtonText' |
+    'searchText';
+type LanguageDictVal = string
+type LanguageDict = Record<LanguageDictKey, LanguageDictVal>
+type Translation = Record<LanguageName, LanguageDict>
