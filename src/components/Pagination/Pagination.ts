@@ -23,7 +23,7 @@ export default defineComponent({
         previousPage: Number,
         currentPage: Number,
         nextPage: Number,
-        pagination: Array<Number|String>
+        pagination: Array,
     },
     watch: {
         currentPage(value) {
