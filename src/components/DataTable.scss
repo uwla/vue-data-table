@@ -1,0 +1,144 @@
+.vue-data-table {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 25% 25% 25% 25%;
+
+    & > .vdt-search, .vdt-pagination, .vdt-export {
+        margin-left: auto
+    }
+
+    @media (min-width: 1401px) {
+        grid-template-areas:
+        "perPage search search search"
+        "table table table table"
+        "info pagination pagination download";
+    }
+
+    @media (min-width: 1051px) AND (max-width: 1400px) {
+        grid-template-areas:
+        "perPage search search search"
+        "table table table table"
+        "info pagination pagination pagination"
+        ". . download download";
+    }
+
+    @media (min-width: 851px) AND (max-width: 1050px) {
+        grid-template-areas:
+        "perPage search search search"
+        "table table table table"
+        "pagination pagination pagination pagination"
+        "info info download download";
+    }
+
+    @medi max-width: 800px) {
+        & > .vdt-pagination {
+            flex-wrap: wrap;
+        }
+    }
+
+    @media (min-width: 651px) AND (max-width: 850px) {
+        grid-template-areas:
+        "perPage search search search"
+        "table table table table"
+        "pagination pagination pagination pagination"
+        "info info info info"
+        "download download download download";
+    }
+
+    @media (max-width: 650px) {
+        grid-template-areas:
+        "search search search search"
+        "perPage perPage perPage perPage "
+        "table table table table"
+        "pagination pagination pagination pagination"
+        "info info info info"
+        "download download download download";
+
+        &>.vdt-perpage {
+            margin-left: auto
+        }
+    }
+
+    & > div {
+        margin-top: 1rem;
+        max-width: 100%;
+    }
+}
+
+// -----------------------------------------------------------------------------
+// GENERIC CLASSES
+
+.vdt-input {
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    color: #495057;
+    display: inline-block;
+    line-height: 1.5;
+    margin: 0;
+    outline: none;
+    padding: 0.25rem 0.5rem;
+    width: 100%;
+
+    &:focus {
+        background-color: #fff;
+        border-color: #80bdff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        color: #495057;
+        outline: 0;
+        -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+}
+
+// Buttons
+
+.vdt-btn {
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    cursor: pointer;
+    color: #fff;
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: .375rem .75rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.vdt-action-view, .vdt-action-confirm {
+    border: 1px solid #28a745;
+    background-color: #28a745;
+    &:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+}
+
+.vdt-action-edit, .vdt-btn-primary {
+    border: 1px solid #007bff;
+    background-color: #007bff;
+    &:hover {
+        background-color: #0069d9;
+        border-color: #0062cc;
+    }
+}
+
+.vdt-action-cancel {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    &:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+}
+
+.vdt-action-delete {
+    border: 1px solid #343a40;
+    background-color: #343a40;
+    &:hover {
+        background-color: #23272b;
+        border-color: #1d2124;
+    }
+}

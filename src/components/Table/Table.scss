@@ -1,0 +1,74 @@
+.vdt-table {
+    overflow: auto;
+    max-height: 80vh;
+    width: 100%;
+    grid-area: table;
+
+    table {
+        border-collapse: collapse;
+        margin: 0;
+    }
+
+    .table {
+        width: 100%;
+        margin-bottom: 1rem;
+        color: #212529;
+    }
+
+    .table thead th {
+        vertical-align: bottom;
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .table td, .table th {
+        padding: .75rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: rgba(0,0,0,.05);
+    }
+
+    .table-hover tbody tr:hover {
+        color: #212529;
+        background-color: rgba(0,0,0,.075);
+    }
+
+    .vdt-column {
+        white-space: nowrap;
+        background-color: white;
+        position: sticky;
+        padding: 1rem 0.75rem;
+        border: none !important;
+        box-shadow: inset 0px 11px .75px -10px #ddd, inset 0px -11px .75px -10px #ddd;
+        line-height: 1;
+        top: 0;
+        user-select: none;
+
+        &[data-sortable] {
+            cursor: pointer;
+
+            &:hover {
+                color: #3490dc;
+            }
+        }
+    }
+
+    .vdt-column-center span {
+        text-align: center;
+        width: 100%;
+        display: block;
+    }
+
+    .vdt-column-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .vdt-empty-body {
+        text-align: center;
+    }
+}
+

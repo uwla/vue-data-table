@@ -15,7 +15,7 @@ toTitleCase(str: string): string
 }
 
 // Replace multiple substrings in the given string from the matching arrays.
-export function stringReplaceFromArray(target: string, searchValues: string[], replacements: string[]): string {
+export function stringReplaceFromArray(target: string, searchValues: string[], replacements: any[]): string {
     for (let i = 0; i < searchValues.length; i++) {
         target = target.replace(searchValues[i], replacements[i])
     }
@@ -125,7 +125,7 @@ export function sortDataByColumns(data: Data, columns: Column[]) {
  * Cross-browser utility to get the event target value
  * @returns {*}
  */
-export function getEventTargetValue(event: any) {
+export function getEventTargetValue(event : any = null) {
     event = event || window.event
     var target
     if (event !== undefined) {
