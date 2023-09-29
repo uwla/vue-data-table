@@ -17,7 +17,7 @@ let gen = (fn: any) => faker.helpers.multiple(fn, { count: n })
 let subset = (arr: any) => faker.helpers.arrayElements(arr, { min: 1, max: arr.length })
 
 // a custom data source for faking data
-const ROLES = ['admin', 'chief', 'staff', 'manager', 'executive', 'user']
+export const ROLES = ['admin', 'chief', 'staff', 'manager', 'executive', 'user']
 
 // generate fake data
 export const names = gen(faker.person.fullName)
@@ -31,7 +31,7 @@ for (let i = 0; i < n; i++)
     data.push({ name: names[i], job: jobs[i], gender: genders[i], roles: roles[i] })
 
 // The component to test
-const CustomComponent = defineComponent({
+const CustomComponent1 = defineComponent({
     props: { data: { type: Object, required: true } },
     render() {
         return createVNode('p', null, [
@@ -42,12 +42,22 @@ const CustomComponent = defineComponent({
     }
 })
 
+const CustomComponent2 = defineComponent({
+    props: { data: { type: Object, required: true } },
+    render() {
+        return createVNode('ul', 
+            null,
+            this.data.roles.map((role: any) => createVNode('li', null, role))
+        );
+    }
+})
+
 // mount the component
 export const wrapper = mount(VueDataTable, {
     global: {
         components: {
             ...components,
-            'custom-component': CustomComponent,
+            CustomComponent1,
         }
     },
     props: {

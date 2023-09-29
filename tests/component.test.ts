@@ -7,7 +7,7 @@ test('it renders custom components', async () => {
     // use custom component (defined in common.ts) in the first column
     await wrapper.setProps({
         columns: [
-            { title: "Person info", component: 'custom-component' },
+            { title: "Person info", component: 'CustomComponent1' },
             { key: 'gender' },
         ],
         perPageSizes: [n],
