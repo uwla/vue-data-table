@@ -20,5 +20,6 @@ function install(app: any) {
 const plugin = { install }
 
 export {
+    components,
     plugin as default,
 }

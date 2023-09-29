@@ -1,5 +1,4 @@
 import { globalDefaultColumn, parseColumnProps } from "../src/parser"
-// import VdtTableCellEditable from '../src/components/Table/TableCellEditable.vue'
 
 test('test parsing columns', function() {
     let columns = [
@@ -39,7 +38,7 @@ test('test parsing columns', function() {
 
     //
     expect(parsed[5].editable).toBe(true)
-    expect(parsed[5].component).toEqual('VdtTableCellEditable')
+    expect(parsed[5].component).toEqual('vdt-cell-editable')
 })
 
 test('test parsing columns with custom default column', function() {
