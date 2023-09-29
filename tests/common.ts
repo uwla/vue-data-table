@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils'
 import { faker } from '@faker-js/faker'
 import { components } from '../src/main'
 import VueDataTable from '../src/components/DataTable.vue'
+import { defineComponent, createVNode } from 'vue'
 
 ////////////////////////////////////////////////////////////////////////////////
 // DATA
@@ -19,20 +20,35 @@ let subset = (arr: any) => faker.helpers.arrayElements(arr, { min: 1, max: arr.l
 const ROLES = ['admin', 'chief', 'staff', 'manager', 'executive', 'user']
 
 // generate fake data
-const names = gen(faker.person.fullName)
-const jobs = gen(faker.person.jobTitle)
-const genders = gen(faker.person.sex)
-const roles = gen(() => subset(ROLES))
+export const names = gen(faker.person.fullName)
+export const jobs = gen(faker.person.jobTitle)
+export const genders = gen(faker.person.sex)
+export const roles = gen(() => subset(ROLES))
 
 // create an object data array with the fake data
 export const data = [] as any
 for (let i = 0; i < n; i++)
     data.push({ name: names[i], job: jobs[i], gender: genders[i], roles: roles[i] })
 
+// The component to test
+const CustomComponent = defineComponent({
+    props: { data: { type: Object, required: true } },
+    render() {
+        return createVNode('p', null, [
+            createVNode('b', null, this.data.name),
+            ' works as ',
+            createVNode('i', null, this.data.job)
+        ]);
+    }
+})
+
 // mount the component
 export const wrapper = mount(VueDataTable, {
     global: {
-        components,
+        components: {
+            ...components,
+            'custom-component': CustomComponent,
+        }
     },
     props: {
         data: data,
@@ -45,9 +61,6 @@ export const wrapper = mount(VueDataTable, {
     },
 })
 
-// this variable will store the number of emitted events,
-// which is needed across tests in order to get the correct event
-export let eventCounter = 0
 
 // some aliases
 export const searchInput = wrapper.find('.vdt-search input')
