@@ -1,11 +1,11 @@
-import { defineComponent } from "vue"
+import { defineComponent, reactive } from "vue"
 
 export default defineComponent({
-    setup() {
-        return {
+    data: () => {
+        return reactive({
             isEditing: false,
             text: '',
-        }
+        })
     },
     methods: {
         edit() {
