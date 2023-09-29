@@ -1,7 +1,7 @@
 import { defineComponent } from "vue"
 
 export default defineComponent({
-    data() {
+    setup() {
         return {
             isEditing: false,
             text: '',

@@ -2,7 +2,7 @@ import { defineComponent } from "vue"
 
 export default defineComponent({
     name: "VdtPagination",
-    data() {
+    setup() {
         return {
             pageToGo: 1
         }

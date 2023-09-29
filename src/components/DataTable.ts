@@ -16,7 +16,7 @@ import {
 } from "../utils"
 import { parseColumnProps, parseTextProps } from "../parser"
 
-import { defineComponent } from "vue"
+import { defineComponent, reactive } from "vue"
 import { SORTING_MODE } from "@/const"
 
 export default defineComponent({
@@ -128,6 +128,27 @@ export default defineComponent({
             type: Object,
             required: false
         }
+    },
+
+    setup: () => {
+        return reactive({
+            currentPage: 1,
+            currentPerPage: 10,
+            parsedColumns: [] as Column[],
+            columnsBeingSorted: [] as Column[],
+            perPageText: "",
+            downloadText: "",
+            downloadButtonText: "",
+            emptyTableText: "",
+            infoText: "",
+            infoFilteredText: "",
+            nextButtonText: "",
+            previousButtonText: "",
+            paginationSearchText: "",
+            paginationSearchButtonText: "",
+            search: "",
+            searchText: ""
+        })
     },
 
     computed: {
@@ -269,8 +290,9 @@ export default defineComponent({
             // values, and return the result
             return stringReplaceFromArray(text, searchValues, replacements)
         },
+
         //
-        // ─── PAGINATION ─────────────────────────────────────────────────────────────────
+        // ─── PAGINATION ──────────────────────────────────────────────────────
         //
 
         /**
@@ -285,7 +307,6 @@ export default defineComponent({
 
         /**
          * Alias for the number of pages
-         * @var {Number}
          */
         lastPage() {
             return this.numberOfPages
@@ -293,7 +314,6 @@ export default defineComponent({
 
         /**
          * Whether this is the last page of the table
-         * @var {Boolean}
          */
         isLastPage() {
             return this.currentPage === this.numberOfPages
@@ -301,7 +321,6 @@ export default defineComponent({
 
         /**
          * Whether this is the first page of the table
-         * @var {Boolean}
          */
         isFirstPage() {
             return this.currentPage === 1
@@ -309,7 +328,6 @@ export default defineComponent({
 
         /**
          * Get the number of the previous page
-         * @var {Number}
          */
         previousPage() {
             return this.currentPage - 1
@@ -317,7 +335,6 @@ export default defineComponent({
 
         /**
          * Get the number of the next page
-         * @var {Number}
          */
         nextPage() {
             return this.currentPage + 1
@@ -363,8 +380,7 @@ export default defineComponent({
             }
         },
 
-        //
-        // ─── BINDINGS ────────────────────────────────────────────────────
+        // ─────────────────────────────────────────────────────────────────────
         //
 
         /**
@@ -455,27 +471,6 @@ export default defineComponent({
         this.setDefaults()
     },
 
-    data() {
-        return {
-            currentPage: 1,
-            currentPerPage: 10,
-            parsedColumns: [] as Column[],
-            columnsBeingSorted: [] as Column[],
-            perPageText: "",
-            downloadText: "",
-            downloadButtonText: "",
-            emptyTableText: "",
-            infoText: "",
-            infoFilteredText: "",
-            nextButtonText: "",
-            previousButtonText: "",
-            paginationSearchText: "",
-            paginationSearchButtonText: "",
-            search: "",
-            searchText: ""
-        }
-    },
-
     methods: {
         /**
          * Propagate upwards an event from user's custom component
@@ -500,8 +495,7 @@ export default defineComponent({
          * Parse columns (assign default values while enabling customization)
          */
         parseColumnProps() {
-            var parsedColumns = parseColumnProps(this.$props)
-            Object.assign(this, { parsedColumns })
+            this.parsedColumns = parseColumnProps(this.$props)
         },
 
         /**
@@ -658,7 +652,6 @@ export default defineComponent({
             this.currentPage = 1
         }
     },
-
 
     watch: {
         columns: {

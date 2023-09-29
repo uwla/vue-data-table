@@ -6,7 +6,8 @@ import translations from "../lang"
 
 // default column to all instances of VDT
 export const globalDefaultColumn = {
-    component: 'VdtTableCell',
+    // component: VdtTableCell,
+    component: 'vdt-cell',
     componentProps: {},
     displayIndex: 1000,
     searchable: true,
@@ -50,7 +51,8 @@ export function parseColumnProps(props: any) {
 
         // editable cell
         if (column.editable)
-            column.component = 'VdtTableCellEditable'
+            column.component = 'vdt-cell-editable'
+            // column.component = VdtTableCellEditable
 
         // merge the column with the default values
         column = { ...globalDefaultColumn, ...defaultColumn, ...column }
