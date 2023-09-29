@@ -53,7 +53,7 @@ export let eventCounter = 0
 export const searchInput = wrapper.find('.vdt-search input')
 export const paginationBtn = wrapper.find('.vdt-pagination-search button')
 export const paginationInput = wrapper.find('.vdt-pagination-search input')
-const col = (i: any) => wrapper.find(`.vdt-column:nth-child(${i})`)
+export const col = (i: any) => wrapper.find(`.vdt-column:nth-child(${i})`)
 
 ////////////////////////////////////////////////////////////////////////////////
 // HELPERS

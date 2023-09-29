@@ -130,7 +130,7 @@ export default defineComponent({
         }
     },
 
-    setup: () => {
+    data: () => {
         return reactive({
             currentPage: 1,
             currentPerPage: 10,
