@@ -10,7 +10,7 @@ export default defineComponent({
     },
     props: {
         tableClass: String,
-        columns: Array,
+        columns: Array as () => any,
         data: Array,
         dataDisplayed: Array,
         dataFiltered: Array,

@@ -1,3 +1,4 @@
+import { expect, test } from "vitest"
 import { globalDefaultColumn, parseColumnProps } from "../src/parser"
 
 test('test parsing columns', function() {

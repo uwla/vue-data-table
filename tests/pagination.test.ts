@@ -1,4 +1,5 @@
-import { arraySafeSort } from '@/utils'
+import { expect, test } from "vitest"
+import { arraySafeSort } from '../src/utils'
 import { click, col, data, n, paginationInput, paginationBtn, searchInput,
 testRowsMatchData, wrapper } from './common'
 

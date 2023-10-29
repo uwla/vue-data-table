@@ -1,3 +1,4 @@
+import { expect, test } from "vitest"
 import { click, data, jobs, n, names, wrapper } from "./common";
 
 // ────────────────────────────────────────────────────────────────────────────────

@@ -1,4 +1,5 @@
-import { arraySafeSort } from "@/utils"
+import { expect, test } from "vitest"
+import { arraySafeSort } from "../src/utils"
 import { click, col, data, rowText, searchInput, testRowsMatchData, wrapper } from "./common"
 
 test('it sorts data', async () => {

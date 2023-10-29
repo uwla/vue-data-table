@@ -1,3 +1,4 @@
+import { expect, test } from "vitest"
 import { stringReplaceFromArray, arraySafeSort, safeCompare } from "../src/utils";
 
 test('test string replacement', function() {

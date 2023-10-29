@@ -1,3 +1,4 @@
+import { expect } from "vitest"
 import { mount } from '@vue/test-utils'
 import { faker } from '@faker-js/faker'
 import { components } from '../src/main'

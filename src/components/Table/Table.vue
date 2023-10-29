@@ -5,7 +5,7 @@
             <thead>
                 <tr>
                     <!-- COLUMN HEADER -->
-                    <th v-for="(column, i) in (columns as any)" :key="i"
+                    <th v-for="(column, i) in columns" :key="i"
                         class="vdt-column"
                         :class="column.cssClass"
                         :data-sortable="column.sortable"
@@ -18,12 +18,12 @@
 
                             <!-- SORTING INDEX -->
                             <component v-if="column.sortingIndex > 0"
-                                :is="sortingIndexComponent as any"
+                                :is="sortingIndexComponent"
                                 :index="column.sortingIndex" />
 
                             <!-- SORTING ICON -->
                             <component v-if="column.sortable"
-                                :is="sortingIconComponent as any" />
+                                :is="sortingIconComponent" />
                         </div>
                     </th>
                 </tr>
@@ -41,7 +41,7 @@
 
                 <!-- NON-EMPTY BODY -->
                 <tr v-for="(data, i) in dataDisplayed" :key="i">
-                    <td v-for="(column, j) in (columns as any)" :key="j">
+                    <td v-for="(column, j) in columns" :key="j">
                         <component :is="column.component"
                             v-bind="{ data, ...column.componentProps }"
                             @userEvent="emitUserEvent" />
@@ -50,10 +50,10 @@
             </tbody>
 
             <!-- COMPONENT IF LOADING -->
-            <component v-if="isLoading" :is="loadingComponent as any" />
+            <component v-if="isLoading" :is="loadingComponent" />
 
             <!-- TABLE FOOTER -->
-            <component v-if="footerComponent" :is="footerComponent as any"
+            <component v-if="footerComponent" :is="footerComponent"
                     v-bind="{ data, dataDisplayed, dataFiltered }" />
         </table>
     </div>

@@ -1,3 +1,4 @@
+import { expect, test } from "vitest"
 import { mount } from '@vue/test-utils'
 import { translations } from '../src/lang'
 import VueDataTable from '../src/components/DataTable.vue'

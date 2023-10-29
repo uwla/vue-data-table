@@ -17,7 +17,7 @@ import {
 import { parseColumnProps, parseTextProps } from "../parser"
 
 import { defineComponent, reactive } from "vue"
-import { SORTING_MODE } from "@/const"
+import { SORTING_MODE } from "../const"
 
 export default defineComponent({
     name: "VueDataTable",

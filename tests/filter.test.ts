@@ -1,5 +1,6 @@
-import translations from "@/lang"
-import { stringReplaceFromArray } from "@/utils"
+import { expect, test } from "vitest"
+import translations from "../src/lang"
+import { stringReplaceFromArray } from "../src/utils"
 import { data, n, searchInput, testRowsMatchData, wrapper } from "./common"
 
 test('it filters data', async () => {

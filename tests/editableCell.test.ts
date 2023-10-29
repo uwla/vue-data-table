@@ -1,3 +1,4 @@
+import { expect, test } from "vitest"
 import { click, data, n, testRowsMatchData, wrapper } from "./common"
 
 test('it can edit editable cells', async () => {

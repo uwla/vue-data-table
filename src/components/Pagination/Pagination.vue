@@ -15,7 +15,7 @@
         <ul class="vdt-pagination-items">
             <li class="vdt-page-item"
                 :class="{ disabled: isFirstPage }"
-                @click="setCurrentPage(previousPage as Number)">
+                @click="setCurrentPage(previousPage)">
                 <span class="vdt-page-link">
                     {{ previousButtonText }}
                 </span>
@@ -23,12 +23,12 @@
             <li v-for="(page, i) in pagination" :key="i"
                 class="vdt-page-item"
                 :class="{ active: currentPage === page, disabled: page === '...'}"
-                @click="setCurrentPage(page as Number)">
+                @click="setCurrentPage(page)">
                 <span class="vdt-page-link">
                     {{ page }}
                 </span>
             </li>
-            <li class="vdt-page-item" @click="setCurrentPage(nextPage as Number)"
+            <li class="vdt-page-item" @click="setCurrentPage(nextPage)"
                 :class="{ disabled: isLastPage }">
                 <span class="vdt-page-link">
                     {{ nextButtonText }}

@@ -8,7 +8,7 @@ export default defineComponent({
         }
     },
     methods: {
-        setCurrentPage(page: string|Number) {
+        setCurrentPage(page: any) {
             this.$emit("set-page", Number(page))
         }
     },

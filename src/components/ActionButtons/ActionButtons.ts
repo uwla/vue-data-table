@@ -12,11 +12,11 @@ export default defineComponent({
     },
     props: {
         actions: {
-            type: Array,
+            type: Array as () => string[],
             default: () => ['view', 'edit', 'delete']
         },
         actionIcons: {
-            type: Object,
+            type: Object as () => ({ [key: string]: string }),
             default: () => ({
                 view: "👁️",
                 edit: "✏️",

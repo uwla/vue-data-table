@@ -1,4 +1,5 @@
-import { arraySafeSort } from "@/utils"
+import { test } from "vitest"
+import { arraySafeSort } from "../src/utils"
 import { click, col, data, ROLES, searchInput, testRowsMatchData, wrapper } from "./common"
 
 // ────────────────────────────────────────────────────────────────────────────────

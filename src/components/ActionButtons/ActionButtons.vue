@@ -1,6 +1,6 @@
 <template>
     <div class="vdt-action-buttons">
-        <button v-for="(action, i) in (actions as string[])" :key="i"
+        <button v-for="(action, i) in actions" :key="i"
             class="vdt-btn"
             :class="`vdt-action-${action}`"
             @click="triggerAction(action)">
