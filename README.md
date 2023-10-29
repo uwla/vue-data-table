@@ -1,6 +1,6 @@
 # VUE DATA TABLE
 
-`VueDataTable` is a Vue plugin that adds advanced features to an HTML table.
+`VueDataTable` is a Vue2 plugin that adds advanced features to an HTML table.
 
 It was inspired by DataTable jQuery Plugin, but was written from scratch in Vue.
 
@@ -30,9 +30,9 @@ It was inspired by DataTable jQuery Plugin, but was written from scratch in Vue.
 - Customize every visible text
 - Support for multiple languages
 - Export data (JSON, CVS, TXT or XLS)
-- Acton buttons (view, edit, delete)
+- Action buttons (view, edit, delete)
 - Editable cells (edit cell values)
-- Custom Vue Components to render cells
+- Custom Vue components to render cells
 - Custom Footer to display data summary
 
 ## DEMO
@@ -543,8 +543,8 @@ parameters() {
 
 #### Adding global custom language
 
-If your lang is not yet supported, you can add a new language and use it in  any
-`VueDataTable` instance as follow:
+If your language is not yet supported, you can add a new language and use it  in
+any `VueDataTable` instance as follow:
 
 ```javascript
 import { languageServiceProvider } from "@uwlajs/vue-data-table";
@@ -849,11 +849,6 @@ export default {
     }
 };
 ```
-
-## ROADMAP
-
-- Support for Vue3
-- String notation for defining columns
 
 ## LICENSE
 
