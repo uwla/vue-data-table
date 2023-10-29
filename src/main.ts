@@ -21,5 +21,6 @@ const plugin = { install }
 
 export {
     components,
+    plugin,
     plugin as default,
 }

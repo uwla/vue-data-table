@@ -3,8 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "typings": "./src/main.d.ts",
   "scripts": {
-    "dev": "vite",
     "build": "vue-tsc && vite build",
     "test": "vitest run"
   },
