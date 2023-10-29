@@ -30,9 +30,9 @@ It was inspired by DataTable jQuery Plugin, but was written from scratch in Vue.
 - Customize every visible text
 - Support for multiple languages
 - Export data (JSON, CVS, TXT or XLS)
-- Acton buttons (view, edit, delete)
+- Action buttons (view, edit, delete)
 - Editable cells (edit cell values)
-- Custom Vue Components to render cells
+- Custom Vue components to render cells
 - Custom Footer to display data summary
 
 ## DEMO
@@ -40,8 +40,7 @@ It was inspired by DataTable jQuery Plugin, but was written from scratch in Vue.
 The best way to see if a package suits your needs is by viewing  and  editing  a
 demo project. Here is a code playground in which you can test `VueDataTable`:
 
-- [Demo (preview)](https://vtlyhz.csb.app/)
-- [Demo (preview and code)](https://codesandbox.io/s/vue-data-table-demo-vtlyhz)
+CURRENTLY NOT AVAILABLE
 
 ## GETTING STARTED
 
@@ -543,8 +542,8 @@ parameters() {
 
 #### Adding global custom language
 
-If your lang is not yet supported, you can add a new language and use it in  any
-`VueDataTable` instance as follow:
+If your language is not yet supported, you can add a new language and use it  in
+any `VueDataTable` instance as follow:
 
 ```javascript
 import { languageServiceProvider } from "@uwlajs/vue-data-table";
@@ -852,8 +851,8 @@ export default {
 
 ## ROADMAP
 
-- Support for Vue3
-- String notation for defining columns
+- [x] Support for Vue3
+- [ ] String notation for defining columns
 
 ## LICENSE
 
