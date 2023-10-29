@@ -1,14 +1,15 @@
 {
-    "name": "vue3-form-builder",
+    "name": "vue3-data-table",
     "version": "0.1.0",
     "private": true,
     "scripts": {
         "serve": "vue-cli-service serve ./src/app.ts",
-        "build": "vue-cli-service build",
+        "build": "vue-cli-service build --target lib --name VueDataTable src/main.ts",
         "test": "vue-cli-service test:unit",
         "lint": "vue-cli-service lint",
         "format": " npx prettier --write . | awk '{ print $1 }' | xargs -I{} truncate -s -1 {}"
     },
+    "main": "dist/VueDataTable.umd.js",
     "dependencies": {
         "export-from-json": "^1.7.3",
         "vue": "^3.2.13"
