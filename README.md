@@ -51,6 +51,10 @@ demo project. Here is a code playground in which you can test `VueDataTable`:
 npm install @uwlajs/vue-data-table
 ```
 
+Make sure to install version `2.0.0` or above for Vue3.
+
+Versions prior to `2.0.0` are for Vue2.
+
 ### Set up
 
 ```javascript
