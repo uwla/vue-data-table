@@ -1,35 +1,40 @@
 {
-  "name": "vue-data-table",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "typings": "./src/main.d.ts",
-  "scripts": {
-    "build": "vue-tsc && vite build",
-    "test": "vitest run"
-  },
-  "main": "./dist/vue-data-table.cjs",
-  "module": "./dist/vue-data-table.js",
-  "exports": {
-    ".": {
-      "import": "./dist/vue-data-table.js",
-      "require": "./dist/vue-data-table.umd.cjs"
+    "name": "@uwlajs/vue-data-table",
+    "description": "Vue plugin that adds advanced features to an HTML table",
+    "version": "2.0.1-beta",
+    "author": "uwla",
+    "private": false,
+    "license": "MIT",
+    "type": "module",
+    "typings": "main.d.ts",
+    "scripts": {
+        "build-types": "vue-tsc && mv dist/main.d.ts .",
+        "build-js": "vite build",
+        "build": "npm run build-types && npm run build-js",
+        "test": "vitest run"
     },
-    "./dist/style.css": "./dist/style.css"
-  },
-  "dependencies": {
-    "export-from-json": "^1.7.3",
-    "vue": "^3.3.4"
-  },
-  "devDependencies": {
-    "@faker-js/faker": "^8.1.0",
-    "@vitejs/plugin-vue": "^4.2.3",
-    "@vue/test-utils": "^2.4.1",
-    "jsdom": "^22.1.0",
-    "sass": "^1.69.5",
-    "typescript": "^5.0.2",
-    "vite": "^4.4.5",
-    "vitest": "^0.34.6",
-    "vue-tsc": "^1.8.5"
-  }
+    "main": "./dist/vue-data-table.cjs",
+    "module": "./dist/vue-data-table.js",
+    "exports": {
+        ".": {
+            "import": "./dist/vue-data-table.js",
+            "require": "./dist/vue-data-table.umd.cjs"
+        },
+        "./dist/style.css": "./dist/style.css"
+    },
+    "dependencies": {
+        "export-from-json": "^1.7.3",
+        "vue": "^3.3.4"
+    },
+    "devDependencies": {
+        "@faker-js/faker": "^8.1.0",
+        "@vitejs/plugin-vue": "^4.2.3",
+        "@vue/test-utils": "^2.4.1",
+        "jsdom": "^22.1.0",
+        "sass": "^1.69.5",
+        "typescript": "^5.0.2",
+        "vite": "^4.4.5",
+        "vitest": "^0.34.6",
+        "vue-tsc": "^1.8.5"
+    }
 }

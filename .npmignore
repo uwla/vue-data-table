@@ -1,0 +1,7 @@
+node_modules/
+src/
+tests/
+.git*
+.editorconfig
+vite.config.ts
+tsconfig.*
