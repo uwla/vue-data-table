@@ -40,7 +40,8 @@ It was inspired by DataTable jQuery Plugin, but was written from scratch in Vue.
 The best way to see if a package suits your needs is by viewing  and  editing  a
 demo project. Here is a code playground in which you can test `VueDataTable`:
 
-CURRENTLY NOT AVAILABLE
+- [Demo (live)](https://c7kfj5.csb.app/)
+- [Demo (code)](https://codesandbox.io/s/vue3-data-table-demo-c7kfj5)
 
 ## GETTING STARTED
 
