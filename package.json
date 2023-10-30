@@ -6,10 +6,10 @@
     "private": false,
     "license": "MIT",
     "type": "module",
-    "typings": "main.d.ts",
+    "typings": "dist/vue-data-table.d.ts",
     "scripts": {
-        "build-types": "vue-tsc && mv dist/main.d.ts .",
-        "build-js": "vite build",
+        "build-types": "vue-tsc && mv dist/main.d.ts vue-data-table.d.ts",
+        "build-js": "vite build && mv vue-data-table.d.ts dist/",
         "build": "npm run build-types && npm run build-js",
         "test": "vitest run"
     },
@@ -17,8 +17,14 @@
     "module": "./dist/vue-data-table.js",
     "exports": {
         ".": {
-            "import": "./dist/vue-data-table.js",
-            "require": "./dist/vue-data-table.umd.cjs"
+            "import": {
+                "types": "./vue-data-table.d.ts",
+                "default": "./dist/vue-data-table.js"
+            },
+            "require": {
+                "default": "./dist/vue-data-table.umd.cjs",
+                "types": "./vue-data-table.d.ts"
+            }
         },
         "./dist/style.css": "./dist/style.css"
     },
