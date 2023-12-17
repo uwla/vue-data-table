@@ -18,12 +18,12 @@
     "exports": {
         ".": {
             "import": {
-                "types": "./vue-data-table.d.ts",
+                "types": "./dist/vue-data-table.d.ts",
                 "default": "./dist/vue-data-table.js"
             },
             "require": {
                 "default": "./dist/vue-data-table.umd.cjs",
-                "types": "./vue-data-table.d.ts"
+                "types": "./dist/vue-data-table.d.ts"
             }
         },
         "./dist/style.css": "./dist/style.css"
