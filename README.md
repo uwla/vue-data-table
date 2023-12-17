@@ -99,43 +99,45 @@ a shortcut to pass multiple props at once.
 
 Only `data` e `columns` are required. Other props are optional.
 
-| prop                  | type     | default                           | description                                                                                |
-| --------------------- | -------- | --------------------------------- | ------------------------------------------------------------------------------------------ |
-| data                  | `Array`  | -                                 | Array of objects with the data to be displayed on the table                                |
-| columns               | `Array`  | -                                 | Array of objects that specifies how to render each column. Optional if `columnKeys` is set |
-| columnKeys            | `Array`  | -                                 | Array of strings matching the object keys in `data`. This is discarded if `columns` is set |
-| lang                  | `String` | `en`                              | The default language                                                                       |
-| perPageSizes          | `Array`  | [10, 25, 50, 100]                 | The options for the number of rows being displayed per page                                |
-| defaultPerPage        | `Number` | 10                                | The default number of entries. If unset, then it will be the first value of `perPageSizes` |
-| isLoading             | `Bool`   | `false`                           | Whether table data is loading. Table rows are shown only if this value is set to `false`   |
-| loadingComponent      | `Object` | -                                 | VueJS component to be shown if `isLoading` is set to `true`                                |
-| showPerPage           | `Bool`   | `true`                            | Whether to show the `PerPage` component                                                    |
-| showEntriesInfo       | `Bool`   | `true`                            | Whether to show the `EntriesInfo` component                                                |
-| showSearchFilter      | `Bool`   | `true`                            | Whether to show the `SearchFilter` component                                               |
-| showPagination        | `Bool`   | `true`                            | Whether to show the `Pagination` component                                                 |
-| showDownloadButton    | `Bool`   | `true`                            | Whether to show the button to download the table's data                                    |
-| tableClass            | `String` | `table table-striped table-hover` | The table's HTML `class` attribute                                                         |
-| sortingMode           | `String` | `multiple`                        | Whether to sort a single column or multiple columns at once                                |
-| sortingIndexComponent | `Object` | `VdtSortingIndex`                 | VueJS component for the sorting index on sortable columns                                  |
-| sortingIconComponent  | `Object` | `VdtSortingIcon`                  | VueJS component for the sorting icon on sortable columns                                   |
-| footerComponent       | `Object` | `null`                            | VueJS component for custom table footer                                                    |
-| allowedExports        | `Array`  | `["csv", "json", "txt"]`          | Formats the user can export the data to. Allowed values: `csv`, `json`, `txt`, `xlsx`      |
+| prop                  | type               | default                           | description                                                                                |
+| --------------------- | ------------------ | --------------------------------- | ------------------------------------------------------------------------------------------ |
+| data                  | `Array`            | -                                 | Array of objects with the data to be displayed on the table                                |
+| columns               | `Array`            | -                                 | Array of objects to specify how to render each column. Optional if `columnKeys` is set     |
+| columnKeys            | `Array`            | -                                 | Array of strings matching the object keys in `data`. Discarded if `columns` is set         |
+| lang                  | `String`           | `en`                              | The default language                                                                       |
+| perPageSizes          | `Array`            | [10, 25, 50, 100]                 | The options for the number of rows being displayed per page                                |
+| defaultPerPage        | `Number`           | 10                                | The default number of entries. If unset, then it will be the first value of `perPageSizes` |
+| isLoading             | `Bool`             | `false`                           | Whether table data is loading. Table rows are shown only if this value is set to `false`   |
+| loadingComponent      | `String`, `Object` | -                                 | VueJS component to be shown if `isLoading` is set to `true`                                |
+| showPerPage           | `Bool`             | `true`                            | Whether to show the `PerPage` component                                                    |
+| showEntriesInfo       | `Bool`             | `true`                            | Whether to show the `EntriesInfo` component                                                |
+| showSearchFilter      | `Bool`             | `true`                            | Whether to show the `SearchFilter` component                                               |
+| showPagination        | `Bool`             | `true`                            | Whether to show the `Pagination` component                                                 |
+| showDownloadButton    | `Bool`             | `true`                            | Whether to show the button to download the table's data                                    |
+| tableClass            | `String`           | `table table-striped table-hover` | The table's HTML `class` attribute                                                         |
+| sortingMode           | `String`           | `multiple`                        | Whether to sort a single column or multiple columns at once                                |
+| sortingIndexComponent | `String`, `Object` | `VdtSortingIndex`                 | VueJS component for the sorting index on sortable columns                                  |
+| sortingIconComponent  | `String`, `Object` | `VdtSortingIcon`                  | VueJS component for the sorting icon on sortable columns                                   |
+| footerComponent       | `String`, `Object` | `null`                            | VueJS component for custom table footer                                                    |
+| allowedExports        | `Array`            | `["csv", "json", "txt"]`          | Formats the user can export the data to. Allowed values: `csv`, `json`, `txt`, `xlsx`      |
+
 
 ### Columns
 
-| key             | type       | default          | description                                               |
-| --------------- | ---------- | ---------------- | --------------------------------------------------------- |
-| key             | `String`   | -                | The object field to be displayed in a table cell          |
-| title           | `String`   | `titleCase(key)` | The title displayed in the header.                        |
-| searchable      | `Bool`     | `true`           | Whether to allow searching rows by this column field      |
-| sortable        | `Bool`     | `true`           | Whether to allow sorting the data by this column field    |
-| editable        | `Bool`     | `true`           | Whether the column is editable by the user.               |
-| type            | `String`   | `string`         | Data type of `key`. Allowed values: `string`, `number`    |
-| compareFunction | `Function` | -                | Custom function provided by the user to sort the column   |
-| searchFunction  | `Function` | -                | Custom function provided by the user to search the column |
-| index           | `Number`   | 1000             | A lower shifts the column to the left of the table        |
-| component       | `Object`   | -                | Custom Vue component to render inside table cell.         |
-| componentProps  | `Object`   | -                | Props to passs to the custom component                    |
+
+| key             | type               | default          | description                                               |
+| --------------- | ------------------ | ---------------- | --------------------------------------------------------- |
+| key             | `String`           | -                | The object field to be displayed in a table cell          |
+| title           | `String`           | `titleCase(key)` | The title displayed in the header                         |
+| searchable      | `Bool`             | `true`           | Whether to allow searching rows by this column field      |
+| sortable        | `Bool`             | `true`           | Whether to allow sorting the data by this column field    |
+| editable        | `Bool`             | `true`           | Whether the column is editable by the user               |
+| type            | `String`           | `string`         | Data type of `key`. Allowed values: `string`, `number`    |
+| compareFunction | `Function`         | -                | Custom function provided by the user to sort the column   |
+| searchFunction  | `Function`         | -                | Custom function provided by the user to search the column |
+| index           | `Number`           | 1000             | Lower values shift the column to the left of the table    |
+| component       | `String`, `Object` | -                | Custom Vue component to render inside table cell          |
+| componentProps  | `Object`           | -                | Props to pass to the custom component                     |
 
 If `columns` is not defined, then `columnKeys` must be defined and  it  will  be
 mapped to a `columns` array with the default parameters. Example:
@@ -402,12 +404,12 @@ export default {
                     {
                         title: "edit"
                         component: VdtActionButtons,
-                        componentprops: { actions: ["edit"] },
+                        componentProps: { actions: ["edit"] },
                     },
                     {
                         title: "delete"
                         component: VdtActionButtons,
-                        componentprops: { actions: ["delete"] },
+                        componentProps: { actions: ["delete"] },
                     },
                 ],
             },
@@ -527,7 +529,7 @@ for the English language.
 | emptyTableText             | "No matching records found"                                           |
 
 **Note**:  Notice  that  the  placeholders  `:first`,  `:last`,  `:total`,   and
-`filtered` will be automatically replaced with the proper numbers.
+`:filtered` will be automatically replaced with the proper numbers.
 
 Example code:
 
@@ -552,18 +554,14 @@ any `VueDataTable` instance as follow:
 
 ```javascript
 import { languageServiceProvider } from "@uwlajs/vue-data-table";
+
 const loremIpsumLanguage = {
-    perPageText: "lorem ppsum",
-    nextButtonText: "labore nostrud",
+    perPageText: "lorem ipsum",
+    nextButtonText: "labore ipsum",
     /* more ... */
 };
-languageServiceProvider.setLang("lorem", loremIpsumLanguage)
 
-/**
- * @function setLang
- * @param {String} lang           the name of the language
- * @param {Object} translations   an object with the translated text
-*/
+languageServiceProvider.setLang("lorem", loremIpsumLanguage)
 ```
 
 You can also change any default text for an  existing  language  and  that  will
@@ -573,13 +571,6 @@ reflect the changes globally. For example:
 // the default text for the download button in the export component is "export as"
 // we may want change that to "download as"
 languageServiceProvider.setLangText("en", "downloadText", "download as:")
-
-/**
- * @function setLangText
- * @param lang
- * @param {String} key     the key in the lang object
- * @param {String} text    the text will be display to the user
-*/
 ```
 
 ### Layout
