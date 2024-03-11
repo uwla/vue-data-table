@@ -21,6 +21,7 @@
         />
         <vdt-pagination
             v-if="showPagination"
+            v-show="numberOfPages !== 1"
             v-bind="propsPagination"
             @set-page="setPage"
         />
