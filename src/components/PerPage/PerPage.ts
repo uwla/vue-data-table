@@ -20,8 +20,12 @@ export default defineComponent({
             type: String,
             required: true
         },
+        perPageAllText: {
+            type: String,
+            required: true,
+        },
         currentPerPage: {
-            type: Number,
+            type: [Number, String],
             required: true
         },
         perPageSizes: {

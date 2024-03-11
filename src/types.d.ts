@@ -30,10 +30,12 @@ type LanguageDictKey =
     'emptyTableText' |
     'infoFilteredText' |
     'infoText' |
+    'infoAllText' |
     'nextButtonText' |
     'paginationSearchButtonText' |
     'paginationSearchText' |
     'perPageText' |
+    'perPageAllText' |
     'previousButtonText' |
     'searchText';
 type LanguageDictVal = string

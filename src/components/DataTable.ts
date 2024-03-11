@@ -137,10 +137,12 @@ export default defineComponent({
             parsedColumns: [] as Column[],
             columnsBeingSorted: [] as Column[],
             perPageText: "",
+            perPageAllText: "",
             downloadText: "",
             downloadButtonText: "",
             emptyTableText: "",
             infoText: "",
+            infoAllText: "",
             infoFilteredText: "",
             nextButtonText: "",
             previousButtonText: "",
@@ -232,7 +234,7 @@ export default defineComponent({
          */
         firstEntry() {
             const { dataFiltered, currentPerPage, currentPage } = this
-            if (dataFiltered.length === 0) {
+            if (dataFiltered.length === 0 || (currentPerPage as Number|String) === '*') {
                 return 0
             }
             return currentPerPage * (currentPage - 1) + 1
@@ -242,10 +244,11 @@ export default defineComponent({
          * Get the index of the last record being displayed in the current page
          */
         lastEntry() {
-            return Math.min(
-                this.filteredEntries,
-                this.firstEntry + this.currentPerPage - 1
-            )
+            const { currentPerPage } = this;
+            if ((currentPerPage as Number|String) === '*') {
+                return this.filteredEntries;
+            }
+            return Math.min(this.filteredEntries, this.firstEntry + currentPerPage - 1)
         },
 
         /**
@@ -256,7 +259,7 @@ export default defineComponent({
         },
 
         /**
-         * Get the number of records
+         * Get the number of records filtered
          */
         filteredEntries() {
             return this.dataFiltered.length
@@ -267,7 +270,9 @@ export default defineComponent({
          */
         entriesInfoText() {
             const {
+                currentPerPage,
                 infoText,
+                infoAllText,
                 infoFilteredText,
                 firstEntry,
                 lastEntry,
@@ -280,8 +285,11 @@ export default defineComponent({
                 filteredEntries,
                 totalEntries
             ]
+            if ((currentPerPage as Number|String) === '*') {
+                return infoAllText;
+            }
             const searchValues = [":first", ":last", ":filtered", ":total"]
-            var text = infoText
+            let text = infoText
             if (totalEntries !== filteredEntries) {
                 text = infoFilteredText
             }
@@ -299,10 +307,10 @@ export default defineComponent({
          * Get the number of pages
          */
         numberOfPages() {
-            return Math.max(
-                Math.ceil(this.filteredEntries / this.currentPerPage),
-                1
-            )
+            const { currentPerPage } = this;
+            if ((currentPerPage as Number|String) === '*')
+                return 1;
+            return Math.max(Math.ceil(this.filteredEntries / this.currentPerPage), 1);
         },
 
         /**
@@ -391,6 +399,7 @@ export default defineComponent({
                 currentPerPage: this.currentPerPage,
                 perPageSizes: this.perPageSizes,
                 perPageText: this.perPageText,
+                perPageAllText: this.perPageAllText,
             }
         },
 
@@ -613,7 +622,8 @@ export default defineComponent({
          * Set the current rows per page
          */
         setPerPage(value: any) {
-            var previousFirstEntry, newPerPage, newCurrentPage
+            let previousFirstEntry, newPerPage, newCurrentPage;
+
             // before updating the value of currentPerPage,
             // we need to store the current firstEntry.
             // We will use it to change the current page.
@@ -631,7 +641,11 @@ export default defineComponent({
             // update current per page so that
             // the user will see the same first
             // rows that were being displayed
-            newCurrentPage = Math.floor(previousFirstEntry / newPerPage) + 1
+            if ((this.currentPerPage as Number|String) === '*') {
+                newCurrentPage = 1
+            } else {
+                newCurrentPage = Math.floor(previousFirstEntry / newPerPage) + 1
+            }
             this.setPage(newCurrentPage)
         },
 
@@ -639,7 +653,9 @@ export default defineComponent({
          * Set the current rows per page from the user input
          */
         setPerPageFromUserInput() {
-            const value = Number(getEventTargetValue())
+            let value = getEventTargetValue()
+            if (value !== '*')
+                value = Number(value);
             this.setPerPage(value)
         },
 
