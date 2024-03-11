@@ -11,8 +11,9 @@ test('it displays correct per page sizes', async () => {
     await wrapper.setProps({ perPageSizes })
 
     let options = wrapper.findAll('.vdt-perpage option')
-    let values = []
-    for (let option of options as any) values.push(Number(option.element.value))
+    let values = [] as Number[]
+    for (let option of options as any)
+        values.push(Number(option.element.value))
     expect(values).toEqual(perPageSizes)
 })
 
@@ -137,3 +138,13 @@ test('it changes pages on filtered data sorted by multiple columns', async () =>
     await click(col(3))
     await click(col(3))
 })
+
+test('it shows all entries at once', async () => {
+    // Set it to show all.
+    await wrapper.setProps({ perPageSizes: ['*'] })
+    testRowsMatchData(data);
+
+    // reset per page sizes
+    await wrapper.setProps({ perPageSizes })
+})
+
