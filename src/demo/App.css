@@ -1,0 +1,55 @@
+body {
+    font-family: Arial;
+}
+
+main {
+    margin: 1px auto;
+    padding: 32px;
+    display: block;
+    max-width: 1200px;
+}
+
+.minwidth {
+    width: 1px;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+main > h2 {
+    margin-top: 3rem;
+}
+
+.p-dialog-mask {
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+}
+
+.form-group {
+    margin-bottom: 1em;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 0.5em;
+}
+
+form textarea,
+form input,
+form .p-treeselect {
+    width: 100%;
+}
+
+form select {
+    width: 100%;
+    display: block;
+    padding: 0.75em;
+}
