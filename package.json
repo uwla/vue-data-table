@@ -11,6 +11,7 @@
         "build-types": "vue-tsc && mv dist/main.d.ts vue-data-table.d.ts",
         "build-js": "vite build && mv vue-data-table.d.ts dist/",
         "build": "npm run build-types && npm run build-js",
+        "dev": "vite --config vite.config.dev.ts",
         "test": "vitest run"
     },
     "main": "./dist/vue-data-table.cjs",
@@ -37,7 +38,9 @@
         "@vitejs/plugin-vue": "^4.2.3",
         "@vue/test-utils": "^2.4.1",
         "jsdom": "^22.1.0",
+        "primevue": "^3.49.1",
         "sass": "^1.69.5",
+        "sweetalert2": "^11.10.6",
         "typescript": "^5.0.2",
         "vite": "^4.4.5",
         "vitest": "^0.34.6",
