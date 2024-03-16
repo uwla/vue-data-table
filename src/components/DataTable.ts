@@ -67,7 +67,7 @@ export default defineComponent({
         },
         perPageSizes: {
             type: Array,
-            default: () => [10, 25, 50, 100]
+            default: () => [10, 25, 50, 100, '*']
         },
         lang: {
             type: String,
