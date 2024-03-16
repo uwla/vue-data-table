@@ -4,22 +4,21 @@
 
 It was inspired by DataTable jQuery Plugin, but was written from scratch in Vue.
 
-## TABLE OF CONTENTS
-
-1. [Features](#features)
-2. [Demo](#demo)
-3. [Getting started](#getting-started)
+- [VUE DATA TABLE](#vue-data-table)
+  - [FEATURES](#features)
+  - [DEMO](#demo)
+  - [GETTING STARTED](#getting-started)
     - [Installation](#installation)
-    - [Set Up](#set-up)
+    - [Set up](#set-up)
     - [Usage](#usage)
-4. [Configuration](#configuration)
+  - [CONFIGURATION](#configuration)
     - [Columns](#columns)
     - [Text](#text)
     - [Layout](#layout)
-    - [Custom components](#custom-components)
-5. [Roadmap](#roadmap)
-6. [License](#license)
-7. [Contributing](#contributing)
+    - [Custom Components](#custom-components)
+  - [ROADMAP](#roadmap)
+  - [LICENSE](#license)
+  - [CONTRIBUTING](#contributing)
 
 ## FEATURES
 
@@ -37,11 +36,11 @@ It was inspired by DataTable jQuery Plugin, but was written from scratch in Vue.
 
 ## DEMO
 
-The best way to see if a package suits your needs is by viewing  and  editing  a
-demo project. Here is a code playground in which you can test `VueDataTable`:
+The best way to see if a package suits your needs is by viewing and testing  its
+functionalities via a [demo app](https://uwla.github.io/vue-data-table/demo).
 
-- [Demo (live)](https://c7kfj5.csb.app/)
-- [Demo (code)](https://codesandbox.io/s/vue3-data-table-demo-c7kfj5)
+There is also this [CodeSandbox Playground](https://codesandbox.io/s/vue3-data-table-demo-c7kfj5)
+in which you can edit the source code with live preview.
 
 ## GETTING STARTED
 
@@ -70,7 +69,7 @@ import "@uwlajs/vue-data-table/dist/VueDataTable.css";
 
 ### Usage
 
-```html
+```vue
 <template>
     <div>
         <data-table v-bind="bindings"/>
@@ -105,7 +104,7 @@ Only `data` e `columns` are required. Other props are optional.
 | columns               | `Array`            | -                                 | Array of objects to specify how to render each column. Optional if `columnKeys` is set     |
 | columnKeys            | `Array`            | -                                 | Array of strings matching the object keys in `data`. Discarded if `columns` is set         |
 | lang                  | `String`           | `en`                              | The default language                                                                       |
-| perPageSizes          | `Array`            | [10, 25, 50, 100]                 | The options for the number of rows being displayed per page                                |
+| perPageSizes          | `Array`            | [10, 25, 50, 100, '*']            | The options for the number of rows being displayed per page. The string '*' shows all.     |
 | defaultPerPage        | `Number`           | 10                                | The default number of entries. If unset, then it will be the first value of `perPageSizes` |
 | isLoading             | `Bool`             | `false`                           | Whether table data is loading. Table rows are shown only if this value is set to `false`   |
 | loadingComponent      | `String`, `Object` | -                                 | VueJS component to be shown if `isLoading` is set to `true`                                |
@@ -121,9 +120,7 @@ Only `data` e `columns` are required. Other props are optional.
 | footerComponent       | `String`, `Object` | `null`                            | VueJS component for custom table footer                                                    |
 | allowedExports        | `Array`            | `["csv", "json", "txt"]`          | Formats the user can export the data to. Allowed values: `csv`, `json`, `txt`, `xlsx`      |
 
-
 ### Columns
-
 
 | key             | type               | default          | description                                               |
 | --------------- | ------------------ | ---------------- | --------------------------------------------------------- |
@@ -222,15 +219,15 @@ config = {
 ]
 ```
 
-#### Custom cell component
+#### Custom Cell Component
 
-Custom components must have a `data` property to receive the data of the current
+Custom cell components must have a `data` property to receive the data of the current
 row for the component to display it.
 
 In the previous code snippet, we used our custom component `UserPermissionList`.
 Below is a sample of that custom component.
 
-```html
+```vue
 <template>
     <div>
         List of permissions for the user {{ data.name }} :
@@ -260,7 +257,7 @@ arbitrary payload to it. The event will be propagated upwards by `VueDataTable`,
 which will also emit an event called `userEvent` whose payload is  the  same  as
 the one emitted by the custom component. For example:
 
-```html
+```vue
 <template>
     <input type="checkbox" class="form-control" :checked="value" @change='toggleChecked' />
 </template>
@@ -292,7 +289,7 @@ When the users clicks the checkbox, it will emit an `userEvent` event, which can
 be accessed from the `VueDataTable`. Here is an  continuation  of  the  previous
 example.
 
-```html
+```vue
 <template>
     <div class="dashboard">
         <h1>DASHBOARD</h1>
@@ -346,7 +343,7 @@ to display buttons for common CRUD action such as viewing, editing, deleting.
 
 Here is an example with all buttons (view, edit, delete) in one column:
 
-```html
+```vue
 <template>
     <main>
         <h1>DASHBOARD</h1>
@@ -379,7 +376,7 @@ export default {
 
 Another example, this time one button per column:
 
-```html
+```vue
 <template>
     <main>
         <h1>DASHBOARD</h1>
@@ -468,7 +465,7 @@ It is up to the developer to handle the event to update the row by, for example,
 sending an AJAX request to the API, then updating the `data` array on the client
 side. Here is an example of how to update the data array on the client side:
 
-```html
+```vue
 <template>
   <vue-data-table :data="data" :columns="columns" @userEvent="handleUserEvent"/>
 </template>
@@ -517,7 +514,9 @@ for the English language.
 | key                        | default                                                               |
 | ---                        | ---                                                                   |
 | perPageText                | "Show :entries entries"                                               |
+| perPageAllText             | "ALL"                                               |
 | infoText                   | "Showing :first to :last of :total entries"                           |
+| infoAllText                | "Showing all entries"                           |
 | infoFilteredText           | "Showing :first to :last of :filtered (filtered from :total entries)" |
 | nextButtonText             | "Next"                                                                |
 | previousButtonText         | "Previous"                                                            |
@@ -547,7 +546,7 @@ parameters() {
 }
 ```
 
-#### Adding global custom language
+#### Adding Language
 
 If your language is not yet supported, you can add a new language and use it  in
 any `VueDataTable` instance as follow:
@@ -677,7 +676,7 @@ show the total amount of fruits bought and the total price.
 
 The footer component would be something like:
 
-```html
+```vue
 <template>
   <tfoot v-show="dataDisplayed.length > 0">
     <td>Total</td>
@@ -714,7 +713,7 @@ export default {
 
 And we pass this component as follow:
 
-```html
+```vue
 <template>
     <data-table v-bind="tableProps"/>
 </template>
@@ -747,7 +746,7 @@ Vue.component("table-footer", TableFooter)
     footerComponent: "table-footer"
 ```
 
-#### Sorting icon
+#### Sorting Icon
 
 By default, `VueDataTable` will display arrows to indicate the sorting direction
 when sorting a column. The `SortingIcon` component is wrapped in a `th` element.
@@ -755,7 +754,7 @@ The `th` element has a `data-sorting` attribute that  may  be  `asc`  or  `desc`
 only. Based on this value, we display an  `arrow_up`  or  an  `arrow_down`  icon
 using `CSS` rules.
 
-```html
+```vue
 <template>
     <span class="data-table-sorting-icon">&nbsp;</span>
 </template>
@@ -803,7 +802,7 @@ export default {
 When sorting multiple columns, `VueDataTable` will display an icon  with a index
 indicating which column has the priority in the sorting process.
 
-```html
+```vue
 <template>
     <span class="data-table-sort-index">
         {{ index }}
@@ -848,6 +847,7 @@ export default {
 ## ROADMAP
 
 - [x] Support for Vue3
+- [ ] Support for SSR
 - [ ] String notation for defining columns
 
 ## LICENSE
