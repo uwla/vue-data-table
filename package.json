@@ -1,11 +1,11 @@
 {
 	"name": "@andresouzaabreu/vue-data-table",
-	"version": "3.3.3",
+	"version": "3.3.4",
 	"private": false,
-	"author": "André Souza Abreu",
+	"author": "uwlajs",
 	"description": "A Vue plugin that adds advanced features to an HTML table",
-	"repository": "https://github.com/AndreSouzaAbreu/vue-data-table",
-	"bugs": "https://github.com/AndreSouzaAbreu/vue-data-table/issues",
+	"repository": "https://github.com/uwla/vue-data-table",
+	"bugs": "https://github.com/uwla/vue-data-table/issues",
 	"license": "MIT",
 	"scripts": {
 		"serve": "vue-cli-service serve",
