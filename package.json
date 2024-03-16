@@ -8,9 +8,10 @@
     "type": "module",
     "typings": "dist/vue-data-table.d.ts",
     "scripts": {
-        "build-types": "vue-tsc && mv dist/main.d.ts vue-data-table.d.ts",
-        "build-js": "vite build && mv vue-data-table.d.ts dist/",
-        "build": "npm run build-types && npm run build-js",
+        "build:ts": "vue-tsc && mv dist/main.d.ts vue-data-table.d.ts",
+        "build:js": "vite build && mv vue-data-table.d.ts dist/",
+        "build": "npm run build:ts && npm run build:js",
+        "build:demo": "vite build --config vite.config.dev.ts",
         "dev": "vite --config vite.config.dev.ts",
         "test": "vitest run"
     },
