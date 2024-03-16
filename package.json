@@ -45,7 +45,7 @@
         "typescript": "^5.0.2",
         "vite": "^4.4.5",
         "vitest": "^0.34.6",
-        "vue-tsc": "^1.8.5"
+        "vue-tsc": "^2.0.6"
     },
     "repository": {
         "type": "git",
