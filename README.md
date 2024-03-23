@@ -1,6 +1,6 @@
 # VUE DATA TABLE
 
-`VueDataTable` is a Vue3 plugin that adds advanced features to an HTML table.
+`VueDataTable` is a Vue plugin that adds advanced features to an HTML table.
 
 It was inspired by DataTable jQuery Plugin, but was written from scratch in Vue.
 
@@ -33,6 +33,7 @@ It was inspired by DataTable jQuery Plugin, but was written from scratch in Vue.
 - Editable cells (edit cell values)
 - Custom Vue components to render cells
 - Custom Footer to display data summary
+- Support for Vue3 and Vue2
 
 ## DEMO
 
@@ -52,7 +53,7 @@ npm install @uwlajs/vue-data-table
 
 Make sure to install version `2.0.0` or above for Vue3.
 
-Versions prior to `2.0.0` are for Vue2.
+Versions prior to `2.0.0` are for Vue2. Checkout the `vue2` branch for its documentation.
 
 ### Set up
 
