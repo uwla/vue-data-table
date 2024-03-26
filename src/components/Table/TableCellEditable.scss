@@ -2,9 +2,14 @@
     .view-cell, .edit-cell {
         display: flex;
         gap: .3em;
-        // align-items: flex-start;
         flex-wrap: nowrap;
         justify-content: space-between;
+    }
+    .view-cell {
+        align-items: flex-start;
+    }
+    .edit-cell {
+        align-items: stretch;
     }
 }
 
