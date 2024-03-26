@@ -39,7 +39,7 @@
         "@faker-js/faker": "^8.1.0",
         "@vitejs/plugin-vue": "^4.2.3",
         "@vue/test-utils": "^2.4.1",
-        "jsdom": "^22.1.0",
+        "jsdom": "^24.0.0",
         "primevue": "^3.49.1",
         "sass": "^1.69.5",
         "sweetalert2": "^11.10.6",
