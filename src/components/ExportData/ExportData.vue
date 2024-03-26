@@ -1,5 +1,5 @@
 <template>
-    <div class="vdt-export">
+    <div class="vdt-export" ref="el">
         <span>{{ downloadText }}</span>
         <select class="vdt-input" v-model="selectedExport">
             <option v-for="(exportType, i) in allowedExports" :key="i" :value="exportType">

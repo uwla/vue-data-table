@@ -34,7 +34,7 @@ export default defineComponent({
     props: {
         allowedExports: {
             type: Array,
-            default: () => ["csv", "json", "txt"]
+            default: () => ["csv", "json", "xml"]
         },
         columns: {
             type: Array,
@@ -162,14 +162,14 @@ export default defineComponent({
         },
 
         /**
-         * Get the column that should be used in searches
+         * Get the columns that can be used in searches
          */
         searchableColumns() {
             return this.parsedColumns.filter((column : Column) => column.searchable)
         },
 
         /**
-         * Get the column that should be used in searches
+         * Get the columns that can be sorted
          */
         sortableColumns() {
             return this.parsedColumns.filter((column : Column) => column.sortable)
