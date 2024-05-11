@@ -4,21 +4,28 @@
 
 It was inspired by DataTable jQuery Plugin, but was written from scratch in Vue.
 
-- [VUE DATA TABLE](#vue-data-table)
-  - [FEATURES](#features)
-  - [DEMO](#demo)
-  - [GETTING STARTED](#getting-started)
-    - [Installation](#installation)
-    - [Set up](#set-up)
-    - [Usage](#usage)
-  - [CONFIGURATION](#configuration)
-    - [Columns](#columns)
-    - [Text](#text)
-    - [Layout](#layout)
-    - [Custom Components](#custom-components)
-  - [ROADMAP](#roadmap)
-  - [LICENSE](#license)
-  - [CONTRIBUTING](#contributing)
+- [FEATURES](#features)
+- [DEMO](#demo)
+- [GETTING STARTED](#getting-started)
+  - [Installation](#installation)
+  - [Set up](#set-up)
+  - [Usage](#usage)
+  - [Nuxt integration](#nuxt-integration)
+- [CONFIGURATION](#configuration)
+  - [Columns](#columns)
+    - [Custom Cell Component](#custom-cell-component)
+    - [Action Buttons](#action-buttons)
+    - [Editable cells](#editable-cells)
+  - [Text](#text)
+    - [Adding Language](#adding-language)
+  - [Layout](#layout)
+  - [Custom Components](#custom-components)
+    - [Footer](#footer)
+    - [Sorting Icon](#sorting-icon)
+    - [Sorting Index Icon](#sorting-index-icon)
+- [ROADMAP](#roadmap)
+- [LICENSE](#license)
+- [CONTRIBUTING](#contributing)
 
 ## FEATURES
 
@@ -34,6 +41,7 @@ It was inspired by DataTable jQuery Plugin, but was written from scratch in Vue.
 - Custom Vue components to render cells
 - Custom Footer to display data summary
 - Support for Vue3 and Vue2
+- Nuxt integration
 
 ## DEMO
 
@@ -94,6 +102,21 @@ export default {
 **Note** Notice that v-bind will take all key-value pairs in the object (in this
 case, the `bindings`), and pass them as props to the `VueDataTable.` So, this is
 a shortcut to pass multiple props at once.
+
+### Nuxt integration
+
+Create a file `@/plugins/vue-data-table.js`, or whatever name you wish, with the following content:
+
+```javascript
+import VueDataTable from '@uwlajs/vue-data-table'
+import '@uwlajs/vue-data-table/dist/style.css'
+
+export default defineNuxtPlugin(nuxtApp => {
+  nuxtApp.vueApp.use(VueDataTable)
+})
+```
+
+Nuxt automatically loads the files in the `plugins/` directory by default.
 
 ## CONFIGURATION
 
