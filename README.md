@@ -1,8 +1,6 @@
 # VUE DATA TABLE
 
-`VueDataTable` is a Vue plugin that adds advanced features to an HTML table.
-
-It was inspired by DataTable jQuery Plugin, but was written from scratch in Vue.
+`VueDataTable` is a Vue plugin to easily create fully-featured data tables.
 
 - [FEATURES](#features)
 - [DEMO](#demo)
@@ -26,6 +24,9 @@ It was inspired by DataTable jQuery Plugin, but was written from scratch in Vue.
 - [ROADMAP](#roadmap)
 - [LICENSE](#license)
 - [CONTRIBUTING](#contributing)
+
+Check out my other plugin, [vue-form-builder](https://github.com/uwla/vue-form-builder),
+that automatically generates beautiful forms from declarative rules.
 
 ## FEATURES
 

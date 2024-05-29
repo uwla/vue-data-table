@@ -1,6 +1,6 @@
 {
     "name": "@uwlajs/vue-data-table",
-    "description": "Vue plugin that adds advanced features to an HTML table",
+    "description": "Vue plugin to easily create fully-featured data tables",
     "version": "2.1.0",
     "author": "uwla",
     "private": false,
