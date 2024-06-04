@@ -52,6 +52,10 @@ functionalities via a [demo app](https://uwla.github.io/vue-data-table/demo).
 There is also this [CodeSandbox Playground](https://codesandbox.io/s/vue3-data-table-demo-c7kfj5)
 in which you can edit the source code with live preview.
 
+![Vue Data Table Demo 1](./assets/vdt-1.png)
+![Vue Data Table Demo 2](./assets/vdt-2.png)
+![Vue Data Table Demo 3](./assets/vdt-3.png)
+
 ## GETTING STARTED
 
 ### Installation
