@@ -41,7 +41,7 @@
         "@vue/test-utils": "^2.4.1",
         "jsdom": "^22.1.0",
         "primevue": "^3.49.1",
-        "sass": "^1.69.5",
+        "sass": "^1.77.5",
         "sweetalert2": "^11.10.6",
         "typescript": "^5.0.2",
         "vite": "^4.4.5",
