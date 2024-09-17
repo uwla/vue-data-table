@@ -2,28 +2,32 @@
 
 `VueDataTable` is a Vue plugin to easily create fully-featured data tables.
 
-- [FEATURES](#features)
-- [DEMO](#demo)
-- [GETTING STARTED](#getting-started)
-  - [Installation](#installation)
-  - [Set up](#set-up)
-  - [Usage](#usage)
-  - [Nuxt integration](#nuxt-integration)
-- [CONFIGURATION](#configuration)
-  - [Columns](#columns)
-    - [Custom Cell Component](#custom-cell-component)
-    - [Action Buttons](#action-buttons)
-    - [Editable cells](#editable-cells)
-  - [Text](#text)
-    - [Adding Language](#adding-language)
-  - [Layout](#layout)
-  - [Custom Components](#custom-components)
-    - [Footer](#footer)
-    - [Sorting Icon](#sorting-icon)
-    - [Sorting Index Icon](#sorting-index-icon)
-- [ROADMAP](#roadmap)
-- [LICENSE](#license)
-- [CONTRIBUTING](#contributing)
+<!-- vim-markdown-toc GFM -->
+
+* [FEATURES](#features)
+* [DEMO](#demo)
+* [GETTING STARTED](#getting-started)
+    * [Installation](#installation)
+    * [Set up](#set-up)
+    * [Usage](#usage)
+    * [Nuxt integration](#nuxt-integration)
+* [CONFIGURATION](#configuration)
+    * [Columns](#columns)
+        * [Custom Cell Component](#custom-cell-component)
+        * [Action Buttons](#action-buttons)
+        * [Editable cells](#editable-cells)
+    * [Text](#text)
+        * [Adding Language](#adding-language)
+    * [Layout](#layout)
+    * [Custom Components](#custom-components)
+        * [Footer](#footer)
+        * [Sort Icon](#sort-icon)
+        * [Sorting Index Icon](#sorting-index-icon)
+* [ROADMAP](#roadmap)
+* [LICENSE](#license)
+* [CONTRIBUTING](#contributing)
+
+<!-- vim-markdown-toc -->
 
 Check out my other plugin, [vue-form-builder](https://github.com/uwla/vue-form-builder),
 that automatically generates beautiful forms from declarative rules.
@@ -775,7 +779,7 @@ Vue.component("table-footer", TableFooter)
     footerComponent: "table-footer"
 ```
 
-#### Sorting Icon
+#### Sort Icon
 
 By default, `VueDataTable` will display arrows to indicate the sorting direction
 when sorting a column. The `SortingIcon` component is wrapped in a `th` element.
