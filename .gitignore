@@ -19,8 +19,10 @@ pnpm-debug.log*
 # Editor directories and files
 .idea
 .vscode
+.vim
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
-*.sw?
+*.sw
+tags
