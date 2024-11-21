@@ -1,7 +1,7 @@
 {
     "name": "@uwlajs/vue-data-table",
     "description": "Vue plugin to easily create fully-featured data tables",
-    "version": "2.1.1",
+    "version": "2.1.2",
     "author": "uwla",
     "private": false,
     "license": "MIT",

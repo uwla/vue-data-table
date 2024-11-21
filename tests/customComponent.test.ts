@@ -71,7 +71,13 @@ test('it emits user events from custom components', async () => {
         // determine the payload
         let row = clicked[0] as any
         let action = clicked[1] as any
-        let payload = [{ action: action, data: data[row-1] }]
+        let payload = [{
+            action: action,
+            data: {
+                ... data[row-1],
+                _key: row-1
+            },
+        }]
 
         // assert payload
         expect(event[currentEvent]).toEqual(payload)
