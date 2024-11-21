@@ -193,10 +193,20 @@ export default defineComponent({
          * The data filtered by search text
          */
         dataFiltered() {
-            const { data, searchableColumns, search } = this
+            const { searchableColumns, search } = this
+
+            // assign key to track row
+            const data = this.data.map((value, index) => {
+                return {
+                    ...(value as Object),
+                    _key: index,
+                };
+            })
+
             if (isNullable(search)) {
                 return data
             }
+
             return data.filter(function(row: any) {
                 return searchableColumns.some(function(column: Column) {
                     return column.searchFunction(row, search, column.key)

@@ -40,12 +40,17 @@
                 </tr>
 
                 <!-- NON-EMPTY BODY -->
-                <tr v-for="(data, i) in dataDisplayed" :key="i">
-                    <td v-for="(column, j) in columns" :key="j">
-                        <component :is="column.component"
-                            v-bind="{ data, ...column.componentProps }"
-                            @userEvent="emitUserEvent" />
+                <tr v-for="data in dataDisplayed" :key="data._key">
+                    <keep-alive>
+                    <td v-for="(column, j) in columns"
+                        :key="'c' + data._key + 'c' + j"
+                        >
+                            <component
+                                :is="column.component"
+                                v-bind="{ data, ...column.componentProps }"
+                                @userEvent="emitUserEvent" />
                     </td>
+                    </keep-alive>
                 </tr>
             </tbody>
 
