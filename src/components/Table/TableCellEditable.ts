@@ -1,6 +1,7 @@
 import { defineComponent, reactive } from "vue"
 
 export default defineComponent({
+    name: "VdtTableCellEditable",
     data: () => {
         return reactive({
             isEditing: false,

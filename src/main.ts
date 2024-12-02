@@ -1,12 +1,14 @@
 import VueDataTable from './components/DataTable.vue'
 import VdtTableCell from './components/Table/TableCell.vue'
 import VdtTableCellEditable from './components/Table/TableCellEditable.vue'
+import VdtTableCellSelectable from './components/Table/TableCellSelectable.vue'
 import VdtActionButtons from './components/ActionButtons/ActionButtons.vue'
 
 const components : { [key: string] : any } = {
     'vdt': VueDataTable,
     'vdt-cell': VdtTableCell,
     'vdt-cell-editable': VdtTableCellEditable,
+    'vdt-cell-selectable': VdtTableCellSelectable,
     'vdt-actions': VdtActionButtons,
     'vdt-action-buttons': VdtActionButtons,
     'vue-data-table': VueDataTable,
