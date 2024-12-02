@@ -47,9 +47,9 @@
                     >
                         <component
                             :is="column.component"
-                            :key="'__' + data._key + '_' + j"
                             v-bind="{ data, ...column.componentProps }"
-                            @userEvent="emitUserEvent" />
+                            @userEvent="emitUserEvent"
+                        />
                     </td>
                 </tr>
             </tbody>
