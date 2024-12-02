@@ -13,7 +13,7 @@ type User = {
     email_verified_at: String;
     fruits: String[];
     gender: "Male" | "Female";
-    id: Number;
+    id: number;
     info: String;
     job: String;
     name: String;
@@ -31,88 +31,104 @@ type User = {
 
 type UserField = keyof User;
 
+const params1 = {
+    sortingMode: "single",
+    columns: [
+        {
+            title: ".",
+            component: "vdt-cell-selectable",
+        },
+        { key: "name" },
+        { key: "email", title: "Email address" },
+        { key: "job" },
+        {
+            cssClass: "minwidth",
+            component: "vdt-actions",
+            componentProps: { actions: ["view"] },
+            title: "view",
+        },
+        {
+            cssClass: "minwidth",
+            component: "vdt-actions",
+            componentProps: { actions: ["edit"] },
+            title: "edit",
+        },
+        {
+            cssClass: "minwidth",
+            component: "vdt-actions",
+            componentProps: { actions: ["delete"] },
+            title: "delete",
+        },
+    ],
+    vKey: "id",
+};
+
+const params2 = {
+    columns: [
+        { key: "name", editable: true },
+        { key: "email", editable: true },
+        { key: "job", editable: true },
+        {
+            title: "actions",
+            cssClass: "minwidth",
+            component: "vdt-actions",
+            componentProps: { actions: ["view", "delete"] },
+        },
+    ],
+    vKey: "id",
+};
+
+const params3 = {
+    defaultPerPage: 25,
+    defaultColumn: { sortable: false },
+    columns: [
+        { key: "name" },
+        {
+            title: "Top 3 Favorite fruits",
+            component: "CellList",
+            searchFunction: (data: any, search: String) => {
+                return data.fruits.some((f: String) =>
+                    f.toLowerCase().includes(search.toLowerCase())
+                );
+            },
+            searchable: true,
+        },
+        {
+            title: "Image",
+            component: "CellImage",
+            cssClass: "minwidth",
+        },
+    ],
+    vKey: "id",
+};
+
 export default {
     data() {
+
         return {
+            title: "UPDATE USER",
+
             // user which will be edited or added
             user: {} as User,
-            title: "UPDATE USER",
 
             // data for both tables
             data: users as User[],
 
-            //
+            // selected users
+            selected: [] as User[],
+
+            // is user being shown/edited?
             userView: false,
             userEdit: false,
 
             // parameters for the first table
-            params1: {
-                sortingMode: "single",
-                columns: [
-                    { key: "name" },
-                    { key: "email", title: "Email address" },
-                    { key: "job" },
-                    {
-                        cssClass: "minwidth",
-                        component: "vdt-actions",
-                        componentProps: { actions: ["view"] },
-                        title: "view",
-                    },
-                    {
-                        cssClass: "minwidth",
-                        component: "vdt-actions",
-                        componentProps: { actions: ["edit"] },
-                        title: "edit",
-                    },
-                    {
-                        cssClass: "minwidth",
-                        component: "vdt-actions",
-                        componentProps: { actions: ["delete"] },
-                        title: "delete",
-                    },
-                ],
-            },
+            params1: params1,
 
             // parameters for the second table
-            params2: {
-                columns: [
-                    { key: "name", editable: true },
-                    { key: "email", editable: true },
-                    { key: "job", editable: true },
-                    {
-                        title: "actions",
-                        cssClass: "minwidth",
-                        component: "vdt-actions",
-                        componentProps: { actions: ["view", "delete"] },
-                    },
-                ],
-            },
+            params2: params2,
 
             // parameters for the third table
-            params3: {
-                defaultPerPage: 25,
-                defaultColumn: {
-                    sortable: false,
-                },
-                columns: [
-                    { key: "name" },
-                    {
-                        title: "Top 3 Favorite fruits",
-                        component: "CellList",
-                        searchFunction: (data: any, search: String) => {
-                            return data.fruits.some((f: String) =>
-                                f.toLowerCase().includes(search.toLowerCase())
-                            );
-                        },
-                        searchable: true,
-                    },
-                    {
-                        title: "Image",
-                        component: "CellImage",
-                        cssClass: "minwidth",
-                    },
-                ],
-            },
+            params3: params3,
         };
     },
 
@@ -139,6 +155,10 @@ export default {
                 case "updateCell":
                     let { key, value } = payload;
                     this.updateUserField(user, key, value);
+                    break;
+                case "select":
+                    let { selected } = payload;
+                    this.updateSelection(user, selected);
             }
         },
         addUser(user: User) {
@@ -147,12 +167,25 @@ export default {
             this.showSuccessMessage("User added!");
         },
         deleteUser(user: User) {
-            this.data = this.data.filter((u) => u.id != user.id);
+            this.data = this.data.filter((u: User) => u.id != user.id);
+        },
+        deleteSelected() {
+            const ids = {};
+            this.selected.forEach((u: User) => ids[u.id] = true);
+            this.data = this.data.filter((u: User) => ids[u.id] !== true);
+            this.selected = [];
         },
         updateUser(user: User) {
-            let index = this.data.findIndex((u) => u.id == user.id);
+            let index = this.data.findIndex((u: User) => u.id == user.id);
             this.data.splice(index, 1, user);
             this.showSuccessMessage("User updated!");
+        },
+        updateSelection(user: User, selected: boolean) {
+            if (selected) {
+                this.selected.push(user);
+            } else {
+                this.selected = this.selected.filter((u: User) => u.id != user.id);
+            }
         },
         showUser(user: User) {
             this.user = { ...user };

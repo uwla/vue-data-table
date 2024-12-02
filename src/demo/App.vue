@@ -2,29 +2,26 @@
     <main>
         <h1>VUE DATA TABLE DEMO</h1>
 
-        <p>
-            This is a sample dashboard using Vue Data Table.
-            You can add, edit, delete and view users.
-        </p>
-        <p>
-            There are three tables to showcase VDT's functionalities.
-        </p>
+        <p>This is a sample dashboard using Vue Data Table. You can add, edit, delete and view users.</p>
+        <p>There are three tables to showcase VDT's functionalities.</p>
 
-        <Button @click="showCreateForm()">
-            ADD USER
-        </Button>
+        <div class="btn-group">
+            <Button @click="showCreateForm()">
+                ADD USER
+            </Button>
+            <Button @click="deleteSelected()" severity="danger">
+                DELETE SELECTED
+            </Button>
+        </div>
 
-        <!-- TABLE 1 -->
         <h2>TABLE 1</h2>
         <p>This table shows a generic dashboard.</p>
         <vue-data-table v-bind="params1" :data="data" @userEvent="handleUserEvent" />
 
-        <!-- TABLE 2 -->
         <h2>TABLE 2</h2>
         <p>This table allows editing cells.</p>
         <vue-data-table v-bind="params2" :data="data" @userEvent="handleUserEvent" />
 
-        <!-- TABLE 3 -->
         <h2>TABLE 3</h2>
         <p>This table shows lists and images.</p>
         <vue-data-table v-bind="params3" :data="data" @userEvent="handleUserEvent" />

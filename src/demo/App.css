@@ -53,3 +53,8 @@ form select {
     display: block;
     padding: 0.75em;
 }
+
+.btn-group {
+    display: flex;
+    gap: .5em;
+}
