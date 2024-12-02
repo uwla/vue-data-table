@@ -16,6 +16,7 @@
         * [Custom Cell Component](#custom-cell-component)
         * [Action Buttons](#action-buttons)
         * [Editable cells](#editable-cells)
+        * [Selectable rows](#selectable-rows)
     * [Text](#text)
         * [Adding Language](#adding-language)
     * [Layout](#layout)
@@ -535,6 +536,59 @@ export default {
 }
 </script>
 ```
+
+#### Selectable rows
+
+`VueDataTable` provides the built-in `vdt-cell-selectable` component to select
+table rows.
+
+```javascript
+const props = {
+    columns = [
+        {
+            title: "",
+            component: "vdt-cell-selectable" // <-- ADD THIS
+        },
+        { key: "name" },
+        { key: "email" },
+        /* ... */
+    ],
+    vKey = "id",
+};
+const data = [
+    { id: 1, name: "joe", email: "joe@example.com" },
+    /* ... */
+]
+```
+
+When the user toggles the checkbox, `VueDataTable` emits an event called
+`userEvent` with the following payload:
+
+```javascript
+{
+    action: "select",
+    selected: true || false, // this is the current value of the checkbox
+    data: {}, // this is the current row (example, a user from an users array)
+}
+```
+
+You can have a reactive variable to keep track of selected items:
+
+```javascript
+const selected = ref([]);
+
+const handleSelect(payload) {
+    const item = payload.data;
+    if (payload.selected) {
+        selected.value.push(item);
+    } else {
+        selected.value = selected.value.filter((x) => x.id !== item.id);
+    }
+}
+```
+
+You can use this variable to perform bulk operations, such as mass deletion or
+mass edition.
 
 ### Text
 
