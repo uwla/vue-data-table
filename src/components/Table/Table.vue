@@ -41,16 +41,16 @@
 
                 <!-- NON-EMPTY BODY -->
                 <tr v-for="data in dataDisplayed" :key="data._key">
-                    <keep-alive>
-                    <td v-for="(column, j) in columns"
-                        :key="'c' + data._key + 'c' + j"
-                        >
-                            <component
-                                :is="column.component"
-                                v-bind="{ data, ...column.componentProps }"
-                                @userEvent="emitUserEvent" />
+                    <td
+                        v-for="(column, j) in columns"
+                        :key="data._key + '_' + j"
+                    >
+                        <component
+                            :is="column.component"
+                            :key="'__' + data._key + '_' + j"
+                            v-bind="{ data, ...column.componentProps }"
+                            @userEvent="emitUserEvent" />
                     </td>
-                    </keep-alive>
                 </tr>
             </tbody>
 

@@ -65,21 +65,21 @@ export default defineComponent({
             type: [Object, String],
             default: null
         },
-        perPageSizes: {
-            type: Array,
-            default: () => [10, 25, 50, 100, '*']
+        isLoading: {
+            type: Boolean,
+            default: false,
         },
         lang: {
             type: String,
             default: "en"
         },
-        isLoading: {
-            type: Boolean,
-            default: false,
-        },
         loadingComponent: {
             type: [Object, String],
             default: () => "",
+        },
+        perPageSizes: {
+            type: Array,
+            default: () => [10, 25, 50, 100, '*']
         },
         showEntriesInfo: {
             type: Boolean,
@@ -127,7 +127,11 @@ export default defineComponent({
         text: {
             type: Object,
             required: false
-        }
+        },
+        vKey: {
+            type: String,
+            default: "",
+        },
     },
 
     data: () => {
@@ -196,7 +200,11 @@ export default defineComponent({
             const { searchableColumns, search } = this
 
             // assign key to track row
-            const data = this.data.map((value, index) => {
+            const key = this.vKey;
+            const data = this.data.map((value: any, index) => {
+                if (key !== "" && value[key]) {
+                    index = value[key];
+                }
                 return {
                     ...(value as Object),
                     _key: index,

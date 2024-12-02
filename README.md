@@ -131,8 +131,12 @@ Nuxt automatically loads the files in the `plugins/` directory by default.
 
 Only `data` e `columns` are required. Other props are optional.
 
+`vKey` is not required but is **highly** recommend to set it if you plan to
+add or delete rows in the table!
+
 | prop                  | type               | default                           | description                                                                                |
 | --------------------- | ------------------ | --------------------------------- | ------------------------------------------------------------------------------------------ |
+| allowedExports        | `Array`            | `["csv", "json", "txt"]`          | Formats the user can export the data to. Allowed values: `csv`, `json`, `txt`, `xlsx`      |
 | data                  | `Array`            | -                                 | Array of objects with the data to be displayed on the table                                |
 | columns               | `Array`            | -                                 | Array of objects to specify how to render each column. Optional if `columnKeys` is set     |
 | columnKeys            | `Array`            | -                                 | Array of strings matching the object keys in `data`. Discarded if `columns` is set         |
@@ -151,7 +155,7 @@ Only `data` e `columns` are required. Other props are optional.
 | sortingIndexComponent | `String`, `Object` | `VdtSortingIndex`                 | VueJS component for the sorting index on sortable columns                                  |
 | sortingIconComponent  | `String`, `Object` | `VdtSortingIcon`                  | VueJS component for the sorting icon on sortable columns                                   |
 | footerComponent       | `String`, `Object` | `null`                            | VueJS component for custom table footer                                                    |
-| allowedExports        | `Array`            | `["csv", "json", "txt"]`          | Formats the user can export the data to. Allowed values: `csv`, `json`, `txt`, `xlsx`      |
+| vKey                  | `String`           | -                                 | The `v-key`, the key in `data` used by Vue to track and distinguish array elements.        |
 
 ### Columns
 
