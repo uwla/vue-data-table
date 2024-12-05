@@ -11,6 +11,7 @@
     * [Set up](#set-up)
     * [Usage](#usage)
     * [Nuxt integration](#nuxt-integration)
+    * [Laravel integration](#laravel-integration)
 * [CONFIGURATION](#configuration)
     * [Columns](#columns)
         * [Custom Cell Component](#custom-cell-component)
@@ -19,6 +20,7 @@
         * [Selectable rows](#selectable-rows)
     * [Text](#text)
         * [Adding Language](#adding-language)
+    * [Async data](#async-data)
     * [Layout](#layout)
     * [Custom Components](#custom-components)
         * [Footer](#footer)
@@ -48,6 +50,7 @@ that automatically generates beautiful forms from declarative rules.
 - Custom Footer to display data summary
 - Support for Vue3 and Vue2
 - Nuxt integration
+- Laravel integration
 
 ## DEMO
 
@@ -128,9 +131,17 @@ export default defineNuxtPlugin(nuxtApp => {
 
 Nuxt automatically loads the files in the `plugins/` directory by default.
 
+### Laravel integration
+
+This plugin integrates  with  Laravel's  pagination  API,  so  it  fetches  data
+asynchronously  from  the  provided  URL. Follow the instrunctions in the
+[async data section](#async-data) for a detailed setup.
+
 ## CONFIGURATION
 
-Only `data` e `columns` are required. Other props are optional.
+Only `columns` are required. Other props are optional.
+
+If `data` is not passed, then `fetchUrl` and `fetchCallback` *must* be passed.
 
 `vKey` is not required but is **highly** recommend to set it if you plan to
 add or delete rows in the table!
@@ -144,6 +155,8 @@ add or delete rows in the table!
 | lang                  | `String`           | `en`                              | The default language                                                                       |
 | perPageSizes          | `Array`            | [10, 25, 50, 100, '*']            | The options for the number of rows being displayed per page. The string '*' shows all.     |
 | defaultPerPage        | `Number`           | 10                                | The default number of entries. If unset, then it will be the first value of `perPageSizes` |
+| fetchUrl              | `String`           | -                                 | The URL to fetch data from if `data` is null                                               |
+| fetchCallback         | `String`           | -                                 | Async function which takes an URL and returns `data` matching Laravel's pagination API     |
 | isLoading             | `Bool`             | `false`                           | Whether table data is loading. Table rows are shown only if this value is set to `false`   |
 | loadingComponent      | `String`, `Object` | -                                 | VueJS component to be shown if `isLoading` is set to `true`                                |
 | showPerPage           | `Bool`             | `true`                            | Whether to show the `PerPage` component                                                    |
@@ -664,6 +677,163 @@ reflect the changes globally. For example:
 languageServiceProvider.setLangText("en", "downloadText", "download as:")
 ```
 
+
+### Async data
+
+If you do not want to fetch all data at once and pass it to `VueDataTable` via
+the `data` prop, you can do so by defining:
+
+- `fetchUrl`: initial endpoint for the first ajax request to fetch data
+- `fetchCallback`: async function which takes an URL and returns a response
+following Laravel's pagination API.
+
+Here is a sample `fetchCallback`:
+
+```vue
+<template>
+    <h1>Users</h1>
+    <vue-data-table v-bind="vdtProps" />
+</template>
+<script setup>
+const vdtProps = {
+    columns: [
+        { key: 'name' },
+        { key: "email", title: "Email address" },
+    ],
+    fetchUrl: "http://app.test/api/users",
+    fetchCallback: async (url) => fetch(url).then(response => response.json())
+}
+</script>
+```
+
+The example above uses the browser's built-in `fetch`, but you can also use
+`axios` or Nuxt's `$fetch` under the hood. Just make sure the response returned
+by the callback matches the following.
+
+The response from the `fetchCallback` should look like this:
+
+```jsonc
+{
+  "data": [
+    { "id": 1, "name": "Miss Juliet Heidenreich", "email": "alvera13@example.org"},
+    { "id": 2, "name": "Heloise Boehm", "email": "joany.feil@example.net"},
+    { "id": 3, "name": "Antwon Collins", "email": "xhills@example.com},
+    /* ... */
+  ],
+  "current_page": 1,
+  "first_page_url": "http://app.test/api/users?page=1",
+  "from": 1,
+  "last_page": 23,
+  "last_page_url": "http://app.test/api/users?page=23",
+  "links": [
+    { "url": null, "label": "&laquo; Previous", "active": false },
+    { "url": "http://app.test/api/users?page=1", "label": "1", "active": true },
+    { "url": "http://app.test/api/users?page=2", "label": "2", "active": false },
+    { "url": "http://app.test/api/users?page=3", "label": "3", "active": false },
+    /* ... */
+    { "url": "http://app.test/api/users?page=23", "label": "23", "active": false },
+    { "url": "http://app.test/api/users?page=2", "label": "Next &raquo;", "active": false }
+  ],
+  "next_page_url": "http://app.test/api/users?page=2",
+  "path": "http://app.test/api/users",
+  "per_page": 15,
+  "prev_page_url": null,
+  "to": 15,
+  "total": 340
+}
+```
+
+Here is how you do so in Laravel:
+
+```php
+<?php
+
+use App\Models\User;
+use Illuminate\Support\Facades\Route;
+
+Route::get('users', function () {
+    return User::paginate();
+});
+```
+
+This will also work with collections: `new UserCollection(User::paginate())`.
+
+In order to be able to **sort** and **search** using endpoints  compatible  with
+Laravel's API, this plugin provides support for Spatie's Laravel  Query  Builder
+package, which allows you to easily generate  API  endpoints  with  sorting  and
+searching functionalities with well-defined standard.
+
+```php
+<?php
+
+use App\Models\User;
+use Illuminate\Support\Facades\Route;
+use Spatie\QueryBuilder\QueryBuilder;
+
+Route::get('users', function () {
+    return QueryBuilder::for (User::class)
+        ->allowedSorts(['name', 'email'])
+        ->allowedFilters(['name', 'email'])
+        ->paginate();
+});
+```
+
+The endpoints look like this:
+
+- `http://app.test/api/users?page=1&filter[name]=foo`
+- `http://app.test/api/users?page31&sort=job,-email`
+- `http://app.test/api/users?page=1&sort=email&filter[email]=joe&filter=[name]=joe`
+
+You do **not** need to worry about the URLs if you are using Spatie's Laravel Query Bulder,
+because `VueDataTable` follows their endpoint standard and automatically generates the urls.
+
+If you do not use their package, then you should parse the `url` variable inside
+the `fetchCallback`, and modify the url. For example, your javascript code should modify:
+
+`http://app.test/api/users?page=4&filter[name]=foo --> http://app.test/api/users?page=4&search=foo`.
+
+Keep in mind that, by default, Spatie's Query Builder apply AND logic for all
+filters. That means if you have `&filter[name]=Ana&filter[email]=Ana`, then
+you will only get results that both `name` and `email` fields match Ana. If
+`name` matches Ana but not the `email` column, then this row would not appear.
+
+Here is how you can implement `OR` logic using their package:
+
+```php
+<?php
+
+// routes/app.php
+use App\Http\Filters\FilterOrWhere;
+use App\Models\User;
+use Illuminate\Support\Facades\Route;
+use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
+
+Route::get('users', function () {
+    return QueryBuilder::for (User::class)
+        ->allowedSorts(['name', 'email'])
+        ->allowedFilters([
+            AllowedFilter::custom('name', new FilterOrWhere),
+            AllowedFilter::custom('email', new FilterOrWhere)
+        ])
+        ->paginate();
+});
+
+// app/Http/Filters/FilterOrWhere.php
+namespace App\Http\Filters;
+
+use Spatie\QueryBuilder\Filters\Filter;
+use Illuminate\Database\Eloquent\Builder;
+
+class FilterOrWhere implements Filter
+{
+    public function __invoke(Builder $query, $value, string $property)
+    {
+        $query->orWhere($property, 'LIKE', '%' . $value . '%');
+    }
+}
+```
+
 ### Layout
 
 `VueDataTable` uses CSS's grid display to specify the position of its components
@@ -939,6 +1109,7 @@ export default {
 ## ROADMAP
 
 - [x] Support for Vue3
+- [x] Laravel integration
 - [ ] Support for SSR
 - [ ] String notation for defining columns
 
