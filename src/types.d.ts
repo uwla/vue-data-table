@@ -10,6 +10,8 @@ type Column = {
     compareFunction: Function,
     component: VueComponent
     componentProps: VueComponentProps,
+    collapsed: boolean,
+    collapsible: boolean,
     displayIndex: number,
     editable: boolean,
     key: string,

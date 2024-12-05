@@ -13,8 +13,10 @@ export const globalDefaultColumn = {
     searchable: true,
     sortable: true,
     editable: false,
+    collapsible: false,
+    collapsed: false,
     type: "string",
-} as Column
+} as Column;
 
 const type2searchFunction = {
     string: searchStringColumn as Function,
@@ -52,7 +54,6 @@ export function parseColumnProps(props: any) {
         // editable cell
         if (column.editable)
             column.component = 'vdt-cell-editable'
-            // column.component = VdtTableCellEditable
 
         // merge the column with the default values
         column = { ...globalDefaultColumn, ...defaultColumn, ...column }

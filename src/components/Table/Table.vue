@@ -10,10 +10,20 @@
                         :class="column.cssClass"
                         :data-sortable="column.sortable"
                         :data-sorting="column.sortingMode"
+                        :data-collapsed="column.collapsed"
                         @click="$emit('sort-column', column)">
 
+                        <div
+                            v-if="column.collapsible && column.collapsed"
+                            @click="column.collapsed = false"
+                            class="vdt-column-collapse"
+                        >
+                            [+]
+                            <span>{{column.title}}</span>
+                        </div>
+
                         <!-- COLUMN HEADER CONTENT -->
-                        <div class="vdt-column-content">
+                        <div v-else class="vdt-column-content">
                             <span>{{ column.title }}</span>
 
                             <!-- SORTING INDEX -->
@@ -24,6 +34,14 @@
                             <!-- SORTING ICON -->
                             <component v-if="column.sortable"
                                 :is="sortingIconComponent" />
+
+                            <div
+                                v-if="column.collapsible && !column.collapsed"
+                                @click="column.collapsed = true"
+                                class="vdt-column-collapse"
+                            >
+                                [-]
+                            </div>
                         </div>
                     </th>
                 </tr>
@@ -45,9 +63,11 @@
                         v-for="(column, j) in columns"
                         :key="data._key + '_' + j"
                     >
+                        <div v-if="column.collapsible && column.collapsed"></div>
                         <component
-                            :is="column.component"
+                            v-else
                             v-bind="{ data, ...column.componentProps }"
+                            :is="column.component"
                             @userEvent="emitUserEvent"
                         />
                     </td>
@@ -55,11 +75,17 @@
             </tbody>
 
             <!-- COMPONENT IF LOADING -->
-            <component v-if="isLoading" :is="loadingComponent" />
+            <component
+                v-if="isLoading"
+                :is="loadingComponent"
+            />
 
             <!-- TABLE FOOTER -->
-            <component v-if="footerComponent" :is="footerComponent"
-                    v-bind="{ data, dataDisplayed, dataFiltered }" />
+            <component
+                v-if="footerComponent"
+                v-bind="{ data, dataDisplayed, dataFiltered }"
+                :is="footerComponent"
+            />
         </table>
     </div>
 </template>

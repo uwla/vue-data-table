@@ -46,11 +46,37 @@
         top: 0;
         user-select: none;
 
-        &[data-sortable] {
+        &[data-sortable=true] {
             cursor: pointer;
-
-            &:hover {
+            span:hover {
                 color: #3490dc;
+            }
+        }
+
+        &[data-collapsed=true] {
+            width: 1px;
+        }
+    }
+
+    .vdt-column-collapse {
+        color: #000;
+        cursor: pointer;
+        position: relative;
+        span {
+            position: absolute;
+            top: 2em;
+            left: -1.5em;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 4px;
+            display: none;
+            z-index: 50;
+        }
+        &:hover {
+            color: #00f;
+            span {
+                display: block;
             }
         }
     }
@@ -64,11 +90,11 @@
     .vdt-column-content {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
+        gap: 5px;
     }
 
     .vdt-empty-body {
         text-align: center;
     }
 }
-

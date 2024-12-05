@@ -73,6 +73,7 @@ const params2 = {
             cssClass: "minwidth",
             component: "vdt-actions",
             componentProps: { actions: ["view", "delete"] },
+            collapsible: true,
         },
     ],
     vKey: "id",
@@ -97,6 +98,7 @@ const params3 = {
             title: "Image",
             component: "CellImage",
             cssClass: "minwidth",
+            collapsible: true,
         },
     ],
     vKey: "id",
@@ -104,7 +106,6 @@ const params3 = {
 
 export default {
     data() {
-
         return {
             title: "UPDATE USER",
 
