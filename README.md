@@ -166,7 +166,8 @@ add or delete rows in the table!
 | title           | `String`           | `titleCase(key)` | The title displayed in the header                         |
 | searchable      | `Bool`             | `true`           | Whether to allow searching rows by this column field      |
 | sortable        | `Bool`             | `true`           | Whether to allow sorting the data by this column field    |
-| editable        | `Bool`             | `true`           | Whether the column is editable by the user               |
+| editable        | `Bool`             | `true`           | Whether the column is editable by the user                |
+| collapsible     | `Bool`             | `false`          | Whether the column is collapsible (expand and collapse)   |
 | type            | `String`           | `string`         | Data type of `key`. Allowed values: `string`, `number`    |
 | compareFunction | `Function`         | -                | Custom function provided by the user to sort the column   |
 | searchFunction  | `Function`         | -                | Custom function provided by the user to search the column |
