@@ -3,8 +3,6 @@ import VdtExportData from "./ExportData/ExportData.vue"
 import VdtPagination from "./Pagination/Pagination.vue"
 import VdtPerPage from "./PerPage/PerPage.vue"
 import VdtSearchFilter from "./SearchFilter/SearchFilter.vue"
-import VdtSortingIcon from "./SortableColumn/SortingIcon.vue"
-import VdtSortingIndex from "./SortableColumn/SortingIndex.vue"
 import VdtTable from "./Table/Table.vue"
 
 import {
@@ -46,7 +44,7 @@ export default defineComponent({
         },
         data: {
             type: Array,
-            required: true,
+            required: false,
         },
         defaultColumn: {
             type: Object,
@@ -60,6 +58,14 @@ export default defineComponent({
         downloadFileName: {
             type: String,
             default: "download",
+        },
+        fetchUrl: {
+            type: String,
+            required: false,
+        },
+        fetchCallback: {
+            type: Function,
+            required: false,
         },
         footerComponent: {
             type: [Object, String],
@@ -109,16 +115,12 @@ export default defineComponent({
             }
         },
         sortingIndexComponent: {
-            type: Object,
-            default: function() {
-                return VdtSortingIndex
-            }
+            type: [Object, String],
+            default: "vdt-sorting-index"
         },
         sortingIconComponent: {
-            type: Object,
-            default: function() {
-                return VdtSortingIcon
-            }
+            type: [Object, String],
+            default: "vdt-sorting-icon"
         },
         tableClass: {
             type: String,
@@ -136,6 +138,8 @@ export default defineComponent({
 
     data: () => {
         return reactive({
+            dataFetched: [] as Column[],
+            dataFetchedLinks: [] as any[],
             currentPage: 1,
             currentPerPage: 10,
             parsedColumns: [] as Column[],
@@ -153,11 +157,16 @@ export default defineComponent({
             paginationSearchText: "",
             paginationSearchButtonText: "",
             search: "",
-            searchText: ""
+            searchText: "",
+            totalRecords: 0,
         })
     },
 
     computed: {
+        actualData() {
+            return (this.data != null) ? this.data : this.dataFetched
+        },
+
         /**
          * Get the total number of columns
          */
@@ -201,7 +210,7 @@ export default defineComponent({
 
             // assign key to track row
             const key = this.vKey;
-            const data = this.data.map((value: any, index) => {
+            const data = this.actualData.map((value: any, index) => {
                 if (key !== "" && value[key]) {
                     index = value[key];
                 }
@@ -240,7 +249,10 @@ export default defineComponent({
          * Indicates if there are no rows to shown
          */
         isEmpty() {
-            return this.dataDisplayed.length === 0
+            if (! this.data)
+                return this.dataFetched.length === 0
+            else
+                return this.dataDisplayed.length === 0
         },
 
         //
@@ -273,13 +285,18 @@ export default defineComponent({
          * Get the number of records
          */
         totalEntries() {
-            return this.data.length
+            if (this.data == null)
+                return this.totalRecords
+            else
+                return this.actualData.length
         },
 
         /**
          * Get the number of records filtered
          */
         filteredEntries() {
+            if (this.data == null)
+                return this.totalRecords
             return this.dataFiltered.length
         },
 
@@ -435,11 +452,15 @@ export default defineComponent({
          * The props for the Table component
          */
         propsTable() {
+            const dataNotNull = this.data != null
+            const data          = (dataNotNull) ? this.data : this.dataFetched
+            const dataDisplayed = (dataNotNull) ? this.dataDisplayed : this.dataFetched
+            const dataFiltered  = (dataNotNull) ? this.dataFiltered : this.dataFetched
             return {
                 columns: this.parsedColumns,
-                data: this.data,
-                dataDisplayed: this.dataDisplayed,
-                dataFiltered: this.dataFiltered,
+                data: data,
+                dataDisplayed: dataDisplayed,
+                dataFiltered: dataFiltered,
                 emptyTableText: this.emptyTableText,
                 footerComponent: this.footerComponent,
                 isEmpty: this.isEmpty,
@@ -496,9 +517,50 @@ export default defineComponent({
 
     mounted() {
         this.setDefaults()
+        this.updateData()
     },
 
     methods: {
+        /**
+         * Update data, fetching it if needed.
+         * If all data was previously fetched, it is stored in state variables,
+         * therefore nothing is done in that case.
+         */
+        async updateData() {
+            if (this.data === null || this.data === undefined)
+                this.fetchData()
+        },
+
+        async fetchData(url = "") {
+            if (this.fetchUrl == null || this.fetchCallback == null)
+                throw Error("Fetch parameters are null");
+
+            // empty URL but we have the URL stored
+            if (url === "" && this.dataFetchedLinks.length > 1) {
+                url = this.dataFetchedLinks[this.currentPage].url
+                    + this.getSearchQuery() + this.getSortQuery();
+            }
+
+            // initial URL
+            if (url === "") {
+                url = this.fetchUrl
+            }
+
+            this.fetchCallback(url).then((responseData: any) => {
+                // Laravel API.
+                // If response is from ResourceCollection,
+                // then the metadata is in a nested object called meta.
+                // Otherwise, the metadata is directly in the JSON response.
+                const { data } = responseData
+                const meta = responseData.meta ?? responseData;
+                this.dataFetched      = data
+                this.dataFetchedLinks = meta.links
+                this.currentPage      = meta.current_page
+                this.currentPerPage   = meta.per_page
+                this.totalRecords     = meta.total
+            })
+        },
+
         /**
          * Propagate upwards an event from user's custom component
          */
@@ -594,8 +656,8 @@ export default defineComponent({
 
             // column is being sorted in ascending mode
             // so, mark it as sorted in descending mode
-            if (column.sortingMode === "asc") {
-                column.sortingMode = "desc"
+            if (column.sortingMode === SORTING_MODE.ASC) {
+                column.sortingMode = SORTING_MODE.DESC
                 this.columnsBeingSorted.splice(
                     column.sortingIndex - 1,
                     1,
@@ -631,9 +693,11 @@ export default defineComponent({
          * Set the current page being displayed
          */
         setPage(value: any) {
-            if (this.isValidPage(value)) {
-                this.currentPage = value
+            if (! this.isValidPage(value)) {
+                return
             }
+            this.currentPage = value
+            this.updateData()
         },
 
         /**
@@ -684,6 +748,46 @@ export default defineComponent({
             const value = getEventTargetValue() || ""
             this.search = value.trim()
             this.currentPage = 1
+            this.updateData();
+        },
+
+        /**
+         * Get search query URI for fetching data.
+         *
+         * @returns string
+         */
+        getSearchQuery() {
+            const encodedSearch = encodeURIComponent(this.search);
+            let searchQueryUri = ""
+            this.searchableColumns.forEach((col: Column) => {
+                if (col.key) {
+                    searchQueryUri += `&filter[${col.key}]=${encodedSearch}`
+                }
+            })
+            return searchQueryUri
+        },
+
+        /**
+         * Return the sort query URI for fetching data.
+         *
+         * @returns string
+         */
+        getSortQuery() {
+            let { columnsBeingSorted } = this
+
+            // nothing being sorted
+            if (columnsBeingSorted.length == 0)
+                return ""
+
+            let searchQueryUri = "&sort="
+            const descPrefix = "-"
+            const sep = ","
+             columnsBeingSorted.forEach((col: Column) => {
+                if (col.sortingMode == SORTING_MODE.DESC)
+                    searchQueryUri += descPrefix
+                searchQueryUri += col.key + sep
+            })
+            return searchQueryUri
         }
     },
 
@@ -697,6 +801,11 @@ export default defineComponent({
             handler: "parseColumnProps",
             deep: true,
             immediate: true
+        },
+        columnsBeingSorted: {
+            handler: "updateData",
+            deep: false,
+            immediate: false,
         },
         text: {
             handler: "parseTextProps",

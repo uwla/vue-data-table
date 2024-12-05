@@ -20,7 +20,7 @@ export default defineComponent({
         isLoading: Boolean,
         loadingComponent: [Object, String],
         numberOfColumns: Number,
-        sortingIconComponent: Object,
-        sortingIndexComponent: Object,
+        sortingIconComponent: [Object, String],
+        sortingIndexComponent: [Object, String],
     },
 })
