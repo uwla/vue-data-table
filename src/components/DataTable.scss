@@ -3,31 +3,33 @@
     width: 100%;
     grid-template-columns: 25% 25% 25% 25%;
 
-    & > .vdt-search, .vdt-pagination, .vdt-export {
-        margin-left: auto
+    & > .vdt-search,
+    .vdt-pagination,
+    .vdt-export {
+        margin-left: auto;
     }
 
     @media (min-width: 1401px) {
         grid-template-areas:
-        "perPage search search search"
-        "table table table table"
-        "info pagination pagination download";
+            "perPage search search search"
+            "table table table table"
+            "info pagination pagination download";
     }
 
     @media (min-width: 1051px) AND (max-width: 1400px) {
         grid-template-areas:
-        "perPage search search search"
-        "table table table table"
-        "info pagination pagination pagination"
-        ". . download download";
+            "perPage search search search"
+            "table table table table"
+            "info pagination pagination pagination"
+            ". . download download";
     }
 
     @media (min-width: 851px) AND (max-width: 1050px) {
         grid-template-areas:
-        "perPage search search search"
-        "table table table table"
-        "pagination pagination pagination pagination"
-        "info info download download";
+            "perPage search search search"
+            "table table table table"
+            "pagination pagination pagination pagination"
+            "info info download download";
     }
 
     @medi max-width: 800px) {
@@ -38,24 +40,24 @@
 
     @media (min-width: 651px) AND (max-width: 850px) {
         grid-template-areas:
-        "perPage search search search"
-        "table table table table"
-        "pagination pagination pagination pagination"
-        "info info info info"
-        "download download download download";
+            "perPage search search search"
+            "table table table table"
+            "pagination pagination pagination pagination"
+            "info info info info"
+            "download download download download";
     }
 
     @media (max-width: 650px) {
         grid-template-areas:
-        "search search search search"
-        "perPage perPage perPage perPage "
-        "table table table table"
-        "pagination pagination pagination pagination"
-        "info info info info"
-        "download download download download";
+            "search search search search"
+            "perPage perPage perPage perPage "
+            "table table table table"
+            "pagination pagination pagination pagination"
+            "info info info info"
+            "download download download download";
 
-        &>.vdt-perpage {
-            margin-left: auto
+        & > .vdt-perpage {
+            margin-left: auto;
         }
     }
 
@@ -71,7 +73,7 @@
 .vdt-input {
     background-color: #fff;
     border: 1px solid #ced4da;
-    border-radius: .25rem;
+    border-radius: 0.25rem;
     color: #495057;
     display: inline-block;
     line-height: 1.5;
@@ -94,19 +96,20 @@
 
 .vdt-btn {
     border: 1px solid transparent;
-    border-radius: .25rem;
+    border-radius: 0.25rem;
     cursor: pointer;
     color: #fff;
     display: inline-block;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    padding: .375rem .75rem;
+    padding: 0.375rem 0.75rem;
     text-align: center;
     vertical-align: middle;
 }
 
-.vdt-action-view, .vdt-action-confirm {
+.vdt-action-view,
+.vdt-action-confirm {
     border: 1px solid #28a745;
     background-color: #28a745;
     &:hover {
@@ -115,7 +118,8 @@
     }
 }
 
-.vdt-action-edit, .vdt-btn-primary {
+.vdt-action-edit,
+.vdt-btn-primary {
     border: 1px solid #007bff;
     background-color: #007bff;
     &:hover {

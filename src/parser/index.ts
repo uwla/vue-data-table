@@ -7,7 +7,7 @@ import translations from "../lang"
 // default column to all instances of VDT
 export const globalDefaultColumn = {
     // component: VdtTableCell,
-    component: 'vdt-cell',
+    component: "vdt-cell",
     componentProps: {},
     displayIndex: 1000,
     searchable: true,
@@ -16,7 +16,7 @@ export const globalDefaultColumn = {
     collapsible: false,
     collapsed: false,
     type: "string",
-} as Column;
+} as Column
 
 const type2searchFunction = {
     string: searchStringColumn as Function,
@@ -25,25 +25,22 @@ const type2searchFunction = {
 
 export function parseColumnProps(props: any) {
     // extract the columns. If not set, columns are derived from columnKeys
-    let columns : Column[]
-    if (props.columns)
-        columns = props.columns
+    let columns: Column[]
+    if (props.columns) columns = props.columns
     else if (props.columnKeys)
         columns = props.columnKeys.map((key: string) => ({ key })) as Column[]
-    else
-        throw new Error('Neither columns or columnKeys is defined in props.')
+    else throw new Error("Neither columns or columnKeys is defined in props.")
 
     // extract the local default column
     let defaultColumn = props.defaultColumn || {}
 
     // merge default column with the columns
-    columns = columns.map(function(column: Column, i: number) {
-        column = { ... column }
+    columns = columns.map(function (column: Column, i: number) {
+        column = { ...column }
         let { key } = column
 
         // if component not set, need to pass the key to the default component
-        if (column.component == null)
-            column.componentProps = { columnKey: key }
+        if (column.component == null) column.componentProps = { columnKey: key }
 
         // by default, columns with custom components are not sortable or searchable
         if (column.component != null) {
@@ -52,8 +49,7 @@ export function parseColumnProps(props: any) {
         }
 
         // editable cell
-        if (column.editable)
-            column.component = 'vdt-cell-editable'
+        if (column.editable) column.component = "vdt-cell-editable"
 
         // merge the column with the default values
         column = { ...globalDefaultColumn, ...defaultColumn, ...column }
@@ -61,7 +57,8 @@ export function parseColumnProps(props: any) {
         // some default values are dynamically computed
         let type = column.type as ColumnType
         column.title = column.title || toTitleCase(key)
-        column.searchFunction = column.searchFunction || type2searchFunction[type]
+        column.searchFunction =
+            column.searchFunction || type2searchFunction[type]
 
         // options below are used internally
         // shall not be overwritten by the user
@@ -74,7 +71,7 @@ export function parseColumnProps(props: any) {
 
     /* order the columns by the index, so the user can
     set a custom order for the columns to be displayed */
-    columns.sort(function(a : Column, b: Column) {
+    columns.sort(function (a: Column, b: Column) {
         return a.displayIndex - b.displayIndex
     })
 

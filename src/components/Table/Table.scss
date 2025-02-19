@@ -20,19 +20,20 @@
         border-bottom: 2px solid #dee2e6;
     }
 
-    .table td, .table th {
-        padding: .75rem;
+    .table td,
+    .table th {
+        padding: 0.75rem;
         vertical-align: top;
         border-top: 1px solid #dee2e6;
     }
 
     .table-striped tbody tr:nth-of-type(odd) {
-        background-color: rgba(0,0,0,.05);
+        background-color: rgba(0, 0, 0, 0.05);
     }
 
     .table-hover tbody tr:hover {
         color: #212529;
-        background-color: rgba(0,0,0,.075);
+        background-color: rgba(0, 0, 0, 0.075);
     }
 
     .vdt-column {
@@ -41,19 +42,21 @@
         position: sticky;
         padding: 1rem 0.75rem;
         border: none !important;
-        box-shadow: inset 0px 11px .75px -10px #ddd, inset 0px -11px .75px -10px #ddd;
+        box-shadow:
+            inset 0px 11px 0.75px -10px #ddd,
+            inset 0px -11px 0.75px -10px #ddd;
         line-height: 1;
         top: 0;
         user-select: none;
 
-        &[data-sortable=true] {
+        &[data-sortable="true"] {
             cursor: pointer;
             span:hover {
                 color: #3490dc;
             }
         }
 
-        &[data-collapsed=true] {
+        &[data-collapsed="true"] {
             width: 1px;
         }
     }

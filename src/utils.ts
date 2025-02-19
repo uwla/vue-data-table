@@ -1,21 +1,26 @@
-export function
-toTitleCase(str: string): string
-{
+export function toTitleCase(str: string): string {
     // convert snake case to title case
-    str = str.replace(/_/g, ' ');
+    str = str.replace(/_/g, " ")
 
     // convert camel case to title case
-    str = str.replace(/([a-z])([A-Z])/g, '$1 $2');
+    str = str.replace(/([a-z])([A-Z])/g, "$1 $2")
 
     // capitalize first letter of each word
-    str = str.replace(/\b\w/g, w => w[0].toUpperCase() + w.slice(1).toLowerCase())
+    str = str.replace(
+        /\b\w/g,
+        w => w[0].toUpperCase() + w.slice(1).toLowerCase()
+    )
 
     // return the result
     return str
 }
 
 // Replace multiple substrings in the given string from the matching arrays.
-export function stringReplaceFromArray(target: string, searchValues: string[], replacements: any[]): string {
+export function stringReplaceFromArray(
+    target: string,
+    searchValues: string[],
+    replacements: any[]
+): string {
     for (let i = 0; i < searchValues.length; i++) {
         target = target.replace(searchValues[i], replacements[i])
     }
@@ -34,24 +39,25 @@ export function isNullable(variable: any): boolean {
     return variable === null || variable === "" || variable === undefined
 }
 
-export function stableSort <T>(arr: T[], compare: Function): T[] {
-    return arr.map((item, index) => ({item, index}))
+export function stableSort<T>(arr: T[], compare: Function): T[] {
+    return arr
+        .map((item, index) => ({ item, index }))
         .sort((a, b) => compare(a.item, b.item) || a.index - b.index)
-        .map(({item}) => item)
+        .map(({ item }) => item)
 }
 
 // Safely compare two items, which may be nullable
 export function safeCompare(compareFunction: Function): Function {
-    return function(a: any, b: any) {
+    return function (a: any, b: any) {
         if (isNullable(a)) return 1
         if (isNullable(b)) return -1
-        return compareFunction(a,b)
+        return compareFunction(a, b)
     }
 }
 
 // Safely compare two items by key, which may be nullable
 export function safeKeyCompare(compareFunction: Function, key: string) {
-    return function(a: any, b: any) {
+    return function (a: any, b: any) {
         if (isNullable(a[key])) return 1
         if (isNullable(b[key])) return -1
         return compareFunction(a[key], b[key])
@@ -60,7 +66,7 @@ export function safeKeyCompare(compareFunction: Function, key: string) {
 
 // Reverse a comparison function
 export function reverseCompare(compareFunction: Function): Function {
-    return (a: any, b: any) => compareFunction(b,a)
+    return (a: any, b: any) => compareFunction(b, a)
 }
 
 // Performs a case-insensitive comparison of two strings
@@ -69,7 +75,7 @@ export function compareStrings(a: string, b: string): number {
 }
 
 // Perform a comparison of numeric values (possibly strings)
-export function compareNumbers (a: string|number, b: string|number): number {
+export function compareNumbers(a: string | number, b: string | number): number {
     return Number(a) - Number(b)
 }
 
@@ -89,18 +95,14 @@ export function sortDataByColumns(data: Data, columns: Column[]) {
             let { sortingMode, compareFunction: f } = c
 
             // reverse comparison
-            let reverseSearch = (sortingMode === 'desc')
+            let reverseSearch = sortingMode === "desc"
 
             // get default value for f
-            if (isNullable(f))
-            {
+            if (isNullable(f)) {
                 let { key, type } = c
-                if (type === "string")
-                    f = compareStrings
-                if (type === "numeric" || type === "number")
-                    f = compareNumbers
-                if (reverseSearch)
-                    f = reverseCompare(f)
+                if (type === "string") f = compareStrings
+                if (type === "numeric" || type === "number") f = compareNumbers
+                if (reverseSearch) f = reverseCompare(f)
                 // make it safe to search null keys, and put them last
                 f = safeKeyCompare(f, key)
             } else if (reverseSearch) {
@@ -108,9 +110,8 @@ export function sortDataByColumns(data: Data, columns: Column[]) {
             }
 
             // get the result
-            let result = f(a,b)
-            if (result !== 0)
-                return result
+            let result = f(a, b)
+            if (result !== 0) return result
 
             // comparison return equal. Proceed to the next comparison
             i += 1
@@ -125,7 +126,7 @@ export function sortDataByColumns(data: Data, columns: Column[]) {
  * Cross-browser utility to get the event target value
  * @returns {*}
  */
-export function getEventTargetValue(event : any = null) {
+export function getEventTargetValue(event: any = null) {
     event = event || window.event
     var target
     if (event !== undefined) {
@@ -139,10 +140,10 @@ export function getEventTargetValue(event : any = null) {
 
 // Performs search on strings
 export function searchStringColumn(data: Cell, search: string, key: string) {
-    return (data[key] || '').toLowerCase().includes(search.toLowerCase())
+    return (data[key] || "").toLowerCase().includes(search.toLowerCase())
 }
 
 // Performs search on numeric values
 export function searchNumericColumn(data: Cell, search: string, key: string) {
-    return (data[key] || '').toString().includes(search)
+    return (data[key] || "").toString().includes(search)
 }

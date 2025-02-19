@@ -1,9 +1,12 @@
 <template>
     <div class="vdt-action-buttons">
-        <button v-for="(action, i) in actions" :key="i"
+        <button
+            v-for="(action, i) in actions"
+            :key="i"
             class="vdt-btn"
             :class="`vdt-action-${action}`"
-            @click="triggerAction(action)">
+            @click="triggerAction(action)"
+        >
             {{ actionIcons[action] }}
         </button>
     </div>

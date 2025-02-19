@@ -56,5 +56,5 @@ form select {
 
 .btn-group {
     display: flex;
-    gap: .5em;
+    gap: 0.5em;
 }

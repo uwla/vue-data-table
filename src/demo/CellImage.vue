@@ -1,11 +1,12 @@
 <template>
-    <img class="cell-img" :src="data.photo" alt="user image" />
+    <img
+        class="cell-img"
+        :src="data.photo"
+        alt="user image"
+    />
 </template>
 <script>
-export default {
-    name: "CellImage",
-    props: ['data']
-}
+export default { name: "CellImage", props: ["data"] }
 </script>
 <style>
 .cell-img {

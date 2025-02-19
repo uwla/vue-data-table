@@ -30,110 +30,46 @@ export default defineComponent({
     },
 
     props: {
-        allowedExports: {
-            type: Array,
-            default: () => ["csv", "json", "xml"]
-        },
-        columns: {
-            type: Array,
-            required: false
-        },
-        columnKeys: {
-            type: Array,
-            required: false
-        },
-        data: {
-            type: Array,
-            required: false,
-        },
-        defaultColumn: {
-            type: Object,
-            required: false,
-            default: () => ({})
-        },
-        defaultPerPage: {
-            type: Number,
-            default: 10
-        },
-        downloadFileName: {
-            type: String,
-            default: "download",
-        },
-        fetchUrl: {
-            type: String,
-            required: false,
-        },
-        fetchCallback: {
-            type: Function,
-            required: false,
-        },
-        footerComponent: {
-            type: [Object, String],
-            default: null
-        },
-        isLoading: {
-            type: Boolean,
-            default: false,
-        },
-        lang: {
-            type: String,
-            default: "en"
-        },
-        loadingComponent: {
-            type: [Object, String],
-            default: () => "",
-        },
-        perPageSizes: {
-            type: Array,
-            default: () => [10, 25, 50, 100, '*']
-        },
-        showEntriesInfo: {
-            type: Boolean,
-            default: true
-        },
-        showPerPage: {
-            type: Boolean,
-            default: true
-        },
-        showDownloadButton: {
-            type: Boolean,
-            default: true
-        },
-        showPagination: {
-            type: Boolean,
-            default: true
-        },
-        showSearchFilter: {
-            type: Boolean,
-            default: true
-        },
+        allowedExports: { type: Array, default: () => ["csv", "json", "xml"] },
+        columns: { type: Array, required: false },
+        columnKeys: { type: Array, required: false },
+        data: { type: Array, required: false },
+        defaultColumn: { type: Object, required: false, default: () => ({}) },
+        defaultPerPage: { type: Number, default: 10 },
+        downloadFileName: { type: String, default: "download" },
+        fetchUrl: { type: String, required: false },
+        fetchCallback: { type: Function, required: false },
+        footerComponent: { type: [Object, String], default: null },
+        isLoading: { type: Boolean, default: false },
+        lang: { type: String, default: "en" },
+        loadingComponent: { type: [Object, String], default: () => "" },
+        perPageSizes: { type: Array, default: () => [10, 25, 50, 100, "*"] },
+        showEntriesInfo: { type: Boolean, default: true },
+        showPerPage: { type: Boolean, default: true },
+        showDownloadButton: { type: Boolean, default: true },
+        showPagination: { type: Boolean, default: true },
+        showSearchFilter: { type: Boolean, default: true },
         sortingMode: {
             type: String,
             default: "multiple",
             validator: (value: string) => {
                 return ["multiple", "single", "none"].includes(value)
-            }
+            },
         },
         sortingIndexComponent: {
             type: [Object, String],
-            default: "vdt-sorting-index"
+            default: "vdt-sorting-index",
         },
         sortingIconComponent: {
             type: [Object, String],
-            default: "vdt-sorting-icon"
+            default: "vdt-sorting-icon",
         },
         tableClass: {
             type: String,
-            default: "table table-striped table-hover"
+            default: "table table-striped table-hover",
         },
-        text: {
-            type: Object,
-            required: false
-        },
-        vKey: {
-            type: String,
-            default: "",
-        },
+        text: { type: Object, required: false },
+        vKey: { type: String, default: "" },
     },
 
     data: () => {
@@ -164,7 +100,7 @@ export default defineComponent({
 
     computed: {
         actualData() {
-            return (this.data != null) ? this.data : this.dataFetched
+            return this.data != null ? this.data : this.dataFetched
         },
 
         /**
@@ -178,14 +114,18 @@ export default defineComponent({
          * Get the columns that can be used in searches
          */
         searchableColumns() {
-            return this.parsedColumns.filter((column : Column) => column.searchable)
+            return this.parsedColumns.filter(
+                (column: Column) => column.searchable
+            )
         },
 
         /**
          * Get the columns that can be sorted
          */
         sortableColumns() {
-            return this.parsedColumns.filter((column : Column) => column.sortable)
+            return this.parsedColumns.filter(
+                (column: Column) => column.sortable
+            )
         },
 
         //
@@ -209,23 +149,20 @@ export default defineComponent({
             const { searchableColumns, search } = this
 
             // assign key to track row
-            const key = this.vKey;
+            const key = this.vKey
             const data = this.actualData.map((value: any, index) => {
                 if (key !== "" && value[key]) {
-                    index = value[key];
+                    index = value[key]
                 }
-                return {
-                    ...(value as Object),
-                    _key: index,
-                };
+                return { ...(value as Object), _key: index }
             })
 
             if (isNullable(search)) {
                 return data
             }
 
-            return data.filter(function(row: any) {
-                return searchableColumns.some(function(column: Column) {
+            return data.filter(function (row: any) {
+                return searchableColumns.some(function (column: Column) {
                     return column.searchFunction(row, search, column.key)
                 })
             })
@@ -249,10 +186,8 @@ export default defineComponent({
          * Indicates if there are no rows to shown
          */
         isEmpty() {
-            if (! this.data)
-                return this.dataFetched.length === 0
-            else
-                return this.dataDisplayed.length === 0
+            if (!this.data) return this.dataFetched.length === 0
+            else return this.dataDisplayed.length === 0
         },
 
         //
@@ -264,7 +199,10 @@ export default defineComponent({
          */
         firstEntry() {
             const { dataFiltered, currentPerPage, currentPage } = this
-            if (dataFiltered.length === 0 || (currentPerPage as Number|String) === '*') {
+            if (
+                dataFiltered.length === 0 ||
+                (currentPerPage as Number | String) === "*"
+            ) {
                 return 0
             }
             return currentPerPage * (currentPage - 1) + 1
@@ -274,29 +212,29 @@ export default defineComponent({
          * Get the index of the last record being displayed in the current page
          */
         lastEntry() {
-            const { currentPerPage } = this;
-            if ((currentPerPage as Number|String) === '*') {
-                return this.filteredEntries;
+            const { currentPerPage } = this
+            if ((currentPerPage as Number | String) === "*") {
+                return this.filteredEntries
             }
-            return Math.min(this.filteredEntries, this.firstEntry + currentPerPage - 1)
+            return Math.min(
+                this.filteredEntries,
+                this.firstEntry + currentPerPage - 1
+            )
         },
 
         /**
          * Get the number of records
          */
         totalEntries() {
-            if (this.data == null)
-                return this.totalRecords
-            else
-                return this.actualData.length
+            if (this.data == null) return this.totalRecords
+            else return this.actualData.length
         },
 
         /**
          * Get the number of records filtered
          */
         filteredEntries() {
-            if (this.data == null)
-                return this.totalRecords
+            if (this.data == null) return this.totalRecords
             return this.dataFiltered.length
         },
 
@@ -312,16 +250,16 @@ export default defineComponent({
                 firstEntry,
                 lastEntry,
                 filteredEntries,
-                totalEntries
+                totalEntries,
             } = this
             const replacements = [
                 firstEntry,
                 lastEntry,
                 filteredEntries,
-                totalEntries
+                totalEntries,
             ]
-            if ((currentPerPage as Number|String) === '*') {
-                return infoAllText;
+            if ((currentPerPage as Number | String) === "*") {
+                return infoAllText
             }
             const searchValues = [":first", ":last", ":filtered", ":total"]
             let text = infoText
@@ -342,10 +280,12 @@ export default defineComponent({
          * Get the number of pages
          */
         numberOfPages() {
-            const { currentPerPage } = this;
-            if ((currentPerPage as Number|String) === '*')
-                return 1;
-            return Math.max(Math.ceil(this.filteredEntries / this.currentPerPage), 1);
+            const { currentPerPage } = this
+            if ((currentPerPage as Number | String) === "*") return 1
+            return Math.max(
+                Math.ceil(this.filteredEntries / this.currentPerPage),
+                1
+            )
         },
 
         /**
@@ -408,7 +348,7 @@ export default defineComponent({
                     currentPage,
                     nextPage,
                     "...",
-                    lastPage
+                    lastPage,
                 ]
             }
             if (lastPage > 7 && lastPage <= currentPage + 3) {
@@ -418,7 +358,7 @@ export default defineComponent({
                     lastPage - 3,
                     lastPage - 2,
                     lastPage - 1,
-                    lastPage
+                    lastPage,
                 ]
             }
         },
@@ -442,10 +382,7 @@ export default defineComponent({
          * The props for the SearchFilter component
          */
         propsSearchFilter() {
-            return {
-                search: this.search,
-                searchText: this.searchText,
-            }
+            return { search: this.search, searchText: this.searchText }
         },
 
         /**
@@ -453,9 +390,13 @@ export default defineComponent({
          */
         propsTable() {
             const dataNotNull = this.data != null
-            const data          = (dataNotNull) ? this.data : this.dataFetched
-            const dataDisplayed = (dataNotNull) ? this.dataDisplayed : this.dataFetched
-            const dataFiltered  = (dataNotNull) ? this.dataFiltered : this.dataFetched
+            const data = dataNotNull ? this.data : this.dataFetched
+            const dataDisplayed = dataNotNull
+                ? this.dataDisplayed
+                : this.dataFetched
+            const dataFiltered = dataNotNull
+                ? this.dataFiltered
+                : this.dataFetched
             return {
                 columns: this.parsedColumns,
                 data: data,
@@ -477,9 +418,7 @@ export default defineComponent({
          * The props for the EntriesInfo component
          */
         propsEntriesInfo() {
-            return {
-                entriesInfoText: this.entriesInfoText
-            }
+            return { entriesInfoText: this.entriesInfoText }
         },
 
         /**
@@ -512,7 +451,7 @@ export default defineComponent({
                 downloadFileName: this.downloadFileName,
                 downloadText: this.downloadText,
             }
-        }
+        },
     },
 
     mounted() {
@@ -527,18 +466,19 @@ export default defineComponent({
          * therefore nothing is done in that case.
          */
         async updateData() {
-            if (this.data === null || this.data === undefined)
-                this.fetchData()
+            if (this.data === null || this.data === undefined) this.fetchData()
         },
 
         async fetchData(url = "") {
             if (this.fetchUrl == null || this.fetchCallback == null)
-                throw Error("Fetch parameters are null");
+                throw Error("Fetch parameters are null")
 
             // empty URL but we have the URL stored
             if (url === "" && this.dataFetchedLinks.length > 1) {
-                url = this.dataFetchedLinks[this.currentPage].url
-                    + this.getSearchQuery() + this.getSortQuery();
+                url =
+                    this.dataFetchedLinks[this.currentPage].url +
+                    this.getSearchQuery() +
+                    this.getSortQuery()
             }
 
             // initial URL
@@ -552,12 +492,12 @@ export default defineComponent({
                 // then the metadata is in a nested object called meta.
                 // Otherwise, the metadata is directly in the JSON response.
                 const { data } = responseData
-                const meta = responseData.meta ?? responseData;
-                this.dataFetched      = data
+                const meta = responseData.meta ?? responseData
+                this.dataFetched = data
                 this.dataFetchedLinks = meta.links
-                this.currentPage      = meta.current_page
-                this.currentPerPage   = meta.per_page
-                this.totalRecords     = meta.total
+                this.currentPage = meta.current_page
+                this.currentPerPage = meta.per_page
+                this.totalRecords = meta.total
             })
         },
 
@@ -565,13 +505,13 @@ export default defineComponent({
          * Propagate upwards an event from user's custom component
          */
         emitUserEvent(payload: any) {
-            this.$emit('userEvent', payload)
+            this.$emit("userEvent", payload)
         },
 
         /**
          * Indicates if a page is valid
          */
-        isValidPage(page: any) : boolean {
+        isValidPage(page: any): boolean {
             return (
                 typeof page === "number" &&
                 page <= this.numberOfPages &&
@@ -612,10 +552,9 @@ export default defineComponent({
 
             // case when the current mode is to only sort a single column
             if (this.sortingMode === "single") {
-
                 // mark other columns as not being sorted
                 // skipping the current column
-                for (let col of (this.sortableColumns as Column[])) {
+                for (let col of this.sortableColumns as Column[]) {
                     if (col.id !== column.id) {
                         col.sortingMode = SORTING_MODE.NONE
                         col.sortingIndex = -1
@@ -670,14 +609,16 @@ export default defineComponent({
             // so, mark it as not being sorted
             column.sortingMode = SORTING_MODE.NONE
             column.sortingIndex = -1
-            this.columnsBeingSorted = this.columnsBeingSorted.filter((c: Column) => {
-                return c.id !== column.id
-            })
+            this.columnsBeingSorted = this.columnsBeingSorted.filter(
+                (c: Column) => {
+                    return c.id !== column.id
+                }
+            )
 
             // in this case,
             // it is necessary to update the sorting index of other columns
             // to reflect the fact that there is one less column.
-            this.columnsBeingSorted.forEach(function(col: Column, i: number) {
+            this.columnsBeingSorted.forEach(function (col: Column, i: number) {
                 col.sortingIndex = i + 1
             })
         },
@@ -693,7 +634,7 @@ export default defineComponent({
          * Set the current page being displayed
          */
         setPage(value: any) {
-            if (! this.isValidPage(value)) {
+            if (!this.isValidPage(value)) {
                 return
             }
             this.currentPage = value
@@ -704,7 +645,7 @@ export default defineComponent({
          * Set the current rows per page
          */
         setPerPage(value: any) {
-            let previousFirstEntry, newPerPage, newCurrentPage;
+            let previousFirstEntry, newPerPage, newCurrentPage
 
             // before updating the value of currentPerPage,
             // we need to store the current firstEntry.
@@ -723,7 +664,7 @@ export default defineComponent({
             // update current per page so that
             // the user will see the same first
             // rows that were being displayed
-            if ((this.currentPerPage as Number|String) === '*') {
+            if ((this.currentPerPage as Number | String) === "*") {
                 newCurrentPage = 1
             } else {
                 newCurrentPage = Math.floor(previousFirstEntry / newPerPage) + 1
@@ -736,8 +677,7 @@ export default defineComponent({
          */
         setPerPageFromUserInput() {
             let value = getEventTargetValue()
-            if (value !== '*')
-                value = Number(value);
+            if (value !== "*") value = Number(value)
             this.setPerPage(value)
         },
 
@@ -748,7 +688,7 @@ export default defineComponent({
             const value = getEventTargetValue() || ""
             this.search = value.trim()
             this.currentPage = 1
-            this.updateData();
+            this.updateData()
         },
 
         /**
@@ -757,7 +697,7 @@ export default defineComponent({
          * @returns string
          */
         getSearchQuery() {
-            const encodedSearch = encodeURIComponent(this.search);
+            const encodedSearch = encodeURIComponent(this.search)
             let searchQueryUri = ""
             this.searchableColumns.forEach((col: Column) => {
                 if (col.key) {
@@ -776,47 +716,34 @@ export default defineComponent({
             let { columnsBeingSorted } = this
 
             // nothing being sorted
-            if (columnsBeingSorted.length == 0)
-                return ""
+            if (columnsBeingSorted.length == 0) return ""
 
             let searchQueryUri = "&sort="
             const descPrefix = "-"
             const sep = ","
-             columnsBeingSorted.forEach((col: Column) => {
+            columnsBeingSorted.forEach((col: Column) => {
                 if (col.sortingMode == SORTING_MODE.DESC)
                     searchQueryUri += descPrefix
                 searchQueryUri += col.key + sep
             })
             return searchQueryUri
-        }
+        },
     },
 
     watch: {
-        columns: {
-            handler: "parseColumnProps",
-            deep: true,
-            immediate: true
-        },
+        columns: { handler: "parseColumnProps", deep: true, immediate: true },
         columnKeys: {
             handler: "parseColumnProps",
             deep: true,
-            immediate: true
+            immediate: true,
         },
         columnsBeingSorted: {
             handler: "updateData",
             deep: false,
             immediate: false,
         },
-        text: {
-            handler: "parseTextProps",
-            deep: true,
-            immediate: true
-        },
-        lang: {
-            handler: "parseTextProps"
-        },
-        perPageSizes: {
-            handler: "setDefaults",
-        }
-    }
+        text: { handler: "parseTextProps", deep: true, immediate: true },
+        lang: { handler: "parseTextProps" },
+        perPageSizes: { handler: "setDefaults" },
+    },
 })

@@ -5,7 +5,7 @@ export default defineComponent({
     methods: {
         // Propagate upwards an event from a user custom component
         emitUserEvent(payload: any) {
-            this.$emit('user-event', payload)
+            this.$emit("user-event", payload)
         },
     },
     props: {

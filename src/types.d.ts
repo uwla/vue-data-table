@@ -1,45 +1,45 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // TYPE DEFINITIONS
 
-type VueComponent = string|any
-type VueComponentProps = { [key: string] : any }
+type VueComponent = string | any
+type VueComponentProps = { [key: string]: any }
 
-type SortingMode = 'asc' | 'desc' | 'none'
-type ColumnType = 'numeric' | 'string' | 'array' | 'other'
+type SortingMode = "asc" | "desc" | "none"
+type ColumnType = "numeric" | "string" | "array" | "other"
 type Column = {
-    compareFunction: Function,
+    compareFunction: Function
     component: VueComponent
-    componentProps: VueComponentProps,
-    collapsed: boolean,
-    collapsible: boolean,
-    displayIndex: number,
-    editable: boolean,
-    key: string,
-    id: number,
-    searchable: boolean,
-    searchFunction: Function,
-    sortable: boolean,
-    sortingIndex: number,
-    sortingMode: SortingMode,
-    title: string,
-    type: string,
+    componentProps: VueComponentProps
+    collapsed: boolean
+    collapsible: boolean
+    displayIndex: number
+    editable: boolean
+    key: string
+    id: number
+    searchable: boolean
+    searchFunction: Function
+    sortable: boolean
+    sortingIndex: number
+    sortingMode: SortingMode
+    title: string
+    type: string
 }
 
 type LanguageName = string
 type LanguageDictKey =
-    'downloadButtonText' |
-    'downloadText' |
-    'emptyTableText' |
-    'infoFilteredText' |
-    'infoText' |
-    'infoAllText' |
-    'nextButtonText' |
-    'paginationSearchButtonText' |
-    'paginationSearchText' |
-    'perPageText' |
-    'perPageAllText' |
-    'previousButtonText' |
-    'searchText';
+    | "downloadButtonText"
+    | "downloadText"
+    | "emptyTableText"
+    | "infoFilteredText"
+    | "infoText"
+    | "infoAllText"
+    | "nextButtonText"
+    | "paginationSearchButtonText"
+    | "paginationSearchText"
+    | "perPageText"
+    | "perPageAllText"
+    | "previousButtonText"
+    | "searchText"
 type LanguageDictVal = string
 type LanguageDict = Record<LanguageDictKey, LanguageDictVal>
 type Translation = Record<LanguageName, LanguageDict>

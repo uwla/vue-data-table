@@ -1,7 +1,8 @@
-.vdt-cell-editable  {
-    .view-cell, .edit-cell {
+.vdt-cell-editable {
+    .view-cell,
+    .edit-cell {
         display: flex;
-        gap: .3em;
+        gap: 0.3em;
         flex-wrap: nowrap;
         justify-content: space-between;
     }

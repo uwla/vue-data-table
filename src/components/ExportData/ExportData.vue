@@ -1,12 +1,25 @@
 <template>
-    <div class="vdt-export" ref="el">
+    <div
+        class="vdt-export"
+        ref="el"
+    >
         <span>{{ downloadText }}</span>
-        <select class="vdt-input" v-model="selectedExport">
-            <option v-for="(exportType, i) in allowedExports" :key="i" :value="exportType">
+        <select
+            class="vdt-input"
+            v-model="selectedExport"
+        >
+            <option
+                v-for="(exportType, i) in allowedExports"
+                :key="i"
+                :value="exportType"
+            >
                 {{ exportType }}
             </option>
         </select>
-        <button class="vdt-btn vdt-btn-primary" @click="download()">
+        <button
+            class="vdt-btn vdt-btn-primary"
+            @click="download()"
+        >
             {{ downloadButtonText }}
         </button>
     </div>

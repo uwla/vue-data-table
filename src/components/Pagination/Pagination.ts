@@ -3,14 +3,12 @@ import { defineComponent } from "vue"
 export default defineComponent({
     name: "VdtPagination",
     setup() {
-        return {
-            pageToGo: 1
-        }
+        return { pageToGo: 1 }
     },
     methods: {
         setCurrentPage(page: any) {
             this.$emit("set-page", Number(page))
-        }
+        },
     },
     props: {
         paginationSearchButtonText: String,
@@ -37,6 +35,6 @@ export default defineComponent({
                 return 1
             }
             return value
-        }
-    }
+        },
+    },
 })

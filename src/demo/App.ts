@@ -1,43 +1,40 @@
-import users from "./users.json";
-import Swal from "sweetalert2";
+import users from "./users.json"
+import Swal from "sweetalert2"
 
 type User = {
-    bio: String;
-    city: String;
-    company: String;
-    country: String;
-    created_at: String;
-    creditCardNumber: String;
-    creditCardType: String;
-    email: String;
-    email_verified_at: String;
-    fruits: String[];
-    gender: "Male" | "Female";
-    id: number;
-    info: String;
-    job: String;
-    name: String;
-    phone: String;
-    photo: String;
-    state: String;
-    streetName: String;
-    suffix: String;
-    timezone: String;
-    title: String;
-    updated_at: String;
-    userAgent: String;
-    username: String;
-};
+    bio: String
+    city: String
+    company: String
+    country: String
+    created_at: String
+    creditCardNumber: String
+    creditCardType: String
+    email: String
+    email_verified_at: String
+    fruits: String[]
+    gender: "Male" | "Female"
+    id: number
+    info: String
+    job: String
+    name: String
+    phone: String
+    photo: String
+    state: String
+    streetName: String
+    suffix: String
+    timezone: String
+    title: String
+    updated_at: String
+    userAgent: String
+    username: String
+}
 
-type UserField = keyof User;
+type UserField = keyof User
 
 const params1 = {
     sortingMode: "single",
     columns: [
-        {
-            title: ".",
-            component: "vdt-cell-selectable",
-        },
+        { title: ".", component: "vdt-cell-selectable" },
         { key: "name" },
         { key: "email", title: "Email address" },
         { key: "job" },
@@ -61,7 +58,7 @@ const params1 = {
         },
     ],
     vKey: "id",
-};
+}
 
 const params2 = {
     columns: [
@@ -77,7 +74,7 @@ const params2 = {
         },
     ],
     vKey: "id",
-};
+}
 
 const params3 = {
     defaultPerPage: 25,
@@ -90,7 +87,7 @@ const params3 = {
             searchFunction: (data: any, search: String) => {
                 return data.fruits.some((f: String) =>
                     f.toLowerCase().includes(search.toLowerCase())
-                );
+                )
             },
             searchable: true,
         },
@@ -102,7 +99,7 @@ const params3 = {
         },
     ],
     vKey: "id",
-};
+}
 
 export default {
     data() {
@@ -130,84 +127,80 @@ export default {
 
             // parameters for the third table
             params3: params3,
-        };
+        }
     },
 
     methods: {
         updateUserField(user: User, field: UserField, value: any) {
-            let ind = this.data.findIndex((u) => u.id === user.id);
-            if (ind < 0) return;
-            let newUser = { ...this.data[ind] };
-            newUser[field] = value;
-            this.data.splice(ind, 1, newUser);
+            let ind = this.data.findIndex(u => u.id === user.id)
+            if (ind < 0) return
+            let newUser = { ...this.data[ind] }
+            newUser[field] = value
+            this.data.splice(ind, 1, newUser)
         },
         handleUserEvent(payload: any) {
-            let user = payload.data as User;
+            let user = payload.data as User
             switch (payload.action) {
                 case "delete":
-                    this.showDeleteForm(user);
-                    break;
+                    this.showDeleteForm(user)
+                    break
                 case "edit":
-                    this.showEditForm(user);
-                    break;
+                    this.showEditForm(user)
+                    break
                 case "view":
-                    this.showUser(user);
-                    break;
+                    this.showUser(user)
+                    break
                 case "updateCell":
-                    let { key, value } = payload;
-                    this.updateUserField(user, key, value);
-                    break;
+                    let { key, value } = payload
+                    this.updateUserField(user, key, value)
+                    break
                 case "select":
-                    let { selected } = payload;
-                    this.updateSelection(user, selected);
+                    let { selected } = payload
+                    this.updateSelection(user, selected)
             }
         },
         addUser(user: User) {
-            user.id = this.data.length + 1;
-            this.data.unshift(user);
-            this.showSuccessMessage("User added!");
+            user.id = this.data.length + 1
+            this.data.unshift(user)
+            this.showSuccessMessage("User added!")
         },
         deleteUser(user: User) {
-            this.data = this.data.filter((u: User) => u.id != user.id);
+            this.data = this.data.filter((u: User) => u.id != user.id)
         },
         deleteSelected() {
-            const ids = {};
-            this.selected.forEach((u: User) => ids[u.id] = true);
-            this.data = this.data.filter((u: User) => ids[u.id] !== true);
-            this.selected = [];
+            const ids = {}
+            this.selected.forEach((u: User) => (ids[u.id] = true))
+            this.data = this.data.filter((u: User) => ids[u.id] !== true)
+            this.selected = []
         },
         updateUser(user: User) {
-            let index = this.data.findIndex((u: User) => u.id == user.id);
-            this.data.splice(index, 1, user);
-            this.showSuccessMessage("User updated!");
+            let index = this.data.findIndex((u: User) => u.id == user.id)
+            this.data.splice(index, 1, user)
+            this.showSuccessMessage("User updated!")
         },
         updateSelection(user: User, selected: boolean) {
             if (selected) {
-                this.selected.push(user);
+                this.selected.push(user)
             } else {
-                this.selected = this.selected.filter((u: User) => u.id != user.id);
+                this.selected = this.selected.filter(
+                    (u: User) => u.id != user.id
+                )
             }
         },
         showUser(user: User) {
-            this.user = { ...user };
-            this.title = user.name;
-            this.userView = true;
+            this.user = { ...user }
+            this.title = user.name
+            this.userView = true
         },
         showEditForm(user: User) {
-            this.title = "UPDATE USER";
-            this.user = { ...user };
-            this.userEdit = true;
+            this.title = "UPDATE USER"
+            this.user = { ...user }
+            this.userEdit = true
         },
         showCreateForm() {
-            this.title = "CREATE USER";
-            this.user = {
-                name: "",
-                email: "",
-                job: "",
-                gender: "",
-                info: "",
-            };
-            this.userEdit = true;
+            this.title = "CREATE USER"
+            this.user = { name: "", email: "", job: "", gender: "", info: "" }
+            this.userEdit = true
         },
         showDeleteForm(user: User) {
             Swal.fire({
@@ -218,12 +211,12 @@ export default {
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Yes, delete it!",
-            }).then((result) => {
+            }).then(result => {
                 if (result.isConfirmed) {
-                    this.deleteUser(user);
-                    this.showSuccessMessage("User deleted!");
+                    this.deleteUser(user)
+                    this.showSuccessMessage("User deleted!")
                 }
-            });
+            })
         },
         showSuccessMessage(message: string) {
             Swal.fire({
@@ -234,13 +227,13 @@ export default {
                 toast: true,
                 timer: 3000,
                 showConfirmButton: false,
-            });
+            })
         },
         submitForm() {
-            const user = this.user;
-            this.userEdit = false;
-            if (user.id != null) this.updateUser(user);
-            else this.addUser(user);
+            const user = this.user
+            this.userEdit = false
+            if (user.id != null) this.updateUser(user)
+            else this.addUser(user)
         },
     },
-};
+}

@@ -1,15 +1,15 @@
 import { expect, test } from "vitest"
-import { click, data, jobs, n, names, wrapper } from "./common";
+import { click, data, jobs, n, names, wrapper } from "./common"
 
 // ────────────────────────────────────────────────────────────────────────────────
 // CUSTOM COMPONENT
 
-test('it renders custom components', async () => {
+test("it renders custom components", async () => {
     // use custom component (defined in common.ts) in the first column
     await wrapper.setProps({
         columns: [
-            { title: "Person info", component: 'CustomComponent1' },
-            { key: 'gender' },
+            { title: "Person info", component: "CustomComponent1" },
+            { key: "gender" },
         ],
         perPageSizes: [n],
     })
@@ -26,22 +26,22 @@ test('it renders custom components', async () => {
     expect(_jobs).toEqual(jobs)
 })
 
-test('it emits user events from custom components', async () => {
+test("it emits user events from custom components", async () => {
     await wrapper.setProps({
         columns: [
-            { key: 'name' },
-            { key: 'gender' },
-            { key: 'job' },
-            { title: 'actions', component: 'vdt-action-buttons' },
+            { key: "name" },
+            { key: "gender" },
+            { key: "job" },
+            { title: "actions", component: "vdt-action-buttons" },
         ],
     })
 
     // which buttons to click
     let clickedButtons = [
-        [2, 'view'],
-        [5, 'edit'],
-        [7, 'edit'],
-        [10, 'delete'],
+        [2, "view"],
+        [5, "edit"],
+        [7, "edit"],
+        [10, "delete"],
     ]
 
     // click many buttons
@@ -56,7 +56,7 @@ test('it emits user events from custom components', async () => {
     await wrapper.vm.$nextTick()
 
     // get the event object
-    const event = wrapper.emitted('userEvent') as any
+    const event = wrapper.emitted("userEvent") as any
 
     // assert event has been emitted
     expect(event).toBeTruthy()
@@ -71,13 +71,9 @@ test('it emits user events from custom components', async () => {
         // determine the payload
         let row = clicked[0] as any
         let action = clicked[1] as any
-        let payload = [{
-            action: action,
-            data: {
-                ... data[row-1],
-                _key: row-1
-            },
-        }]
+        let payload = [
+            { action: action, data: { ...data[row - 1], _key: row - 1 } },
+        ]
 
         // assert payload
         expect(event[currentEvent]).toEqual(payload)

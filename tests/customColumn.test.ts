@@ -1,28 +1,36 @@
 import { test } from "vitest"
 import { arraySafeSort } from "../src/utils"
-import { click, col, data, ROLES, searchInput, testRowsMatchData, wrapper } from "./common"
+import {
+    click,
+    col,
+    data,
+    ROLES,
+    searchInput,
+    testRowsMatchData,
+    wrapper,
+} from "./common"
 
 // ────────────────────────────────────────────────────────────────────────────────
 // CUSTOM COLUMN
 
-test('it sets custom order for columns', async () => {
+test("it sets custom order for columns", async () => {
     await wrapper.setProps({
         columns: [
-            { key: 'gender', displayIndex: 2 },
-            { key: 'job' },
-            { key: 'name', displayIndex: 1 },
+            { key: "gender", displayIndex: 2 },
+            { key: "job" },
+            { key: "name", displayIndex: 1 },
         ],
     })
     testRowsMatchData(data)
 })
 
-test('it uses custom comparison function', async () => {
+test("it uses custom comparison function", async () => {
     let fn = (a: any, b: any) => a.name.length - b.name.length
     await wrapper.setProps({
         columns: [
-            { key: 'name', compareFunction: fn },
-            { key: 'gender' },
-            { key: 'job' },
+            { key: "name", compareFunction: fn },
+            { key: "gender" },
+            { key: "job" },
         ],
     })
 
@@ -41,10 +49,10 @@ test('it uses custom comparison function', async () => {
     testRowsMatchData(data)
 })
 
-test('it uses custom search function', async () => {
+test("it uses custom search function", async () => {
     let fn = (data: any, search: any) => data.roles.includes(search)
 
-     // update props
+    // update props
     await wrapper.setProps({
         columns: [
             { key: "name" },
@@ -52,20 +60,17 @@ test('it uses custom search function', async () => {
             { key: "job" },
             {
                 title: "Roles",
-                component: 'CustomComponent2',
+                component: "CustomComponent2",
                 searchable: true,
                 searchFunction: fn,
             },
         ],
-        defaultColumn: {
-            searchable: false
-        }
+        defaultColumn: { searchable: false },
     })
 
     // test custom search
     let searchValues = ROLES
-    for (let search of searchValues)
-    {
+    for (let search of searchValues) {
         await searchInput.setValue(search)
         let copy = data.filter((x: any) => x.roles.includes(search))
         testRowsMatchData(copy)

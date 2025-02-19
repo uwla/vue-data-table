@@ -1,7 +1,7 @@
 .vdt-sorting-icon {
     display: flex;
     margin-left: auto;
-    padding-left: .3em;
+    padding-left: 0.3em;
 
     .icon {
         width: 0.75em;
@@ -15,18 +15,19 @@
             content: "\2191";
         }
 
-        &.asc::after, &.desc::after {
+        &.asc::after,
+        &.desc::after {
             line-height: 1;
             display: block;
             color: black;
             opacity: 0.5;
         }
 
-        [data-sorting=asc] &.asc::after {
+        [data-sorting="asc"] &.asc::after {
             opacity: 1;
         }
 
-        [data-sorting=desc] &.desc::after {
+        [data-sorting="desc"] &.desc::after {
             opacity: 1;
         }
     }

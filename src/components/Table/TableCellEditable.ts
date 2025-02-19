@@ -3,10 +3,7 @@ import { defineComponent, reactive } from "vue"
 export default defineComponent({
     name: "VdtTableCellEditable",
     data: () => {
-        return reactive({
-            isEditing: false,
-            text: '',
-        })
+        return reactive({ isEditing: false, text: "" })
     },
     methods: {
         edit() {
@@ -16,25 +13,18 @@ export default defineComponent({
         finishEditing(confirmation: boolean) {
             this.isEditing = false
 
-            if (confirmation === false)
-                return
+            if (confirmation === false) return
 
-            this.$emit('userEvent', {
-                action: 'updateCell',
+            this.$emit("userEvent", {
+                action: "updateCell",
                 data: this.data,
                 key: this.columnKey,
                 value: this.text,
             })
-        }
+        },
     },
     props: {
-        data: {
-            type: Object,
-            required: true,
-        },
-        columnKey: {
-            type: String,
-            required: true,
-        }
+        data: { type: Object, required: true },
+        columnKey: { type: String, required: true },
     },
 })

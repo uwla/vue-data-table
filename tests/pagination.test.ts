@@ -1,36 +1,43 @@
 import { expect, test } from "vitest"
-import { arraySafeSort } from '../src/utils'
-import { click, col, data, n, paginationInput, paginationBtn, searchInput,
-testRowsMatchData, wrapper } from './common'
+import { arraySafeSort } from "../src/utils"
+import {
+    click,
+    col,
+    data,
+    n,
+    paginationInput,
+    paginationBtn,
+    searchInput,
+    testRowsMatchData,
+    wrapper,
+} from "./common"
 
 // the per page for the pagination tests
 const perPage = 25
 const perPageSizes = [25, 50, 100, 200]
 
-test('it displays correct per page sizes', async () => {
+test("it displays correct per page sizes", async () => {
     await wrapper.setProps({ perPageSizes })
 
-    let options = wrapper.findAll('.vdt-perpage option')
+    let options = wrapper.findAll(".vdt-perpage option")
     let values = [] as Number[]
-    for (let option of options as any)
-        values.push(Number(option.element.value))
+    for (let option of options as any) values.push(Number(option.element.value))
     expect(values).toEqual(perPageSizes)
 })
 
-test('it sets correct per page sizes', async () => {
+test("it sets correct per page sizes", async () => {
     await wrapper.setProps({ perPageSizes })
 
     // test default per page
-    let select = wrapper.find('.vdt-perpage select') as any
+    let select = wrapper.find(".vdt-perpage select") as any
     expect(Number(select.element.value)).toBe(perPageSizes[0])
 
     // TODO: fix code below, which is not working
 
-    let options = select.findAll('option')
-    
+    let options = select.findAll("option")
+
     // test rows length with different per page sizes
-    for (let i = 0; i < options.length; i += 1)
-    {
+    for (let i = 0; i < options.length; i += 1) {
         let option = options[i]
         let size = perPageSizes[i]
         await select.setValue(option.element.value)
@@ -38,12 +45,12 @@ test('it sets correct per page sizes', async () => {
     }
 })
 
-test('it changes pages by clicking on buttons', async () => {
+test("it changes pages by clicking on buttons", async () => {
     await wrapper.setData({ currentPerPage: perPage })
 
     // the number of buttons may vary depending on the page,
     // that's why we need to use 'let'
-    let buttons = wrapper.findAll('.vdt-pagination .vdt-page-item')
+    let buttons = wrapper.findAll(".vdt-pagination .vdt-page-item")
     let l = buttons.length
     let prevBtn = buttons[0]
     let nextBtn = buttons[l - 1]
@@ -83,9 +90,9 @@ test('it changes pages by clicking on buttons', async () => {
     await click(buttons[1])
 })
 
-test('it changes pages by setting current page', async () => {
+test("it changes pages by setting current page", async () => {
     await wrapper.setData({ currentPerPage: perPage })
-    const lastPage = paginationInput.attributes('max') as any
+    const lastPage = paginationInput.attributes("max") as any
 
     for (let i = lastPage; i >= 1; i -= 1) {
         await paginationInput.setValue(i)
@@ -96,7 +103,7 @@ test('it changes pages by setting current page', async () => {
     }
 })
 
-test('it changes pages on filtered data sorted by multiple columns', async () => {
+test("it changes pages on filtered data sorted by multiple columns", async () => {
     // set smaller per page sizes
     let perPage = 10
     await wrapper.setProps({ perPageSizes: [perPage] })
@@ -106,7 +113,7 @@ test('it changes pages on filtered data sorted by multiple columns', async () =>
     await click(col(2))
     await click(col(3))
 
-    let searchValues = ['Engineer', 'Manager']
+    let searchValues = ["Engineer", "Manager"]
     for (let search of searchValues) {
         // filter data
         await searchInput.setValue(search)
@@ -114,8 +121,8 @@ test('it changes pages on filtered data sorted by multiple columns', async () =>
 
         // sort data
         copy = arraySafeSort(copy, (a: any, b: any) => {
-            let key = 'gender'
-            if (a[key] == b[key]) key = 'job'
+            let key = "gender"
+            if (a[key] == b[key]) key = "job"
             return a[key].localeCompare(b[key])
         })
 
@@ -130,7 +137,7 @@ test('it changes pages on filtered data sorted by multiple columns', async () =>
     }
 
     // clear search
-    await searchInput.setValue('')
+    await searchInput.setValue("")
 
     // clear sorting
     await click(col(2))
@@ -139,12 +146,11 @@ test('it changes pages on filtered data sorted by multiple columns', async () =>
     await click(col(3))
 })
 
-test('it shows all entries at once', async () => {
+test("it shows all entries at once", async () => {
     // Set it to show all.
-    await wrapper.setProps({ perPageSizes: ['*'] })
-    testRowsMatchData(data);
+    await wrapper.setProps({ perPageSizes: ["*"] })
+    testRowsMatchData(data)
 
     // reset per page sizes
     await wrapper.setProps({ perPageSizes })
 })
-

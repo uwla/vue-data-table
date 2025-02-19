@@ -1,9 +1,9 @@
 import { expect } from "vitest"
-import { mount } from '@vue/test-utils'
-import { faker } from '@faker-js/faker'
-import { components } from '../src/main'
-import VueDataTable from '../src/components/DataTable.vue'
-import { defineComponent, createVNode } from 'vue'
+import { mount } from "@vue/test-utils"
+import { faker } from "@faker-js/faker"
+import { components } from "../src/main"
+import VueDataTable from "../src/components/DataTable.vue"
+import { defineComponent, createVNode } from "vue"
 
 ////////////////////////////////////////////////////////////////////////////////
 // DATA
@@ -15,10 +15,11 @@ export const n = 400
 
 // aliases to make it less verbose to create multiple fake data
 let gen = (fn: any) => faker.helpers.multiple(fn, { count: n })
-let subset = (arr: any) => faker.helpers.arrayElements(arr, { min: 1, max: arr.length })
+let subset = (arr: any) =>
+    faker.helpers.arrayElements(arr, { min: 1, max: arr.length })
 
 // a custom data source for faking data
-export const ROLES = ['admin', 'chief', 'staff', 'manager', 'executive', 'user']
+export const ROLES = ["admin", "chief", "staff", "manager", "executive", "user"]
 
 // generate fake data
 export const names = gen(faker.person.fullName)
@@ -29,54 +30,50 @@ export const roles = gen(() => subset(ROLES))
 // create an object data array with the fake data
 export const data = [] as any
 for (let i = 0; i < n; i++)
-    data.push({ name: names[i], job: jobs[i], gender: genders[i], roles: roles[i] })
+    data.push({
+        name: names[i],
+        job: jobs[i],
+        gender: genders[i],
+        roles: roles[i],
+    })
 
 // The component to test
 const CustomComponent1 = defineComponent({
     props: { data: { type: Object, required: true } },
     render() {
-        return createVNode('p', null, [
-            createVNode('b', null, this.data.name),
-            ' works as ',
-            createVNode('i', null, this.data.job)
-        ]);
-    }
+        return createVNode("p", null, [
+            createVNode("b", null, this.data.name),
+            " works as ",
+            createVNode("i", null, this.data.job),
+        ])
+    },
 })
 
 const CustomComponent2 = defineComponent({
     props: { data: { type: Object, required: true } },
     render() {
-        return createVNode('ul', 
+        return createVNode(
+            "ul",
             null,
-            this.data.roles.map((role: any) => createVNode('li', null, role))
-        );
-    }
+            this.data.roles.map((role: any) => createVNode("li", null, role))
+        )
+    },
 })
 
 // mount the component
 export const wrapper = mount(VueDataTable, {
-    global: {
-        components: {
-            ...components,
-            CustomComponent1,
-        }
-    },
+    global: { components: { ...components, CustomComponent1 } },
     props: {
         data: data,
-        columns: [
-            { key: 'name' },
-            { key: 'gender' },
-            { key: 'job' },
-        ],
+        columns: [{ key: "name" }, { key: "gender" }, { key: "job" }],
         perPageSizes: [n], // this should render all rows in the table
     },
 })
 
-
 // some aliases
-export const searchInput = wrapper.find('.vdt-search input')
-export const paginationBtn = wrapper.find('.vdt-pagination-search button')
-export const paginationInput = wrapper.find('.vdt-pagination-search input')
+export const searchInput = wrapper.find(".vdt-search input")
+export const paginationBtn = wrapper.find(".vdt-pagination-search button")
+export const paginationInput = wrapper.find(".vdt-pagination-search input")
 export const col = (i: any) => wrapper.find(`.vdt-column:nth-child(${i})`)
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -84,18 +81,20 @@ export const col = (i: any) => wrapper.find(`.vdt-column:nth-child(${i})`)
 
 // click on something
 export async function click(el: any) {
-    el.trigger('click')
+    el.trigger("click")
 }
 
 // get the text of the given row
 export function rowText(i: any) {
-    return wrapper.findAll(`tbody td:nth-child(${i})`).map((el: any) => el.text())
+    return wrapper
+        .findAll(`tbody td:nth-child(${i})`)
+        .map((el: any) => el.text())
 }
 
 // check the rows match the given data
 export function testRowsMatchData(data: any) {
     if (data.length == 0) return
-    expect(rowText(1)).toEqual(data.map((x: any) =>x.name))
-    expect(rowText(2)).toEqual(data.map((x: any) =>x.gender))
-    expect(rowText(3)).toEqual(data.map((x: any) =>x.job))
+    expect(rowText(1)).toEqual(data.map((x: any) => x.name))
+    expect(rowText(2)).toEqual(data.map((x: any) => x.gender))
+    expect(rowText(3)).toEqual(data.map((x: any) => x.job))
 }
