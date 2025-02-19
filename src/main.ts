@@ -19,7 +19,7 @@ const components: { [key: string]: any } = {
 }
 
 function install(app: any) {
-    for (let componentName in components)
+    for (const componentName in components)
         app.component(componentName, components[componentName])
 }
 

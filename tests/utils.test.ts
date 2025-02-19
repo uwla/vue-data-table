@@ -35,8 +35,8 @@ test("test safe sort", function () {
     ] as any[]
     f = safeCompare(f)
     g = safeCompare(g)
-    let f2 = (a: any, b: any) => f(a.n, b.n)
-    let g2 = (a: any, b: any) => g(a.n, b.n)
+    const f2 = (a: any, b: any) => f(a.n, b.n)
+    const g2 = (a: any, b: any) => g(a.n, b.n)
     res = arraySafeSort(arr, f2).map((x: any) => x.n)
     expect(res).toEqual([2, 10, 15, 20, 45, null, null])
     res = arraySafeSort(arr, g2).map((x: any) => x.n)

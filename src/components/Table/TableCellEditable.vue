@@ -32,9 +32,9 @@
             class="edit-cell"
         >
             <input
+                v-model="text"
                 type="text"
                 class="vdt-input"
-                v-model="text"
             />
             <button
                 class="vdt-btn vdt-action-confirm"

@@ -2,31 +2,31 @@ import users from "./users.json"
 import Swal from "sweetalert2"
 
 type User = {
-    bio: String
-    city: String
-    company: String
-    country: String
-    created_at: String
-    creditCardNumber: String
-    creditCardType: String
-    email: String
-    email_verified_at: String
-    fruits: String[]
+    bio: string
+    city: string
+    company: string
+    country: string
+    created_at: string
+    creditCardNumber: string
+    creditCardType: string
+    email: string
+    email_verified_at: string
+    fruits: string[]
     gender: "Male" | "Female"
     id: number
-    info: String
-    job: String
-    name: String
-    phone: String
-    photo: String
-    state: String
-    streetName: String
-    suffix: String
-    timezone: String
-    title: String
-    updated_at: String
-    userAgent: String
-    username: String
+    info: string
+    job: string
+    name: string
+    phone: string
+    photo: string
+    state: string
+    streetName: string
+    suffix: string
+    timezone: string
+    title: string
+    updated_at: string
+    userAgent: string
+    username: string
 }
 
 type UserField = keyof User
@@ -84,8 +84,8 @@ const params3 = {
         {
             title: "Top 3 Favorite fruits",
             component: "CellList",
-            searchFunction: (data: any, search: String) => {
-                return data.fruits.some((f: String) =>
+            searchFunction: (data: any, search: string) => {
+                return data.fruits.some((f: string) =>
                     f.toLowerCase().includes(search.toLowerCase())
                 )
             },
@@ -132,14 +132,14 @@ export default {
 
     methods: {
         updateUserField(user: User, field: UserField, value: any) {
-            let ind = this.data.findIndex(u => u.id === user.id)
+            const ind = this.data.findIndex(u => u.id === user.id)
             if (ind < 0) return
-            let newUser = { ...this.data[ind] }
+            const newUser = { ...this.data[ind] }
             newUser[field] = value
             this.data.splice(ind, 1, newUser)
         },
         handleUserEvent(payload: any) {
-            let user = payload.data as User
+            const user = payload.data as User
             switch (payload.action) {
                 case "delete":
                     this.showDeleteForm(user)
@@ -151,11 +151,11 @@ export default {
                     this.showUser(user)
                     break
                 case "updateCell":
-                    let { key, value } = payload
+                    const { key, value } = payload
                     this.updateUserField(user, key, value)
                     break
                 case "select":
-                    let { selected } = payload
+                    const { selected } = payload
                     this.updateSelection(user, selected)
             }
         },
@@ -174,7 +174,7 @@ export default {
             this.selected = []
         },
         updateUser(user: User) {
-            let index = this.data.findIndex((u: User) => u.id == user.id)
+            const index = this.data.findIndex((u: User) => u.id == user.id)
             this.data.splice(index, 1, user)
             this.showSuccessMessage("User updated!")
         },

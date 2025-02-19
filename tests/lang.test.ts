@@ -19,14 +19,14 @@ test("test table text matches language", function () {
     } as any
 
     // text each language
-    for (let lang in translations) {
-        let translation = translations[lang]
-        let wrapper = mount(VueDataTable, {
+    for (const lang in translations) {
+        const translation = translations[lang]
+        const wrapper = mount(VueDataTable, {
             props: { data: [], columnKeys: [], lang: lang },
         })
 
-        for (let textKey in text2cssSelector) {
-            let selector = text2cssSelector[textKey]
+        for (const textKey in text2cssSelector) {
+            const selector = text2cssSelector[textKey]
             let text = translation[textKey as LanguageDictKey] as string
 
             // some text have placeholders for the number of rows in the table,

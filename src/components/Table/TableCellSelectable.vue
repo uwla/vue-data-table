@@ -1,9 +1,9 @@
 <template>
     <input
-        class="vdt-cell-selectable"
         v-model="selected"
-        @change="handleChange"
+        class="vdt-cell-selectable"
         type="checkbox"
+        @change="handleChange"
     />
 </template>
 <script src="./TableCellSelectable.ts" lang="ts"></script>

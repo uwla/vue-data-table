@@ -2,6 +2,12 @@ import { defineComponent } from "vue"
 
 export default defineComponent({
     name: "VdtPerPage",
+    props: {
+        perPageText: { type: String, required: true },
+        perPageAllText: { type: String, required: true },
+        currentPerPage: { type: [Number, String], required: true },
+        perPageSizes: { type: Array, required: true },
+    },
     computed: {
         textBeforeOptions() {
             return (this.perPageText.split(":entries")[0] || "").trim()
@@ -14,11 +20,5 @@ export default defineComponent({
         stringNotEmpty(string: string) {
             return string !== ""
         },
-    },
-    props: {
-        perPageText: { type: String, required: true },
-        perPageAllText: { type: String, required: true },
-        currentPerPage: { type: [Number, String], required: true },
-        perPageSizes: { type: Array, required: true },
     },
 })

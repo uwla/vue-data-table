@@ -2,8 +2,8 @@
     <div class="vdt-perpage">
         <span>{{ textBeforeOptions }}</span>
         <select
-            @input="$emit('set-per-page')"
             :value="currentPerPage"
+            @input="$emit('set-per-page')"
         >
             <option
                 v-for="(val, i) in perPageSizes"

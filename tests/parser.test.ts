@@ -2,7 +2,7 @@ import { expect, test } from "vitest"
 import { globalDefaultColumn, parseColumnProps } from "../src/parser"
 
 test("test parsing columns", function () {
-    let columns = [
+    const columns = [
         { key: "name" },
         { key: "mail", title: "Email address" },
         { key: "age", type: "number" },
@@ -10,8 +10,8 @@ test("test parsing columns", function () {
         { key: "phone_number", sortable: false },
         { key: "job", editable: true },
     ]
-    let defaultColumn = globalDefaultColumn
-    let parsed = parseColumnProps({ columns, defaultColumn })
+    const defaultColumn = globalDefaultColumn
+    const parsed = parseColumnProps({ columns, defaultColumn })
 
     //
     expect(typeof parsed).toBe(typeof columns)
@@ -43,15 +43,15 @@ test("test parsing columns", function () {
 })
 
 test("test parsing columns with custom default column", function () {
-    let columns = [
+    const columns = [
         { key: "name" },
         { key: "mail" },
         { key: "age", sortable: true, searchable: true },
         { key: "gender" },
         { key: "phone_number" },
     ]
-    let defaultColumn = { searchable: false, sortable: false }
-    let parsed = parseColumnProps({ columns, defaultColumn })
+    const defaultColumn = { searchable: false, sortable: false }
+    const parsed = parseColumnProps({ columns, defaultColumn })
 
     //
     expect(typeof parsed).toBe(typeof columns)
@@ -69,8 +69,13 @@ test("test parsing columns with custom default column", function () {
 })
 
 test("test parsing column keys", function () {
-    let columnKeys = ["first_name", "phone_number", "streetName", "companyName"]
-    let parsed = parseColumnProps({ columnKeys }) as any
+    const columnKeys = [
+        "first_name",
+        "phone_number",
+        "streetName",
+        "companyName",
+    ]
+    const parsed = parseColumnProps({ columnKeys }) as any
 
     expect(typeof parsed).toBe(typeof columnKeys)
     expect(parsed.length).toBe(columnKeys.length)
@@ -82,9 +87,9 @@ test("test parsing column keys", function () {
     expect(parsed[3].title).toBe("Company Name")
 
     // test fields
-    let defaultColumn = globalDefaultColumn as any
-    for (let col of parsed) {
-        for (let key in defaultColumn) {
+    const defaultColumn = globalDefaultColumn as any
+    for (const col of parsed) {
+        for (const key in defaultColumn) {
             // skip object fields
             if (typeof defaultColumn[key] === "object") continue
 

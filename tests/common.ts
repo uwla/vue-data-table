@@ -14,8 +14,8 @@ import { defineComponent, createVNode } from "vue"
 export const n = 400
 
 // aliases to make it less verbose to create multiple fake data
-let gen = (fn: any) => faker.helpers.multiple(fn, { count: n })
-let subset = (arr: any) =>
+const gen = (fn: any) => faker.helpers.multiple(fn, { count: n })
+const subset = (arr: any) =>
     faker.helpers.arrayElements(arr, { min: 1, max: arr.length })
 
 // a custom data source for faking data

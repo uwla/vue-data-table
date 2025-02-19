@@ -11,7 +11,7 @@ import {
 } from "./common"
 
 test("it sorts data", async () => {
-    let keys = ["name", "gender", "job"] as any
+    const keys = ["name", "gender", "job"] as any
     let c, copy, key: any, i
     for (i = 0; i < keys.length; i += 1) {
         key = keys[i]
@@ -69,14 +69,14 @@ test("it sorts only one column", async () => {
 })
 
 test("it sorts filtered data", async () => {
-    let search = "Executive"
+    const search = "Executive"
     await searchInput.setValue(search)
 
     // clone the array
-    let names = data
+    const names = data
         .filter((x: any) => x.job.includes(search))
         .map((x: any) => x.name)
-    let orderedNames = [...names]
+    const orderedNames = [...names]
 
     // sort by first column
     await click(col(1))
@@ -156,7 +156,7 @@ test("it sorts only sortable columns", async () => {
 
     // third column is sortable
     await click(col(3))
-    let copy = [...data]
+    const copy = [...data]
     copy.sort((a, b) => a.job.localeCompare(b.job))
     testRowsMatchData(copy)
 

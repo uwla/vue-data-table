@@ -2,6 +2,7 @@ import { defineComponent, reactive } from "vue"
 
 export default defineComponent({
     name: "VdtTableCellSelectable",
+    props: { data: { type: Object, required: true } },
     data: () => {
         return reactive({ selected: false })
     },
@@ -15,5 +16,4 @@ export default defineComponent({
             })
         },
     },
-    props: { data: { type: Object, required: true } },
 })

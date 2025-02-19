@@ -19,8 +19,8 @@ test("it renders custom components", async () => {
     await wrapper.setData({ currentPerPage: n })
 
     // get the text to test, which is within by bold and italic tags
-    let _names = wrapper.findAll("tbody td b").map(t => t.text())
-    let _jobs = wrapper.findAll("tbody td i").map(t => t.text())
+    const _names = wrapper.findAll("tbody td b").map(t => t.text())
+    const _jobs = wrapper.findAll("tbody td i").map(t => t.text())
 
     expect(_names).toEqual(names)
     expect(_jobs).toEqual(jobs)
@@ -37,7 +37,7 @@ test("it emits user events from custom components", async () => {
     })
 
     // which buttons to click
-    let clickedButtons = [
+    const clickedButtons = [
         [2, "view"],
         [5, "edit"],
         [7, "edit"],
@@ -45,10 +45,10 @@ test("it emits user events from custom components", async () => {
     ]
 
     // click many buttons
-    for (let clicked of clickedButtons) {
-        let row = clicked[0]
-        let action = clicked[1]
-        let selector = `tr:nth-child(${row}) .vdt-action-${action}`
+    for (const clicked of clickedButtons) {
+        const row = clicked[0]
+        const action = clicked[1]
+        const selector = `tr:nth-child(${row}) .vdt-action-${action}`
         await click(wrapper.find(selector))
     }
 
@@ -67,11 +67,11 @@ test("it emits user events from custom components", async () => {
     // the current event
     let currentEvent = 0
 
-    for (let clicked of clickedButtons) {
+    for (const clicked of clickedButtons) {
         // determine the payload
-        let row = clicked[0] as any
-        let action = clicked[1] as any
-        let payload = [
+        const row = clicked[0] as any
+        const action = clicked[1] as any
+        const payload = [
             { action: action, data: { ...data[row - 1], _key: row - 1 } },
         ]
 

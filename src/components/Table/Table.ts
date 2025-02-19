@@ -2,12 +2,6 @@ import { defineComponent } from "vue"
 
 export default defineComponent({
     name: "VdtTable",
-    methods: {
-        // Propagate upwards an event from a user custom component
-        emitUserEvent(payload: any) {
-            this.$emit("user-event", payload)
-        },
-    },
     props: {
         tableClass: String,
         columns: Array as () => any,
@@ -22,5 +16,11 @@ export default defineComponent({
         numberOfColumns: Number,
         sortingIconComponent: [Object, String],
         sortingIndexComponent: [Object, String],
+    },
+    methods: {
+        // Propagate upwards an event from a user custom component
+        emitUserEvent(payload: any) {
+            this.$emit("user-event", payload)
+        },
     },
 })

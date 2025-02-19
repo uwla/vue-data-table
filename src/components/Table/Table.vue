@@ -17,8 +17,8 @@
                     >
                         <div
                             v-if="column.collapsible && column.collapsed"
-                            @click="column.collapsed = false"
                             class="vdt-column-collapse"
+                            @click="column.collapsed = false"
                         >
                             [+]
                             <span>{{ column.title }}</span>
@@ -33,21 +33,21 @@
 
                             <!-- SORTING INDEX -->
                             <component
-                                v-if="column.sortingIndex > 0"
                                 :is="sortingIndexComponent"
+                                v-if="column.sortingIndex > 0"
                                 :index="column.sortingIndex"
                             />
 
                             <!-- SORTING ICON -->
                             <component
-                                v-if="column.sortable"
                                 :is="sortingIconComponent"
+                                v-if="column.sortable"
                             />
 
                             <div
                                 v-if="column.collapsible && !column.collapsed"
-                                @click="column.collapsed = true"
                                 class="vdt-column-collapse"
+                                @click="column.collapsed = true"
                             >
                                 [-]
                             </div>
@@ -81,10 +81,10 @@
                             v-if="column.collapsible && column.collapsed"
                         ></div>
                         <component
-                            v-else
                             v-bind="{ data, ...column.componentProps }"
                             :is="column.component"
-                            @userEvent="emitUserEvent"
+                            v-else
+                            @user-event="emitUserEvent"
                         />
                     </td>
                 </tr>
@@ -92,15 +92,15 @@
 
             <!-- COMPONENT IF LOADING -->
             <component
-                v-if="isLoading"
                 :is="loadingComponent"
+                v-if="isLoading"
             />
 
             <!-- TABLE FOOTER -->
             <component
-                v-if="footerComponent"
                 v-bind="{ data, dataDisplayed, dataFiltered }"
                 :is="footerComponent"
+                v-if="footerComponent"
             />
         </table>
     </div>

@@ -2,6 +2,10 @@ import { defineComponent, reactive } from "vue"
 
 export default defineComponent({
     name: "VdtTableCellEditable",
+    props: {
+        data: { type: Object, required: true },
+        columnKey: { type: String, required: true },
+    },
     data: () => {
         return reactive({ isEditing: false, text: "" })
     },
@@ -22,9 +26,5 @@ export default defineComponent({
                 value: this.text,
             })
         },
-    },
-    props: {
-        data: { type: Object, required: true },
-        columnKey: { type: String, required: true },
     },
 })

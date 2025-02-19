@@ -45,7 +45,7 @@ test("it can edit editable cells", async () => {
             await click(confirmBtn)
 
             // the events to be emitted
-            let events = wrapper.emitted("userEvent") as any
+            const events = wrapper.emitted("userEvent") as any
 
             // increment event counter and, assert event was emitted
             currentEvent += 1

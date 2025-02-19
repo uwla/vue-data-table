@@ -154,7 +154,7 @@ export default defineComponent({
                 if (key !== "" && value[key]) {
                     index = value[key]
                 }
-                return { ...(value as Object), _key: index }
+                return { ...(value as object), _key: index }
             })
 
             if (isNullable(search)) {
@@ -172,7 +172,7 @@ export default defineComponent({
          * The data after sorting it by the desirable columns
          */
         dataSorted() {
-            var { dataFiltered: data, columnsBeingSorted } = this
+            const { dataFiltered: data, columnsBeingSorted } = this
 
             // do not sort if there is no rows or no data to sort
             if (columnsBeingSorted.length === 0 || data.length === 0) {
@@ -201,7 +201,7 @@ export default defineComponent({
             const { dataFiltered, currentPerPage, currentPage } = this
             if (
                 dataFiltered.length === 0 ||
-                (currentPerPage as Number | String) === "*"
+                (currentPerPage as number | string) === "*"
             ) {
                 return 0
             }
@@ -213,7 +213,7 @@ export default defineComponent({
          */
         lastEntry() {
             const { currentPerPage } = this
-            if ((currentPerPage as Number | String) === "*") {
+            if ((currentPerPage as number | string) === "*") {
                 return this.filteredEntries
             }
             return Math.min(
@@ -258,7 +258,7 @@ export default defineComponent({
                 filteredEntries,
                 totalEntries,
             ]
-            if ((currentPerPage as Number | String) === "*") {
+            if ((currentPerPage as number | string) === "*") {
                 return infoAllText
             }
             const searchValues = [":first", ":last", ":filtered", ":total"]
@@ -281,7 +281,7 @@ export default defineComponent({
          */
         numberOfPages() {
             const { currentPerPage } = this
-            if ((currentPerPage as Number | String) === "*") return 1
+            if ((currentPerPage as number | string) === "*") return 1
             return Math.max(
                 Math.ceil(this.filteredEntries / this.currentPerPage),
                 1
@@ -454,6 +454,23 @@ export default defineComponent({
         },
     },
 
+    watch: {
+        columns: { handler: "parseColumnProps", deep: true, immediate: true },
+        columnKeys: {
+            handler: "parseColumnProps",
+            deep: true,
+            immediate: true,
+        },
+        columnsBeingSorted: {
+            handler: "updateData",
+            deep: false,
+            immediate: false,
+        },
+        text: { handler: "parseTextProps", deep: true, immediate: true },
+        lang: { handler: "parseTextProps" },
+        perPageSizes: { handler: "setDefaults" },
+    },
+
     mounted() {
         this.setDefaults()
         this.updateData()
@@ -554,7 +571,7 @@ export default defineComponent({
             if (this.sortingMode === "single") {
                 // mark other columns as not being sorted
                 // skipping the current column
-                for (let col of this.sortableColumns as Column[]) {
+                for (const col of this.sortableColumns as Column[]) {
                     if (col.id !== column.id) {
                         col.sortingMode = SORTING_MODE.NONE
                         col.sortingIndex = -1
@@ -664,7 +681,7 @@ export default defineComponent({
             // update current per page so that
             // the user will see the same first
             // rows that were being displayed
-            if ((this.currentPerPage as Number | String) === "*") {
+            if ((this.currentPerPage as number | string) === "*") {
                 newCurrentPage = 1
             } else {
                 newCurrentPage = Math.floor(previousFirstEntry / newPerPage) + 1
@@ -713,7 +730,7 @@ export default defineComponent({
          * @returns string
          */
         getSortQuery() {
-            let { columnsBeingSorted } = this
+            const { columnsBeingSorted } = this
 
             // nothing being sorted
             if (columnsBeingSorted.length == 0) return ""
@@ -728,22 +745,5 @@ export default defineComponent({
             })
             return searchQueryUri
         },
-    },
-
-    watch: {
-        columns: { handler: "parseColumnProps", deep: true, immediate: true },
-        columnKeys: {
-            handler: "parseColumnProps",
-            deep: true,
-            immediate: true,
-        },
-        columnsBeingSorted: {
-            handler: "updateData",
-            deep: false,
-            immediate: false,
-        },
-        text: { handler: "parseTextProps", deep: true, immediate: true },
-        lang: { handler: "parseTextProps" },
-        perPageSizes: { handler: "setDefaults" },
     },
 })

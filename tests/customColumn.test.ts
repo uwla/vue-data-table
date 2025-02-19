@@ -25,7 +25,7 @@ test("it sets custom order for columns", async () => {
 })
 
 test("it uses custom comparison function", async () => {
-    let fn = (a: any, b: any) => a.name.length - b.name.length
+    const fn = (a: any, b: any) => a.name.length - b.name.length
     await wrapper.setProps({
         columns: [
             { key: "name", compareFunction: fn },
@@ -50,7 +50,7 @@ test("it uses custom comparison function", async () => {
 })
 
 test("it uses custom search function", async () => {
-    let fn = (data: any, search: any) => data.roles.includes(search)
+    const fn = (data: any, search: any) => data.roles.includes(search)
 
     // update props
     await wrapper.setProps({
@@ -69,10 +69,10 @@ test("it uses custom search function", async () => {
     })
 
     // test custom search
-    let searchValues = ROLES
-    for (let search of searchValues) {
+    const searchValues = ROLES
+    for (const search of searchValues) {
         await searchInput.setValue(search)
-        let copy = data.filter((x: any) => x.roles.includes(search))
+        const copy = data.filter((x: any) => x.roles.includes(search))
         testRowsMatchData(copy)
     }
     await searchInput.setValue("")

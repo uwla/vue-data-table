@@ -4,8 +4,23 @@ import { defineComponent } from "vue"
 
 export default defineComponent({
     name: "VdtExportData",
+    props: {
+        data: Array,
+        allowedExports: Array,
+        downloadButtonText: String,
+        downloadFileName: String,
+        downloadText: String,
+    },
     setup() {
         return { selectedExport: "" }
+    },
+    watch: {
+        allowedExports: {
+            handler(value) {
+                this.selectedExport = value[0]
+            },
+            immediate: true,
+        },
     },
     methods: {
         download() {
@@ -13,7 +28,7 @@ export default defineComponent({
                 return this.downloadPdf()
             }
             exportFromJSON({
-                data: this.data as Object,
+                data: this.data as object,
                 fileName: this.downloadFileName,
                 exportType: this.selectedExport as ExportType,
             })
@@ -31,21 +46,6 @@ export default defineComponent({
                 x: 10,
                 y: 10,
             })
-        },
-    },
-    props: {
-        data: Array,
-        allowedExports: Array,
-        downloadButtonText: String,
-        downloadFileName: String,
-        downloadText: String,
-    },
-    watch: {
-        allowedExports: {
-            handler(value) {
-                this.selectedExport = value[0]
-            },
-            immediate: true,
         },
     },
 })

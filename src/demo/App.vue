@@ -11,8 +11,8 @@
         <div class="btn-group">
             <Button @click="showCreateForm()">ADD USER</Button>
             <Button
-                @click="deleteSelected()"
                 severity="danger"
+                @click="deleteSelected()"
             >
                 DELETE SELECTED
             </Button>
@@ -23,7 +23,7 @@
         <vue-data-table
             v-bind="params1"
             :data="data"
-            @userEvent="handleUserEvent"
+            @user-event="handleUserEvent"
         />
 
         <h2>TABLE 2</h2>
@@ -31,7 +31,7 @@
         <vue-data-table
             v-bind="params2"
             :data="data"
-            @userEvent="handleUserEvent"
+            @user-event="handleUserEvent"
         />
 
         <h2>TABLE 3</h2>
@@ -39,44 +39,44 @@
         <vue-data-table
             v-bind="params3"
             :data="data"
-            @userEvent="handleUserEvent"
+            @user-event="handleUserEvent"
         />
 
         <!-- MODAL DIALOG TO EDIT USERS -->
         <Dialog
+            v-model:visible="userEdit"
             modal
             :header="title"
-            v-model:visible="userEdit"
             :style="{ 'min-width': '400px' }"
         >
             <form @submit.prevent="submitForm()">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <InputText
-                        v-model="user.name"
                         id="name"
+                        v-model="user.name"
                     />
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
                     <InputText
-                        v-model="user.email"
                         id="email"
+                        v-model="user.email"
                         type="email"
                     />
                 </div>
                 <div class="form-group">
                     <label for="job">Job</label>
                     <InputText
-                        v-model="user.job"
                         id="job"
+                        v-model="user.job"
                     />
                 </div>
                 <div class="form-group">
                     <label for="gender">Gender</label>
                     <select
-                        v-model="user.gender"
                         id="gender"
+                        v-model="user.gender"
                     >
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
@@ -85,9 +85,9 @@
                 <div class="form-group">
                     <label for="info">Info</label>
                     <Textarea
+                        id="info"
                         v-model="user.info"
                         rows="5"
-                        id="info"
                     />
                 </div>
                 <div class="form-buttons">
@@ -99,9 +99,9 @@
 
         <!-- DIALOG TO VIEW USERS -->
         <Dialog
+            v-model:visible="userView"
             modal
             :header="title"
-            v-model:visible="userView"
         >
             <div style="max-width: 500px">
                 <b>Name</b>

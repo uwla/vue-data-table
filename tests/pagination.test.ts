@@ -19,9 +19,10 @@ const perPageSizes = [25, 50, 100, 200]
 test("it displays correct per page sizes", async () => {
     await wrapper.setProps({ perPageSizes })
 
-    let options = wrapper.findAll(".vdt-perpage option")
-    let values = [] as Number[]
-    for (let option of options as any) values.push(Number(option.element.value))
+    const options = wrapper.findAll(".vdt-perpage option")
+    const values = [] as number[]
+    for (const option of options as any)
+        values.push(Number(option.element.value))
     expect(values).toEqual(perPageSizes)
 })
 
@@ -29,17 +30,17 @@ test("it sets correct per page sizes", async () => {
     await wrapper.setProps({ perPageSizes })
 
     // test default per page
-    let select = wrapper.find(".vdt-perpage select") as any
+    const select = wrapper.find(".vdt-perpage select") as any
     expect(Number(select.element.value)).toBe(perPageSizes[0])
 
     // TODO: fix code below, which is not working
 
-    let options = select.findAll("option")
+    const options = select.findAll("option")
 
     // test rows length with different per page sizes
     for (let i = 0; i < options.length; i += 1) {
-        let option = options[i]
-        let size = perPageSizes[i]
+        const option = options[i]
+        const size = perPageSizes[i]
         await select.setValue(option.element.value)
         testRowsMatchData(data.slice(0, size))
     }
@@ -50,10 +51,10 @@ test("it changes pages by clicking on buttons", async () => {
 
     // the number of buttons may vary depending on the page,
     // that's why we need to use 'let'
-    let buttons = wrapper.findAll(".vdt-pagination .vdt-page-item")
-    let l = buttons.length
-    let prevBtn = buttons[0]
-    let nextBtn = buttons[l - 1]
+    const buttons = wrapper.findAll(".vdt-pagination .vdt-page-item")
+    const l = buttons.length
+    const prevBtn = buttons[0]
+    const nextBtn = buttons[l - 1]
 
     // assert we are in the first page
     testRowsMatchData(data.slice(0, perPage))
@@ -71,8 +72,8 @@ test("it changes pages by clicking on buttons", async () => {
     testRowsMatchData(data.slice(perPage, perPage * 2))
 
     // first entry of the last page
-    let lastPage = Math.ceil(n / perPage)
-    let firstEntry = (lastPage - 1) * perPage
+    const lastPage = Math.ceil(n / perPage)
+    const firstEntry = (lastPage - 1) * perPage
 
     // go to last page by clicking on the last page button
     await click(buttons[l - 2])
@@ -97,15 +98,15 @@ test("it changes pages by setting current page", async () => {
     for (let i = lastPage; i >= 1; i -= 1) {
         await paginationInput.setValue(i)
         await click(paginationBtn)
-        let end = perPage * i
-        let start = end - perPage
+        const end = perPage * i
+        const start = end - perPage
         testRowsMatchData(data.slice(start, end))
     }
 })
 
 test("it changes pages on filtered data sorted by multiple columns", async () => {
     // set smaller per page sizes
-    let perPage = 10
+    const perPage = 10
     await wrapper.setProps({ perPageSizes: [perPage] })
     await wrapper.setData({ currentPerPage: perPage })
 
@@ -113,8 +114,8 @@ test("it changes pages on filtered data sorted by multiple columns", async () =>
     await click(col(2))
     await click(col(3))
 
-    let searchValues = ["Engineer", "Manager"]
-    for (let search of searchValues) {
+    const searchValues = ["Engineer", "Manager"]
+    for (const search of searchValues) {
         // filter data
         await searchInput.setValue(search)
         let copy = data.filter((x: any) => x.job.includes(search))
@@ -126,12 +127,12 @@ test("it changes pages on filtered data sorted by multiple columns", async () =>
             return a[key].localeCompare(b[key])
         })
 
-        let lastPage = Math.ceil(copy.length / perPage)
+        const lastPage = Math.ceil(copy.length / perPage)
         for (let i = lastPage; i >= 1; i -= 1) {
             await paginationInput.setValue(i)
             await click(paginationBtn)
-            let end = perPage * i
-            let start = end - perPage
+            const end = perPage * i
+            const start = end - perPage
             testRowsMatchData(copy.slice(start, end))
         }
     }

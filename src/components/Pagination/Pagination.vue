@@ -11,8 +11,8 @@
                 @keyup.enter="setCurrentPage(pageToGo)"
             />
             <button
-                @click="setCurrentPage(pageToGo)"
                 class="vdt-btn vdt-btn-primary"
+                @click="setCurrentPage(pageToGo)"
             >
                 {{ paginationSearchButtonText }}
             </button>
@@ -43,8 +43,8 @@
             </li>
             <li
                 class="vdt-page-item"
-                @click="setCurrentPage(nextPage)"
                 :class="{ disabled: isLastPage }"
+                @click="setCurrentPage(nextPage)"
             >
                 <span class="vdt-page-link">
                     {{ nextButtonText }}

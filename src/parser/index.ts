@@ -32,12 +32,12 @@ export function parseColumnProps(props: any) {
     else throw new Error("Neither columns or columnKeys is defined in props.")
 
     // extract the local default column
-    let defaultColumn = props.defaultColumn || {}
+    const defaultColumn = props.defaultColumn || {}
 
     // merge default column with the columns
     columns = columns.map(function (column: Column, i: number) {
         column = { ...column }
-        let { key } = column
+        const { key } = column
 
         // if component not set, need to pass the key to the default component
         if (column.component == null) column.componentProps = { columnKey: key }
@@ -55,7 +55,7 @@ export function parseColumnProps(props: any) {
         column = { ...globalDefaultColumn, ...defaultColumn, ...column }
 
         // some default values are dynamically computed
-        let type = column.type as ColumnType
+        const type = column.type as ColumnType
         column.title = column.title || toTitleCase(key)
         column.searchFunction =
             column.searchFunction || type2searchFunction[type]

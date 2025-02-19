@@ -28,7 +28,7 @@ export function stringReplaceFromArray(
 }
 
 export function range(min: number, max: number, step: number = 1): number[] {
-    var range = []
+    const range = []
     for (let i = min; i <= max; i += step) {
         range.push(i)
     }
@@ -86,20 +86,20 @@ export function arraySafeSort<T>(array: T[], compareFunction: Function): T[] {
 
 // Sort an array of objects (representing the table) by the given column
 export function sortDataByColumns(data: Data, columns: Column[]) {
-    let l = columns.length
+    const l = columns.length
 
-    let fn = (a: any, b: any) => {
+    const fn = (a: any, b: any) => {
         let i = 0
         while (i < l) {
-            let c = columns[i]
+            const c = columns[i]
             let { sortingMode, compareFunction: f } = c
 
             // reverse comparison
-            let reverseSearch = sortingMode === "desc"
+            const reverseSearch = sortingMode === "desc"
 
             // get default value for f
             if (isNullable(f)) {
-                let { key, type } = c
+                const { key, type } = c
                 if (type === "string") f = compareStrings
                 if (type === "numeric" || type === "number") f = compareNumbers
                 if (reverseSearch) f = reverseCompare(f)
@@ -110,7 +110,7 @@ export function sortDataByColumns(data: Data, columns: Column[]) {
             }
 
             // get the result
-            let result = f(a, b)
+            const result = f(a, b)
             if (result !== 0) return result
 
             // comparison return equal. Proceed to the next comparison
@@ -128,7 +128,7 @@ export function sortDataByColumns(data: Data, columns: Column[]) {
  */
 export function getEventTargetValue(event: any = null) {
     event = event || window.event
-    var target
+    let target
     if (event !== undefined) {
         target = event.target || event.srcElement
     }
