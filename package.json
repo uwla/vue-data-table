@@ -13,6 +13,8 @@
         "build": "npm run build:ts && npm run build:js",
         "build:demo": "vite build --config vite.config.dev.ts",
         "dev": "vite --config vite.config.dev.ts",
+        "format": "prettier --write .",
+        "format:check": "prettier --check .",
         "test": "vitest run"
     },
     "main": "./dist/vue-data-table.cjs",
@@ -40,6 +42,7 @@
         "@vitejs/plugin-vue": "^4.2.3",
         "@vue/test-utils": "^2.4.1",
         "jsdom": "^22.1.0",
+        "prettier": "^3.5.1",
         "primevue": "^3.49.1",
         "sass": "^1.69.5",
         "sweetalert2": "^11.10.6",

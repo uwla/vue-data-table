@@ -1,0 +1,8 @@
+node_modules/
+dist/
+build/
+assets/
+index.html
+.github/
+*.md
+*.min.js
