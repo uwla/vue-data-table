@@ -1,4 +1,4 @@
-import type { Cell, Column, Data } from "./types"
+import type { Cell, Column, CompareFn, Data } from "./types"
 
 export function toTitleCase(str: string): string {
     // convert snake case to title case
@@ -41,7 +41,7 @@ export function isNullable(variable: any): boolean {
     return variable === null || variable === "" || variable === undefined
 }
 
-export function stableSort<T>(arr: T[], compare: Function): T[] {
+export function stableSort<T>(arr: T[], compare: CompareFn): T[] {
     return arr
         .map((item, index) => ({ item, index }))
         .sort((a, b) => compare(a.item, b.item) || a.index - b.index)
@@ -49,7 +49,7 @@ export function stableSort<T>(arr: T[], compare: Function): T[] {
 }
 
 // Safely compare two items, which may be nullable
-export function safeCompare(compareFunction: Function): Function {
+export function safeCompare(compareFunction: CompareFn): CompareFn {
     return function (a: any, b: any) {
         if (isNullable(a)) return 1
         if (isNullable(b)) return -1
@@ -58,7 +58,7 @@ export function safeCompare(compareFunction: Function): Function {
 }
 
 // Safely compare two items by key, which may be nullable
-export function safeKeyCompare(compareFunction: Function, key: string) {
+export function safeKeyCompare(compareFunction: CompareFn, key: string) {
     return function (a: any, b: any) {
         if (isNullable(a[key])) return 1
         if (isNullable(b[key])) return -1
@@ -67,7 +67,7 @@ export function safeKeyCompare(compareFunction: Function, key: string) {
 }
 
 // Reverse a comparison function
-export function reverseCompare(compareFunction: Function): Function {
+export function reverseCompare(compareFunction: CompareFn): CompareFn {
     return (a: any, b: any) => compareFunction(b, a)
 }
 
@@ -82,7 +82,7 @@ export function compareNumbers(a: string | number, b: string | number): number {
 }
 
 // Safely stable sort an array that may have null elements
-export function arraySafeSort<T>(array: T[], compareFunction: Function): T[] {
+export function arraySafeSort<T>(array: T[], compareFunction: CompareFn): T[] {
     return stableSort(array, safeCompare(compareFunction))
 }
 
@@ -94,7 +94,8 @@ export function sortDataByColumns(data: Data, columns: Column[]): Data {
         let i = 0
         while (i < l) {
             const c = columns[i]
-            let { sortingMode, compareFunction: f } = c
+            const { sortingMode, compareFunction } = c
+            let f = compareFunction
 
             // reverse comparison
             const reverseSearch = sortingMode === "desc"
@@ -141,7 +142,11 @@ export function getEventTargetValue(event: any = null) {
 }
 
 // Performs search on strings
-export function searchStringColumn(data: Cell, search: string, key: string) {
+export function searchStringColumn(
+    data: Cell,
+    search: string,
+    key: string
+): boolean {
     return (data[key] || "").toLowerCase().includes(search.toLowerCase())
 }
 

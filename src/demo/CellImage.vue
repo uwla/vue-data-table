@@ -6,7 +6,7 @@
     />
 </template>
 <script>
-export default { name: "CellImage", props: ["data"] }
+export default { name: "CellImage", props: { data: Object } }
 </script>
 <style>
 .cell-img {

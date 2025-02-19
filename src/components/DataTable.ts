@@ -364,7 +364,7 @@ export default defineComponent({
                     lastPage,
                 ]
             }
-            throw new Error('INVALID PAGE RANGE')
+            throw new Error("INVALID PAGE RANGE")
         },
 
         // ─────────────────────────────────────────────────────────────────────

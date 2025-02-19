@@ -4,10 +4,11 @@
 export type VueComponent = string | any
 export type VueComponentProps = { [key: string]: any }
 
+export type CompareFn = (a: any, b: any) => number
 export type SortingMode = "asc" | "desc" | "none"
 export type ColumnType = "numeric" | "string" | "array" | "other"
 export type Column = {
-    compareFunction: Function
+    compareFunction: CompareFn
     component: VueComponent
     componentProps: VueComponentProps
     collapsed: boolean
@@ -17,7 +18,7 @@ export type Column = {
     key: string
     id: number
     searchable: boolean
-    searchFunction: Function
+    searchFunction: (data: Cell, search: string, key: string) => boolean
     sortable: boolean
     sortingIndex: number
     sortingMode: SortingMode

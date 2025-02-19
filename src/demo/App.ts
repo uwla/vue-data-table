@@ -132,7 +132,7 @@ export default {
 
     methods: {
         updateUserField(user: User, field: UserField, value: any) {
-            const ind = this.data.findIndex((u: any) => u.id === user.id)
+            const ind = this.data.findIndex((u: User) => u.id === user.id)
             if (ind < 0) return
             const newUser = { ...this.data[ind] }
             newUser[field] = value
@@ -151,12 +151,12 @@ export default {
                     this.showUser(user)
                     break
                 case "updateCell":
-                    const { key, value } = payload
-                    this.updateUserField(user, key, value)
+                    this.updateUserField(user, payload.key, payload.value)
                     break
                 case "select":
-                    const { selected } = payload
-                    this.updateSelection(user, selected)
+                    this.updateSelection(user, payload.selected)
+                    break
+                default:
             }
         },
         addUser(user: User) {

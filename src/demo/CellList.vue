@@ -9,5 +9,5 @@
     </ul>
 </template>
 <script>
-export default { name: "CellList", props: ["data"] }
+export default { name: "CellList", props: { data: Object } }
 </script>

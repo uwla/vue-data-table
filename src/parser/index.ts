@@ -16,10 +16,9 @@ export const globalDefaultColumn = {
     type: "string",
 } as Column
 
-const type2searchFunction = {
-    string: searchStringColumn as Function,
-    numeric: searchNumericColumn as Function,
-} as Record<ColumnType, Function>
+const type2searchFunction: Partial<
+    Record<ColumnType, Column["searchFunction"]>
+> = { string: searchStringColumn, numeric: searchNumericColumn }
 
 export function parseColumnProps(props: any) {
     // extract the columns. If not set, columns are derived from columnKeys

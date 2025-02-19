@@ -4,6 +4,7 @@ import {
     arraySafeSort,
     safeCompare,
 } from "../src/utils"
+import type { CompareFn } from "../src/types"
 
 test("test string replacement", function () {
     const str = "showing :first: to :last: entries of :total: rows"
@@ -16,8 +17,8 @@ test("test string replacement", function () {
 test("test safe sort", function () {
     let arr = [2, 45, null, 10, 20, null, 15]
     let res: (number | null)[]
-    let f: Function = (a: any, b: any) => a - b
-    let g: Function = (a: any, b: any) => b - a
+    let f: CompareFn = (a: any, b: any) => a - b
+    let g: CompareFn = (a: any, b: any) => b - a
     res = arraySafeSort(arr, f)
     expect(res).toEqual([2, 10, 15, 20, 45, null, null])
     res = arraySafeSort(arr, g)
