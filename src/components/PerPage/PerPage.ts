@@ -8,6 +8,7 @@ export default defineComponent({
         currentPerPage: { type: [Number, String], required: true },
         perPageSizes: { type: Array, required: true },
     },
+    emits: ["set-per-page"],
     computed: {
         textBeforeOptions() {
             return (this.perPageText.split(":entries")[0] || "").trim()

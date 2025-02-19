@@ -1,12 +1,12 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // TYPE DEFINITIONS
 
-type VueComponent = string | any
-type VueComponentProps = { [key: string]: any }
+export type VueComponent = string | any
+export type VueComponentProps = { [key: string]: any }
 
-type SortingMode = "asc" | "desc" | "none"
-type ColumnType = "numeric" | "string" | "array" | "other"
-type Column = {
+export type SortingMode = "asc" | "desc" | "none"
+export type ColumnType = "numeric" | "string" | "array" | "other"
+export type Column = {
     compareFunction: Function
     component: VueComponent
     componentProps: VueComponentProps
@@ -25,8 +25,8 @@ type Column = {
     type: string
 }
 
-type LanguageName = string
-type LanguageDictKey =
+export type LanguageName = string
+export type LanguageDictKey =
     | "downloadButtonText"
     | "downloadText"
     | "emptyTableText"
@@ -40,9 +40,9 @@ type LanguageDictKey =
     | "perPageAllText"
     | "previousButtonText"
     | "searchText"
-type LanguageDictVal = string
-type LanguageDict = Record<LanguageDictKey, LanguageDictVal>
-type Translation = Record<LanguageName, LanguageDict>
+export type LanguageDictVal = string
+export type LanguageDict = Record<LanguageDictKey, LanguageDictVal>
+export type Translation = Record<LanguageName, LanguageDict>
 
-type Cell = { [key: string]: any }
-type Data = Cell[]
+export type Cell = { [key: string]: any }
+export type Data = Cell[]

@@ -132,7 +132,7 @@ export default {
 
     methods: {
         updateUserField(user: User, field: UserField, value: any) {
-            const ind = this.data.findIndex(u => u.id === user.id)
+            const ind = this.data.findIndex((u: any) => u.id === user.id)
             if (ind < 0) return
             const newUser = { ...this.data[ind] }
             newUser[field] = value

@@ -15,7 +15,7 @@ test("test string replacement", function () {
 
 test("test safe sort", function () {
     let arr = [2, 45, null, 10, 20, null, 15]
-    let res
+    let res: (number | null)[]
     let f: Function = (a: any, b: any) => a - b
     let g: Function = (a: any, b: any) => b - a
     res = arraySafeSort(arr, f)

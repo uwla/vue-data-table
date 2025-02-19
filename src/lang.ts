@@ -6,6 +6,13 @@
 import en from "./lang/en"
 import es from "./lang/es"
 import ptBr from "./lang/pt-br"
+import type {
+    LanguageDict,
+    LanguageDictKey,
+    LanguageDictVal,
+    LanguageName,
+    Translation,
+} from "./types"
 
 const translations = { "pt-br": ptBr, "en": en, "es": es } as Translation
 
@@ -26,5 +33,4 @@ const languageServiceProvider = {
     },
 }
 
-export default translations
-export { languageServiceProvider, translations }
+export { languageServiceProvider, translations, translations as default }

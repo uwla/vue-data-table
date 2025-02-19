@@ -16,6 +16,7 @@ import { parseColumnProps, parseTextProps } from "../parser"
 
 import { defineComponent, reactive } from "vue"
 import { SORTING_MODE } from "../const"
+import type { Column, Data } from "../types"
 
 export default defineComponent({
     name: "VueDataTable",
@@ -71,6 +72,8 @@ export default defineComponent({
         text: { type: Object, required: false },
         vKey: { type: String, default: "" },
     },
+
+    emits: ["userEvent"],
 
     data: () => {
         return reactive({
@@ -361,6 +364,7 @@ export default defineComponent({
                     lastPage,
                 ]
             }
+            throw new Error('INVALID PAGE RANGE')
         },
 
         // ─────────────────────────────────────────────────────────────────────
@@ -662,12 +666,12 @@ export default defineComponent({
          * Set the current rows per page
          */
         setPerPage(value: any) {
-            let previousFirstEntry, newPerPage, newCurrentPage
+            let newPerPage, newCurrentPage
+            const previousFirstEntry = this.firstEntry
 
             // before updating the value of currentPerPage,
             // we need to store the current firstEntry.
             // We will use it to change the current page.
-            previousFirstEntry = this.firstEntry
             newPerPage = this.currentPerPage
 
             if (!this.perPageSizes.includes(newPerPage)) {

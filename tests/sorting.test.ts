@@ -9,10 +9,15 @@ import {
     testRowsMatchData,
     wrapper,
 } from "./common"
+import { DOMWrapper } from "@vue/test-utils"
 
 test("it sorts data", async () => {
-    const keys = ["name", "gender", "job"] as any
-    let c, copy, key: any, i
+    const keys = ["name", "gender", "job"]
+    let key: string
+    let copy: any[]
+    let i: number
+    let c: DOMWrapper<any>
+
     for (i = 0; i < keys.length; i += 1) {
         key = keys[i]
         c = col(i + 1)
@@ -35,7 +40,7 @@ test("it sorts data", async () => {
 })
 
 test("it sorts only one column", async () => {
-    let arr
+    let arr: any[]
 
     // sets the sorting mode
     await wrapper.setProps({ sortingMode: "single" })
@@ -98,7 +103,7 @@ test("it sorts filtered data", async () => {
 
 test("it sorts multiple rows", async () => {
     // copy the data
-    let copy
+    let copy: any[]
 
     // sort by second column, then by third column
     await click(col(2))

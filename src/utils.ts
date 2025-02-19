@@ -1,3 +1,5 @@
+import type { Cell, Column, Data } from "./types"
+
 export function toTitleCase(str: string): string {
     // convert snake case to title case
     str = str.replace(/_/g, " ")
@@ -85,7 +87,7 @@ export function arraySafeSort<T>(array: T[], compareFunction: Function): T[] {
 }
 
 // Sort an array of objects (representing the table) by the given column
-export function sortDataByColumns(data: Data, columns: Column[]) {
+export function sortDataByColumns(data: Data, columns: Column[]): Data {
     const l = columns.length
 
     const fn = (a: any, b: any) => {
@@ -144,6 +146,10 @@ export function searchStringColumn(data: Cell, search: string, key: string) {
 }
 
 // Performs search on numeric values
-export function searchNumericColumn(data: Cell, search: string, key: string) {
+export function searchNumericColumn(
+    data: Cell,
+    search: string,
+    key: string
+): boolean {
     return (data[key] || "").toString().includes(search)
 }

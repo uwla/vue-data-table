@@ -1,3 +1,5 @@
+import type { LanguageDict } from "../types"
+
 export default {
     perPageText: "Show :entries entries",
     perPageAllText: "ALL",

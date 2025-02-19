@@ -1,3 +1,5 @@
+import type { ColumnType, SortingMode } from "./types"
+
 export const SORTING_MODE = { ASC: "asc", DESC: "desc", NONE: "none" } as {
     [key: string]: SortingMode
 }

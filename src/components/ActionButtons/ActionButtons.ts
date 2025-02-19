@@ -13,6 +13,7 @@ export default defineComponent({
         },
         data: Object,
     },
+    emits: ["userEvent"],
     methods: {
         triggerAction(action: string) {
             this.$emit("userEvent", { action: action, data: this.data })

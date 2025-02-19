@@ -62,7 +62,9 @@ const CustomComponent2 = defineComponent({
 
 // mount the component
 export const wrapper = mount(VueDataTable, {
-    global: { components: { ...components, CustomComponent1 } },
+    global: {
+        components: { ...components, CustomComponent1, CustomComponent2 },
+    },
     props: {
         data: data,
         columns: [{ key: "name" }, { key: "gender" }, { key: "job" }],

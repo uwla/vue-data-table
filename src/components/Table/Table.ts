@@ -17,6 +17,7 @@ export default defineComponent({
         sortingIconComponent: [Object, String],
         sortingIndexComponent: [Object, String],
     },
+    emits: ["user-event", "sort-column"],
     methods: {
         // Propagate upwards an event from a user custom component
         emitUserEvent(payload: any) {

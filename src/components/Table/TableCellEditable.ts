@@ -6,6 +6,7 @@ export default defineComponent({
         data: { type: Object, required: true },
         columnKey: { type: String, required: true },
     },
+    emits: ["userEvent"],
     data: () => {
         return reactive({ isEditing: false, text: "" })
     },

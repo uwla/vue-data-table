@@ -15,6 +15,7 @@ export default defineComponent({
         nextPage: Number,
         pagination: Array,
     },
+    emits: ["set-page"],
     setup() {
         return { pageToGo: 1 }
     },
