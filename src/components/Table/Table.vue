@@ -71,7 +71,7 @@
                 <!-- NON-EMPTY BODY -->
                 <tr
                     v-for="data in dataDisplayed"
-                    :key="data._key"
+                    :key="(data._key)"
                 >
                     <td
                         v-for="(column, j) in columns"

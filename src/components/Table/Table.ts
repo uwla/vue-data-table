@@ -4,10 +4,10 @@ export default defineComponent({
     name: "VdtTable",
     props: {
         tableClass: String,
-        columns: Array as () => any,
+        columns: Array as () => any[],
         data: Array,
-        dataDisplayed: Array as () => any,
-        dataFiltered: Array as () => any,
+        dataDisplayed: Array as () => any[],
+        dataFiltered: Array as () => any[],
         emptyTableText: String,
         footerComponent: [Object, String],
         isEmpty: Boolean,

@@ -21,10 +21,10 @@ export function toTitleCase(str: string): string {
 export function stringReplaceFromArray(
     target: string,
     searchValues: string[],
-    replacements: any[]
+    replacements: (string | number)[]
 ): string {
     for (let i = 0; i < searchValues.length; i++) {
-        target = target.replace(searchValues[i], replacements[i])
+        target = target.replace(searchValues[i], "" + replacements[i])
     }
     return target
 }
@@ -147,7 +147,8 @@ export function searchStringColumn(
     search: string,
     key: string
 ): boolean {
-    return (data[key] || "").toLowerCase().includes(search.toLowerCase())
+    return ((data[key] || "") as unknown as string)
+        .toLowerCase().includes(search.toLowerCase())
 }
 
 // Performs search on numeric values

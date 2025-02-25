@@ -77,7 +77,7 @@ export default defineComponent({
 
     data: () => {
         return reactive({
-            dataFetched: [] as Column[],
+            dataFetched: [] as Data,
             dataFetchedLinks: [] as any[],
             currentPage: 1,
             currentPerPage: 10,
@@ -182,7 +182,10 @@ export default defineComponent({
                 return data
             }
 
-            return sortDataByColumns(data as Data, columnsBeingSorted)
+            return sortDataByColumns(
+                data as unknown as Data,
+                columnsBeingSorted
+            )
         },
 
         /**
@@ -532,7 +535,7 @@ export default defineComponent({
         /**
          * Indicates if a page is valid
          */
-        isValidPage(page: any): boolean {
+        isValidPage(page: number | string): boolean {
             return (
                 typeof page === "number" &&
                 page <= this.numberOfPages &&
@@ -586,7 +589,7 @@ export default defineComponent({
                 // so, mark it as sorted in ascending mode
                 if (column.sortingMode === SORTING_MODE.NONE) {
                     column.sortingMode = SORTING_MODE.ASC
-                    this.columnsBeingSorted = [column] as any
+                    this.columnsBeingSorted = [column]
                     return
                 }
 
@@ -594,7 +597,7 @@ export default defineComponent({
                 // so, mark it as sorted in descending mode
                 if (column.sortingMode === SORTING_MODE.ASC) {
                     column.sortingMode = SORTING_MODE.DESC
-                    this.columnsBeingSorted = [column] as any
+                    this.columnsBeingSorted = [column]
                     return
                 }
 
@@ -654,11 +657,11 @@ export default defineComponent({
         /**
          * Set the current page being displayed
          */
-        setPage(value: any) {
+        setPage(value: number | string) {
             if (!this.isValidPage(value)) {
                 return
             }
-            this.currentPage = value
+            this.currentPage = Number(value)
             this.updateData()
         },
 

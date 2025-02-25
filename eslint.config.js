@@ -12,6 +12,7 @@ export default typescriptEslint.config(
             "**/dist",
             "assets/",
             "src/dev.ts",
+            "tests/**/*",
         ],
     },
     {
@@ -28,7 +29,7 @@ export default typescriptEslint.config(
             parserOptions: { parser: typescriptEslint.parser },
         },
         rules: {
-            "@typescript-eslint/no-explicit-any": "off", // Allow the use of `any`
+            "@typescript-eslint/no-explicit-any": "warn", // Allow the use of `any`
             "@typescript-eslint/no-unused-vars": [
                 "error",
                 {

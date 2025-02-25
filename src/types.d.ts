@@ -45,5 +45,5 @@ export type LanguageDictVal = string
 export type LanguageDict = Record<LanguageDictKey, LanguageDictVal>
 export type Translation = Record<LanguageName, LanguageDict>
 
-export type Cell = { [key: string]: any }
+export type Cell = { [key: string]: [String, Number, Array, Object] }
 export type Data = Cell[]
